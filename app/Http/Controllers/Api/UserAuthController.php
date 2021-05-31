@@ -7,6 +7,8 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserAuthController extends Controller
 {
@@ -81,11 +83,17 @@ class UserAuthController extends Controller
         ]);
     }
 
+    /**
+     * @throws ValidationException
+     */
     private function createToken($credentials): JsonResponse
     {
-        $user = User::firstOrCreate($credentials);
-        if (!$user) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $user = User::where('email',$credentials['email'])->first();
+
+        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
         }
 
         $token = $user->createToken('mobile_app_user_auth_token')->plainTextToken;

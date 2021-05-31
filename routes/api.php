@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login',[\App\Http\Controllers\Api\UserAuthController::class,'login']);
 Route::post('logout',[\App\Http\Controllers\Api\UserAuthController::class,'logout']);
-Route::post('me',[\App\Http\Controllers\Api\UserAuthController::class,'me']);
+Route::get('me',[\App\Http\Controllers\Api\UserAuthController::class,'me']);
