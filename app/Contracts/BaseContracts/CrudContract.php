@@ -9,21 +9,21 @@ interface CrudContract
     /**
      * @param $id
      * @param array $relations
-     * @param array|string[] $column
+     * @param array|string[] $columns
      * @param array $scopes
      * @param array $relations_count
      * @return mixed
      */
-    public function findOneById($id, array $relations = [],array $column = ['*'], array $scopes = [], array $relations_count = []);
+    public function findOneById($id, array $relations = [],array $columns = ['*'], array $scopes = [], array $relations_count = []);
 
     /**
      * @param array $relations
-     * @param array|string[] $column
+     * @param array|string[] $columns
      * @param array $scopes
      * @param array $relations_count
      * @return mixed
      */
-    public function findByFilter(array $relations = [],array $column = ['*'], array $scopes = [], array $relations_count = []);
+    public function findByFilter($per_page = 10, array $relations = [],array $columns = ['*'], array $scopes = [], array $relations_count = []);
 
     /**
      * @param array $data
