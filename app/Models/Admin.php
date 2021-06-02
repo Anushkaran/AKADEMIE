@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use App\Notifications\Admin\AdminResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @method static create(array $data)
  */
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     /**
      * @var string[]
@@ -37,5 +39,10 @@ class Admin extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordResetNotification($token) :void
+    {
+        $this->notify(new AdminResetPasswordNotification($token));
+    }
 
 }
