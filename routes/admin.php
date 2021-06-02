@@ -12,3 +12,10 @@ Route::get('forgot/password',[\App\Http\Controllers\Web\Admin\Auth\ForgotPasswor
 Route::post('forgot/password',[\App\Http\Controllers\Web\Admin\Auth\ForgotPasswordController::class,'sendResetLinkEmail'])->name('forgot.password.send');
 
 Route::any('logout',[\App\Http\Controllers\Web\Admin\Auth\AdminLoginController::class,'logout'])->name('logout');
+
+
+Route::middleware('auth:admin')->group(function (){
+    Route::get('dashboard',function (){
+        return view('admin.dashboard');
+    });
+});
