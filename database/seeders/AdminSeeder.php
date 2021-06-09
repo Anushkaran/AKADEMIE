@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
@@ -13,6 +14,12 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Admin::create([
+            'name' => 'Admin',
+            'email' => 'admin@app.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+            'image' => asset('assets/vuexy/app-assets/images/avatars/12.png')
+        ]);
     }
 }

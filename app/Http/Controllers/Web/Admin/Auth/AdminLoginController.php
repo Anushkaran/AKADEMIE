@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Web\Admin\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,9 +29,9 @@ class AdminLoginController extends Controller
     /**
      * return login form for admin
      *
-     * @return Application|Factory|View
+     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
         return view('admin.auth.login');
     }

@@ -6,6 +6,7 @@ use App\Notifications\Admin\AdminResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 /**
  * @method static create(array $data)
@@ -40,9 +41,26 @@ class Admin extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'image_url'
+    ];
+
+    public function getImageUrlAttribute()
+    {
+        if (Str::contains($this->image,'http'))
+        {
+            return $this->image;
+        }
+
+        return $this->image
+            ? asset('storage/'.$this->image)
+            : asset('assets/vuexy/app-assets/images/avatars/12.png');
+    }
+
     public function sendPasswordResetNotification($token) :void
     {
         $this->notify(new AdminResetPasswordNotification($token));
     }
+
 
 }
