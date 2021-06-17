@@ -88,7 +88,7 @@
                                                     <i data-feather="eye"></i>
                                                 </a>
                                                 <a href="javascript:void(0)" onclick="deleteForm({{$center->id}})" class="btn btn-sm btn-outline-warning">
-                                                    <i data-feather="delete"></i>
+                                                    <i data-feather="trash"></i>
                                                 </a>
                                             @else
                                                 <div class="dropdown">

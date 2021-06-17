@@ -28,55 +28,59 @@
             <div class="content-body">
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <form class="add-new-record modal-content pt-0" method="post" action="{{route('admin.centers.update',$center->id)}}">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-header mb-1">
-                                    <h5 class="modal-title" id="exampleModalLabel">
+                        <div class="col-md-6 card">
+                            <div class="card-header">
+                                    <h5 class="card-text">
                                         {{__('actions.update')}}
                                     </h5>
-                                    @if(url()->previous() !== request()->url())
+                                @if(url()->previous() !== request()->url())
                                     <a href="{{url()->previous()}}" class="btn btn-outline-danger">
                                         <i data-feather='arrow-left'></i>
                                     </a>
-                                    @endif
-                                </div>
-                                <div class="modal-body flex-grow-1">
-                                    <div class="form-group">
-                                        <label class="form-label" for="center">{{__('labels.name')}}</label>
-                                        <input type="text" required name="name" value="{{old('name',$center->name)}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="center" placeholder="{{trans_choice('labels.center',1)}} ..."  aria-label="{{trans_choice('labels.center',1)}} ..." />
-                                        @error('name')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="center">{{__('labels.phone')}}</label>
-                                        <input type="text" required name="phone" value="{{old('phone',$center->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
-                                        @error('phone')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="address">{{__('labels.address')}}</label>
-                                        <textarea required  name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="..." cols="30" rows="3">{{old('address',$center->address)}}</textarea>
-                                        @error('address')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
+                                @endif
+                            </div>
+                            <div class="card-body">
+                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.centers.update',$center->id)}}">
+                                    @csrf
+                                    @method('PUT')
 
-                                    <div class="form-group">
-                                        <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
-                                        <textarea required  name="note" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="..." cols="30" rows="3">{{old('note',$center->note)}}</textarea>
-                                        @error('note')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                    </div>
+                                    <div class="modal-body flex-grow-1">
+                                        <div class="form-group">
+                                            <label class="form-label" for="center">{{__('labels.name')}}</label>
+                                            <input type="text" required name="name" value="{{old('name',$center->name)}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="center" placeholder="{{trans_choice('labels.center',1)}} ..."  aria-label="{{trans_choice('labels.center',1)}} ..." />
+                                            @error('name')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="center">{{__('labels.phone')}}</label>
+                                            <input type="text" required name="phone" value="{{old('phone',$center->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
+                                            @error('phone')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="address">{{__('labels.address')}}</label>
+                                            <textarea required  name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="..." cols="30" rows="3">{{old('address',$center->address)}}</textarea>
+                                            @error('address')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
 
-                                    <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
-                                    <button  class="btn btn-outline-secondary" onclick="window.location = '{{route('admin.centers.index')}}'">{{__('actions.cancel')}}</button>
-                                </div>
-                            </form>
+                                        <div class="form-group">
+                                            <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
+                                            <textarea required  name="note" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="..." cols="30" rows="3">{{old('note',$center->note)}}</textarea>
+                                            @error('note')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
+                                        <a href="{{route('admin.centers.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
+                                    </div>
+                                </form>
+
+                            </div>
                         </div>
                     </div>
 

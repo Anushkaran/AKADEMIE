@@ -13,6 +13,7 @@ return [
    'password_confirmation' => 'Confirm Password',
    'set_password' => 'Set New Password',
    'name' => 'Name',
+   'profile' => 'Profile',
    'first_name' => 'First name',
    'last_name' => 'Last name',
    'phone' => 'Phone',
