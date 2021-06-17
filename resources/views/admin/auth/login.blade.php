@@ -65,10 +65,11 @@
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
                                             <input class="form-control @error('password') is-invalid @enderror form-control-merge" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" />
+
+                                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                                             @error('password')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
-                                            <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
