@@ -97,6 +97,7 @@ class AdminController extends Controller
             'email' => 'required|email|unique:admins,email',
             'image' => 'sometimes|nullable|file|image|max:3000',
             'password' => 'required|string|min:8|max:24|confirmed',
+            'role' => 'required|string',
         ];
 
         if ($request->method() === 'put')

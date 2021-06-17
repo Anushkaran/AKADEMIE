@@ -16,14 +16,11 @@ class Center extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name', 'address', 'longitude' , 'latitude'
+        'name',
+        'address',
+        'phone',
+        'note'
     ];
 
-    /**
-     * @var string[]
-     */
-    protected $casts = [
-        'longitude' => 'double',
-        'latitude' => 'double',
-    ];
+
 }

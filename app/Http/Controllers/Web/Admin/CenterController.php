@@ -31,7 +31,7 @@ class CenterController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $this->center->new($this->getValidatedData($request));
-        session()->flash('success','messages.create');
+        session()->flash('success',__('messages.create'));
         return redirect()->route('admin.centers.index');
     }
 
@@ -56,7 +56,7 @@ class CenterController extends Controller
     public function update($id,Request $request): RedirectResponse
     {
         $this->center->update($id,$this->getValidatedData($request));
-        session()->flash('success','messages.update');
+        session()->flash('success',__('messages.update'));
         return redirect()->route('admin.centers.index');
     }
 
@@ -67,7 +67,7 @@ class CenterController extends Controller
     public function destroy($id): RedirectResponse
     {
         $this->center->delete($id);
-        session()->flash('success','messages.delete');
+        session()->flash('success',__('messages.delete'));
         return redirect()->route('admin.centers.index');
     }
 
@@ -75,7 +75,7 @@ class CenterController extends Controller
     {
         return $request->validate([
             'name' => 'required|string|max:100',
-            'description' => 'sometimes|nullable|string|max:250',
+            'note' => 'sometimes|nullable|string|max:250',
             'phone' => 'required|string|max:15',
             'address' => 'required|string|max:200',
         ]);

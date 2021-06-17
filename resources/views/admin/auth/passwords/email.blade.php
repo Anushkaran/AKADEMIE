@@ -34,7 +34,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h2 class="brand-text text-primary ml-1">Vuexy</h2>
+                            <h2 class="brand-text text-primary ml-1">{{config('app.name')}}</h2>
                         </a>
                         <!-- /Brand logo-->
                         <!-- Left Text-->
@@ -47,15 +47,15 @@
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                                 @if(session('status'))
                                     <div class="alert alert-success" role="alert">
-                                        <h4 class="alert-heading">Success</h4>
+                                        <h4 class="alert-heading">{{__('labels.success')}}</h4>
                                         <div class="alert-body">
                                             {{session('status')}}.
                                         </div>
                                     </div>
                                 @endif
 
-                                <h2 class="card-title font-weight-bold mb-1">Forgot Password? 🔒</h2>
-                                <p class="card-text mb-2">Enter your email and we'll send you instructions to reset your password</p>
+                                <h2 class="card-title font-weight-bold mb-1">{{__('messages.forgot_password')}} 🔒</h2>
+                                <p class="card-text mb-2">{{__('messages.reset_message')}}</p>
                                 <form class="auth-forgot-password-form mt-2" action="{{route('admin.forgot.password.send')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -65,9 +65,14 @@
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-                                    <button class="btn btn-primary btn-block" tabindex="2">Send reset link</button>
+                                    <button class="btn btn-primary btn-block" tabindex="2">{{__('labels.send_reset_link')}}</button>
                                 </form>
-                                <p class="text-center mt-2"><a href="{{route('admin.login.index')}}"><i data-feather="chevron-left"></i> Back to login</a></p>
+                                <p class="text-center mt-2">
+                                    <a href="{{route('admin.login.index')}}">
+                                        <i data-feather="chevron-left"></i>
+                                    {{__('labels.back-to',['name' => __('labels.login')])}}
+                                    </a>
+                                </p>
                             </div>
                         </div>
                         <!-- /Forgot password-->

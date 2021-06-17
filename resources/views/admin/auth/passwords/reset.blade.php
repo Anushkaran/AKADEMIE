@@ -47,13 +47,13 @@
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                                 {{$errors}}
-                                <h2 class="card-title font-weight-bold mb-1">Reset Password 🔒</h2>
-                                <p class="card-text mb-2">Your new password must be different from previously used passwords</p>
+                                <h2 class="card-title font-weight-bold mb-1">{{__('messages.reset_password')}}</h2>
+                                <p class="card-text mb-2">{{__('messages.reset_message')}}</p>
                                 <form class="auth-reset-password-form mt-2" action="{{route('admin.reset')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <div class="d-flex justify-content-between">
-                                            <label for="reset-password-new">New Password</label>
+                                            <label for="reset-password-new">{{__('labels.new_password')}}</label>
                                         </div>
                                         <input type="hidden" name="token" value="{{$token}}">
                                         <input type="hidden" name="email" value="{{$email}}">
@@ -69,16 +69,19 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="d-flex justify-content-between">
-                                            <label for="reset-password-confirm">Confirm Password</label>
+                                            <label for="reset-password-confirm">{{__('labels.password_confirmation')}}</label>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
                                             <input class="form-control form-control-merge" id="reset-password-confirm" type="password" name="password_confirmation" placeholder="············" aria-describedby="reset-password-confirm" tabindex="2"  required/>
                                             <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-block" tabindex="3">Set New Password</button>
+                                    <button class="btn btn-primary btn-block" tabindex="3">{{__('labels.set_password')}}</button>
                                 </form>
-                                <p class="text-center mt-2"><a href="page-auth-login-v2.html"><i data-feather="chevron-left"></i> Back to login</a></p>
+                                <p class="text-center mt-2">
+                                    <a href="{{route('admin.login.index')}}">
+                                        <i data-feather="chevron-left"></i>
+                                    {{__('labels.back-to',['name' => __('login')])}}</a></p>
                             </div>
                         </div>
                         <!-- /Reset password-->

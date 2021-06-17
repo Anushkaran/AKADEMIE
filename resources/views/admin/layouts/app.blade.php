@@ -15,6 +15,10 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/vendors/css/vendors.min.css')}}">
+    <script src="{{asset('assets/vuexy/app-assets/vendors/css/extensions/sweetalert2.min.css')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/vendors/css/extensions/toastr.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/plugins/extensions/ext-component-toastr.min.css')}}">
+
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -78,7 +82,8 @@
 <script src="{{asset('assets/vuexy/app-assets/js/core/app.js')}}"></script>
 <!-- END: Theme JS-->
 
-<!-- BEGIN: Page JS-->
+<script src="{{asset('assets/vuexy/app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('assets/vuexy/app-assets/vendors/js/extensions/toastr.min.js')}}"></script><!-- BEGIN: Page JS-->
 <!-- END: Page JS-->
 
 <script>
@@ -90,6 +95,24 @@
             });
         }
     })
+
+    // Success Type
+    @if(session()->has('success'))
+        toastr['success']('{{session("success")}}', '{{__('labels.success')}}', {
+        closeButton: true,
+        tapToDismiss: false,
+        rtl: false
+    });
+    @endif
+
+        @if(session()->has('error'))
+        toastr['error']('{{session("error")}}', '{{__('labels.error')}}', {
+        closeButton: true,
+        tapToDismiss: false,
+        rtl: true
+    });
+    @endif
+
     let mode = localStorage.getItem('mode');
 
     $('#switch-mode').on('click',function (){

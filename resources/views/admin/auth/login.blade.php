@@ -35,7 +35,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h2 class="brand-text text-primary ml-1">Vuexy</h2>
+                            <h2 class="brand-text text-primary ml-1">{{config('app.name')}}</h2>
                         </a>
                         <!-- /Brand logo-->
                         <!-- Left Text-->
@@ -46,12 +46,14 @@
                         <!-- Login-->
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                <h2 class="card-title font-weight-bold mb-1">Welcome to Vuexy! 👋</h2>
-                                <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
+                                <h2 class="card-title font-weight-bold mb-1">{{__('messages.welcome_to',['name' => config('app.name')])}}</h2>
+                                <p class="card-text mb-2">
+                                    {{__('messages.login_message')}}
+                                </p>
                                 <form class="auth-login-form mt-2" action="{{route('admin.login')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="form-label" for="login-email">Email</label>
+                                        <label class="form-label" for="login-email">{{__('labels.email')}}</label>
                                         <input class="form-control @error('email') is-invalid @enderror" value="{{old('email')}}" id="login-email" type="email" name="email" placeholder="john@example.com" aria-describedby="login-email" autofocus="" tabindex="1" />
                                         @error('email')
                                         <div class="invalid-feedback">{{$message}}</div>
@@ -59,7 +61,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="d-flex justify-content-between">
-                                            <label for="login-password">Password</label><a href="{{route('admin.forgot.password.email')}}"><small>Forgot Password?</small></a>
+                                            <label for="login-password">{{__('labels.password')}}</label><a href="{{route('admin.forgot.password.email')}}"><small>{{__('messages.forgot_password')}}</small></a>
                                         </div>
                                         <div class="input-group input-group-merge form-password-toggle">
                                             <input class="form-control @error('password') is-invalid @enderror form-control-merge" id="login-password" type="password" name="password" placeholder="············" aria-describedby="login-password" tabindex="2" />
@@ -72,15 +74,15 @@
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input class="custom-control-input" value="on" id="remember-me" type="checkbox" tabindex="3" name="remember_me" />
-                                            <label class="custom-control-label" for="remember-me"> Remember Me</label>
+                                            <label class="custom-control-label" for="remember-me"> {{__('labels.remember_me')}}</label>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
+                                    <button class="btn btn-primary btn-block" tabindex="4">{{__('labels.login')}}</button>
                                 </form>
                                 <div class="divider my-2">
-                                    <div class="divider-text"><small>Forgot Password?</small></div>
+                                    <div class="divider-text"><small>{{__('messages.forgot_password')}}</small></div>
                                 </div>
-                                <a href="{{route('admin.forgot.password.email')}}"><small>Reset your password from here</small></a>                            </div>
+                                <a href="{{route('admin.forgot.password.email')}}"><small>{{__('messages.reset_password_text')}} </small></a>                            </div>
                         </div>
                         <!-- /Login-->
                     </div>

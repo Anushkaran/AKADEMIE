@@ -17,8 +17,8 @@ class CreateCentersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('address');
-            $table->double('longitude')->nullable();
-            $table->double('latitude')->nullable();
+            $table->string('phone');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

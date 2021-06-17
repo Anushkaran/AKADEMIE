@@ -21,5 +21,5 @@ Route::middleware('auth:admin')->group(function (){
     Route::get('dashboard',[App\Http\Controllers\Web\Admin\DashboardController::class,'index'])->name('dashboard');
     Route::resource('users',App\Http\Controllers\Web\Admin\UserController::class);
     Route::resource('admins',App\Http\Controllers\Web\Admin\AdminController::class);
-    Route::resource('centers',App\Http\Controllers\Web\Admin\AdminController::class);
+    Route::resource('centers',App\Http\Controllers\Web\Admin\CenterController::class);
 });
