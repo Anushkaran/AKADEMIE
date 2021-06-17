@@ -1,5 +1,7 @@
 @extends('admin.layouts.auth-app')
 
+@section('title',__('messages.forgot_password'))
+
 @section('content')
     <div class="app-content content ">
         <div class="content-overlay"></div>

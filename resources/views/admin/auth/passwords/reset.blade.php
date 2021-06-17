@@ -1,5 +1,6 @@
 @extends('admin.layouts.auth-app')
 
+@section('title',__('messages.reset_password'))
 
 @section('content')
     <div class="app-content content ">
