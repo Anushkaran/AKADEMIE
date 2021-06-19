@@ -52,7 +52,10 @@ class UserAuthController extends Controller
     public function logout(): JsonResponse
     {
         $this->guard()->user()->tokens()->delete();
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Successfully logged out'
+        ]);
     }
 
     /**
@@ -65,6 +68,7 @@ class UserAuthController extends Controller
     protected function respondWithToken(string $token,User $user): JsonResponse
     {
         return response()->json([
+            'success' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
             'user' => new UserResource($user)
