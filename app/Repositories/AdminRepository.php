@@ -5,10 +5,11 @@ namespace App\Repositories;
 
 
 use App\Models\Admin;
+use App\Traits\UploadAble;
 
 class AdminRepository extends BaseRepository implements \App\Contracts\AdminContract
 {
-
+    use UploadAble;
     /**
      * @inheritDoc
      */
@@ -38,6 +39,12 @@ class AdminRepository extends BaseRepository implements \App\Contracts\AdminCont
      */
     public function new(array $data)
     {
+        if (array_key_exists('image',$data))
+        {
+            $data['image'] = $this->uploadOne($data['image'],'admin/img');
+        }
+
+        $data['password'] = bcrypt($data['password']);
         return Admin::create($data);
     }
 
@@ -47,6 +54,20 @@ class AdminRepository extends BaseRepository implements \App\Contracts\AdminCont
     public function update($id, array $data)
     {
         $admin = $this->findOneById($id);
+        if (array_key_exists('image',$data))
+        {
+            if ($admin->image)
+            {
+                $this->deleteOne($admin->image);
+            }
+            $data['image'] = $this->uploadOne($data['image'],'admin/img');
+        }
+
+        if (array_key_exists('password',$data))
+        {
+            $data['password'] = bcrypt($data['password']);
+        }
+
         $admin->update($data);
         return $admin;
     }
@@ -56,6 +77,11 @@ class AdminRepository extends BaseRepository implements \App\Contracts\AdminCont
      */
     public function delete($id)
     {
-        return Admin::destroy($id);
+        $admin = $this->findOneById($id);
+        if ($admin->image)
+        {
+            $this->deleteOne($admin->image);
+        }
+        return $admin->delete();
     }
 }

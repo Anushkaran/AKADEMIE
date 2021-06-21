@@ -12,14 +12,13 @@ class AdminSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         Admin::create([
             'name' => 'Admin',
             'email' => 'admin@app.com',
             'password' => bcrypt('password'),
             'role' => 'admin',
-            'image' => asset('assets/vuexy/app-assets/images/avatars/12.png')
         ]);
     }
 }

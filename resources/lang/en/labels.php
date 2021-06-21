@@ -32,5 +32,10 @@ return [
    'error' => 'Error',
    'remember_me' => 'Remember Me',
    'back' => 'Back',
+   'pic' => 'Image',
    'back-to' => 'Back to :name',
+   'roles' => [
+       'admin' => 'Admin',
+       'manager' => 'Manager'
+   ],
 ];

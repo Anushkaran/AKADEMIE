@@ -100,7 +100,7 @@ class AdminController extends Controller
             'role' => 'required|string',
         ];
 
-        if ($request->method() === 'put')
+        if ($request->method() === 'PUT')
         {
             $rules['password'] = 'sometimes|nullable|string|min:8|max:24|confirmed';
             $rules['email'] = 'required|email|unique:admins,email,'.$request->route('admin');
