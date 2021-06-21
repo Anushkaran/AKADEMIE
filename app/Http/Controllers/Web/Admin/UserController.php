@@ -85,8 +85,44 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
+    public function editPassword($id)
+    {
+        $user = $this->user->findOneById($id,[],['id']);
+        return view('admin.users.edit-password',compact('user'));
+    }
+
+    public function updatePassword($id,Request $request)
+    {
+        $data = $request->validate([
+            'password' => 'required|string|max:24|min:8|confirmed'
+        ]);
+
+        $this->user->update($id,$data);
+        session()->flash('success',__('messages.update'));
+        return redirect()->route('admin.users.show',$id);
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
     private function getValidatedData(Request $request): array
     {
-        return $request->validate([]);
+        $rules = [
+            'first_name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
+            'phone' => 'sometimes|nullable|string|max:20',
+            'email' => 'required|string|email|unique:users,email',
+            'password' => 'required|string|min:8|max:24|confirmed',
+            'image' => 'sometimes|nullable|file|image|max:3000',
+        ];
+
+        if ($request->method() === 'PUT' )
+        {
+            $rules['email'] = 'required|string|email|unique:users,email,'.$request->route('user');
+            unset($rules['password']);
+        }
+
+        return $request->validate($rules);
     }
 }

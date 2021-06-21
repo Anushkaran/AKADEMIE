@@ -14,9 +14,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
                                     <li class="breadcrumb-item"><a href="{{route('admin.admins.index')}}">
-                                            {{__('labels.list',['name' => trans_choice('labels.admin',2)])}}</a>
+                                            {{__('labels.list',['name' => trans_choice('labels.user',2)])}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{__('actions.edit')}}
+                                    <li class="breadcrumb-item active">{{__('actions.edit-password')}}
                                     </li>
                                 </ol>
                             </div>
@@ -39,63 +39,28 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">{{__('actions.edit')}}</h4>
-                                    <a href="{{route('admin.admins.password.edit',$admin->id)}}" class="mx-2 btn btn-primary">{{__('actions.edit-password')}}</a>
-
                                 </div>
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="{{route('admin.admins.update',$admin->id)}}" method="post" enctype="multipart/form-data">
+                                    <form class="form form-vertical" action="{{route('admin.admins.password.update',$admin->id)}}" method="post">
                                         @csrf
                                         @method('PUT')
                                         <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group text-center">
-                                                    <label for="pic">{{__('labels.pic')}}</label>
-                                                    <input type="file" style="visibility: hidden"  id="pic-input"
-                                                           class="form-control @error('image') is-invalid @enderror" name="image"
-                                                    />
-                                                    <img onclick="document.getElementById('pic-input').click()"
-                                                         src="{{$admin->image_url}}"
-                                                         class="img-thumbnail img-fluid" id="image_preview" width="150" height="150" alt="default pic">
-                                                    @error('image')
-                                                    <div class="invalid-feedback">{{$message}}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
 
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label for="first-name-vertical">{{__('labels.name')}}</label>
-                                                    <input type="text" value="{{old('name',$admin->name)}}" id="first-name-vertical"
-                                                           class="form-control @error('name') is-invalid @enderror" name="name"
-                                                           placeholder="{{__('labels.name')}}" />
-                                                    @error('name')
+                                                    <label for="password-vertical">{{__('labels.password')}} </label>
+                                                    <input type="password" id="password-vertical" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{__('labels.password')}}" />
+                                                    @error('password')
                                                     <div class="invalid-feedback">{{$message}}</div>
                                                     @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label for="role">{{__('labels.role')}}</label>
-                                                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
-                                                        @foreach(config('settings.roles') as $role)
-                                                            <option value="{{$role}}" {{old('role',$admin->role) === $role ? 'selected' : ''}}>{{__('labels.roles.'.$role)}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('role')
-                                                    <div class="invalid-feedback">{{$message}}</div>
-                                                    @enderror
+                                                    <label for="password-confirm">{{__('labels.password_confirmation')}}</label>
+                                                    <input type="password" id="password-confirm" class="form-control" name="password_confirmation" placeholder="{{__('labels.password_confirmation')}}" />
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="email-id-vertical">{{__('labels.email')}}</label>
-                                                    <input type="email" value="{{old('email',$admin->email)}}" id="email-id-vertical" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="{{__('labels.email')}}" />
-                                                    @error('email')
-                                                    <div class="invalid-feedback">{{$message}}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
 
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-primary mr-1">{{__('actions.save')}}</button>

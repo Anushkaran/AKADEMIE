@@ -90,6 +90,23 @@ class AdminController extends Controller
         return redirect()->route('admin.admins.index');
     }
 
+
+    public function editPassword($id)
+    {
+        $admin = $this->admin->findOneById($id,[],['id']);
+        return view('admin.admins.edit-password',compact('admin'));
+    }
+
+    public function updatePassword($id,Request $request)
+    {
+        $data = $request->validate([
+            'password' => 'required|string|max:24|min:8|confirmed'
+        ]);
+
+        $this->admin->update($id,$data);
+        session()->flash('success',__('messages.update'));
+        redirect()->route('admin.admins.show',$id);
+    }
     private function getValidatedDate(Request $request): array
     {
         $rules = [

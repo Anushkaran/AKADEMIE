@@ -47,7 +47,7 @@
                             <div class="card user-card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
+                                        <div class="col-xl-12 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-avatar-section">
                                                 <div class="d-flex justify-content-start">
                                                     <img class="img-fluid rounded" src="{{$admin->image_url}}" height="104" width="104" alt="User avatar" />
@@ -58,6 +58,8 @@
                                                         </div>
                                                         <div class="d-flex flex-wrap">
                                                             <a href="{{route('admin.admins.edit',$admin->id)}}" class="btn btn-primary">{{__('actions.edit')}}</a>
+                                                            <a href="{{route('admin.admins.password.edit',$admin->id)}}" class="mx-2 btn btn-primary">{{__('actions.edit-password')}}</a>
+
                                                             <button onclick="deleteForm({{$admin->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>

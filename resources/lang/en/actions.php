@@ -6,6 +6,7 @@ return [
     'save' => 'Save',
     'update' => 'Update',
     'edit' => 'Edit',
+    'edit-password' => 'Change password',
     'delete' => 'Delete',
     'add' => 'Add',
     'add-new' => 'Add new :name',

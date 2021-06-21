@@ -19,7 +19,13 @@ Route::middleware('auth:admin')->group(function (){
     Route::any('logout',[\App\Http\Controllers\Web\Admin\Auth\AdminLoginController::class,'logout'])->name('logout');
 
     Route::get('dashboard',[App\Http\Controllers\Web\Admin\DashboardController::class,'index'])->name('dashboard');
+
+    Route::get('users/{id}/edit-password',[App\Http\Controllers\Web\Admin\UserController::class,'editPassword'])->name('users.password.edit');
+    Route::put('users/{id}/edit-password',[App\Http\Controllers\Web\Admin\UserController::class,'updatePassword'])->name('users.password.update');
     Route::resource('users',App\Http\Controllers\Web\Admin\UserController::class);
+
+    Route::get('admins/{id}/edit-password',[App\Http\Controllers\Web\Admin\AdminController::class,'editPassword'])->name('admins.password.edit');
+    Route::put('admins/{id}/edit-password',[App\Http\Controllers\Web\Admin\AdminController::class,'updatePassword'])->name('admins.password.update');
     Route::resource('admins',App\Http\Controllers\Web\Admin\AdminController::class);
     Route::resource('centers',App\Http\Controllers\Web\Admin\CenterController::class);
 });

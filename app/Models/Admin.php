@@ -58,7 +58,7 @@ class Admin extends Authenticatable
 
         return $this->image
             ? asset('storage/'.$this->image)
-            : asset('assets/vuexy/app-assets/images/avatars/12.png');
+            : asset('assets/vuexy/app-assets/images/defaults/user-default.jpg');
     }
 
     public function sendPasswordResetNotification($token) :void
