@@ -20,7 +20,7 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.centers.index')}}">{{__('labels.list',['name' => trans_choice('labels.center',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluations.index')}}">{{__('labels.list',['name' => trans_choice('labels.evaluation',2)])}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.details')}}
                                     </li>
@@ -37,7 +37,7 @@
                     <!-- User Card & Plan Starts -->
                     <div class="row">
                         <!-- User Card starts-->
-                        <div class="col-xl-9 col-lg-8 col-md-7">
+                        <div class="col-xl-4 col-lg-4 col-md-4">
                             <div class="card user-card">
                                 <div class="card-body">
                                     <div class="row">
@@ -51,8 +51,8 @@
                                                                     <i data-feather='arrow-left'></i>
                                                                 </a>
                                                             @endif
-                                                            <a href="{{route('admin.centers.edit',$center->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
-                                                            <button onclick="deleteForm({{$center->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
+                                                            <a href="{{route('admin.evaluations.edit',$ev->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
+                                                            <button onclick="deleteForm({{$ev->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -65,35 +65,31 @@
                                                         <i data-feather="user" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.name')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->name}}</p>
+                                                    <p class="card-text mb-0">{{$ev->name}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap my-50">
+
+                                                <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
-                                                        <i data-feather="map-pin" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.address')}}</span>
+                                                        <i data-feather="calendar" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.end_date')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->address}}</p>
+                                                    <p class="card-text mb-0">{{$ev->start_date->format('d-m-Y')}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap my-50">
+
+                                                <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
-                                                        <i data-feather="phone" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.phone')}}</span>
+                                                        <i data-feather="calendar" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.start_date')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->phone}}</p>
+                                                    <p class="card-text mb-0">{{$ev->end_date->format('d-m-Y')}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title">
-                                                        <i data-feather="book-open" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('note')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">{{$center->note}}</p>
-                                                </div>
+
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
                                                         <i data-feather="calendar" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.created_at')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->created_at->format('d-m-Y')}}</p>
+                                                    <p class="card-text mb-0">{{$ev->created_at->format('d-m-Y')}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +98,106 @@
                             </div>
                         </div>
                         <!-- /User Card Ends-->
+                        <div class="col-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                        <button class="dt-button create-new btn btn-primary" tabindex="0"
+                                                aria-controls="DataTables_Table_0"
+                                                type="button" data-toggle="modal" id="create-btn"
+                                                data-target="#modals-slide-in">
+                                            <i data-feather='plus'></i>
+                                            {{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}
+                                        </button>
 
+                                    </h4>
+                                </div>
+                                <div class="card-body">
+                                    {{--                                filters--}}
+                                </div>
+                                <div class="table-responsive">
+
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{__('labels.name')}}</th>
+                                            <th>{{__('labels.phone')}}</th>
+                                            <th>{{__('labels.email')}}</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Jhon Do</td>
+                                            <td>123456789</td>
+                                            <td>student@email.com</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i data-feather="trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+{{--                                        @foreach($evaluations as $key => $e)--}}
+{{--                                            <tr>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$key + 1}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>{{$e->name}}</td>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$e->start_date->format('d-m-Y')}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$e->end_date->format('d-m-Y')}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    {{$e->created_at->format('d-m-Y')}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    @if($count < 3)--}}
+{{--                                                        <a href="{{route('admin.evaluations.edit',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
+{{--                                                            <i data-feather="edit"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                        <a href="{{route('admin.evaluations.show',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
+{{--                                                            <i data-feather="eye"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                        <a href="javascript:void(0)" onclick="deleteForm({{$e->id}})" class="btn btn-sm btn-outline-warning">--}}
+{{--                                                            <i data-feather="trash"></i>--}}
+{{--                                                        </a>--}}
+{{--                                                    @else--}}
+{{--                                                        <div class="dropdown">--}}
+{{--                                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">--}}
+{{--                                                                <i data-feather="more-vertical"></i>--}}
+{{--                                                            </button>--}}
+{{--                                                            <div class="dropdown-menu">--}}
+{{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.edit',$e->id)}}">--}}
+{{--                                                                    <i data-feather="edit-2" class="mr-50"></i>--}}
+{{--                                                                    <span>{{__('actions.edit')}}</span>--}}
+{{--                                                                </a>--}}
+{{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.show',$e->id)}}">--}}
+{{--                                                                    <i data-feather="eye" class="mr-50"></i>--}}
+{{--                                                                    <span>{{__('actions.details')}}</span>--}}
+{{--                                                                </a>--}}
+{{--                                                                <a class="dropdown-item" href="javascript:void(0);" onclick="deleteForm({{$e->id}})">--}}
+{{--                                                                    <i data-feather="trash" class="mr-50"></i>--}}
+{{--                                                                    <span>{{__('actions.delete')}}</span>--}}
+{{--                                                                </a>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    @endif--}}
+
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex justify-content-center">
+{{--                                    {{$evaluations->links()}}--}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
@@ -135,7 +230,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/centers/${id}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");
