@@ -40,37 +40,48 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.centers.update',$center->id)}}">
+                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.students.update',$student->id)}}">
                                     @csrf
                                     @method('PUT')
 
                                     <div class="modal-body flex-grow-1">
                                         <div class="form-group">
-                                            <label class="form-label" for="center">{{__('labels.name')}}</label>
-                                            <input type="text" required name="name" value="{{old('name',$center->name)}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="center" placeholder="{{trans_choice('labels.center',1)}} ..."  aria-label="{{trans_choice('labels.center',1)}} ..." />
-                                            @error('name')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label" for="center">{{__('labels.phone')}}</label>
-                                            <input type="text" required name="phone" value="{{old('phone',$center->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
-                                            @error('phone')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label" for="address">{{__('labels.address')}}</label>
-                                            <textarea required  name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="..." cols="30" rows="3">{{old('address',$center->address)}}</textarea>
-                                            @error('address')
+                                            <label class="form-label" for="first_name">{{__('labels.first_name')}}</label>
+                                            <input type="text" required name="first_name" value="{{old('first_name',$student->name)}}" class="form-control @error('first_name') is-invalid @enderror dt-full-name" id="first_name" placeholder="{{__('labels.first_name')}} ..."  aria-label="{{__('labels.first_name')}} ..." />
+                                            @error('first_name')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
-                                            <textarea required  name="note" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="..." cols="30" rows="3">{{old('note',$center->note)}}</textarea>
-                                            @error('note')
+                                            <label class="form-label" for="last_name">{{__('labels.last_name')}}</label>
+                                            <input type="text" required name="last_name" value="{{old('last_name',$student->last_name)}}" class="form-control @error('last_name') is-invalid @enderror dt-full-name" id="last_name" placeholder="{{__('labels.last_name')}} ..."  aria-label="{{__('labels.first_name')}} ..." />
+                                            @error('last_name')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="email">{{__('labels.email')}}</label>
+                                            <input type="email" required name="email" value="{{old('email',$student->email)}}" class="form-control @error('email') is-invalid @enderror dt-full-name" id="email" placeholder="{{__('labels.email')}} ..."  aria-label="{{__('labels.email')}} ..." />
+                                            @error('email')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone">{{__('labels.phone')}}</label>
+                                            <input type="text" required name="phone" value="{{old('phone',$student->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
+                                            @error('phone')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="address">{{__('labels.address')}}</label>
+                                            <textarea required  name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="..." cols="30" rows="3">{{old('address',$student->address)}}</textarea>
+                                            @error('address')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>

@@ -20,7 +20,7 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.centers.index')}}">{{__('labels.list',['name' => trans_choice('labels.center',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.students.index')}}">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.details')}}
                                     </li>
@@ -51,8 +51,8 @@
                                                                     <i data-feather='arrow-left'></i>
                                                                 </a>
                                                             @endif
-                                                            <a href="{{route('admin.centers.edit',$center->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
-                                                            <button onclick="deleteForm({{$center->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
+                                                            <a href="{{route('admin.students.edit',$student->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
+                                                            <button onclick="deleteForm({{$student->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -63,37 +63,38 @@
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
                                                         <i data-feather="user" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.name')}}</span>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.first_name')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->name}}</p>
+                                                    <p class="card-text mb-0">{{$student->first_name}}</p>
+                                                </div>
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="user" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.last_name')}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$student->last_name}}</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
                                                         <i data-feather="map-pin" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.address')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->address}}</p>
+                                                    <p class="card-text mb-0">{{$student->address}}</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
                                                         <i data-feather="phone" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.phone')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->phone}}</p>
+                                                    <p class="card-text mb-0">{{$student->phone}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title">
-                                                        <i data-feather="book-open" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('note')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">{{$center->note}}</p>
-                                                </div>
+
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
                                                         <i data-feather="calendar" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.created_at')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$center->created_at->format('d-m-Y')}}</p>
+                                                    <p class="card-text mb-0">{{$student->created_at->format('d-m-Y')}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -135,7 +136,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/centers/${id}`);
+                    f.setAttribute('action',`/admin/students/${id}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

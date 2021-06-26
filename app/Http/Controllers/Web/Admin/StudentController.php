@@ -111,6 +111,7 @@ class StudentController extends Controller
             'last_name' => 'required|string|max:100',
             'email' => 'required|email',
             'phone' => 'required|string|max:20',
+            'address' => 'required|string|max:200',
         ]);
     }
 }

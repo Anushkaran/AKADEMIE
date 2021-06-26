@@ -7,10 +7,11 @@ use Illuminate\Support\ServiceProvider;
 class RepositoryServiceProvider extends ServiceProvider
 {
     protected $repos = [
-       \App\Contracts\UserContract::class => \App\Repositories\UserRepository::class,
-       \App\Contracts\AdminContract::class => \App\Repositories\AdminRepository::class,
-       \App\Contracts\CenterContract::class => \App\Repositories\CenterRepository::class,
+       \App\Contracts\UserContract::class       => \App\Repositories\UserRepository::class,
+       \App\Contracts\AdminContract::class      => \App\Repositories\AdminRepository::class,
+       \App\Contracts\CenterContract::class     => \App\Repositories\CenterRepository::class,
        \App\Contracts\EvaluationContract::class => \App\Repositories\EvaluationRepository::class,
+       \App\Contracts\StudentContract::class    => \App\Repositories\StudentRepository::class,
     ];
 
     /**
