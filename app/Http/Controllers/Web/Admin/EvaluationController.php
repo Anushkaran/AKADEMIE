@@ -54,7 +54,7 @@ class EvaluationController extends Controller
             'end_date'      => 'required|date|after:start_date',
         ]);
 
-        $this->ev->create($data);
+        $this->ev->new($data);
         session()->flash('success',__('messages.create'));
         return redirect()->route('admin.evaluations.index');
     }
@@ -84,7 +84,7 @@ class EvaluationController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function update($id, Request $request)
+    public function update($id, Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name'          => 'required|string|max:100',
