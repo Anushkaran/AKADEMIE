@@ -26,6 +26,9 @@ Route::middleware('auth:admin')->group(function (){
 
     Route::get('admins/{id}/edit-password',[App\Http\Controllers\Web\Admin\AdminController::class,'editPassword'])->name('admins.password.edit');
     Route::put('admins/{id}/edit-password',[App\Http\Controllers\Web\Admin\AdminController::class,'updatePassword'])->name('admins.password.update');
+
     Route::resource('admins',App\Http\Controllers\Web\Admin\AdminController::class);
     Route::resource('centers',App\Http\Controllers\Web\Admin\CenterController::class);
+    Route::resource('students',App\Http\Controllers\Web\Admin\StudentController::class);
+    Route::resource('evaluations',App\Http\Controllers\Web\Admin\EvaluationController::class);
 });
