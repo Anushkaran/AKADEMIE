@@ -31,4 +31,6 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('centers',App\Http\Controllers\Web\Admin\CenterController::class);
     Route::resource('students',App\Http\Controllers\Web\Admin\StudentController::class);
     Route::resource('evaluations',App\Http\Controllers\Web\Admin\EvaluationController::class);
+    Route::resource('skills',App\Http\Controllers\Web\Admin\SkillController::class);
+    Route::resource('tasks',App\Http\Controllers\Web\Admin\TaskController::class);
 });

@@ -14,7 +14,7 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.centers.index')}}">{{__('labels.list',['name' => trans_choice('labels.center',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.skills.index')}}">{{__('labels.list',['name' => trans_choice('labels.skill',2)])}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.edit')}}
                                     </li>
@@ -40,43 +40,29 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.centers.update',$center->id)}}">
+                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.skills.update',$s->id)}}">
                                     @csrf
                                     @method('PUT')
 
                                     <div class="modal-body flex-grow-1">
                                         <div class="form-group">
-                                            <label class="form-label" for="center">{{__('labels.name')}}</label>
-                                            <input type="text" required name="name" value="{{old('name',$center->name)}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="center" placeholder="{{trans_choice('labels.center',1)}} ..."  aria-label="{{trans_choice('labels.center',1)}} ..." />
+                                            <label class="form-label" for="name">{{__('labels.name')}}</label>
+                                            <input type="text" required name="name" value="{{old('name',$s->name)}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="name" placeholder="{{trans_choice('labels.skill',1)}} ..."  aria-label="{{trans_choice('labels.skill',1)}} ..." />
                                             @error('name')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label" for="center">{{__('labels.phone')}}</label>
-                                            <input type="text" required name="phone" value="{{old('phone',$center->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
-                                            @error('phone')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label" for="address">{{__('labels.address')}}</label>
-                                            <textarea required  name="address" class="form-control @error('address') is-invalid @enderror" id="address" placeholder="..." cols="30" rows="3">{{old('address',$center->address)}}</textarea>
-                                            @error('address')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
-                                            <textarea   name="note" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="..." cols="30" rows="3">{{old('note',$center->note)}}</textarea>
-                                            @error('note')
+                                            <label class="form-label" for="description">{{__('labels.description')}} ({{__('labels.optional')}})</label>
+                                            <textarea  name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="..." cols="30" rows="3">{{old('description',$s->description)}}</textarea>
+                                            @error('description')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
 
                                         <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
-                                        <a href="{{route('admin.centers.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
+                                        <a href="{{route('admin.skills.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
                                     </div>
                                 </form>
 
