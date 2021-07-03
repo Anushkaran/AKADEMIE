@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@app.com',
             'password' => bcrypt('password'),
         ]);
-        \App\Models\User::factory(10000)->create();
+        \App\Models\User::factory(3)->create();
 
         $this->call(AdminSeeder::class);
     }
