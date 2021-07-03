@@ -47,7 +47,7 @@
                                     <div class="modal-body flex-grow-1">
                                         <div class="form-group">
                                             <label class="form-label" for="first_name">{{__('labels.first_name')}}</label>
-                                            <input type="text" required name="first_name" value="{{old('first_name',$student->name)}}" class="form-control @error('first_name') is-invalid @enderror dt-full-name" id="first_name" placeholder="{{__('labels.first_name')}} ..."  aria-label="{{__('labels.first_name')}} ..." />
+                                            <input type="text" required name="first_name" value="{{old('first_name',$student->first_name)}}" class="form-control @error('first_name') is-invalid @enderror dt-full-name" id="first_name" placeholder="{{__('labels.first_name')}} ..."  aria-label="{{__('labels.first_name')}} ..." />
                                             @error('first_name')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
