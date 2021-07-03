@@ -90,7 +90,7 @@ class TaskController extends Controller
     {
         $this->task->delete($id);
         session()->flash('success',__('messages.delete'));
-        return redirect()->back();
+        return redirect()->route('admin.tasks.index');
     }
 
 }
