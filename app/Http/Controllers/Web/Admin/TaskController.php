@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Contracts\SkillContract;
+use App\Contracts\TaskContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +13,7 @@ class TaskController extends Controller
 {
     protected $task;
 
-    public function __construct(SkillContract $task)
+    public function __construct(TaskContract $task)
     {
         $this->task = $task;
     }
@@ -23,6 +25,12 @@ class TaskController extends Controller
     {
         $tasks = $this->task->findByFilter();
         return view('admin.tasks.index',compact('tasks'));
+    }
+
+    public function create(SkillContract $skill)
+    {
+        $skills = $skill->findByFilter(-1,[],['id','name']);
+        return view('admin.tasks.create',compact('skills'));
     }
 
     /**
@@ -49,18 +57,19 @@ class TaskController extends Controller
      */
     public function show($id): Renderable
     {
-        $s = $this->task->findOneById($id,['tasks']);
-        return view('admin.tasks.show',compact('s'));
+        $t = $this->task->findOneById($id,['tasks']);
+        return view('admin.tasks.show',compact('t'));
     }
 
     /**
      * @param $id
      * @return Renderable
      */
-    public function edit($id): Renderable
+    public function edit($id,SkillContract $skill): Renderable
     {
-        $s = $this->task->findOneById($id);
-        return view('admin.tasks.edit',compact('s'));
+        $t = $this->task->findOneById($id);
+        $skills = $skill->findByFilter(-1,[],['id','name']);
+        return view('admin.tasks.edit',compact('t','skills'));
     }
 
     /**

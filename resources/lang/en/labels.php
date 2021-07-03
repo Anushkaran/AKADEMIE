@@ -8,6 +8,7 @@ return [
    'accounts' => '{1}Account|[2,*]accounts',
    'evaluation' => '{1}Evaluation|[2,*]evaluation',
    'skill' => '{1}Skill|[2,*]skills',
+   'task' => '{1}Task|[2,*]tasks',
    'list' => 'List of :name',
    'email' => 'Email',
    'password' => 'Password',
