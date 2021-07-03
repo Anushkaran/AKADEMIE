@@ -60,7 +60,7 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="skill_id">{{trans_choice('labels.skill',1)}}</label>
-                                            <select class="form-control select2 @error('skill_id') is-invalid @enderror" name="skill_id select2 @error('skill_id') is-invalid @enderror" id="skill_id">
+                                            <select class="form-control select2 @error('skill_id') is-invalid @enderror" name="skill_id" id="skill_id">
                                                 @foreach($skills as $s)
                                                     <option value="{{$s->id}}" {{$s->id === (int)old('skill_id') ? 'selected' : ''}}>
                                                         {{$s->name}}

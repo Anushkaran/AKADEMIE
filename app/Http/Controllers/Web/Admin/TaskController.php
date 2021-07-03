@@ -27,7 +27,11 @@ class TaskController extends Controller
         return view('admin.tasks.index',compact('tasks'));
     }
 
-    public function create(SkillContract $skill)
+    /**
+     * @param SkillContract $skill
+     * @return Renderable
+     */
+    public function create(SkillContract $skill): Renderable
     {
         $skills = $skill->findByFilter(-1,[],['id','name']);
         return view('admin.tasks.create',compact('skills'));
@@ -48,7 +52,7 @@ class TaskController extends Controller
         $this->task->new($data);
 
         session()->flash('success',__('messages.create'));
-        return redirect()->back();
+        return redirect()->route('admin.tasks.index');
     }
 
     /**
@@ -57,12 +61,13 @@ class TaskController extends Controller
      */
     public function show($id): Renderable
     {
-        $t = $this->task->findOneById($id,['tasks']);
+        $t = $this->task->findOneById($id,['skill:id,name']);
         return view('admin.tasks.show',compact('t'));
     }
 
     /**
      * @param $id
+     * @param SkillContract $skill
      * @return Renderable
      */
     public function edit($id,SkillContract $skill): Renderable

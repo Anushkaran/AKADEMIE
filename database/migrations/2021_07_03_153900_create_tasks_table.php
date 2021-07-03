@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->index('name');
