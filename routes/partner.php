@@ -3,7 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('partner','admin/dashboard');
+Route::redirect('/','partner/dashboard');
 
 Route::get('login',[\App\Http\Controllers\Web\Partner\Auth\PartnerLoginController::class,'index'])->name('login.index');
 Route::post('login',[\App\Http\Controllers\Web\Partner\Auth\PartnerLoginController::class,'login'])->name('login');
@@ -15,7 +15,7 @@ Route::get('forgot/password',[\App\Http\Controllers\Web\Partner\Auth\ForgotPassw
 Route::post('forgot/password',[\App\Http\Controllers\Web\Partner\Auth\ForgotPasswordController::class,'sendResetLinkEmail'])->name('forgot.password.send');
 
 
-Route::middleware('auth:admin')->group(function (){
+Route::middleware('auth:partner')->group(function (){
     Route::any('logout',[\App\Http\Controllers\Web\Partner\Auth\PartnerLoginController::class,'logout'])->name('logout');
 
     Route::get('dashboard',[App\Http\Controllers\Web\Partner\DashboardController::class,'index'])->name('dashboard');

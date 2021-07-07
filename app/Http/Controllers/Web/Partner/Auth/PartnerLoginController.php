@@ -19,7 +19,7 @@ class PartnerLoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
+    protected $redirectTo = RouteServiceProvider::PARTNER_HOME;
 
     public function __construct()
     {

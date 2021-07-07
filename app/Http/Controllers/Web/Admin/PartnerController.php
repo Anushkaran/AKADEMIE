@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Contracts\AdminContract;
+use App\Contracts\PartnerContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class PartnerController extends Controller
 {
-    protected $admin;
+    protected $partner;
 
-    public function __construct(AdminContract $admin)
+    public function __construct(PartnerContract $partner)
     {
-        $this->admin = $admin;
+        $this->partner = $partner;
     }
 
     /**
@@ -22,8 +22,8 @@ class AdminController extends Controller
      */
     public function index() : Renderable
     {
-        $admins = $this->admin->findByFilter();
-        return view('admin.admins.index',compact('admins'));
+        $partners = $this->partner->findByFilter();
+        return view('admin.partners.index',compact('partners'));
     }
 
     /**
@@ -31,7 +31,7 @@ class AdminController extends Controller
      */
     public function create() : Renderable
     {
-        return view('admin.admins.create');
+        return view('admin.partners.create');
     }
 
     /**
@@ -41,9 +41,9 @@ class AdminController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $this->getValidatedDate($request);
-        $this->admin->new($data);
+        $this->partner->new($data);
         session()->flash('success',__('messages.create'));
-        return redirect()->route('admin.admins.index');
+        return redirect()->route('admin.partners.index');
     }
 
     /**
@@ -52,8 +52,8 @@ class AdminController extends Controller
      */
     public function show($id) : Renderable
     {
-        $admin = $this->admin->findOneById($id);
-        return view('admin.admins.show',compact('admin'));
+        $partner = $this->partner->findOneById($id);
+        return view('admin.partners.show',compact('partner'));
     }
 
     /**
@@ -62,8 +62,8 @@ class AdminController extends Controller
      */
     public function edit($id) : Renderable
     {
-        $admin = $this->admin->findOneById($id);
-        return view('admin.admins.edit',compact('admin'));
+        $partner = $this->partner->findOneById($id);
+        return view('admin.partners.edit',compact('partner'));
     }
 
     /**
@@ -74,9 +74,9 @@ class AdminController extends Controller
     public function update($id, Request $request): RedirectResponse
     {
         $data = $this->getValidatedDate($request);
-        $this->admin->update($id,$data);
+        $this->partner->update($id,$data);
         session()->flash('success',__('messages.update'));
-        return redirect()->route('admin.admins.index');
+        return redirect()->route('admin.partners.index');
     }
 
     /**
@@ -85,16 +85,16 @@ class AdminController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $this->admin->delete($id);
+        $this->partner->delete($id);
         session()->flash('success',__('messages.delete'));
-        return redirect()->route('admin.admins.index');
+        return redirect()->route('admin.partners.index');
     }
 
 
     public function editPassword($id)
     {
-        $admin = $this->admin->findOneById($id,[],['id']);
-        return view('admin.admins.edit-password',compact('admin'));
+        $partner = $this->partner->findOneById($id,[],['id']);
+        return view('admin.partners.edit-password',compact('partner'));
     }
 
     public function updatePassword($id,Request $request)
@@ -103,24 +103,24 @@ class AdminController extends Controller
             'password' => 'required|string|max:24|min:8|confirmed'
         ]);
 
-        $this->admin->update($id,$data);
+        $this->partner->update($id,$data);
         session()->flash('success',__('messages.update'));
-        return redirect()->route('admin.admins.show',$id);
+        return redirect()->route('admin.partners.show',$id);
     }
     private function getValidatedDate(Request $request): array
     {
         $rules = [
             'name' => 'required|string|max:100',
-            'email' => 'required|email|unique:admins,email',
-            'image' => 'sometimes|nullable|file|image|max:3000',
+            'email' => 'required|email|unique:partners,email',
+            'phone' => 'required|string|max:20|unique:partners,phone',
             'password' => 'required|string|min:8|max:24|confirmed',
-            'role' => 'required|string',
         ];
 
         if ($request->method() === 'PUT')
         {
             $rules['password'] = 'sometimes|nullable|string|min:8|max:24|confirmed';
-            $rules['email'] = 'required|email|unique:admins,email,'.$request->route('admin');
+            $rules['email'] = 'required|email|unique:partners,email,'.$request->route('partner');
+            $rules['phone'] = 'required|string|max:20|unique:partners,phone,'.$request->route('partner');
         }
 
         return $request->validate($rules);

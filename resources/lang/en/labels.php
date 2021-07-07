@@ -3,6 +3,7 @@
 return [
    'user' => '{1}User|[2,*]users',
    'admin' => '{1}Admin|[2,*]admins',
+   'partner' => '{1}Partner|[2,*]partners',
    'center' => '{1}Center|[2,*]center',
    'student' => '{1}Student|[2,*]students',
    'accounts' => '{1}Account|[2,*]accounts',

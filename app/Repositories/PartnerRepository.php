@@ -5,6 +5,8 @@ namespace App\Repositories;
 
 
 use App\Models\Partner;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class PartnerRepository extends BaseRepository implements \App\Contracts\PartnerContract
 {
@@ -39,15 +41,29 @@ class PartnerRepository extends BaseRepository implements \App\Contracts\Partner
      */
     public function new(array $data)
     {
+        $data['password'] = Hash::make($data['password']);
         return Partner::create($data);
     }
 
     /**
      * @inheritDoc
+     * @throws ValidationException
      */
     public function update($id, array $data)
     {
         $p = $this->findOneById($id);
+
+        if (array_key_exists('password',$data))
+        {
+            if (Hash::check($data['password'],$p->password))
+            {
+                throw ValidationException::withMessages([
+                    'password' => 'new password cannot be the same as old'
+                ]);
+            }
+            $data['password'] = Hash::make($data['password']);
+        }
+
         $p->update($data);
         return $p;
     }

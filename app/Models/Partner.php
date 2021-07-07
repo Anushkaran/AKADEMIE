@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\Partner\PartnerResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,5 +49,11 @@ class Partner extends Authenticatable
     public function students(): HasMany
     {
         return $this->hasMany(Student::class);
+    }
+
+
+    public function sendPasswordResetNotification($token) :void
+    {
+        $this->notify(new PartnerResetPasswordNotification($token));
     }
 }

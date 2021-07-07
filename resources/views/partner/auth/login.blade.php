@@ -51,6 +51,13 @@
                                 <p class="card-text mb-2">
                                     {{__('messages.login_message')}}
                                 </p>
+                                @if(session()->has('error'))
+                                <div class="alert alert-danger">
+                                    <p class="alert-body">
+                                        {{session('error')}}
+                                    </p>
+                                </div>
+                                @endif
                                 <form class="auth-login-form mt-2" action="{{route('partner.login')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
