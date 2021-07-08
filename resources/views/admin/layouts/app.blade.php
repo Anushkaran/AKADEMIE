@@ -104,7 +104,7 @@
     @endif
 
         @if(session()->has('error'))
-        toastr['error']('{{session("error")}}', '{{__('labels.error')}}', {
+        toastr['error']('{{session("error")}}', '{{__("labels.error")}}', {
         closeButton: true,
         tapToDismiss: false,
         rtl: true

@@ -19,10 +19,13 @@ class PartnerFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'name'      => $this->faker->words(5,true),
+            'phone'     => $this->faker->phoneNumber,
+            'email'     => $this->faker->unique()->safeEmail,
+            'password'  => bcrypt('password'),
         ];
     }
 }

@@ -1,5 +1,11 @@
 @extends('admin.layouts.app')
 
+@push('css')
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
+
 @section('content')
 
     <div class="app-content content ">
@@ -169,6 +175,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                        <select name="partner_id" id="partner_id" class="form-control select2">
+{{--                            @foreach($partners as $p)--}}
+{{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
+{{--                            @endforeach--}}
+                        </select>
+                        @error('partner_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label" for="phone">{{__('labels.phone')}}</label>
                         <input type="text" required name="phone" value="{{old('phone')}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
                         @error('phone')
@@ -195,11 +213,45 @@
 
 
 @push('js')
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
         @if($errors->any())
             document.getElementById('create-btn').click();
         @endif
+
+        $(document).ready(function() {
+            $('.select2').select2({
+                ajax: {
+                    url: '{{route('admin.partners.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    },
+                    processResults: function ({partners}, params) {
+                        params.page = params.page || 1;
+                        console.log(partners.data)
+                        let fData = $.map(partners.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+                        return {
+                            results: fData,
+                            // pagination: {
+                            //     more: (params.page * 10) < partners.count_filtered
+                            // }
+                        };
+                    }
+                }
+            });
+            $('.select2-selection__arrow').style.display = 'node'
+        });
 
         const deleteForm = id => {
             Swal.fire({

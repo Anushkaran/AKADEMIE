@@ -19,10 +19,14 @@ class StudentFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'first_name' => $this->faker->firstName,
+            'last_name'  => $this->faker->lastName,
+            'email'      => $this->faker->unique()->safeEmail,
+            'phone'      => $this->faker->phoneNumber,
+            'address'    => $this->faker->address,
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Contracts\PartnerContract;
 use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
@@ -27,10 +28,11 @@ class StudentController extends Controller
     /**
      * @return Renderable
      */
-    public function index(): Renderable
+    public function index(PartnerContract $p): Renderable
     {
         $students = $this->student->findByFilter();
-        return view('admin.students.index',compact('students'));
+        $partners = $p->findByFilter(-1,[],['id','name']);
+        return view('admin.students.index',compact('students','partners'));
     }
 
     /**
@@ -69,10 +71,12 @@ class StudentController extends Controller
      * @param $id
      * @return Renderable
      */
-    public function edit($id) : Renderable
+    public function edit($id,PartnerContract $p) : Renderable
     {
         $student = $this->student->findOneById($id);
-        return view('admin.students.edit',compact('student'));
+        $partners = $p->findByFilter(-1,[],['id','name']);
+
+        return view('admin.students.edit',compact('student','partners'));
     }
 
     /**

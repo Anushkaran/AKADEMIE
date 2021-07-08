@@ -1,5 +1,11 @@
 @extends('admin.layouts.app')
 
+@push('css')
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
+
 @section('content')
 
     <div class="app-content content ">
@@ -70,6 +76,18 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                                            <select name="partner_id" id="partner_id" class="form-control select2">
+                                                <option value="">test one</option>
+                                                <option value=""> test two </option>
+                                                <option value="">test two 33</option>
+                                            </select>
+                                            @error('partner_id')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group">
                                             <label class="form-label" for="phone">{{__('labels.phone')}}</label>
                                             <input type="text" required name="phone" value="{{old('phone',$student->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
                                             @error('phone')
@@ -106,12 +124,17 @@
 @push('js')
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <!-- END: Page JS-->
 
     <script>
         @if($errors->any())
         document.getElementById('create-btn').click();
         @endif
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
     </script>
 
 @endpush

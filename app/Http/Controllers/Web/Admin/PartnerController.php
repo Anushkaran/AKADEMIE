@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Contracts\PartnerContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -18,10 +19,19 @@ class PartnerController extends Controller
     }
 
     /**
-     * @return Renderable
+     * @param Request $request
+     * @return Renderable|JsonResponse
      */
-    public function index() : Renderable
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'partners' => $this->partner->findByFilter(1,[],['id','name'])
+            ]);
+        }
+
         $partners = $this->partner->findByFilter();
         return view('admin.partners.index',compact('partners'));
     }
