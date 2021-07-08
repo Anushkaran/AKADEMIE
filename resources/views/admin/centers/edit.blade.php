@@ -69,7 +69,7 @@
 
                                         <div class="form-group">
                                             <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
-                                            <textarea required  name="note" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="..." cols="30" rows="3">{{old('note',$center->note)}}</textarea>
+                                            <textarea   name="note" class="form-control @error('note') is-invalid @enderror" id="note" placeholder="..." cols="30" rows="3">{{old('note',$center->note)}}</textarea>
                                             @error('note')
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror

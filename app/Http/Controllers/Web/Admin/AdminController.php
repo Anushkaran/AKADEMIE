@@ -105,7 +105,7 @@ class AdminController extends Controller
 
         $this->admin->update($id,$data);
         session()->flash('success',__('messages.update'));
-        redirect()->route('admin.admins.show',$id);
+        return redirect()->route('admin.admins.show',$id);
     }
     private function getValidatedDate(Request $request): array
     {
