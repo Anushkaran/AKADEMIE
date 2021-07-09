@@ -28,7 +28,7 @@ class PartnerController extends Controller
         {
             return response()->json([
                 'success' => true,
-                'partners' => $this->partner->findByFilter(1,[],['id','name'])
+                'partners' => $this->partner->findByFilter(10,[],['id','name'])
             ]);
         }
 

@@ -131,6 +131,9 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            {{$students->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -222,30 +225,37 @@
 
         $(document).ready(function() {
             $('.select2').select2({
+                minimumInputLength:2,
+                cache:true,
                 ajax: {
+                    delay: 250,
                     url: '{{route('admin.partners.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
-
                         // Query parameters will be ?search=[term]&page=[page]
-                        return {
-                            search: params.term,
-                            page: params.page || 1
-                        };
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
                     },
                     processResults: function ({partners}, params) {
                         params.page = params.page || 1;
-                        console.log(partners.data)
+
                         let fData = $.map(partners.data, function (obj) {
                             obj.text = obj.name; // replace name with the property used for the text
                             return obj;
                         });
+
                         return {
                             results: fData,
-                            // pagination: {
-                            //     more: (params.page * 10) < partners.count_filtered
-                            // }
+                            pagination: {
+                                more: (params.page * 10) < partners.total
+                            }
                         };
                     }
                 }
