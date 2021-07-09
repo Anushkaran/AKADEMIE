@@ -102,38 +102,42 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">
-                                        <button class="dt-button create-new btn btn-primary" tabindex="0"
-                                                aria-controls="DataTables_Table_0"
-                                                type="button" data-toggle="modal" id="create-btn"
-                                                data-target="#modals-slide-in">
+
+                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#success">
                                             <i data-feather='plus'></i>
                                             {{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}
-                                        </button>
-                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#success">
-                                            Success
                                         </button>
                                         <!-- Modal -->
                                         <div class="modal fade text-left modal-success" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel110" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="myModalLabel110">Success Modal</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="myModalLabel110">{{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="" id="attach-students-form" method="post">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="">{{trans_choice('labels.student',3)}}</label>
+                                                                <select
+                                                                    name="students[]" multiple
+                                                                    id="students" class="select2 form-control"></select>
+                                                            </div>
+                                                            </form>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button"  class="btn btn-success" onclick="document.getElementById('attach-students-form').submit()" data-dismiss="modal">
+                                                                {{__('actions.save')}}
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        Tart lemon drops macaroon oat cake chocolate toffee chocolate bar icing. Pudding jelly beans
-                                                        carrot cake pastry gummies cheesecake lollipop. I love cookie lollipop cake I love sweet gummi
-                                                        bears cupcake dessert.
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
-                                </div>
+
                                     </h4>
                                 </div>
                                 <div class="card-body">
@@ -240,6 +244,47 @@
     <!-- END: Page JS-->
 
     <script>
+
+        $(document).ready(function() {
+            $('.select2').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.students.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({partners}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(partners.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < partners.total
+                            }
+                        };
+                    }
+                }
+            });
+            $('.select2-selection__arrow').style.display = 'node'
+        });
+
         const deleteForm = id => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',

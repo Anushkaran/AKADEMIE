@@ -76,18 +76,6 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
-                                            <select name="partner_id" id="partner_id" class="form-control select2">
-                                                <option value="">test one</option>
-                                                <option value=""> test two </option>
-                                                <option value="">test two 33</option>
-                                            </select>
-                                            @error('partner_id')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group">
                                             <label class="form-label" for="phone">{{__('labels.phone')}}</label>
                                             <input type="text" required name="phone" value="{{old('phone',$student->phone)}}" class="form-control @error('phone') is-invalid @enderror dt-full-name" id="phone" placeholder="xxx xx xx xx"  aria-label="xxx xx xx xx" />
                                             @error('phone')

@@ -44,9 +44,7 @@
                                             >
                                         <i data-feather='plus'></i>
                                         {{__('actions.add-new',['name' => trans_choice('labels.task',1)])}}
-                                    </a>
-
-                                </h4>
+                                    </a>                                </h4>
                             </div>
                             <div class="card-body">
                                 {{--                                filters--}}
