@@ -126,7 +126,11 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            {{$admins->links()}}
+                        </div>
                     </div>
+
                 </div>
             </div>
 
