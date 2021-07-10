@@ -27,7 +27,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" id="attach-students-form" method="post">
+                                    <form action="{{route('admin.evaluations.students.attach',$ev->id)}}" id="attach-students-form" method="post">
                                         @csrf
                                         <div class="form-group">
                                             <label for="">{{trans_choice('labels.student',3)}}</label>
@@ -39,7 +39,8 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button"  class="btn btn-success" onclick="document.getElementById('attach-students-form').submit()" data-dismiss="modal">
+                                    <button type="button" disabled  class="btn btn-success" id="students-attach-btn"
+                                            onclick="document.getElementById('attach-students-form').submit()">
                                         {{__('actions.save')}}
                                     </button>
                                 </div>
@@ -51,10 +52,13 @@
             </div>
             <div class="card-body">
                 {{--                                filters--}}
+                <div class="form-group">
+                    <input type="text" id="search" class="form-control" >
+                </div>
             </div>
             <div class="table-responsive">
 
-                <table class="table">
+                <table class="table" id="myList">
                     <thead>
                     <tr>
                         <th>#</th>
@@ -65,68 +69,35 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($ev->students as $key => $s)
                     <tr>
-                        <td>1</td>
-                        <td>Jhon Do</td>
-                        <td>123456789</td>
-                        <td>student@email.com</td>
+                        <td>{{$key + 1 }}</td>
+                        <td>{{$s->name}}</td>
                         <td>
-                            <button class="btn btn-sm btn-outline-danger">
+                            <strong>
+                                <a href="tel:{{$s->phone}}" class="text-decoration-none">
+                                    <i data-feather="phone"></i>
+                                    {{$s->phone}}
+                                </a>
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <a href="mailto:{{$s->email}}" class="text-decoration-none">
+                                    <i data-feather="mail"></i>
+                                    {{$s->email}}
+                                </a>
+                            </strong>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger"
+                                    onclick="removeStudent({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
                         </td>
                     </tr>
-                    {{--                                        @foreach($evaluations as $key => $e)--}}
-                    {{--                                            <tr>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$key + 1}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>{{$e->name}}</td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->start_date->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->end_date->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->created_at->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    @if($count < 3)--}}
-                    {{--                                                        <a href="{{route('admin.evaluations.edit',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="edit"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                        <a href="{{route('admin.evaluations.show',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="eye"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                        <a href="javascript:void(0)" onclick="deleteForm({{$e->id}})" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="trash"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                    @else--}}
-                    {{--                                                        <div class="dropdown">--}}
-                    {{--                                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">--}}
-                    {{--                                                                <i data-feather="more-vertical"></i>--}}
-                    {{--                                                            </button>--}}
-                    {{--                                                            <div class="dropdown-menu">--}}
-                    {{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.edit',$e->id)}}">--}}
-                    {{--                                                                    <i data-feather="edit-2" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.edit')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.show',$e->id)}}">--}}
-                    {{--                                                                    <i data-feather="eye" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.details')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                                <a class="dropdown-item" href="javascript:void(0);" onclick="deleteForm({{$e->id}})">--}}
-                    {{--                                                                    <i data-feather="trash" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.delete')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                            </div>--}}
-                    {{--                                                        </div>--}}
-                    {{--                                                    @endif--}}
+                    @endforeach
 
-                    {{--                                                </td>--}}
-                    {{--                                            </tr>--}}
-                    {{--                                        @endforeach--}}
                     </tbody>
                 </table>
             </div>
@@ -148,6 +119,24 @@
     <script>
 
         $(document).ready(function() {
+
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myList td").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#students').change(function (){
+
+                if ($('#students').select2('val').length > 0)
+                {
+                    $('#students-attach-btn').removeAttr('disabled')
+                }else {
+                    $('#students-attach-btn').attr('disabled',true)
+                }
+            })
+
             $('.select2').select2({
                 minimumInputLength:2,
                 cache:true,
@@ -167,10 +156,10 @@
                         }
 
                     },
-                    processResults: function ({partners}, params) {
+                    processResults: function ({students}, params) {
                         params.page = params.page || 1;
 
-                        let fData = $.map(partners.data, function (obj) {
+                        let fData = $.map(students.data, function (obj) {
                             obj.text = obj.name; // replace name with the property used for the text
                             return obj;
                         });
@@ -178,7 +167,7 @@
                         return {
                             results: fData,
                             pagination: {
-                                more: (params.page * 10) < partners.total
+                                more: (params.page * 10) < students.total
                             }
                         };
                     }
@@ -187,7 +176,7 @@
             $('.select2-selection__arrow').style.display = 'node'
         });
 
-        const deleteForm = id => {
+        const removeStudent = (id,student) => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',
                 text: "{{__('actions.delete_confirm_text')}}",
@@ -201,7 +190,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}/students/${student}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

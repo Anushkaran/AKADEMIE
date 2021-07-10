@@ -36,6 +36,8 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('students',App\Http\Controllers\Web\Admin\StudentController::class);
 
     Route::get('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'studentsList'])->name('evaluations.students.index');
+    Route::post('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'attachStudents'])->name('evaluations.students.attach');
+    Route::delete('evaluations/{id}/students/{student}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'removeStudents'])->name('evaluations.students.remove');
     Route::get('evaluations/{id}/skills',[App\Http\Controllers\Web\Admin\EvaluationController::class,'skillsList'])->name('evaluations.skills.index');
     Route::post('evaluations/{id}/skills',[App\Http\Controllers\Web\Admin\EvaluationController::class,'attachSkills'])->name('evaluations.skills.attach');
     Route::delete('evaluations/{id}/skills/{skill}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'removeSkills'])->name('evaluations.skills.remove');

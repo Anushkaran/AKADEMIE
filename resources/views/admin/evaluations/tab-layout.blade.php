@@ -40,7 +40,7 @@
                     <!-- User Card & Plan Starts -->
                     <div class="row">
                         <!-- User Card starts-->
-                        <div class="col-xl-4 col-lg-4 col-md-4">
+                        <div class="col-xl-6 col-lg-6 col-md-6">
                             <div class="card user-card">
                                 <div class="card-body">
                                     <div class="row">

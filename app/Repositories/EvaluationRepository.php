@@ -60,8 +60,9 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     {
         $e = $this->findOneById($id);
         $students = is_array($students) ? $students : [$students];
-
-        $e->students()->attach($students);
+        $attachedIds = $e->students()->whereIn('students.id', $students['students'])->pluck('students.id');
+        $newIds = array_diff($students['students'], $attachedIds->all());
+        $e->students()->attach($newIds);
         return $e;
 
     }

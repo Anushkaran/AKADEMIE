@@ -31,7 +31,9 @@ class StudentRepository extends BaseRepository implements \App\Contracts\Student
             ->scopes($scopes)
             ->select($columns)
             ->newQuery();
-        return $this->applyFilter($query, $per_page);
+        return $this->applyFilter($query, $per_page,[
+            \App\QueryFilter\Search::class
+        ]);
     }
 
     /**

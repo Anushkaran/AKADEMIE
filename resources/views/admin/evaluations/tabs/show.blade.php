@@ -76,57 +76,7 @@
                             </button>
                         </td>
                     </tr>
-                    {{--                                        @foreach($evaluations as $key => $e)--}}
-                    {{--                                            <tr>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$key + 1}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>{{$e->name}}</td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->start_date->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->end_date->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->created_at->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    @if($count < 3)--}}
-                    {{--                                                        <a href="{{route('admin.evaluations.edit',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="edit"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                        <a href="{{route('admin.evaluations.show',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="eye"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                        <a href="javascript:void(0)" onclick="deleteForm({{$e->id}})" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="trash"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                    @else--}}
-                    {{--                                                        <div class="dropdown">--}}
-                    {{--                                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">--}}
-                    {{--                                                                <i data-feather="more-vertical"></i>--}}
-                    {{--                                                            </button>--}}
-                    {{--                                                            <div class="dropdown-menu">--}}
-                    {{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.edit',$e->id)}}">--}}
-                    {{--                                                                    <i data-feather="edit-2" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.edit')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.show',$e->id)}}">--}}
-                    {{--                                                                    <i data-feather="eye" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.details')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                                <a class="dropdown-item" href="javascript:void(0);" onclick="deleteForm({{$e->id}})">--}}
-                    {{--                                                                    <i data-feather="trash" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.delete')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                            </div>--}}
-                    {{--                                                        </div>--}}
-                    {{--                                                    @endif--}}
 
-                    {{--                                                </td>--}}
-                    {{--                                            </tr>--}}
-                    {{--                                        @endforeach--}}
                     </tbody>
                 </table>
             </div>
