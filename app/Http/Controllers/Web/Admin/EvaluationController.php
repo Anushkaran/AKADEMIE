@@ -67,7 +67,22 @@ class EvaluationController extends Controller
     public function show($id): Renderable
     {
         $ev = $this->ev->findOneById($id);
-        return view('admin.evaluations.show',compact('ev'));
+        $title = __('labels.list',['name' => trans_choice('labels.evaluation-session',3)]);
+        return view('admin.evaluations.tabs.show',compact('ev','title'));
+    }
+
+    public function skillsList($id)
+    {
+        $ev = $this->ev->findOneById($id,['skills']);
+        $title = __('labels.list',['name' => trans_choice('labels.skill',3)]);
+        return view('admin.evaluations.tabs.skills',compact('ev','title'));
+    }
+
+    public function studentsList($id)
+    {
+        $ev = $this->ev->findOneById($id,['students']);
+        $title = __('labels.list',['name' => trans_choice('labels.student',3)]);
+        return view('admin.evaluations.tabs.students',compact('ev','title'));
     }
 
     /**

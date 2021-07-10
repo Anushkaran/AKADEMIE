@@ -8,6 +8,7 @@ return [
    'student' => '{1}Student|[2,*]students',
    'accounts' => '{1}Account|[2,*]accounts',
    'evaluation' => '{1}Evaluation|[2,*]evaluation',
+   'evaluation-session' => '{1}Evaluation-session|[2,*]Evaluation-sessions',
    'skill' => '{1}Skill|[2,*]skills',
    'task' => '{1}Task|[2,*]tasks',
    'list' => 'List of :name',

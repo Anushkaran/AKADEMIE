@@ -26,4 +26,22 @@ class Evaluation extends Model
         'start_date' => 'date',
         'end_date'   => 'date',
     ];
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class)
+            ->withTimestamps()
+            ->withPivot('is_canceled');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class)
+            ->withTimestamps();
+    }
+
+    public function sessions()
+    {
+        return $this->hasMany(EvaluationSession::class);
+    }
 }
