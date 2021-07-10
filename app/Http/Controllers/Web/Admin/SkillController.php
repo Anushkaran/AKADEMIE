@@ -6,6 +6,7 @@ use App\Contracts\SkillContract;
 use App\Contracts\TaskContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,19 @@ class SkillController extends Controller
     }
 
     /**
-     * @return Renderable
+     * @param Request $request
+     * @return Renderable|JsonResponse
      */
-    public function index() :Renderable
+    public function index(Request $request)
     {
         $skills = $this->skill->findByFilter();
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'skills' => $skills
+            ]);
+        }
         return view('admin.skills.index',compact('skills'));
     }
 
@@ -53,6 +62,7 @@ class SkillController extends Controller
         $s = $this->skill->findOneById($id,['tasks'=> function($q){
             $q->latest();
         }]);
+
         return view('admin.skills.show',compact('s'));
     }
 

@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/pages/app-user.css')}}">
 
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
 
     @stack('tab-css')
 @endpush
@@ -164,82 +165,7 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
-    <script>
-
-        $(document).ready(function() {
-            $('.select2').select2({
-                minimumInputLength:2,
-                cache:true,
-                ajax: {
-                    delay: 250,
-                    url: '{{route('admin.students.index')}}',
-                    dataType: 'json',
-                    data: function (params) {
-
-                        // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
-
-                    },
-                    processResults: function ({partners}, params) {
-                        params.page = params.page || 1;
-
-                        let fData = $.map(partners.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
-
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < partners.total
-                            }
-                        };
-                    }
-                }
-            });
-            $('.select2-selection__arrow').style.display = 'node'
-        });
-
-        const deleteForm = id => {
-            Swal.fire({
-                title: '{{__('actions.delete_confirm_title')}}',
-                text: "{{__('actions.delete_confirm_text')}}",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '{{__('actions.delete_btn_yes')}}',
-                cancelButtonText: '{{__('actions.delete_btn_cancel')}}'
-            }).then((result) => {
-                if (result.value) {
-                    let f = document.createElement("form");
-                    f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}`);
-
-                    let i1 = document.createElement("input"); //input element, text
-                    i1.setAttribute('type',"hidden");
-                    i1.setAttribute('name','_token');
-                    i1.setAttribute('value','{{csrf_token()}}');
-
-                    let i2 = document.createElement("input"); //input element, text
-                    i2.setAttribute('type',"hidden");
-                    i2.setAttribute('name','_method');
-                    i2.setAttribute('value','DELETE');
-
-                    f.appendChild(i1);
-                    f.appendChild(i2);
-                    document.body.appendChild(f);
-                    f.submit()
-                }
-            });
-        }
-    </script>
     @stack('tab-js')
 @endpush

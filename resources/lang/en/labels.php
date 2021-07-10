@@ -24,6 +24,7 @@ return [
    'phone' => 'Phone',
    'address' => 'Address',
    'description' => 'Description',
+   'actions' => 'Actions',
    'optional' => 'Optional',
    'note' => 'Note',
    'role' => 'Role',

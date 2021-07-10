@@ -1,10 +1,6 @@
 @extends('admin.evaluations.tab-layout')
 
-@push('tab-css')
 
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/pages/app-user.css')}}">
-
-@endpush
 
 @section('tab-content')
     <div class="tab-pane active" id="homeIcon" aria-labelledby="homeIcon-tab" role="tabpanel">
@@ -14,32 +10,32 @@
 
                     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#success">
                         <i data-feather='plus'></i>
-                        {{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}
+                        {{__('actions.add-new',['name' => trans_choice('labels.skill',1)])}}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade text-left modal-success" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel110" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myModalLabel110">{{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}</h5>
+                                    <h5 class="modal-title" id="myModalLabel110">{{__('actions.add-new',['name' => trans_choice('labels.skill',1)])}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="" id="attach-students-form" method="post">
+                                    <form action="{{route('admin.evaluations.skills.attach',$ev->id)}}" id="attach-skills-form" method="post">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="">{{trans_choice('labels.student',3)}}</label>
+                                            <label for="skills">{{trans_choice('labels.skill',3)}}</label>
                                             <select
-                                                name="students[]" multiple
-                                                id="students" class="select2 form-control"></select>
+                                                name="skills[]" multiple
+                                                id="skills" class="select2 form-control"></select>
                                         </div>
                                     </form>
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button"  class="btn btn-success" onclick="document.getElementById('attach-students-form').submit()" data-dismiss="modal">
+                                    <button type="button" disabled class="btn btn-success" onclick="document.getElementById('attach-skills-form').submit()" id="skill-attach-btn">
                                         {{__('actions.save')}}
                                     </button>
                                 </div>
@@ -51,88 +47,47 @@
             </div>
             <div class="card-body">
                 {{--                                filters--}}
+                <div class="form-group">
+                    <input type="text" id="search" class="form-control" >
+                </div>
             </div>
-            <div class="table-responsive">
+                <section id="accordion-with-margin">
+                    <div class="row">
+                        @foreach($ev->skills as $key => $s)
+                        <div class="col-sm-12">
+                            <div class="card collapse-icon" id="myList">
+                                <div class="card-header">
+                                    <h4 class="card-title">{{$s->name}}</h4>
+                                    <button class="btn btn-sm btn-gradient-danger"
+                                            onclick="removeSkill({{$ev->id}}),{{$s->id}}">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {{$s->description}}
+                                    </p>
+                                    <div class="collapse-margin" id="skill-{{$s->id}}">
+                                        @foreach($s->tasks as $t)
+                                        <div class="card">
+                                            <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#task-{{$t->id}}" aria-expanded="false" aria-controls="task-{{$t->id}}">
+                                                <span class="lead collapse-title"> {{$t->name}} </span>
+                                            </div>
 
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>{{__('labels.name')}}</th>
-                        <th>{{__('labels.phone')}}</th>
-                        <th>{{__('labels.email')}}</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Jhon Do</td>
-                        <td>123456789</td>
-                        <td>student@email.com</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-danger">
-                                <i data-feather="trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    {{--                                        @foreach($evaluations as $key => $e)--}}
-                    {{--                                            <tr>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$key + 1}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>{{$e->name}}</td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->start_date->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->end_date->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    {{$e->created_at->format('d-m-Y')}}--}}
-                    {{--                                                </td>--}}
-                    {{--                                                <td>--}}
-                    {{--                                                    @if($count < 3)--}}
-                    {{--                                                        <a href="{{route('admin.evaluations.edit',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="edit"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                        <a href="{{route('admin.evaluations.show',$e->id)}}" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="eye"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                        <a href="javascript:void(0)" onclick="deleteForm({{$e->id}})" class="btn btn-sm btn-outline-warning">--}}
-                    {{--                                                            <i data-feather="trash"></i>--}}
-                    {{--                                                        </a>--}}
-                    {{--                                                    @else--}}
-                    {{--                                                        <div class="dropdown">--}}
-                    {{--                                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">--}}
-                    {{--                                                                <i data-feather="more-vertical"></i>--}}
-                    {{--                                                            </button>--}}
-                    {{--                                                            <div class="dropdown-menu">--}}
-                    {{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.edit',$e->id)}}">--}}
-                    {{--                                                                    <i data-feather="edit-2" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.edit')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                                <a class="dropdown-item" href="{{route('admin.evaluations.show',$e->id)}}">--}}
-                    {{--                                                                    <i data-feather="eye" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.details')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                                <a class="dropdown-item" href="javascript:void(0);" onclick="deleteForm({{$e->id}})">--}}
-                    {{--                                                                    <i data-feather="trash" class="mr-50"></i>--}}
-                    {{--                                                                    <span>{{__('actions.delete')}}</span>--}}
-                    {{--                                                                </a>--}}
-                    {{--                                                            </div>--}}
-                    {{--                                                        </div>--}}
-                    {{--                                                    @endif--}}
-
-                    {{--                                                </td>--}}
-                    {{--                                            </tr>--}}
-                    {{--                                        @endforeach--}}
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex justify-content-center">
-                {{--                                    {{$evaluations->links()}}--}}
-            </div>
+                                            <div id="task-{{$t->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#skill-{{$s->id}}">
+                                                <div class="card-body">
+                                                    {{$t->description}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </section>
         </div>
     </div>
 
@@ -141,19 +96,33 @@
 
 
 @push('tab-js')
-    <!-- BEGIN: Page JS-->
-    <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
-    <!-- END: Page JS-->
+
 
     <script>
 
         $(document).ready(function() {
+            $("#search").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myList ").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#skills').change(function (){
+
+                if ($('#skills').select2('val').length > 0)
+                {
+                    $('#skill-attach-btn').removeAttr('disabled')
+                }else {
+                    $('#skill-attach-btn').attr('disabled',true)
+                }
+            })
             $('.select2').select2({
                 minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('admin.students.index')}}',
+                    url: '{{route('admin.skills.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -167,10 +136,9 @@
                         }
 
                     },
-                    processResults: function ({partners}, params) {
+                    processResults: function ({skills}, params) {
                         params.page = params.page || 1;
-
-                        let fData = $.map(partners.data, function (obj) {
+                        let fData = $.map(skills.data, function (obj) {
                             obj.text = obj.name; // replace name with the property used for the text
                             return obj;
                         });
@@ -178,7 +146,7 @@
                         return {
                             results: fData,
                             pagination: {
-                                more: (params.page * 10) < partners.total
+                                more: (params.page * 10) < skills.total
                             }
                         };
                     }
@@ -187,7 +155,7 @@
             $('.select2-selection__arrow').style.display = 'node'
         });
 
-        const deleteForm = id => {
+        const removeSkill = (id,skill) => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',
                 text: "{{__('actions.delete_confirm_text')}}",
@@ -201,7 +169,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}/skills/${skill}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

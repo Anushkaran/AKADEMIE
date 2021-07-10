@@ -79,8 +79,9 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     {
         $e = $this->findOneById($id);
         $skills = is_array($skills) ? $skills : [$skills];
-
-        $e->students()->attach($skills);
+        $attachedIds = $e->skills()->whereIn('skills.id', $skills['skills'])->pluck('skills.id');
+        $newIds = array_diff($skills['skills'], $attachedIds->all());
+        $e->skills()->attach($newIds);
         return $e;
     }
 
@@ -89,7 +90,7 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
         $e = $this->findOneById($id);
         $skills = is_array($skills) ? $skills : [$skills];
 
-        $e->students()->detach($skills);
+        $e->skills()->detach($skills);
         return $e;
     }
 

@@ -73,7 +73,7 @@ class EvaluationController extends Controller
 
     public function skillsList($id)
     {
-        $ev = $this->ev->findOneById($id,['skills']);
+        $ev = $this->ev->findOneById($id,['skills.tasks']);
         $title = __('labels.list',['name' => trans_choice('labels.skill',3)]);
         return view('admin.evaluations.tabs.skills',compact('ev','title'));
     }
@@ -122,5 +122,43 @@ class EvaluationController extends Controller
         $this->ev->delete($id);
         session()->flash('success',__('messages.delete'));
         return redirect()->route('admin.evaluations.index');
+    }
+
+    public function attachSkills($id,Request $request)
+    {
+        $data = $request->validate([
+            'skills'    => 'required|array',
+            'skills.*'  => 'required|integer'
+        ]);
+
+        $this->ev->attachSkill($id,$data);
+        session()->flash('success',__('messages.attach'));
+        return redirect()->back();
+    }
+
+    public function removeSkills($id,$skill)
+    {
+        $this->ev->detachSkill($id,$skill);
+        session()->flash('success',__('messages.removed'));
+        return redirect()->back();
+    }
+
+    public function attachStudents($id,Request $request)
+    {
+        $data = $request->validate([
+            'students'    => 'required|array',
+            'students.*'  => 'required|integer'
+        ]);
+
+        $this->ev->attachStudent($id,$data);
+        session()->flash('success',__('messages.attach'));
+        return redirect()->back();
+    }
+
+    public function removeStudents($id,$student)
+    {
+        $this->ev->detachStudent($id,$student);
+        session()->flash('success',__('messages.removed'));
+        return redirect()->back();
     }
 }
