@@ -100,7 +100,7 @@
                                             <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
                                                 <div class="mb-1 mb-sm-0">
                                                     <h2 class="font-weight-bolder mb-25">10</h2>
-                                                    <p class="card-text font-weight-bold mb-2">Edudiants</p>
+                                                    <p class="card-text font-weight-bold mb-2">Nouveaux Etudiants</p>
                                                     <div class="font-medium-2">
                                                         <span class="text-success mr-25">+5.2%</span>
                                                         <span>par rapport aux 7 derniers Jours</span>

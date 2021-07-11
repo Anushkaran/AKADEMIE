@@ -19,7 +19,7 @@
                         <span class="user-status">{{auth()->user()->role}}</span>
                     </div>
                     <span class="avatar">
-                        <img class="round" src="{{asset('assets/vuexy/app-assets/images/portrait/small/avatar-s-11.jpg')}}" alt="avatar" height="40" width="40">
+                        <img class="round" src="{{asset('storage/'.auth()->user()->image)}}" alt="avatar" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>
                 </a>
@@ -44,7 +44,6 @@
                 </div>
             </li>
         </ul>
-
         <form action="{{route('admin.logout')}}" method="post" id="logout-form">@csrf</form>
     </div>
 </nav>
