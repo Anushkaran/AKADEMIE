@@ -17,8 +17,15 @@ class CenterController extends Controller
         $this->center = $center;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'centers' => $this->center->findByFilter(10,[],['id','name'])
+            ]);
+        }
         $centers = $this->center->findByFilter();
         return view('admin.centers.index',compact('centers'));
     }

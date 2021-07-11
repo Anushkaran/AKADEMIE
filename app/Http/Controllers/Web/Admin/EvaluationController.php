@@ -161,4 +161,26 @@ class EvaluationController extends Controller
         session()->flash('success',__('messages.removed'));
         return redirect()->back();
     }
+
+    public function addSession($id,Request $request)
+    {
+        $data = $request->validate([
+            'user_id'       => 'required|integer|exists:users,id',
+            'center_id'     => 'required|integer|exists:centers,id',
+            'name'          => 'required|string|max:150',
+            'date'          => 'required|date',
+            'note'          => 'sometimes|nullable|string|max:200',
+        ]);
+
+        $this->ev->createSession($id,$data);
+        session()->flash('success',__('messages.create'));
+        return redirect()->back();
+    }
+
+    public function deleteSession($id,$session): RedirectResponse
+    {
+        $this->ev->deleteSession($id,$session);
+        session()->flash('success',__('messages.delete'));
+        return redirect()->back();
+    }
 }

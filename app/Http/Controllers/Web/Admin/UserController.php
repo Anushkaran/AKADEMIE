@@ -17,8 +17,15 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'users' => $this->user->findByFilter(10,[],['id','first_name','last_name'])
+            ]);
+        }
         $users = $this->user->findByFilter();
         return view('admin.users.index',compact('users'));
     }

@@ -12,40 +12,14 @@
             <div class="card-header">
                 <h4 class="card-title">
 
-                    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#success">
+                    <button class="dt-button create-new btn btn-primary" tabindex="0"
+                            aria-controls="DataTables_Table_0"
+                            type="button" data-toggle="modal" id="create-btn"
+                            data-target="#modals-slide-in">
                         <i data-feather='plus'></i>
-                        {{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}
+                        {{__('actions.add-new',['name' => trans_choice('labels.evaluation-session',1)])}}
                     </button>
                     <!-- Modal -->
-                    <div class="modal fade text-left modal-success" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel110" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="myModalLabel110">{{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="" id="attach-students-form" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="">{{trans_choice('labels.student',3)}}</label>
-                                            <select
-                                                name="students[]" multiple
-                                                id="students" class="select2 form-control"></select>
-                                        </div>
-                                    </form>
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button"  class="btn btn-success" onclick="document.getElementById('attach-students-form').submit()" data-dismiss="modal">
-                                        {{__('actions.save')}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </h4>
             </div>
@@ -59,23 +33,51 @@
                     <tr>
                         <th>#</th>
                         <th>{{__('labels.name')}}</th>
-                        <th>{{__('labels.phone')}}</th>
-                        <th>{{__('labels.email')}}</th>
+                        <th>{{__('labels.date')}}</th>
+                        <th>{{trans_choice('labels.center',1)}}</th>
+                        <th>{{trans_choice('labels.user',1)}}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($ev->sessions as $key => $s)
                     <tr>
-                        <td>1</td>
-                        <td>Jhon Do</td>
-                        <td>123456789</td>
-                        <td>student@email.com</td>
+                        <td>{{$key+1}}</td>
+                        <td>{{$s->name}}</td>
+                        <td><span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span></td>
                         <td>
-                            <button class="btn btn-sm btn-outline-danger">
+                            <strong>{{$s->center->name}}</strong>
+                            <small>
+                                <a href="{{route('admin.centers.show',$s->center_id)}}" class="text-decoration-none">
+                                    <i data-feather="arrow-up-right"></i>
+                                </a>
+                            </small>
+                        </td>
+                        <td>
+                            <strong>
+                                {{$s->user->name}}
+                                <a href="{{route('admin.users.show',$s->user_id)}}" class="text-decoration-none">
+                                    <i data-feather="arrow-up-right"></i>
+                                </a>
+                            </strong><br>
+                            <small>
+                                <a href="tel:{{$s->user->phone}}" class="text-decoration-none">
+                                    {{$s->user->phone}}
+                                    <i data-feather="phone"></i>
+                                </a><br>
+                                <a href="mailTo:{{$s->user->email}}" class="text-decoration-none">
+                                    {{$s->user->email}}
+                                    <i data-feather="mail"></i>
+                                </a>
+                            </small>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger" onclick="deleteSession({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
                         </td>
                     </tr>
+                    @endforeach
 
                     </tbody>
                 </table>
@@ -86,7 +88,72 @@
         </div>
     </div>
 
+    <!-- Modal to add new record -->
+    <div class="modal modal-slide-in fade" id="modals-slide-in">
+        <div class="modal-dialog sidebar-sm">
+            <form class="add-new-record modal-content pt-0" method="post"
+                  action="{{route('admin.evaluations.sessions.store',$ev->id)}}">
+                @csrf
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        {{__('actions.add-new',['name' => trans_choice('labels.evaluation-session',1)])}}
+                    </h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+                    <div class="form-group">
+                        <label class="form-label" for="name">{{__('labels.name')}}</label>
+                        <input type="text" required name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="name" placeholder="{{__('labels.name')}}  ..."  aria-label="{{__('labels.name')}} ..." />
+                        @error('name')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
 
+                    <div class="form-group">
+                        <label class="form-label" for="center_id">{{trans_choice('labels.center',2)}}</label>
+                        <select name="center_id"
+                                id="center_id"
+                                class="form-control select2-center @error('center_id') is-invalid @enderror"></select>
+                        @error('center_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="center_id">{{trans_choice('labels.user',2)}}</label>
+                        <select name="user_id"
+                                id="user_id"
+                                class="form-control select2-user @error('user_id') is-invalid @enderror"></select>
+                        @error('user_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="start_date">{{__('labels.date')}}</label>
+                        <input type="date" required name="date"
+                               value="{{old('start_date')}}"
+                               class="form-control @error('date') is-invalid @enderror"
+                               id="date" placeholder="{{__('labels.start_date')}}
+                            ..."  aria-label="{{__('labels.start_date')}} ..." />
+                        @error('date')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="note">{{__('labels.date')}} ({{__('labels.optional')}})</label>
+                        <textarea name="note" id="note" class="form-control @error('note') is-invalid @enderror">{{old('note')}}</textarea>
+                        @error('note')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
+                    <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{__('actions.cancel')}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 
@@ -96,15 +163,16 @@
     <!-- END: Page JS-->
 
     <script>
-
+        @if($errors->any())
+        document.getElementById('create-btn').click();
+        @endif
         $(document).ready(function() {
-
-            $('.select2').select2({
+            $('.select2-center').select2({
                 minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('admin.students.index')}}',
+                    url: '{{route('admin.centers.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -118,10 +186,10 @@
                         }
 
                     },
-                    processResults: function ({partners}, params) {
+                    processResults: function ({centers}, params) {
                         params.page = params.page || 1;
 
-                        let fData = $.map(partners.data, function (obj) {
+                        let fData = $.map(centers.data, function (obj) {
                             obj.text = obj.name; // replace name with the property used for the text
                             return obj;
                         });
@@ -129,16 +197,51 @@
                         return {
                             results: fData,
                             pagination: {
-                                more: (params.page * 10) < partners.total
+                                more: (params.page * 10) < centers.total
                             }
                         };
                     }
                 }
             });
-            $('.select2-selection__arrow').style.display = 'node'
+            $('.select2-user').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.users.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({users}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(users.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < users.total
+                            }
+                        };
+                    }
+                }
+            });
         });
 
-        const deleteForm = id => {
+        const deleteSession = (id,sessionID) => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',
                 text: "{{__('actions.delete_confirm_text')}}",
@@ -152,7 +255,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}/sessions/${sessionID}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

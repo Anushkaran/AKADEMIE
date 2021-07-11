@@ -46,4 +46,6 @@ return [
        'admin' => 'Admin',
        'manager' => 'Manager'
    ],
+
+    'date' => 'Date',
 ];

@@ -27,7 +27,9 @@ class CenterRepository extends BaseRepository implements \App\Contracts\CenterCo
     public function findByFilter($per_page = 10, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
     {
         $query = Center::with($relations)->withCount($relations_count)->select($columns)->scopes($scopes)->newQuery();
-        return $this->applyFilter($query, $per_page);
+        return $this->applyFilter($query, $per_page,[
+            \App\QueryFilter\Search::class
+        ]);
     }
 
     /**
