@@ -24,7 +24,7 @@
                 </h4>
             </div>
             <div class="card-body">
-                {{--                                filters--}}
+                {{--filters--}}
             </div>
             <div class="table-responsive">
 
@@ -141,7 +141,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="note">{{__('labels.date')}} ({{__('labels.optional')}})</label>
+                        <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
                         <textarea name="note" id="note" class="form-control @error('note') is-invalid @enderror">{{old('note')}}</textarea>
                         @error('note')
                         <div class="invalid-feedback">{{$message}}</div>
