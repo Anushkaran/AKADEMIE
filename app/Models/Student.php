@@ -17,6 +17,15 @@ class Student extends Model
         'first_name', 'last_name', 'email', 'phone', 'address','partner_id'
     ];
 
+    protected $appends = [
+        'name'
+    ];
+
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
     /**
      * @return BelongsTo
      */

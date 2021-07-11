@@ -131,6 +131,9 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            {{$partners->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

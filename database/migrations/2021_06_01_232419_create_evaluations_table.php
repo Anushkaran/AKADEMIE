@@ -15,6 +15,10 @@ class CreateEvaluationsTable extends Migration
     {
         Schema::create('evaluations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('partner_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
@@ -29,6 +33,9 @@ class CreateEvaluationsTable extends Migration
      */
     public function down()
     {
+        Schema::table('evaluations', function (Blueprint $table) {
+            $table->dropForeign('evaluations_partner_id_foreign');
+        });
         Schema::dropIfExists('evaluations');
     }
 }

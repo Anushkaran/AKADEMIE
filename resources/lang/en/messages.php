@@ -2,6 +2,8 @@
 
 return [
     'create' => 'Record has been created successfully',
+    'attach' => 'Record has been attached successfully',
+    'removed' => 'Record has been removed successfully',
     'update' => 'Record has been Updated successfully',
     'delete' => 'Record has been deleted successfully',
     'fail' => 'Oops! Something went worn, please try again.',

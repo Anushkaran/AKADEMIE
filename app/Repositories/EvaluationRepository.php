@@ -55,4 +55,58 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     {
         return Evaluation::destroy($id);
     }
+
+    public function attachStudent($id, $students)
+    {
+        $e = $this->findOneById($id);
+        $students = is_array($students) ? $students : [$students];
+        $attachedIds = $e->students()->whereIn('students.id', $students['students'])->pluck('students.id');
+        $newIds = array_diff($students['students'], $attachedIds->all());
+        $e->students()->attach($newIds);
+        return $e;
+
+    }
+
+    public function detachStudent($id, $students)
+    {
+        $e = $this->findOneById($id);
+        $students = is_array($students) ? $students : [$students];
+
+        $e->students()->detach($students);
+        return $e;
+    }
+
+    public function attachSkill($id, $skills)
+    {
+        $e = $this->findOneById($id);
+        $skills = is_array($skills) ? $skills : [$skills];
+        $attachedIds = $e->skills()->whereIn('skills.id', $skills['skills'])->pluck('skills.id');
+        $newIds = array_diff($skills['skills'], $attachedIds->all());
+        $e->skills()->attach($newIds);
+        return $e;
+    }
+
+    public function detachSkill($id, $skills)
+    {
+        $e = $this->findOneById($id);
+        $skills = is_array($skills) ? $skills : [$skills];
+
+        $e->skills()->detach($skills);
+        return $e;
+    }
+
+    public function createSession($id, array $data)
+    {
+        $e = $this->findOneById($id);
+        $e->sessions()->create($data);
+        return $e;
+    }
+
+    public function deleteSession($id, $session)
+    {
+        $e = $this->findOneById($id);
+        $s = $e->sessions()->where('id',$session)->firstOrFail();
+        $s->delete();
+        return $e;
+    }
 }

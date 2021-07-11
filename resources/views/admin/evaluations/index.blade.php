@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
+@push('css')
 
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
 @section('content')
 
     <div class="app-content content ">
@@ -153,6 +157,17 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                        <select name="partner_id" id="partner_id" class="form-control select2 @error('partner_id') is-invalid @enderror">
+                            {{--                            @foreach($partners as $p)--}}
+                            {{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
+                            {{--                            @endforeach--}}
+                        </select>
+                        @error('partner_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
 
                     <div class="form-group">
                         <label class="form-label" for="start_date">{{__('labels.start_date')}}</label>
@@ -171,14 +186,11 @@
                         <input type="date" required name="end_date"
                                value="{{old('end_date')}}"
                                class="form-control @error('end_date') is-invalid @enderror"
-                               id="name" placeholder="{{__('labels.end_date')}}
-                            ..."  aria-label="{{__('labels.end_date')}} ..." />
+                               id="name" placeholder="{{__('labels.end_date')}}..."  aria-label="{{__('labels.end_date')}} ..." />
                         @error('end_date')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-
-
 
                     <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
                     <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{__('actions.cancel')}}</button>
@@ -190,12 +202,51 @@
 
 
 @push('js')
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
         @if($errors->any())
             document.getElementById('create-btn').click();
         @endif
+        $(document).ready(function() {
+            $('.select2').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.partners.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
 
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({partners}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(partners.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < partners.total
+                            }
+                        };
+                    }
+                }
+            });
+            $('.select2-selection__arrow').style.display = 'node'
+        });
         const deleteForm = id => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',

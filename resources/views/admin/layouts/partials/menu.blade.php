@@ -60,6 +60,13 @@
                             <span class="menu-item text-truncate" data-i18n="Collapsed Menu">{{trans_choice('labels.user',2)}}</span>
                         </a>
                     </li>
+
+                    <li class="{{request()->routeIs('admin.partners*') ? 'active' : ''}}">
+                        <a class="d-flex align-items-center" href="{{route('admin.partners.index')}}">
+                            <i data-feather="users"></i>
+                            <span class="menu-item text-truncate" data-i18n="Collapsed Menu">{{trans_choice('labels.partner',2)}}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class=" {{request()->routeIs('admin.centers*') ? 'active' : ''}} nav-item">

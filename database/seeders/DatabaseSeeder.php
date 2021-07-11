@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
 
         User::create([
@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(3)->create();
 
         $this->call(AdminSeeder::class);
+        $this->call(CenterSeeder::class);
+        $this->call(PartnerSeeder::class);
+        $this->call(SkillSeeder::class);
     }
 }

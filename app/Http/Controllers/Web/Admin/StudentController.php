@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Contracts\PartnerContract;
 use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -25,10 +27,17 @@ class StudentController extends Controller
     }
 
     /**
-     * @return Renderable
+     * @return Renderable|JsonResponse
      */
-    public function index(): Renderable
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'students'=> $this->student->findByFilter(10,[],['id','first_name','last_name'])
+            ]);
+        }
         $students = $this->student->findByFilter();
         return view('admin.students.index',compact('students'));
     }
@@ -69,10 +78,12 @@ class StudentController extends Controller
      * @param $id
      * @return Renderable
      */
-    public function edit($id) : Renderable
+    public function edit($id,PartnerContract $p) : Renderable
     {
         $student = $this->student->findOneById($id);
-        return view('admin.students.edit',compact('student'));
+        $partners = $p->findByFilter(-1,[],['id','name']);
+
+        return view('admin.students.edit',compact('student','partners'));
     }
 
     /**

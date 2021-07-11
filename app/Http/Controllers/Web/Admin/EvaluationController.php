@@ -50,6 +50,7 @@ class EvaluationController extends Controller
     {
         $data = $request->validate([
             'name'          => 'required|string|max:100',
+            'partner_id'    => 'required|integer|exists:partners,id',
             'start_date'    => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
@@ -66,7 +67,22 @@ class EvaluationController extends Controller
     public function show($id): Renderable
     {
         $ev = $this->ev->findOneById($id);
-        return view('admin.evaluations.show',compact('ev'));
+        $title = __('labels.list',['name' => trans_choice('labels.evaluation-session',3)]);
+        return view('admin.evaluations.tabs.show',compact('ev','title'));
+    }
+
+    public function skillsList($id)
+    {
+        $ev = $this->ev->findOneById($id,['skills.tasks']);
+        $title = __('labels.list',['name' => trans_choice('labels.skill',3)]);
+        return view('admin.evaluations.tabs.skills',compact('ev','title'));
+    }
+
+    public function studentsList($id)
+    {
+        $ev = $this->ev->findOneById($id,['students']);
+        $title = __('labels.list',['name' => trans_choice('labels.student',3)]);
+        return view('admin.evaluations.tabs.students',compact('ev','title'));
     }
 
     /**
@@ -106,5 +122,43 @@ class EvaluationController extends Controller
         $this->ev->delete($id);
         session()->flash('success',__('messages.delete'));
         return redirect()->route('admin.evaluations.index');
+    }
+
+    public function attachSkills($id,Request $request)
+    {
+        $data = $request->validate([
+            'skills'    => 'required|array',
+            'skills.*'  => 'required|integer'
+        ]);
+
+        $this->ev->attachSkill($id,$data);
+        session()->flash('success',__('messages.attach'));
+        return redirect()->back();
+    }
+
+    public function removeSkills($id,$skill)
+    {
+        $this->ev->detachSkill($id,$skill);
+        session()->flash('success',__('messages.removed'));
+        return redirect()->back();
+    }
+
+    public function attachStudents($id,Request $request)
+    {
+        $data = $request->validate([
+            'students'    => 'required|array',
+            'students.*'  => 'required|integer'
+        ]);
+
+        $this->ev->attachStudent($id,$data);
+        session()->flash('success',__('messages.attach'));
+        return redirect()->back();
+    }
+
+    public function removeStudents($id,$student)
+    {
+        $this->ev->detachStudent($id,$student);
+        session()->flash('success',__('messages.removed'));
+        return redirect()->back();
     }
 }

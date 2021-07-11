@@ -19,10 +19,13 @@ class CenterFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            //
+            'name'      => $this->faker->words(3,true),
+            'address'   => $this->faker->address,
+            'phone'     => $this->faker->phoneNumber,
+            'note'      => $this->faker->sentence(15)
         ];
     }
 }

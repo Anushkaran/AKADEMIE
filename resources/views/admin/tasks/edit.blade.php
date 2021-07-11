@@ -34,7 +34,7 @@
             <div class="content-body">
 
                     <div class="row">
-                        <div class="col-md-6 card">
+                        <div class="col-md-8 card">
                             <div class="card-header">
                                     <h5 class="card-text">
                                         {{__('actions.update')}}

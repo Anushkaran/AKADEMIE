@@ -1,5 +1,11 @@
 @extends('admin.layouts.app')
 
+@push('css')
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
+
 @section('content')
 
     <div class="app-content content ">
@@ -106,12 +112,17 @@
 @push('js')
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <!-- END: Page JS-->
 
     <script>
         @if($errors->any())
         document.getElementById('create-btn').click();
         @endif
+
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
     </script>
 
 @endpush
