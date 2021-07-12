@@ -14,10 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::post('login',[\App\Http\Controllers\Api\UserAuthController::class,'login']);
 Route::any('logout',[\App\Http\Controllers\Api\UserAuthController::class,'logout']);
 Route::get('me',[\App\Http\Controllers\Api\UserAuthController::class,'me']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('evaluations',[\App\Http\Controllers\Api\EvaluationController::class,'index']);
+    Route::get('evaluations/{id}/sessions',[\App\Http\Controllers\Api\EvaluationController::class,'getSessions']);
+    Route::get('evaluations/{id}/students',[\App\Http\Controllers\Api\EvaluationController::class,'students']);
+    Route::get('evaluations/{id}/skills',[\App\Http\Controllers\Api\EvaluationController::class,'skills']);
+});

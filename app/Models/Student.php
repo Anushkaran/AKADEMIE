@@ -34,4 +34,9 @@ class Student extends Model
         return $this->belongsTo(Partner::class);
     }
 
+    public function evaluations()
+    {
+        return $this->belongsToMany(Evaluation::class);
+    }
+
 }

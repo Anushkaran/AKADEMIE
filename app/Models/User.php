@@ -69,4 +69,9 @@ class User extends Authenticatable
             ? asset('storage/'.$this->image)
             : asset('assets/vuexy/app-assets/images/defaults/user-default.jpg');
     }
+
+    public function eavluationSessions()
+    {
+        return $this->hasMany(EvaluationSession::class);
+    }
 }

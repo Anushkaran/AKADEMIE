@@ -47,4 +47,9 @@ class EvaluationSession extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function students()
+    {
+        return $this->hasManyThrough(Student::class,Evaluation::class);
+    }
 }

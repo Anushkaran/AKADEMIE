@@ -56,4 +56,9 @@ class Partner extends Authenticatable
     {
         $this->notify(new PartnerResetPasswordNotification($token));
     }
+
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
 }
