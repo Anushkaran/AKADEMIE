@@ -20,4 +20,5 @@ Route::middleware('auth:partner')->group(function (){
 
     Route::get('dashboard',[App\Http\Controllers\Web\Partner\DashboardController::class,'index'])->name('dashboard');
 
+    Route::resource('students',App\Http\Controllers\Web\Partner\StudentController::class);
 });

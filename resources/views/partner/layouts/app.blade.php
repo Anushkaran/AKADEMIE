@@ -29,12 +29,16 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/core/menu/menu-types/horizontal-menu.css')}}">
+    <script src="{{asset('assets/vuexy/app-assets/vendors/css/extensions/sweetalert2.min.css')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/vendors/css/extensions/toastr.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/plugins/extensions/ext-component-toastr.min.css')}}">
+
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/assets/css/style.css')}}">
     <!-- END: Custom CSS-->
-
+    @stack('css')
 </head>
 <!-- END: Head-->
 
@@ -80,6 +84,8 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
+<script src="{{asset('assets/vuexy/app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('assets/vuexy/app-assets/vendors/js/extensions/toastr.min.js')}}"></script><!-- BEGIN: Page JS-->
 <!-- END: Page JS-->
 
 <script>
@@ -91,7 +97,75 @@
             });
         }
     })
+
+    // Success Type
+    @if(session()->has('success'))
+        toastr['success']('{{session("success")}}', '{{__('labels.success')}}', {
+        closeButton: true,
+        tapToDismiss: false,
+        rtl: false
+    });
+    @endif
+
+        @if(session()->has('error'))
+        toastr['error']('{{session("error")}}', '{{__("labels.error")}}', {
+        closeButton: true,
+        tapToDismiss: false,
+        rtl: true
+    });
+    @endif
+
+    let mode = localStorage.getItem('mode');
+
+    $('#switch-mode').on('click',function (){
+        if (mode === 'dark-layout')
+        {
+            mode = 'light-layout';
+            localStorage.setItem('mode',mode);
+        }else {
+
+            mode = 'dark-layout';
+            localStorage.setItem('mode',mode);
+        }
+        setLayout(mode)
+    })
+    if (!mode){
+        mode = 'light-layout';
+    }
+    function setLayout(currentLocalStorageLayout) {
+        var navLinkStyle = $('.nav-link-style'),
+            currentLayout = currentLocalStorageLayout,
+            mainMenu = $('.main-menu'),
+            navbar = $('.header-navbar');
+
+        var $html = $('html');
+        $html.removeClass('semi-dark-layout dark-layout bordered-layout');
+
+        if (currentLocalStorageLayout === 'dark-layout') {
+            $html.addClass('dark-layout');
+            mainMenu.removeClass('menu-light').addClass('menu-dark');
+            navbar.removeClass('navbar-light').addClass('navbar-dark');
+            navLinkStyle.find('.ficon').replaceWith(feather.icons['sun'].toSvg({ class: 'ficon' }));
+        } else {
+            $html.addClass('light-layout');
+            mainMenu.removeClass('menu-dark').addClass('menu-light');
+            navbar.removeClass('navbar-dark').addClass('navbar-light');
+            navLinkStyle.find('.ficon').replaceWith(feather.icons['moon'].toSvg({ class: 'ficon' }));
+        }
+        // Set radio in customizer if we have
+        if ($('input:radio[data-layout=' + currentLocalStorageLayout.split('-')[0] + ']').length > 0) {
+            setTimeout(function () {
+                $('input:radio[data-layout=' + currentLocalStorageLayout.split('-')[0] + ']').prop('checked', true);
+            });
+        }
+    }
+
+    setLayout(mode)
+
 </script>
+
+@stack('js')
+
 </body>
 <!-- END: Body-->
 

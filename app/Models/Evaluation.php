@@ -44,4 +44,9 @@ class Evaluation extends Model
     {
         return $this->hasMany(EvaluationSession::class);
     }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
 }

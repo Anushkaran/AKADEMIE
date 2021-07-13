@@ -36,9 +36,36 @@
         <div class="navbar-container main-menu-content" data-menu="menu-container">
             <!-- include ../../../includes/mixins-->
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="{{route('partner.dashboard')}}" data-toggle="dropdown"><i data-feather="home"></i><span data-i18n="Dashboards">Tableau de bord</span></a>
+
+                <li class="{{request()->routeIs('partner.dashboard') ? 'active' : ''}}">
+                    <a class="nav-item  d-flex align-items-center"
+                       href="{{route('partner.dashboard')}}"  data-i18n="Dashboard">
+                        <i data-feather="activity"></i>
+                        <span data-i18n="dashboard">{{__('labels.dashboard')}}</span>
+                    </a>
+                </li>
+
+                <li class="dropdown nav-item {{request()->routeIs('partner.students*') ? 'active' : ''}}" data-menu="dropdown">
+                    <a class="dropdown-toggle nav-link d-flex align-items-center"
+                       href="{{route('partner.students.index')}}" data-toggle="dropdown">
+                        <i data-feather="users"></i>
+                        <span data-i18n="student">
+                            {{trans_choice('labels.student',2)}}
+                        </span>
+                    </a>
                     <ul class="dropdown-menu">
-                        <li data-menu=""><a class="dropdown-item d-flex align-items-center" href="dashboard-analytics.html" data-toggle="dropdown" data-i18n="Analytics"><i data-feather="activity"></i><span data-i18n="Analytics">Statistiques</span></a>
+                        <li class="{{request()->routeIs('partner.students.index') ? 'active' : ''}}">
+                            <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.index')}}" data-toggle="dropdown" data-i18n="students">
+                                <i data-feather="list"></i>
+                                <span data-i18n="Analytics">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</span>
+                            </a>
+                        </li>
+
+                        <li class="{{request()->routeIs('partner.students.create') ? 'active' : ''}}">
+                            <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
+                                <i data-feather="user-plus"></i>
+                                <span data-i18n="Analytics">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</span>
+                            </a>
                         </li>
                     </ul>
                 </li>

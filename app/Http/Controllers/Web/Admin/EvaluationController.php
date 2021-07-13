@@ -30,7 +30,7 @@ class EvaluationController extends Controller
      */
     public function index(): Renderable
     {
-        $evaluations = $this->ev->findByFilter();
+        $evaluations = $this->ev->findByFilter(10,['partner:id,name']);
         return view('admin.evaluations.index',compact('evaluations'));
     }
 

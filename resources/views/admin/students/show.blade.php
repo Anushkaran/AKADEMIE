@@ -89,6 +89,19 @@
                                                     <p class="card-text mb-0">{{$student->phone}}</p>
                                                 </div>
 
+                                                <div class="d-flex flex-wrap my-50">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="phone" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.partner',1)}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">
+                                                        <a href="{{route('admin.partners.show',$student->partner_id)}}">
+                                                            <i data-feather="arrow-up-right"></i>
+                                                            {{$student->partner->name}}
+                                                        </a>
+                                                    </p>
+                                                </div>
+
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
                                                         <i data-feather="calendar" class="mr-1"></i>

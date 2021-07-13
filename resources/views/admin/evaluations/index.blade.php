@@ -65,6 +65,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{__('labels.name')}}</th>
+                                        <th>{{trans_choice('labels.partner',1)}}</th>
                                         <th>{{__('labels.start_date')}}</th>
                                         <th>{{__('labels.end_date')}}</th>
                                         <th>{{__('labels.created_at')}}</th>
@@ -78,6 +79,14 @@
                                             {{$key + 1}}
                                         </td>
                                         <td>{{$e->name}}</td>
+                                        <td>
+                                            <strong>
+                                                <a href="{{route('admin.partners.show',$e->partner_id)}}" class="text-decoration-none">
+                                                   <i data-feather="arrow-up-right"></i>
+                                                    {{$e->partner->name}}
+                                                </a>
+                                            </strong>
+                                        </td>
                                             <td>
                                                 {{$e->start_date->format('d-m-Y')}}
                                             </td>

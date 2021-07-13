@@ -25,7 +25,7 @@ class StudentController extends Controller
                     10,
                     [],
                     ['id','first_name','last_name','partner_id'],
-                    ['perPartner:'.auth('partner')->id()]
+                    ['perPartner' => auth('partner')->id()]
                 ),
             ]);
         }
@@ -34,7 +34,7 @@ class StudentController extends Controller
             10,
             [],
             ['*'],
-            ['perPartner:'.auth('partner')->id()]
+            ['perPartner' => auth('partner')->id()]
         );
         return view('partner.students.index',compact('students'));
     }
@@ -63,13 +63,13 @@ class StudentController extends Controller
 
     public function show($id)
     {
-        $student = $this->student->findOneById($id);
+        $student = $this->student->findOneById($id,[],['*'],['perPartner' => auth('partner')->id()]);
         return view('partner.students.show',compact('student'));
     }
 
     public function edit($id)
     {
-        $student = $this->student->findOneById($id);
+        $student = $this->student->findOneById($id,[],['*'],['perPartner' => auth('partner')->id()]);
         return view('partner.students.edit',compact('student'));
     }
 

@@ -93,7 +93,7 @@
                                         </div>
 
                                         <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
-                                        <a href="{{route('admin.centers.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
+                                        <a href="{{route('admin.students.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
                                     </div>
                                 </form>
 
