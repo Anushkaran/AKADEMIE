@@ -45,6 +45,7 @@
                                 <div class="card-body">
                                     <form class="form form-vertical" action="{{route('admin.users.update',$user->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
+
                                         @method('PUT')
                                         <div class="row">
                                             <div class="col-12">
@@ -77,7 +78,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="last_name-vertical">{{__('labels.last_name')}}</label>
-                                                    <input type="text" value="{{old('name',$user->last_name)}}" id="last_name-vertical"
+                                                    <input type="text" value="{{old('last_name',$user->last_name)}}" id="last_name-vertical"
                                                            class="form-control @error('last_name') is-invalid @enderror" name="last_name"
                                                            placeholder="{{__('labels.last_name')}}" />
                                                     @error('last_name')
@@ -89,7 +90,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="phone-vertical">{{__('labels.phone')}}</label>
-                                                    <input type="text" value="{{old('name',$user->phone)}}" id="phone-vertical"
+                                                    <input type="text" value="{{old('phone',$user->phone)}}" id="phone-vertical"
                                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
                                                            placeholder="{{__('labels.phone')}}" />
                                                     @error('phone')

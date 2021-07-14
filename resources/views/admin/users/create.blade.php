@@ -38,9 +38,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">{{__('actions.add-new',['name' => trans_choice('labels.admin',1)])}}</h4>
+                                    {{$errors}}
                                 </div>
                                 <div class="card-body">
-                                    <form class="form form-vertical" action="{{route('admin.admins.store')}}" method="post" enctype="multipart/form-data">
+                                    <form class="form form-vertical" action="{{route('admin.users.store')}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
                                             <div class="col-12">
@@ -59,28 +60,40 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label for="first-name-vertical">{{__('labels.name')}}</label>
-                                                    <input type="text" value="{{old('name')}}" id="first-name-vertical"
-                                                           class="form-control @error('name') is-invalid @enderror" name="name"
-                                                           placeholder="{{__('labels.name')}}" />
-                                                    @error('name')
-                                                        <div class="invalid-feedback">{{$message}}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="role">{{__('labels.role')}}</label>
-                                                    <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
-                                                        @foreach(config('settings.roles') as $role)
-                                                            <option value="{{$role}}" {{old('role') === $role ? 'selected' : ''}}>{{__('labels.roles.'.$role)}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('role')
+                                                    <label for="first_name-vertical">{{__('labels.first_name')}}</label>
+                                                    <input type="text" value="{{old('first_name')}}" id="first_name-vertical"
+                                                           class="form-control @error('first_name') is-invalid @enderror" name="first_name"
+                                                           placeholder="{{__('labels.first_name')}}" />
+                                                    @error('first_name')
                                                     <div class="invalid-feedback">{{$message}}</div>
                                                     @enderror
                                                 </div>
                                             </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="last_name-vertical">{{__('labels.last_name')}}</label>
+                                                    <input type="text" value="{{old('last_name')}}" id="last_name-vertical"
+                                                           class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                                                           placeholder="{{__('labels.last_name')}}" />
+                                                    @error('last_name')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="phone-vertical">{{__('labels.phone')}}</label>
+                                                    <input type="text" value="{{old('phone')}}" id="phone-vertical"
+                                                           class="form-control @error('phone') is-invalid @enderror" name="phone"
+                                                           placeholder="{{__('labels.phone')}}" />
+                                                    @error('phone')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="email-id-vertical">{{__('labels.email')}}</label>
