@@ -13,13 +13,14 @@
             </ul>
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
-            <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown dropdown-user">
+                <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="user-nav d-sm-flex d-none">
                         <span class="user-name font-weight-bolder">{{auth()->user()->name}}</span>
                         <span class="user-status">{{auth()->user()->role}}</span>
                     </div>
                     <span class="avatar">
-                        <img class="round" src="{{asset('storage/'.auth()->user()->image)}}" alt="avatar" height="40" width="40">
+                        <img class="round" src="{{auth()->user()->image_url}}" alt="avatar" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>
                 </a>
