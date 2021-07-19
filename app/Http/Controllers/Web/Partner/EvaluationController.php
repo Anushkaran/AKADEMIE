@@ -27,26 +27,65 @@ class EvaluationController extends Controller
 
     public function store(Request $request)
     {
-
+        $data = $request->validate([
+            'name'          => 'required|string|max:100',
+            'start_date'    => 'required|date',
+            'end_date'      => 'required|date|after:start_date',
+        ]);
+        $data['partner_id'] = auth('partner')->id();
+        $e = $this->ev->new($data);
+        session()->flash(__('messages.create'));
+        return redirect()->route('partner.evaluations.show',$e->id);
     }
 
     public function show($id)
     {
+        $ev = $this->ev->findOneById($id,['sessions']);
 
+        if ($ev->partner_id !== auth('partner')->id())
+        {
+            abort(404);
+        }
+
+        return view('partner.evaluations.show',compact('ev'));
     }
 
     public function edit($id)
     {
+        $ev = $this->ev->findOneById($id,['sessions']);
 
+        if ($ev->partner_id !== auth('partner')->id())
+        {
+            abort(404);
+        }
+
+        return view('partner.evaluations.show',compact('ev'));
     }
 
-    public function update($id, Request $request)
+    public function update($id, Request $request): \Illuminate\Http\RedirectResponse
     {
-
+        $data = $request->validate([
+            'name'          => 'required|string|max:100',
+            'start_date'    => 'required|date',
+            'end_date'      => 'required|date|after:start_date',
+        ]);
+        $this->ev->update($id,$data);
+        session()->flash(__('messages.update'));
+        return redirect()->route('partner.evaluations.show',$id);
     }
 
     public function destroy($id)
     {
+        $ev = $this->ev->findOneById($id,['sessions']);
 
+        if ($ev->partner_id !== auth('partner')->id())
+        {
+            abort(404);
+        }
+
+        $ev->delete();
+        session()->flash(__('messages.delete'));
+
+        redirect()->route('partner.evaluations.index');
     }
 }

@@ -19,6 +19,7 @@ Route::middleware('auth:partner')->group(function (){
     Route::any('logout',[\App\Http\Controllers\Web\Partner\Auth\PartnerLoginController::class,'logout'])->name('logout');
 
     Route::get('dashboard',[App\Http\Controllers\Web\Partner\DashboardController::class,'index'])->name('dashboard');
-
     Route::resource('students',App\Http\Controllers\Web\Partner\StudentController::class);
+
+    Route::resource('evaluations',App\Http\Controllers\Web\Partner\EvaluationController::class);
 });
