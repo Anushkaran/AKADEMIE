@@ -48,4 +48,7 @@ interface EvaluationContract extends BaseContracts\CrudContract
      * @return mixed
      */
     public function deleteSession($id,$session);
+
+    public function findByPartner($id,$per_page = 10, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = []);
+    public function findOneByPartner($id,$evaluation, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = []);
 }

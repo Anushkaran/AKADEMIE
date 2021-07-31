@@ -109,4 +109,20 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
         $s->delete();
         return $e;
     }
+
+    public function findByPartner($id, $per_page = 10, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
+    {
+        $query = Evaluation::with($relations)->where('partner_id',$id)->withCount($relations_count)->scopes($scopes)->select($columns)->newQuery();
+        return $this->applyFilter($query, $per_page);
+    }
+
+    public function findOneByPartner($id, $evaluation, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
+    {
+        return Evaluation::with($relations)
+            ->withCount($relations_count)
+            ->where('partner_id',$id)
+            ->select($columns)
+            ->scopes($scopes)
+            ->findOrFail($evaluation);
+    }
 }

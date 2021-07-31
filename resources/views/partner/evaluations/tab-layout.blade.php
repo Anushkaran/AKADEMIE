@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('partner.layouts.app')
 
 @push('css')
 
@@ -22,8 +22,8 @@
                             <h2 class="content-header-title float-left mb-0">{{__('actions.details')}}</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluations.index')}}">{{__('labels.list',['name' => trans_choice('labels.evaluation',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('partner.dashboard')}}">{{__('labels.dashboard')}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('partner.evaluations.index')}}">{{__('labels.list',['name' => trans_choice('labels.evaluation',2)])}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.details')}}
                                     </li>
@@ -54,7 +54,7 @@
                                                                     <i data-feather='arrow-left'></i>
                                                                 </a>
                                                             @endif
-                                                            <a href="{{route('admin.evaluations.edit',$ev->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
+                                                            <a href="{{route('partner.evaluations.edit',$ev->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
                                                             <button onclick="deleteForm({{$ev->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>
@@ -110,30 +110,30 @@
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('admin.evaluations.show') ? 'active' : ''}}"
+                                            <a class="nav-link {{request()->routeIs('partner.evaluations.show') ? 'active' : ''}}"
                                                id="homeIcon-tab"
-                                               href="{{route('admin.evaluations.show',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('admin.evaluations.show')}}">
+                                               href="{{route('partner.evaluations.show',$ev->id)}}"
+                                               aria-selected="{{request()->routeIs('partner.evaluations.show')}}">
                                                 <i data-feather="check-circle"></i>
                                                 {{trans_choice('labels.evaluation-session',3)}}
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('admin.evaluations.students.index') ? 'active' : ''}}"
+                                            <a class="nav-link {{request()->routeIs('partner.evaluations.students.index') ? 'active' : ''}}"
                                                id="homeIcon-tab"
-                                               href="{{route('admin.evaluations.students.index',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('admin.evaluations.students.index')}}">
+                                               href="{{route('partner.evaluations.students.index',$ev->id)}}"
+                                               aria-selected="{{request()->routeIs('partner.evaluations.students.index')}}">
                                                 <i data-feather="check-circle"></i>
                                                 {{trans_choice('labels.student',3)}}
                                             </a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('admin.evaluations.skills.index') ? 'active' : ''}}"
+                                            <a class="nav-link {{request()->routeIs('partner.evaluations.skills.index') ? 'active' : ''}}"
                                                id="homeIcon-tab"
-                                               href="{{route('admin.evaluations.skills.index',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('admin.evaluations.skills.index')}}">
+                                               href="{{route('partner.evaluations.skills.index',$ev->id)}}"
+                                               aria-selected="{{request()->routeIs('partner.evaluations.skills.index')}}">
                                                 <i data-feather="check-circle"></i>
                                                 {{trans_choice('labels.skill',3)}}
                                             </a>
@@ -166,6 +166,40 @@
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+    <script>
+        const deleteForm = id => {
+            Swal.fire({
+                title: '{{__('actions.delete_confirm_title')}}',
+                text: "{{__('actions.delete_confirm_text')}}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{__('actions.delete_btn_yes')}}',
+                cancelButtonText: '{{__('actions.delete_btn_cancel')}}'
+            }).then((result) => {
+                if (result.value) {
+                    let f = document.createElement("form");
+                    f.setAttribute('method',"post");
+                    f.setAttribute('action',`/partner/evaluations/${id}`);
 
+                    let i1 = document.createElement("input"); //input element, text
+                    i1.setAttribute('type',"hidden");
+                    i1.setAttribute('name','_token');
+                    i1.setAttribute('value','{{csrf_token()}}');
+
+                    let i2 = document.createElement("input"); //input element, text
+                    i2.setAttribute('type',"hidden");
+                    i2.setAttribute('name','_method');
+                    i2.setAttribute('value','DELETE');
+
+                    f.appendChild(i1);
+                    f.appendChild(i2);
+                    document.body.appendChild(f);
+                    f.submit()
+                }
+            });
+        }
+    </script>
     @stack('tab-js')
 @endpush

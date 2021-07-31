@@ -1,4 +1,4 @@
-@extends('admin.evaluations.tab-layout')
+@extends('partner.evaluations.tab-layout')
 
 @push('tab-css')
 
@@ -27,7 +27,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{route('admin.evaluations.students.attach',$ev->id)}}" id="attach-students-form" method="post">
+                                    <form action="{{route('partner.evaluations.students.attach',$ev->id)}}" id="attach-students-form" method="post">
                                         @csrf
                                         <div class="form-group">
                                             <label for="">{{trans_choice('labels.student',3)}}</label>
@@ -142,7 +142,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('admin.students.index')}}',
+                    url: '{{route('partner.students.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -190,7 +190,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}/students/${student}`);
+                    f.setAttribute('action',`/partner/evaluations/${id}/students/${student}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

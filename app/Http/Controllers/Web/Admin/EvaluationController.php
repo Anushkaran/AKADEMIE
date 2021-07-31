@@ -124,7 +124,12 @@ class EvaluationController extends Controller
         return redirect()->route('admin.evaluations.index');
     }
 
-    public function attachSkills($id,Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function attachSkills($id,Request $request): RedirectResponse
     {
         $data = $request->validate([
             'skills'    => 'required|array',

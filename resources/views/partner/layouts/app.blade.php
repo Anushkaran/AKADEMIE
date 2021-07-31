@@ -36,7 +36,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/css/style.css')}}">
     <!-- END: Custom CSS-->
     @stack('css')
 </head>
@@ -107,7 +107,7 @@
     });
     @endif
 
-        @if(session()->has('error'))
+    @if(session()->has('error'))
         toastr['error']('{{session("error")}}', '{{__("labels.error")}}', {
         closeButton: true,
         tapToDismiss: false,

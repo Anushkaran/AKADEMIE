@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web\Partner;
 
 use App\Contracts\EvaluationContract;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
@@ -17,7 +19,9 @@ class EvaluationController extends Controller
 
     public function index()
     {
-        return view('partner.evaluations.index');
+        $evaluations = $this->ev->findByPartner(auth('partner')->id(),10,[],['*']);
+        $evaluations->loadCount(['sessions','students']);
+        return view('partner.evaluations.index',compact('evaluations'));
     }
 
     public function create()
@@ -38,18 +42,20 @@ class EvaluationController extends Controller
         return redirect()->route('partner.evaluations.show',$e->id);
     }
 
-    public function show($id)
+    /**
+     * @param $id
+     * @return Renderable
+     */
+    public function show($id): Renderable
     {
-        $ev = $this->ev->findOneById($id,['sessions']);
-
+        $ev = $this->ev->findOneById($id);
         if ($ev->partner_id !== auth('partner')->id())
         {
             abort(404);
         }
-
-        return view('partner.evaluations.show',compact('ev'));
+        $title = __('labels.list',['name' => trans_choice('labels.evaluation-session',3)]);
+        return view('partner.evaluations.tabs.show',compact('ev','title'));
     }
-
     public function edit($id)
     {
         $ev = $this->ev->findOneById($id,['sessions']);
@@ -59,7 +65,7 @@ class EvaluationController extends Controller
             abort(404);
         }
 
-        return view('partner.evaluations.show',compact('ev'));
+        return view('partner.evaluations.edit',compact('ev'));
     }
 
     public function update($id, Request $request): \Illuminate\Http\RedirectResponse
@@ -76,7 +82,7 @@ class EvaluationController extends Controller
 
     public function destroy($id)
     {
-        $ev = $this->ev->findOneById($id,['sessions']);
+        $ev = $this->ev->findOneById($id);
 
         if ($ev->partner_id !== auth('partner')->id())
         {
@@ -86,6 +92,95 @@ class EvaluationController extends Controller
         $ev->delete();
         session()->flash(__('messages.delete'));
 
-        redirect()->route('partner.evaluations.index');
+        return redirect()->route('partner.evaluations.index');
+    }
+
+    public function skillsList($id)
+    {
+        $ev = $this->ev->findOneById($id,['skills.tasks']);
+        if ($ev->partner_id !== auth('partner')->id())
+        {
+            abort(404);
+        }
+        $title = __('labels.list',['name' => trans_choice('labels.skill',3)]);
+        return view('admin.evaluations.tabs.skills',compact('ev','title'));
+    }
+
+    public function studentsList($id)
+    {
+        $ev = $this->ev->findOneById($id,['students']);
+
+        if ($ev->partner_id !== auth('partner')->id())
+        {
+            abort(404);
+        }
+
+        $title = __('labels.list',['name' => trans_choice('labels.student',3)]);
+        return view('admin.evaluations.tabs.students',compact('ev','title'));
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function attachSkills($id,Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'skills'    => 'required|array',
+            'skills.*'  => 'required|integer'
+        ]);
+
+        $this->ev->attachSkill($id,$data);
+        session()->flash('success',__('messages.attach'));
+        return redirect()->back();
+    }
+
+    public function removeSkills($id,$skill)
+    {
+        $this->ev->detachSkill($id,$skill);
+        session()->flash('success',__('messages.removed'));
+        return redirect()->back();
+    }
+
+    public function attachStudents($id,Request $request)
+    {
+        $data = $request->validate([
+            'students'    => 'required|array',
+            'students.*'  => 'required|integer'
+        ]);
+
+        $this->ev->attachStudent($id,$data);
+        session()->flash('success',__('messages.attach'));
+        return redirect()->back();
+    }
+
+    public function removeStudents($id,$student)
+    {
+        $this->ev->detachStudent($id,$student);
+        session()->flash('success',__('messages.removed'));
+        return redirect()->back();
+    }
+
+    public function addSession($id,Request $request)
+    {
+        $data = $request->validate([
+            'user_id'       => 'required|integer|exists:users,id',
+            'center_id'     => 'required|integer|exists:centers,id',
+            'name'          => 'required|string|max:150',
+            'date'          => 'required|date',
+            'note'          => 'sometimes|nullable|string|max:200',
+        ]);
+
+        $this->ev->createSession($id,$data);
+        session()->flash('success',__('messages.create'));
+        return redirect()->back();
+    }
+
+    public function deleteSession($id,$session): RedirectResponse
+    {
+        $this->ev->deleteSession($id,$session);
+        session()->flash('success',__('messages.delete'));
+        return redirect()->back();
     }
 }

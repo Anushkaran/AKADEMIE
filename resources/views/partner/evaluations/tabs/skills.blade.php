@@ -1,6 +1,4 @@
-@extends('shop.evaluations.tab-layout')
-
-
+@extends('partner.evaluations.tab-layout')
 
 @section('tab-content')
     <div class="tab-pane active" id="homeIcon" aria-labelledby="homeIcon-tab" role="tabpanel">
@@ -23,7 +21,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{route('admin.evaluations.skills.attach',$ev->id)}}" id="attach-skills-form" method="post">
+                                    <form action="{{route('partner.evaluations.skills.attach',$ev->id)}}" id="attach-skills-form" method="post">
                                         @csrf
                                         <div class="form-group">
                                             <label for="skills">{{trans_choice('labels.skill',3)}}</label>
@@ -122,7 +120,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('admin.skills.index')}}',
+                    url: '{{route('partner.skills.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -169,7 +167,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}/skills/${skill}`);
+                    f.setAttribute('action',`/partner/evaluations/${id}/skills/${skill}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

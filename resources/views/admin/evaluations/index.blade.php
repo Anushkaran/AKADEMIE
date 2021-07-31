@@ -211,7 +211,6 @@
 
 
 @push('js')
-    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
         @if($errors->any())
@@ -270,7 +269,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}`);
+                    f.setAttribute('action',`/partner/evaluations/${id}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

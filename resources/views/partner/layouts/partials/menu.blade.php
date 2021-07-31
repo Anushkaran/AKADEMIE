@@ -64,12 +64,18 @@
                         <li class="{{request()->routeIs('partner.students.create') ? 'active' : ''}}">
                             <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
                                 <i data-feather="user-plus"></i>
-                                <span data-i18n="Analytics">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</span>
+                                <span data-i18n="Analytics">{{__('actions.add-new',['name' => trans_choice('labels.student',2)])}}</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-
+                <li class="{{request()->routeIs('partner.evaluations*') ? 'active' : ''}}">
+                    <a class="nav-item  d-flex align-items-center"
+                       href="{{route('partner.evaluations.index')}}"  data-i18n="Dashboard">
+                        <i data-feather="check"></i>
+                        <span data-i18n="dashboard">{{trans_choice('labels.evaluation',2)}}</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
