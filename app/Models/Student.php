@@ -44,4 +44,11 @@ class Student extends Model
         return $this->belongsToMany(Evaluation::class);
     }
 
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class)
+            ->withTimestamps()
+            ->withPivot(['evaluation_id','evaluation_session_id']);
+    }
+
 }
