@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
     <meta name="description" content="bienvenue sur l'espace partenaire d'akademie.">
     <meta name="keywords" content="akademie">
-    <meta name="author" content="PIXINVENT">
+    <meta name="author" content="DEVELOPIT">
     <title>@yield('title') - {{config('app.name')}}</title>
     <link rel="apple-touch-icon" href="{{asset('assets/vuexy/app-assets/images/ico/apple-icon-120.png')}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/vuexy/app-assets/images/ico/favicon.ico')}}">
