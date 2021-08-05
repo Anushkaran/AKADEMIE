@@ -170,7 +170,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('partner.centers.index')}}',
+                    url: '{{route('admin.centers.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -206,7 +206,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('partner.users.index')}}',
+                    url: '{{route('admin.users.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -253,7 +253,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/partner/evaluations/${id}/sessions/${sessionID}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}/sessions/${sessionID}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");
