@@ -11,7 +11,7 @@ class CreateTaskStudentTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('task_student', function (Blueprint $table) {
             $table->id();
@@ -27,7 +27,7 @@ class CreateTaskStudentTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->foreignId('evaluation_id')
+            $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
@@ -44,7 +44,7 @@ class CreateTaskStudentTable extends Migration
     {
         Schema::table('task_student', function (Blueprint $table) {
             $table->dropForeign('task_student_student_id_foreign');
-            $table->dropForeign('task_student_evaluation_id_foreign');
+            $table->dropForeign('task_student_user_id_foreign');
             $table->dropForeign('task_student_evaluation_session_id_foreign');
             $table->dropForeign('task_student_task_id_foreign');
         });

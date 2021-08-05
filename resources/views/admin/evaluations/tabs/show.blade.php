@@ -56,7 +56,7 @@
                         <td>
                             <strong>
                                 {{$s->user->name}}
-                                <a href="{{route('partner.users.show',$s->user_id)}}" class="text-decoration-none">
+                                <a href="{{route('admin.users.show',$s->user_id)}}" class="text-decoration-none">
                                     <i data-feather="arrow-up-right"></i>
                                 </a>
                             </strong><br>
