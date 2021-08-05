@@ -92,7 +92,7 @@
     <div class="modal modal-slide-in fade" id="modals-slide-in">
         <div class="modal-dialog sidebar-sm">
             <form class="add-new-record modal-content pt-0" method="post"
-                  action="{{route('partner.evaluations.sessions.store',$ev->id)}}">
+                  action="{{route('admin.evaluations.sessions.store',$ev->id)}}">
                 @csrf
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
