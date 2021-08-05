@@ -1,4 +1,4 @@
-@extends('partner.evaluations.tab-layout')
+@extends('admin.evaluations.tab-layout')
 
 @push('tab-css')
 
