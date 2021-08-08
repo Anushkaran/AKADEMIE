@@ -1,4 +1,4 @@
-@extends('partner.evaluations.tab-layout')
+@extends('admin.evaluations.tab-layout')
 
 @push('tab-css')
 
@@ -56,7 +56,7 @@
                         <td>
                             <strong>
                                 {{$s->user->name}}
-                                <a href="{{route('partner.users.show',$s->user_id)}}" class="text-decoration-none">
+                                <a href="{{route('admin.users.show',$s->user_id)}}" class="text-decoration-none">
                                     <i data-feather="arrow-up-right"></i>
                                 </a>
                             </strong><br>
@@ -92,7 +92,7 @@
     <div class="modal modal-slide-in fade" id="modals-slide-in">
         <div class="modal-dialog sidebar-sm">
             <form class="add-new-record modal-content pt-0" method="post"
-                  action="{{route('partner.evaluations.sessions.store',$ev->id)}}">
+                  action="{{route('admin.evaluations.sessions.store',$ev->id)}}">
                 @csrf
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
@@ -170,7 +170,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('partner.centers.index')}}',
+                    url: '{{route('admin.centers.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -206,7 +206,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('partner.users.index')}}',
+                    url: '{{route('admin.users.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -253,7 +253,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/partner/evaluations/${id}/sessions/${sessionID}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}/sessions/${sessionID}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

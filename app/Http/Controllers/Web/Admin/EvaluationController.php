@@ -66,7 +66,7 @@ class EvaluationController extends Controller
      */
     public function show($id): Renderable
     {
-        $ev = $this->ev->findOneById($id);
+        $ev = $this->ev->findOneById($id,['sessions']);
         $title = __('labels.list',['name' => trans_choice('labels.evaluation-session',3)]);
         return view('admin.evaluations.tabs.show',compact('ev','title'));
     }
