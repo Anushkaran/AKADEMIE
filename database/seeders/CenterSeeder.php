@@ -14,6 +14,6 @@ class CenterSeeder extends Seeder
      */
     public function run()
     {
-        Center::factory(30)->create();
+        Center::factory(5)->create();
     }
 }

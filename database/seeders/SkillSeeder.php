@@ -16,8 +16,8 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        Skill::factory(100)->create()->each(function ($s){
-           Task::factory(random_int(5,10))->create([
+        Skill::factory(10)->create()->each(function ($s){
+           Task::factory(random_int(2,5))->create([
                'skill_id' => $s->id
            ]);
         });
