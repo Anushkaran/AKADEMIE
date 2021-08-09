@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Student extends Model
 {
@@ -48,7 +49,17 @@ class Student extends Model
     {
         return $this->belongsToMany(Task::class)
             ->withTimestamps()
-            ->withPivot(['evaluation_id','evaluation_session_id']);
+            ->withPivot(['session_student_id','user_id']);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function sessionStudents(): BelongsToMany
+    {
+        return $this->belongsToMany(SessionStudent::class,'session_student_task')
+            ->withTimestamps()
+            ->withPivot(['task_id','user_id']);
     }
 
 }
