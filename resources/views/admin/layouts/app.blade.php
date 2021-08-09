@@ -8,9 +8,9 @@
     <meta name="description" content=" une application permettant de gérer les formations dispensées aux collaborateurs et de piloter les compétences et les ressources .">
     <meta name="keywords" content=" une application permettant de gérer les formations dispensées aux collaborateurs et de piloter les compétences et les ressources .">
     <meta name="author" content="DEVELOP/IT">
-    <title>@yield('title',config('app.name'). ' Admin Panel' )</title>
+    <title>@yield('title',config('app.name'). " Panneau d'administration" )</title>
     <link rel="apple-touch-icon" href="{{asset('assets/vuexy/app-assets/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/vuexy/app-assets/images/ico/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/vuexy/app-assets/images/ico/favicon.png')}}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
