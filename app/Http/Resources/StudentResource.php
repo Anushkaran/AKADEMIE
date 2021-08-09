@@ -22,6 +22,7 @@ class StudentResource extends JsonResource
             'phone'     => $this->phone,
             'address'   => $this->address,
             'partner'   => new PartnerResource($this->whenLoaded('partner')),
+            'tasks'   =>  TaskResource::collection($this->whenLoaded('tasks')),
         ];
     }
 }

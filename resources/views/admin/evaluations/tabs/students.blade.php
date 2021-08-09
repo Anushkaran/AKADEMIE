@@ -173,7 +173,6 @@
                     }
                 }
             });
-            $('.select2-selection__arrow').style.display = 'node'
         });
 
         const removeStudent = (id,student) => {

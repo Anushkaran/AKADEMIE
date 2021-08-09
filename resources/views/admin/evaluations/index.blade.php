@@ -183,7 +183,7 @@
                         <input type="date" required name="start_date"
                                value="{{old('start_date')}}"
                                class="form-control @error('start_date') is-invalid @enderror"
-                               id="name" placeholder="{{__('labels.start_date')}}
+                               id="date" placeholder="{{__('labels.start_date')}}
                             ..."  aria-label="{{__('labels.start_date')}} ..." />
                         @error('start_date')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -195,7 +195,7 @@
                         <input type="date" required name="end_date"
                                value="{{old('end_date')}}"
                                class="form-control @error('end_date') is-invalid @enderror"
-                               id="name" placeholder="{{__('labels.end_date')}}..."  aria-label="{{__('labels.end_date')}} ..." />
+                               id="end_date" placeholder="{{__('labels.end_date')}}..."  aria-label="{{__('labels.end_date')}} ..." />
                         @error('end_date')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -211,7 +211,7 @@
 
 
 @push('js')
-
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script>
         @if($errors->any())
             document.getElementById('create-btn').click();
@@ -253,7 +253,6 @@
                     }
                 }
             });
-            $('.select2-selection__arrow').style.display = 'node'
         });
         const deleteForm = id => {
             Swal.fire({

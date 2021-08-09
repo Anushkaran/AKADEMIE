@@ -18,6 +18,7 @@ class SessionStudentResource extends JsonResource
             'id' => $this->id,
             'student_id' => $this->student_id,
             'evaluation_session_id' => $this->evaluation_session_id,
+            'note' => $this->note,
             'student' => new StudentResource($this->whenLoaded('student')),
             'evaluation_session' => new EvaluationSessionResource($this->whenLoaded('evaluationSession')),
             'tasks' =>  TaskResource::collection($this->whenLoaded('tasks')),

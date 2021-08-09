@@ -47,7 +47,7 @@ class Student extends Model
 
     public function tasks()
     {
-        return $this->belongsToMany(Task::class)
+        return $this->belongsToMany(Task::class,'session_student_task')
             ->withTimestamps()
             ->withPivot(['session_student_id','user_id']);
     }

@@ -14,7 +14,6 @@ class StudentController extends Controller
 {
     public function show($id,$student,StudentContract $s)
     {
-
         $st = $s->findOneById($student,['evaluations' => function($ev) use($id){
             $ev->where('evaluations.id',$id);
         }]);
@@ -35,10 +34,9 @@ class StudentController extends Controller
 
     public function startSession($session,$student,StudentContract $s,EvaluationSessionContract $ev)
     {
-        $evaluationSession = $ev->findOneById($session,['evaluation']);
+        $evaluationSession = $ev->findOneById($session);
         $st = $s->findOneById($student);
-
-        if ($st->evaluations()->where('id',$evaluationSession->evalatuion->id)->count() === 0)
+        if ($st->evaluations()->where('evaluations.id',$evaluationSession->evaluation_id)->count() === 0)
         {
             return response()->json([
                 'success' => false,
@@ -46,7 +44,7 @@ class StudentController extends Controller
             ],404);
         }
 
-        $session_student = SessionStudent::firstOrNew([
+        $session_student = SessionStudent::firstOrCreate([
             'evaluation_session_id' => $session,
             'student_id' => $student,
         ]);
@@ -61,11 +59,16 @@ class StudentController extends Controller
     public function attachTask($session_student,Request $request)
     {
         $data = $request->validate(['task_id' => 'required|integer|exists:tasks,id']);
-        $session_student = SessionStudent::findOrFail($session_student);
-        $session_student->tasks()->attachIfNotAttached($data['task_id'],[
-            'student_id' => $session_student->student_id,
-            'user_id' => auth('api')->id(),
-        ]);
+        $session_student = SessionStudent::with('session.evaluation.skills')->findOrFail($session_student);
+
+        if (!$session_student->tasks->contains($data['task_id']))
+        {
+            $session_student->tasks()->attach($data['task_id'],[
+                'student_id' => $session_student->student_id,
+                'user_id' => auth('api')->id(),
+            ]);
+        }
+
 
         return response()->json([
             'success' => true,
