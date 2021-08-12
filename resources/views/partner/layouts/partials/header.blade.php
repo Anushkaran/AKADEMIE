@@ -2,7 +2,7 @@
     <div class="navbar-header d-xl-block d-none">
         <ul class="nav navbar-nav">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="{{route('admin.dashboard')}}">
+                <a class="navbar-brand" href="{{route('partner.dashboard')}}">
                         <img  height="30%" width="30%" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}"/>
                 </a>
             </li>
