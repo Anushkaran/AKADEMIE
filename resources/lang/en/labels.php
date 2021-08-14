@@ -49,4 +49,5 @@ return [
 
     'date' => 'Date',
     'nb_of' => 'Number of :item',
+    'status' => 'Status',
 ];

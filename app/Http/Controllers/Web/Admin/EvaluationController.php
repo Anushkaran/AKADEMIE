@@ -160,6 +160,18 @@ class EvaluationController extends Controller
         return redirect()->back();
     }
 
+    public function disableStudent($id,$student)
+    {
+
+
+    }
+
+    public function enableStudent($id,$student)
+    {
+
+
+    }
+
     public function removeStudents($id,$student)
     {
         $this->ev->detachStudent($id,$student);

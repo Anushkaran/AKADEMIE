@@ -65,6 +65,7 @@
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.phone')}}</th>
                         <th>{{__('labels.email')}}</th>
+                        <th>{{__('labels.status')}}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -89,6 +90,20 @@
                                 </a>
                             </strong>
                         </td>
+
+                        <td>
+                            <div>
+                                <b-card-text class="mb-0">Secondary</b-card-text>
+                                <b-form-checkbox checked="true" class="custom-control-secondary" name="check-button" switch>
+                                    <span class="switch-icon-left"><feather-icon icon="CheckIcon"/></span>
+                                    <span class="switch-icon-right"><feather-icon icon="XIcon"/></span>
+                                </b-form-checkbox>
+                            </div>
+                            <span class="badge badge-info" onclick="updateState({{$s->id}})')">
+                                {{$s->is_canceled ? 'inactive' : 'active'}}
+                            </span>
+                        </td>
+
                         <td>
                             <button class="btn btn-sm btn-outline-danger"
                                     onclick="removeStudent({{$ev->id}},{{$s->id}})">
@@ -118,7 +133,16 @@
 
     <script>
 
+
         $(document).ready(function() {
+
+
+            const updateState = url => {
+
+                axios.put(url).then(({data}) => {
+                    console.log(data)
+                }).cache(err => console.error())
+            }
 
             $("#search").on("keyup", function() {
                 var value = $(this).val().toLowerCase();

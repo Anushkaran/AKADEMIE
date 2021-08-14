@@ -39,6 +39,8 @@ Route::middleware('auth:admin')->group(function (){
     Route::delete('evaluations/{id}/sessions/{session}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'deleteSession'])->name('evaluations.sessions.delete');
     Route::get('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'studentsList'])->name('evaluations.students.index');
     Route::post('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'attachStudents'])->name('evaluations.students.attach');
+    Route::put('evaluations/{id}/students/{student}/enable',[App\Http\Controllers\Web\Admin\EvaluationController::class,'cancelStudent'])->name('evaluations.students.attach');
+    Route::put('evaluations/{id}/students/{student}/disable',[App\Http\Controllers\Web\Admin\EvaluationController::class,'st'])->name('evaluations.students.attach');
     Route::delete('evaluations/{id}/students/{student}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'removeStudents'])->name('evaluations.students.remove');
     Route::get('evaluations/{id}/skills',[App\Http\Controllers\Web\Admin\EvaluationController::class,'skillsList'])->name('evaluations.skills.index');
     Route::post('evaluations/{id}/skills',[App\Http\Controllers\Web\Admin\EvaluationController::class,'attachSkills'])->name('evaluations.skills.attach');

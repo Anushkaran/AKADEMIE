@@ -42,7 +42,7 @@ class Student extends Model
 
     public function evaluations()
     {
-        return $this->belongsToMany(Evaluation::class);
+        return $this->belongsToMany(Evaluation::class)->withTimestamps()->withPivot('is_canceled');
     }
 
     public function tasks()
