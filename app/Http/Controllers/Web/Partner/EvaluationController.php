@@ -103,7 +103,7 @@ class EvaluationController extends Controller
             abort(404);
         }
         $title = __('labels.list',['name' => trans_choice('labels.skill',3)]);
-        return view('admin.evaluations.tabs.skills',compact('ev','title'));
+        return view('partner.evaluations.tabs.skills',compact('ev','title'));
     }
 
     public function studentsList($id)
@@ -116,7 +116,7 @@ class EvaluationController extends Controller
         }
 
         $title = __('labels.list',['name' => trans_choice('labels.student',3)]);
-        return view('admin.evaluations.tabs.students',compact('ev','title'));
+        return view('partner.evaluations.tabs.students',compact('ev','title'));
     }
 
     /**
@@ -182,5 +182,49 @@ class EvaluationController extends Controller
         $this->ev->deleteSession($id,$session);
         session()->flash('success',__('messages.delete'));
         return redirect()->back();
+    }
+
+    public function disableStudent($id,$student)
+    {
+        $ev = $this->ev->findOneById($id,[],['id'],[],['students' => function($s) use($student){
+            $s->where('students.id',$student);
+        }]);
+
+        if ($ev->students->count() === 0){
+            return response()->json([
+                'success' => false,
+                'message' => 'student not found',
+            ],404);
+        }
+
+        $ev->students()->updateExistingPivot($student, array('is_canceled' => true), true);
+        return response()->json([
+            'success' => true,
+            'message' => 'student status was updated successfully',
+            'is_canceled' => true
+
+        ],201);
+    }
+
+    public function enableStudent($id,$student)
+    {
+
+        $ev = $this->ev->findOneByPartner(auth('partner')->id(),$id,[],['id','partner_id'],[],['students' => function($s) use($student){
+            $s->where('students.id',$student);
+        }]);
+
+        if ($ev->students->count() === 0){
+            return response()->json([
+                'success' => false,
+                'message' => 'student not found',
+            ],404);
+        }
+
+        $ev->students()->updateExistingPivot($student, array('is_canceled' => false), true);
+        return response()->json([
+            'success' => true,
+            'message' => 'student status was updated successfully',
+            'is_canceled' => false
+        ],201);
     }
 }

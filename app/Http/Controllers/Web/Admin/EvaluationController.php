@@ -162,14 +162,46 @@ class EvaluationController extends Controller
 
     public function disableStudent($id,$student)
     {
+        $ev = $this->ev->findOneById($id,[],['id'],[],['students' => function($s) use($student){
+            $s->where('students.id',$student);
+        }]);
 
+        if ($ev->students->count() === 0){
+            return response()->json([
+                'success' => false,
+                'message' => 'student not found',
+            ],404);
+        }
 
+        $ev->students()->updateExistingPivot($student, array('is_canceled' => true), true);
+        return response()->json([
+            'success' => true,
+            'message' => 'student status was updated successfully',
+            'is_canceled' => true
+
+        ],201);
     }
 
     public function enableStudent($id,$student)
     {
 
+        $ev = $this->ev->findOneById($id,[],['id'],[],['students' => function($s) use($student){
+            $s->where('students.id',$student);
+        }]);
 
+        if ($ev->students->count() === 0){
+            return response()->json([
+                'success' => false,
+                'message' => 'student not found',
+            ],404);
+        }
+
+        $ev->students()->updateExistingPivot($student, array('is_canceled' => false), true);
+        return response()->json([
+            'success' => true,
+            'message' => 'student status was updated successfully',
+            'is_canceled' => false
+        ],201);
     }
 
     public function removeStudents($id,$student)

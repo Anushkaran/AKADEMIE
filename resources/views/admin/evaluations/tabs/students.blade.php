@@ -30,7 +30,7 @@
                                     <form action="{{route('admin.evaluations.students.attach',$ev->id)}}" id="attach-students-form" method="post">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="">{{trans_choice('labels.student',3)}}</label>
+                                            <label for="students">{{trans_choice('labels.student',3)}}</label>
                                             <select
                                                 name="students[]" multiple
                                                 id="students" class="select2 form-control"></select>
@@ -93,15 +93,15 @@
 
                         <td>
                             <div>
-                                <b-card-text class="mb-0">Secondary</b-card-text>
-                                <b-form-checkbox checked="true" class="custom-control-secondary" name="check-button" switch>
-                                    <span class="switch-icon-left"><feather-icon icon="CheckIcon"/></span>
-                                    <span class="switch-icon-right"><feather-icon icon="XIcon"/></span>
-                                </b-form-checkbox>
+                                <div class="custom-control custom-switch custom-control-inline mb-1">
+                                    <input type="checkbox" data-is-canceled="{{(bool)($s->pivot->is_canceled === 0)}}"
+                                           onchange="updateStudentState({{$ev->id}},{{$s->id}})"
+                                           class="custom-control-input" @if($s->pivot->is_canceled === 0) checked @endif id="switch-{{$s->id}}">
+                                    <label class="custom-control-label mr-1" for="switch-{{$s->id}}">
+                                    </label>
+                                </div>
                             </div>
-                            <span class="badge badge-info" onclick="updateState({{$s->id}})')">
-                                {{$s->is_canceled ? 'inactive' : 'active'}}
-                            </span>
+
                         </td>
 
                         <td>
@@ -129,20 +129,37 @@
 @push('tab-js')
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- END: Page JS-->
 
     <script>
 
-
+        const updateStudentState = (id,student) => {
+            console.log($("#switch-"+student).data('is-canceled'))
+            let isCanceled = $("#switch-"+student).data('is-canceled')
+            let url = isCanceled ? `/admin/evaluations/${id}/students/${student}/enable` : `/admin/evaluations/${id}/students/${student}/disable`;
+            $("#switch-"+student).attr('disable')
+            axios.put(url).then(({data}) => {
+                $("#switch-"+student).data('is-canceled',!isCanceled)
+                console.log($("#switch-"+student).data('is-canceled'))
+                Swal.fire({
+                    text: "{{__('messages.update')}}",
+                    icon: 'success',
+                })
+            }).catch(err => {
+                $("#switch-"+student).data('is-canceled',isCanceled)
+                Swal.fire({
+                    text: "{{__('messages.fail')}}",
+                    icon: 'error',
+                })
+            })
+                .finally(() => $("#switch-"+student).removeAttr('disable'))
+        }
         $(document).ready(function() {
 
 
-            const updateState = url => {
 
-                axios.put(url).then(({data}) => {
-                    console.log(data)
-                }).cache(err => console.error())
-            }
+
 
             $("#search").on("keyup", function() {
                 var value = $(this).val().toLowerCase();

@@ -65,6 +65,7 @@
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.phone')}}</th>
                         <th>{{__('labels.email')}}</th>
+                        <th>{{__('labels.status')}}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -90,11 +91,24 @@
                             </strong>
                         </td>
                         <td>
+                            <div>
+                                <div class="custom-control custom-switch custom-control-inline mb-1">
+                                    <input type="checkbox" data-is-canceled="{{(bool)($s->pivot->is_canceled === 0)}}"
+                                           onchange="updateStudentState({{$ev->id}},{{$s->id}})"
+                                           class="custom-control-input" @if($s->pivot->is_canceled === 0) checked @endif id="switch-{{$s->id}}">
+                                    <label class="custom-control-label mr-1" for="switch-{{$s->id}}">
+                                    </label>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
                             <button class="btn btn-sm btn-outline-danger"
                                     onclick="removeStudent({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
                         </td>
+
                     </tr>
                     @endforeach
 
@@ -115,9 +129,29 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-
+        const updateStudentState = (id,student) => {
+            let isCanceled = $("#switch-"+student).data('is-canceled')
+            let url = isCanceled ? `/partner/evaluations/${id}/students/${student}/enable` : `/partner/evaluations/${id}/students/${student}/disable`;
+            $("#switch-"+student).attr('disable')
+            axios.put(url).then(({data}) => {
+                $("#switch-"+student).data('is-canceled',!isCanceled)
+                console.log($("#switch-"+student).data('is-canceled'))
+                Swal.fire({
+                    text: "{{__('messages.update')}}",
+                    icon: 'success',
+                })
+            }).catch(err => {
+                $("#switch-"+student).data('is-canceled',isCanceled)
+                Swal.fire({
+                    text: "{{__('messages.fail')}}",
+                    icon: 'error',
+                })
+            })
+                .finally(() => $("#switch-"+student).removeAttr('disable'))
+        }
         $(document).ready(function() {
 
             $("#search").on("keyup", function() {

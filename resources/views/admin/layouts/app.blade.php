@@ -96,20 +96,25 @@
 
     // Success Type
     @if(session()->has('success'))
-        toastr['success']('{{session("success")}}', '{{__('labels.success')}}', {
-        closeButton: true,
-        tapToDismiss: false,
-        rtl: false
-    });
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: "{{session('success')}}",
+          showConfirmButton: false,
+          timer: 1500
+        })
     @endif
 
         @if(session()->has('error'))
-        toastr['error']('{{session("error")}}', '{{__("labels.error")}}', {
-        closeButton: true,
-        tapToDismiss: false,
-        rtl: true
-    });
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: "{{session('error')}}",
+          showConfirmButton: false,
+          timer: 1500
+        })
     @endif
+
 
     let mode = localStorage.getItem('mode');
 
