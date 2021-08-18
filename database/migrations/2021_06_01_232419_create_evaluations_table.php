@@ -19,6 +19,10 @@ class CreateEvaluationsTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreignId('center_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

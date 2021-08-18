@@ -70,6 +70,22 @@
                                                     </div>
                                                     <p class="card-text mb-0">{{$ev->name}}</p>
                                                 </div>
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="home" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.partner',1)}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$ev->partner->name}}</p>
+
+                                                </div>
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="map-pin" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.center',1)}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$ev->center->name}}<br> <small class="card-text mb-0">({{$ev->center->address}})</small></p>
+
+                                                </div>
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
@@ -78,6 +94,7 @@
                                                     </div>
                                                     <p class="card-text mb-0">{{$ev->start_date->format('d-m-Y')}}</p>
                                                 </div>
+
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">

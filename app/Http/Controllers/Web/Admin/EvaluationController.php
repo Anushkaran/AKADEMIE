@@ -51,6 +51,7 @@ class EvaluationController extends Controller
         $data = $request->validate([
             'name'          => 'required|string|max:100',
             'partner_id'    => 'required|integer|exists:partners,id',
+            'center_id'    => 'required|integer|exists:centers,id',
             'start_date'    => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
@@ -104,6 +105,7 @@ class EvaluationController extends Controller
     {
         $data = $request->validate([
             'name'          => 'required|string|max:100',
+            'center_id'    => 'required|integer|exists:centers,id',
             'start_date'    => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
@@ -215,7 +217,6 @@ class EvaluationController extends Controller
     {
         $data = $request->validate([
             'user_id'       => 'required|integer|exists:users,id',
-            'center_id'     => 'required|integer|exists:centers,id',
             'name'          => 'required|string|max:150',
             'date'          => 'required|date',
             'note'          => 'sometimes|nullable|string|max:200',

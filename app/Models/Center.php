@@ -22,6 +22,9 @@ class Center extends Model
         'note'
     ];
 
-
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class);
+    }
 
 }

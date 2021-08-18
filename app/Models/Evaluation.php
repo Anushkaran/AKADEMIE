@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static create(array $data)
@@ -16,7 +17,7 @@ class Evaluation extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name', 'start_date', 'end_date','partner_id'
+        'name', 'start_date', 'end_date','partner_id','center_id',
     ];
 
     /**
@@ -32,6 +33,14 @@ class Evaluation extends Model
         return $this->belongsToMany(Student::class)
             ->withTimestamps()
             ->withPivot('is_canceled');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function center(): BelongsTo
+    {
+        return $this->belongsTo(Center::class);
     }
 
     public function skills()

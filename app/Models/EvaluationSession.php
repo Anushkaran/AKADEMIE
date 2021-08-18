@@ -14,7 +14,7 @@ class EvaluationSession extends Model
      * @var string[]
      */
     protected $fillable = [
-        'evaluation_id', 'user_id', 'center_id', 'name', 'date', 'note',
+        'evaluation_id', 'user_id', 'name', 'date', 'note',
     ];
 
     /**
@@ -24,13 +24,7 @@ class EvaluationSession extends Model
         'date' => 'date'
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function center(): BelongsTo
-    {
-        return $this->belongsTo(Center::class);
-    }
+
 
     /**
      * @return BelongsTo

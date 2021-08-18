@@ -66,9 +66,12 @@
                                         <th>#</th>
                                         <th>{{__('labels.name')}}</th>
                                         <th>{{trans_choice('labels.partner',1)}}</th>
+                                        <th>{{trans_choice('labels.center',1)}}</th>
+
                                         <th>{{__('labels.start_date')}}</th>
                                         <th>{{__('labels.end_date')}}</th>
                                         <th>{{__('labels.created_at')}}</th>
+
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -87,6 +90,14 @@
                                                 </a>
                                             </strong>
                                         </td>
+                                            <td>
+                                                <strong>
+                                                    <a href="{{route('admin.centers.show',$e->center_id)}}" class="text-decoration-none">
+                                                        <i data-feather="arrow-up-right"></i>
+                                                        {{$e->center->name}}
+                                                    </a>
+                                                </strong>
+                                            </td>
                                             <td>
                                                 {{$e->start_date->format('d-m-Y')}}
                                             </td>
@@ -165,10 +176,18 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-
+                    <div class="form-group">
+                        <label class="form-label" for="center_id">{{trans_choice('labels.center',2)}}</label>
+                        <select name="center_id"
+                                id="center_id"
+                                class="form-control select2-center @error('center_id') is-invalid @enderror"></select>
+                        @error('center_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
-                        <select name="partner_id" id="partner_id" class="form-control select2 @error('partner_id') is-invalid @enderror">
+                        <select name="partner_id" id="partner_id" class="form-control select2-partner @error('partner_id') is-invalid @enderror">
                             {{--                            @foreach($partners as $p)--}}
                             {{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
                             {{--                            @endforeach--}}
@@ -217,7 +236,44 @@
             document.getElementById('create-btn').click();
         @endif
         $(document).ready(function() {
-            $('.select2').select2({
+            $('.select2-center').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.centers.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({centers}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(centers.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < centers.total
+                            }
+                        };
+                    }
+                }
+            });
+
+            $('.select2-partner').select2({
                 minimumInputLength:2,
                 cache:true,
                 ajax: {

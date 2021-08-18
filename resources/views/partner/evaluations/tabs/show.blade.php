@@ -34,7 +34,6 @@
                         <th>#</th>
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.date')}}</th>
-                        <th>{{trans_choice('labels.center',1)}}</th>
                         <th>{{trans_choice('labels.user',1)}}</th>
                         <th>Actions</th>
                     </tr>
@@ -45,13 +44,7 @@
                         <td>{{$key+1}}</td>
                         <td>{{$s->name}}</td>
                         <td><span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span></td>
-                        <td>
-                            <strong>{{$s->center->name}}</strong>
-                            <small>
-                                <a href="{{route('admin.centers.show',$s->center_id)}}" class="text-decoration-none">
-                                    <i data-feather="arrow-up-right"></i>
-                                </a>
-                            </small>
+
                         </td>
                         <td>
                             <strong>
@@ -109,15 +102,6 @@
                         @enderror
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="center_id">{{trans_choice('labels.center',2)}}</label>
-                        <select name="center_id"
-                                id="center_id"
-                                class="form-control select2-center @error('center_id') is-invalid @enderror"></select>
-                        @error('center_id')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
 
                     <div class="form-group">
                         <label class="form-label" for="center_id">{{trans_choice('labels.user',2)}}</label>
@@ -167,42 +151,6 @@
         document.getElementById('create-btn').click();
         @endif
         $(document).ready(function() {
-            $('.select2-center').select2({
-                minimumInputLength:2,
-                cache:true,
-                ajax: {
-                    delay: 250,
-                    url: '{{route('partner.centers.index')}}',
-                    dataType: 'json',
-                    data: function (params) {
-
-                        // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
-
-                    },
-                    processResults: function ({centers}, params) {
-                        params.page = params.page || 1;
-
-                        let fData = $.map(centers.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
-
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < centers.total
-                            }
-                        };
-                    }
-                }
-            });
             $('.select2-user').select2({
                 minimumInputLength:2,
                 cache:true,

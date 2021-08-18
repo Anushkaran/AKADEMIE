@@ -1,5 +1,10 @@
 @extends('partner.layouts.app')
+@push('css')
 
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
 @section('content')
 
     <div class="app-content content ">
@@ -52,8 +57,17 @@
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </div>
-
-
+                                    <div class="form-group">
+                                        <label class="form-label" for="center_id">{{trans_choice('labels.center',2)}}</label>
+                                        <select name="center_id"
+                                                id="center_id"
+                                                class="form-control select2-center @error('center_id') is-invalid @enderror">
+                                            <option value="{{$ev->center_id}}">{{$ev->center->name}}</option>
+                                        </select>
+                                        @error('center_id')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <label class="form-label" for="start_date">{{__('labels.start_date')}}</label>
                                         <input type="date" required name="start_date"
@@ -100,11 +114,51 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
         @if($errors->any())
         document.getElementById('create-btn').click();
         @endif
+        $(document).ready(function() {
+            $('.select2-center').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('partner.centers.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({centers}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(centers.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < centers.total
+                            }
+                        };
+                    }
+                }
+            });
+        });
+
     </script>
 
 @endpush

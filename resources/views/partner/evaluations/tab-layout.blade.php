@@ -73,6 +73,16 @@
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
+                                                        <i data-feather="map-pin" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.center',1)}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$ev->center->name}}<br>
+                                                        <small>({{$ev->center->address}})</small>
+                                                    </p>
+                                                </div>
+
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
                                                         <i data-feather="calendar" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.end_date')}}</span>
                                                     </div>

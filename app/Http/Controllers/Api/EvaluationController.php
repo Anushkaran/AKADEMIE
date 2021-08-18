@@ -23,7 +23,7 @@ class EvaluationController extends Controller
 
     public function index()
     {
-        return EvaluationResource::collection(Evaluation::whereHas('sessions',function ($s){
+        return EvaluationResource::collection(Evaluation::with('center')->whereHas('sessions',function ($s){
             $s->where('user_id',auth('api')->id());
         })->latest()->get());
     }

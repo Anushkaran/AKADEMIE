@@ -19,6 +19,7 @@ class EvaluationResource extends JsonResource
             'name'      => $this->name,
             'start_date'=> $this->start_date->format('d-m-Y'),
             'end_date'  => $this->end_date->format('d-m-Y'),
+            'center'    => new CenterResource($this->whenLoaded('center')),
             'partner'   => new PartnerResource($this->whenLoaded('partner')),
             'sessions'  => EvaluationSessionResource::collection($this->whenLoaded('sessions')),
             'students'  => StudentResource::collection($this->whenLoaded('students'))

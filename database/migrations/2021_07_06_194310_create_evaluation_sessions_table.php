@@ -19,10 +19,7 @@ class CreateEvaluationSessionsTable extends Migration
                 ->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')
                 ->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('center_id')
-                ->constrained()
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+
             $table->string('name');
             $table->date('date');
             $table->string('note')->nullable();

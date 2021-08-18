@@ -1,5 +1,10 @@
 @extends('partner.layouts.app')
+@push('css')
 
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
 @section('content')
 
     <div class="app-content content ">
@@ -61,6 +66,7 @@
                                     <tr>
 {{--                                        <th>#</th>--}}
                                         <th>{{__('labels.name')}}</th>
+                                        <th>{{trans_choice('labels.center',1)}}</th>
                                         <th>{{__('labels.start_date')}}</th>
                                         <th>{{__('labels.end_date')}}</th>
                                         <th>{{__('labels.nb_of',['item'=>trans_choice('labels.student',3)])}}</th>
@@ -76,7 +82,13 @@
 {{--                                                {{$key + 1}}--}}
 {{--                                            </td>--}}
                                             <td>{{$ev->name}}</td>
-                                            <td>{{$ev->start_date->format('d-m-Y')}}</td>
+                                            <td>
+                                                <strong>{{$ev->center->name}}</strong>
+                                                <small>
+                                                    <a href="{{route('admin.centers.show',$ev->center_id)}}" class="text-decoration-none">
+                                                        <i data-feather="arrow-up-right"></i>
+                                                    </a>
+                                                </small>                                            <td>{{$ev->start_date->format('d-m-Y')}}</td>
                                             <td>
                                                 {{$ev->end_date->format('d-m-Y')}}
                                             </td>
@@ -156,6 +168,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label" for="center_id">{{trans_choice('labels.center',2)}}</label>
+                        <select name="center_id"
+                                id="center_id"
+                                class="form-control select2-center @error('center_id') is-invalid @enderror"></select>
+                        @error('center_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label" for="start_date">{{__('labels.start_date')}}</label>
                         <input type="date" required name="start_date"
                                value="{{old('start_date')}}"
@@ -187,8 +209,85 @@
 @endsection
 
 @push('js')
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
+        $(document).ready(function() {
+            $('.select2-center').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('partner.centers.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({centers}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(centers.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < centers.total
+                            }
+                        };
+                    }
+                }
+            });
+            $('.select2-user').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('partner.users.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({users}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(users.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < users.total
+                            }
+                        };
+                    }
+                }
+            });
+        });
+
+
         @if($errors->any())
         document.getElementById('create-btn').click();
         @endif
