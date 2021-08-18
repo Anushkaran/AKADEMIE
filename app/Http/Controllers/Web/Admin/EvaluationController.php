@@ -74,7 +74,7 @@ class EvaluationController extends Controller
 
     public function skillsList($id)
     {
-        $ev = $this->ev->findOneById($id,['skills.tasks']);
+        $ev = $this->ev->findOneById($id,['skills.tasks.level']);
         $title = __('labels.list',['name' => trans_choice('labels.skill',3)]);
         return view('admin.evaluations.tabs.skills',compact('ev','title'));
     }

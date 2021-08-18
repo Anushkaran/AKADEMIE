@@ -72,6 +72,11 @@
                                         <div class="card">
                                             <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#task-{{$t->id}}" aria-expanded="false" aria-controls="task-{{$t->id}}">
                                                 <span class="lead collapse-title"> {{$t->name}} </span>
+                                                <div class="heading-elements">
+                                                    <span class="badge badge-info">
+                                                        {{$t->level->name}}
+                                                    </span>
+                                                </div>
                                             </div>
 
                                             <div id="task-{{$t->id}}" class="collapse" aria-labelledby="headingOne" data-parent="#skill-{{$s->id}}">

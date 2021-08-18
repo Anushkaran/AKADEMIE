@@ -99,7 +99,7 @@ class EvaluationController extends Controller
 
     public function skillsList($id)
     {
-        $ev = $this->ev->findOneById($id,['skills.tasks']);
+        $ev = $this->ev->findOneById($id,['skills.tasks.level']);
         if ($ev->partner_id !== auth('partner')->id())
         {
             abort(404);
