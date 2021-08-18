@@ -25,7 +25,9 @@ class LevelRepository extends BaseRepository implements LevelContract
             ->scopes($scopes)
             ->newQuery();
 
-        return $this->applyFilter($query,$per_page);
+        return $this->applyFilter($query,$per_page,[
+            \App\QueryFilter\Search::class
+        ]);
     }
 
     public function new(array $data)

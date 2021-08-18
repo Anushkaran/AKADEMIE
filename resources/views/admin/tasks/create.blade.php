@@ -61,11 +61,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="skill_id">{{trans_choice('labels.skill',1)}}</label>
                                             <select class="form-control select2-skill @error('skill_id') is-invalid @enderror" name="skill_id" id="skill_id">
-                                                @foreach($skills as $s)
-                                                    <option value="{{$s->id}}" {{$s->id === (int)old('skill_id') ? 'selected' : ''}}>
-                                                        {{$s->name}}
-                                                    </option>
-                                                @endforeach
+
                                             </select>
                                             @error('skill_id')
                                             <div class="invalid-feedback">{{$message}}</div>
@@ -114,7 +110,42 @@
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.select2-skill').select2();
+            $('.select2-skill').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.skills.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({skills}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(skills.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < skills.total
+                            }
+                        };
+                    }
+                }
+            });
 
             $('.select2-level').select2({
                 minimumInputLength:2,
