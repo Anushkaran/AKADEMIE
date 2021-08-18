@@ -68,13 +68,23 @@
                                                     <p class="card-text mb-0">{{$t->name}}</p>
                                                 </div>
 
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="check" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.level',1)}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$t->level->name}}</p>
+                                                </div>
+
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
-                                                        <i data-feather="book-open" class="mr-1"></i>
+                                                        <i data-feather="check-circle" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.skill',1)}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$t->skill->name}}</p>
                                                 </div>
+
+
 
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">

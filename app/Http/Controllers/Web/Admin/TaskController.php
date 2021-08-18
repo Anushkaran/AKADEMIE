@@ -23,18 +23,17 @@ class TaskController extends Controller
      */
     public function index() :Renderable
     {
-        $tasks = $this->task->findByFilter();
+        $tasks = $this->task->findByFilter(10,['skill','level']);
         return view('admin.tasks.index',compact('tasks'));
     }
 
     /**
-     * @param SkillContract $skill
+     *
      * @return Renderable
      */
-    public function create(SkillContract $skill): Renderable
+    public function create(): Renderable
     {
-        $skills = $skill->findByFilter(-1,[],['id','name']);
-        return view('admin.tasks.create',compact('skills'));
+        return view('admin.tasks.create',compact());
     }
 
     /**
@@ -74,8 +73,7 @@ class TaskController extends Controller
     public function edit($id,SkillContract $skill): Renderable
     {
         $t = $this->task->findOneById($id);
-        $skills = $skill->findByFilter(-1,[],['id','name']);
-        return view('admin.tasks.edit',compact('t','skills'));
+        return view('admin.tasks.edit',compact('t'));
     }
 
     /**

@@ -59,6 +59,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{__('labels.name')}}</th>
+                                        <th>{{trans_choice('labels.level',1)}}</th>
                                         <th>{{trans_choice('labels.skill',1)}}</th>
                                         <th>{{__('labels.description')}}</th>
                                         <th>{{__('labels.created_at')}}</th>
@@ -72,6 +73,7 @@
                                             {{$key + 1}}
                                         </td>
                                         <td>{{$t->name}}</td>
+                                        <td>{{$t->level->name}}</td>
                                         <td>{{$t->skill->name}}</td>
                                         <td style="width: 30%">
                                             {{$t->description}}
@@ -96,11 +98,11 @@
                                                         <i data-feather="more-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('admin.skills.edit',$t->id)}}">
+                                                        <a class="dropdown-item" href="{{route('admin.tasks.edit',$t->id)}}">
                                                             <i data-feather="edit-2" class="mr-50"></i>
                                                             <span>{{__('actions.edit')}}</span>
                                                         </a>
-                                                        <a class="dropdown-item" href="{{route('admin.skills.show',$t->id)}}">
+                                                        <a class="dropdown-item" href="{{route('admin.tasks.show',$t->id)}}">
                                                             <i data-feather="eye" class="mr-50"></i>
                                                             <span>{{__('actions.details')}}</span>
                                                         </a>

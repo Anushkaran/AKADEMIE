@@ -31,7 +31,9 @@ class TaskRepository extends BaseRepository implements \App\Contracts\TaskContra
             ->scopes($scopes)
             ->select($columns)
             ->newQuery();
-        return $this->applyFilter($query, $per_page);
+        return $this->applyFilter($query, $per_page,[
+        \App\QueryFilter\Search::class
+        ]);
     }
 
     /**

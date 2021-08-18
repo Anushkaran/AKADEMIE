@@ -3,6 +3,7 @@
 @push('css')
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/pages/app-user.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
 
 @endpush
 
@@ -120,6 +121,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>{{__('labels.name')}}</th>
+                                        <th>{{trans_choice('labels.level',1)}}</th>
                                         <th>{{__('labels.description')}}</th>
                                         <th>{{__('labels.created_at')}}</th>
                                         <th>Actions</th>
@@ -132,6 +134,7 @@
                                                 {{$key + 1}}
                                             </td>
                                             <td>{{$t->name}}</td>
+                                            <td>{{$t->level->name}}</td>
                                             <td style="width: 30%">
                                                 {{$t->description}}
                                             </td>
@@ -155,11 +158,11 @@
                                                             <i data-feather="more-vertical"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="{{route('admin.skills.edit',$t->id)}}">
+                                                            <a class="dropdown-item" href="{{route('admin.tasks.edit',$t->id)}}">
                                                                 <i data-feather="edit-2" class="mr-50"></i>
                                                                 <span>{{__('actions.edit')}}</span>
                                                             </a>
-                                                            <a class="dropdown-item" href="{{route('admin.skills.show',$t->id)}}">
+                                                            <a class="dropdown-item" href="{{route('admin.tasks.show',$t->id)}}">
                                                                 <i data-feather="eye" class="mr-50"></i>
                                                                 <span>{{__('actions.details')}}</span>
                                                             </a>
@@ -207,7 +210,14 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
-
+                    <div class="form-group">
+                        <label class="form-label" for="level_id">{{trans_choice('labels.level',1)}}</label>
+                        <select class="form-control select2-level @error('level_id') is-invalid @enderror" name="level_id" id="level_id">
+                        </select>
+                        @error('level_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label class="form-label" for="description">{{__('labels.description')}} ({{__('labels.optional')}})</label>
                         <textarea   name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="..." cols="30" rows="3">{{old('description')}}</textarea>
@@ -229,10 +239,46 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
 
+        $('.select2-level').select2({
+            minimumInputLength:2,
+            cache:true,
+            ajax: {
+                delay: 250,
+                url: '{{route('admin.levels.index')}}',
+                dataType: 'json',
+                data: function (params) {
 
+                    // Query parameters will be ?search=[term]&page=[page]
+                    if (params.term && params.term.length > 3)
+                    {
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    }
+
+                },
+                processResults: function ({levels}, params) {
+                    params.page = params.page || 1;
+
+                    let fData = $.map(levels.data, function (obj) {
+                        obj.text = obj.name; // replace name with the property used for the text
+                        return obj;
+                    });
+
+                    return {
+                        results: fData,
+                        pagination: {
+                            more: (params.page * 10) < levels.total
+                        }
+                    };
+                }
+            }
+        });
         const deleteForm = id => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',

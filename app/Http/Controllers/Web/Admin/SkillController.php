@@ -60,7 +60,7 @@ class SkillController extends Controller
     public function show($id): Renderable
     {
         $s = $this->skill->findOneById($id,['tasks'=> function($q){
-            $q->latest();
+            $q->latest()->with('level');
         }]);
 
         return view('admin.skills.show',compact('s'));
@@ -109,6 +109,7 @@ class SkillController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:100',
+            'level_id' => 'required|integer|exists:levels,id',
             'description' => 'sometimes|nullable|string',
         ]);
 

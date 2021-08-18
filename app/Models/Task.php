@@ -27,6 +27,14 @@ class Task extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function level(): BelongsTo
+    {
+        return $this->belongsTo(Level::class);
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function students(): BelongsToMany

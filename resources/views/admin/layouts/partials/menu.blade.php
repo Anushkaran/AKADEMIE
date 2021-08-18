@@ -81,6 +81,13 @@
                 </a>
             </li>
 
+            <li class=" {{request()->routeIs('admin.levels*') ? 'active' : ''}} nav-item">
+                <a class="d-flex align-items-center" href="{{route('admin.levels.index')}}">
+                    <i data-feather="check"></i>
+                    <span class="menu-title text-truncate" data-i18n="Task">{{trans_choice('labels.level',2)}}</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </div>
