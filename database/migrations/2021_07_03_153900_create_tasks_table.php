@@ -19,6 +19,10 @@ class CreateTasksTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreignId('level_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
@@ -36,6 +40,7 @@ class CreateTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropForeign('tasks_skill_id_foreign');
+            $table->dropForeign('tasks_level_id_foreign');
         });
         Schema::dropIfExists('tasks');
     }

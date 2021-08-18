@@ -46,6 +46,7 @@ class TaskController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:200|unique:tasks,name',
             'skill_id' => 'required|integer|exists:skills,id',
+            'level_id' => 'required|integer|exists:levels,id',
             'description' => 'sometimes|nullable|string',
         ]);
 
@@ -87,6 +88,7 @@ class TaskController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:200|unique:tasks,name,'.$id,
             'skill_id' => 'required|integer|exists:skills,id',
+            'level_id' => 'required|integer|exists:levels,id',
             'description' => 'sometimes|nullable|string',
         ]);
 

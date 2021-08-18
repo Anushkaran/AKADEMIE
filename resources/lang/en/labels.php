@@ -5,6 +5,7 @@ return [
    'admin' => '{1}Admin|[2,*]admins',
    'partner' => '{1}Partner|[2,*]partners',
    'center' => '{1}Center|[2,*]center',
+   'level' => '{1}Level|[2,*]level',
    'student' => '{1}Student|[2,*]students',
    'accounts' => '{1}Account|[2,*]accounts',
    'evaluation' => '{1}Evaluation|[2,*]evaluation',

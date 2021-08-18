@@ -51,4 +51,5 @@ Route::middleware('auth:admin')->group(function (){
     Route::post('skills/{id}/tasks',[App\Http\Controllers\Web\Admin\SkillController::class,'taskStore'])->name('skills.tasks.store');
     Route::resource('skills',App\Http\Controllers\Web\Admin\SkillController::class);
     Route::resource('tasks',App\Http\Controllers\Web\Admin\TaskController::class);
+    Route::resource('levels',App\Http\Controllers\Web\Admin\LevelController::class)->except(['show','create']);
 });
