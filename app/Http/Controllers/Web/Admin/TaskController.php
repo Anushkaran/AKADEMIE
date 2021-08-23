@@ -33,7 +33,7 @@ class TaskController extends Controller
      */
     public function create(): Renderable
     {
-        return view('admin.tasks.create',compact());
+        return view('admin.tasks.create');
     }
 
     /**
