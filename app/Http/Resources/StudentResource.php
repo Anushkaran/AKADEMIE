@@ -22,6 +22,7 @@ class StudentResource extends JsonResource
             'email'     => $this->email,
             'phone'     => $this->phone,
             'address'   => $this->address,
+            'is_evaluated'   => $this->whenLoaded('sessionStudents',$this->sessionStudents->count() > 0),
             'is_canceled' => $this->whenPivotLoaded('evaluation_student',function (){
                 return (bool)$this->pivot->is_canceled;
             }),

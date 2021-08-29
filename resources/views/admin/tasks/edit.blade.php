@@ -114,7 +114,6 @@
     <script>
         $(document).ready(function() {
             $('.select2-skill').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,

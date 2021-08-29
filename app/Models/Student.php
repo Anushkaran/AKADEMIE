@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Student extends Model
 {
@@ -45,7 +46,7 @@ class Student extends Model
         return $this->belongsToMany(Evaluation::class)->withTimestamps()->withPivot('is_canceled');
     }
 
-    public function tasks()
+    public function tasks(): BelongsToMany
     {
         return $this->belongsToMany(Task::class,'session_student_task')
             ->withTimestamps()
@@ -53,13 +54,11 @@ class Student extends Model
     }
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function sessionStudents(): BelongsToMany
+    public function sessionStudents(): HasMany
     {
-        return $this->belongsToMany(SessionStudent::class,'session_student_task')
-            ->withTimestamps()
-            ->withPivot(['task_id','user_id']);
+        return $this->hasMany(SessionStudent::class);
     }
 
 }

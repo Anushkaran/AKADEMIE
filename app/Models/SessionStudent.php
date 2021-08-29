@@ -20,7 +20,7 @@ class SessionStudent extends Model
 
     public function session(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(EvaluationSession::class);
+        return $this->belongsTo(EvaluationSession::class,'evaluation_session_id');
     }
 
     public function student(): \Illuminate\Database\Eloquent\Relations\BelongsTo

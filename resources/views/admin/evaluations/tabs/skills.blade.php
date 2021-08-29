@@ -29,7 +29,9 @@
                                             <label for="skills">{{trans_choice('labels.skill',3)}}</label>
                                             <select
                                                 name="skills[]" multiple
-                                                id="skills" class="select2 form-control"></select>
+                                                id="skills" class="select2 form-control">
+
+                                            </select>
                                         </div>
                                     </form>
 
@@ -123,7 +125,6 @@
                 }
             })
             $('.select2').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,

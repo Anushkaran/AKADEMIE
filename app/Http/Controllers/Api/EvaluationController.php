@@ -39,11 +39,17 @@ class EvaluationController extends Controller
         );
     }
 
-    public function students($id)
+    public function students($id,$session)
     {
-        $evaluation = Evaluation::with('students')
-            ->whereHas('sessions',function ($s){
-                $s->where('user_id',auth('api')->id());
+        $evaluation = Evaluation::with([
+            'students.sessionStudents' => function($sst) use($id){
+                $sst->whereHas('session',function ($s)use($id){
+                    $s->where('evaluation_sessions.evaluation_id',$id)->where('user_id',auth('api')->id());
+                });
+            }
+        ])
+            ->whereHas('sessions',function ($s) use ($session){
+                $s->where('user_id',auth('api')->id())->where('id',$session);
             })
             ->findOrFail($id);
 
