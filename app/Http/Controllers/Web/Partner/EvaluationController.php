@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Partner;
 
 use App\Contracts\EvaluationContract;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -227,5 +228,21 @@ class EvaluationController extends Controller
             'message' => 'student status was updated successfully',
             'is_canceled' => false
         ],201);
+    }
+
+    public function studentDetails($id,$student)
+    {
+
+        $student  = Student::whereHas('evaluations',function ($ev) use ($id){
+            $ev->where('evaluations.id',$id)->where('partner_id',auth('partner')->id());
+        })->with([
+            'sessionStudents' => function($es) use($id){
+                $es->with('tasks','session.user')->whereHas('session',function ($s) use($id){
+                    $s->where('evaluation_sessions.evaluation_id',$id);
+                });
+            }
+        ])->where('partner_id',auth('partner')->id())->findOrFail($student);
+
+        return view('partner.evaluations.student',compact('student','id'));
     }
 }
