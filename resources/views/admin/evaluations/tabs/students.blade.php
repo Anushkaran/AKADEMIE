@@ -109,6 +109,10 @@
                                     onclick="removeStudent({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
+
+                            <a class="btn btn-sm btn-outline-info" href="{{route('admin.evaluations.students.show',['id' => $ev->id,'student' => $s->id])}}">
+                                <i data-feather="eye" class="mr-50"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

@@ -26,6 +26,7 @@ Route::middleware('auth:partner')->group(function (){
     Route::post('evaluations/{id}',[App\Http\Controllers\Web\Partner\EvaluationController::class,'addSession'])->name('evaluations.sessions.store');
     Route::post('evaluations/{id}/students',[App\Http\Controllers\Web\Partner\EvaluationController::class,'attachStudents'])->name('evaluations.students.attach');
     Route::get('evaluations/{id}/students',[App\Http\Controllers\Web\Partner\EvaluationController::class,'studentsList'])->name('evaluations.students.index');
+    Route::get('evaluations/{id}/students/{student}',[App\Http\Controllers\Web\Partner\EvaluationController::class,'studentDetails'])->name('evaluations.students.show');
     Route::delete('evaluations/{id}/students/{student}',[App\Http\Controllers\Web\Partner\EvaluationController::class,'removeStudents'])->name('evaluations.students.remove');
     Route::put('evaluations/{id}/students/{student}/enable',[App\Http\Controllers\Web\Partner\EvaluationController::class,'disableStudent'])->name('evaluations.students.disable');
     Route::put('evaluations/{id}/students/{student}/disable',[App\Http\Controllers\Web\Partner\EvaluationController::class,'enableStudent'])->name('evaluations.students.enable');

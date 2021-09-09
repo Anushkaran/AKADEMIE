@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Contracts\EvaluationContract;
+use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -232,5 +234,22 @@ class EvaluationController extends Controller
         $this->ev->deleteSession($id,$session);
         session()->flash('success',__('messages.delete'));
         return redirect()->back();
+    }
+
+    public function studentDetails($id,$student)
+    {
+
+        $student  = Student::whereHas('evaluations',function ($ev) use ($id){
+            $ev->where('evaluations.id',$id);
+        })->with([
+            'sessionStudents' => function($es) use($id){
+                $es->with('tasks')->whereHas('session',function ($s) use($id){
+                    $s->where('evaluation_sessions.evaluation_id',$id);
+                });
+            }
+        ])->findOrFail($student);
+
+        dd($student->toArray());
+        return view('admin.evaluations.student',compact('student'));
     }
 }
