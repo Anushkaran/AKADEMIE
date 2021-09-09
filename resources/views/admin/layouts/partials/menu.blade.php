@@ -18,6 +18,11 @@
                     <span class="menu-title text-truncate" data-i18n="Home">{{__('labels.dashboard')}}</span>
                 </a>
             </li>
+
+{{--            USERS--}}
+
+
+
             <li class="nav-item {{request()->routeIs(['admin.user*','admin.admins*']) ? 'open' : ''}}">
                 <a class="d-flex align-items-center" href="#">
                     <i data-feather="users"></i>
@@ -48,45 +53,92 @@
                     </li>
                 </ul>
             </li>
-            <li class=" {{request()->routeIs('admin.centers*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.centers.index')}}">
-                    <i data-feather="home"></i>
-                    <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.center',2)}}</span>
+
+
+
+
+
+
+
+{{--            Evaluations--}}
+
+            <li>
+                <a class="d-flex align-items-center" href="#">
+                    <i data-feather="file"></i>
+                    <span class="menu-title text-truncate" data-i18n="Evaluation">
+                        {{trans_choice('labels.evaluation',2)}}
+                    </span>
                 </a>
-            </li>
-            <li class=" {{request()->routeIs('admin.evaluations*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.evaluations.index')}}">
-                    <i data-feather="check"></i>
-                    <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.evaluation',2)}}</span>
-                </a>
-            </li>
-            <li class=" {{request()->routeIs('admin.students*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.students.index')}}">
-                    <i data-feather="user-check"></i>
-                    <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.student',2)}}</span>
-                </a>
+                <ul class="menu-content">
+                    <li class=" {{request()->routeIs('admin.centers*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.centers.index')}}">
+                            <i data-feather="home"></i>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.center',2)}}</span>
+                        </a>
+                    </li>
+                    <li class=" {{request()->routeIs('admin.evaluations*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.evaluations.index')}}">
+                            <i data-feather="check"></i>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.evaluation',2)}}</span>
+                        </a>
+                    </li>
+                    <li class=" {{request()->routeIs('admin.students*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.students.index')}}">
+                            <i data-feather="user-check"></i>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.student',2)}}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
-            <li class=" {{request()->routeIs('admin.skills*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.skills.index')}}">
-                    <i data-feather="check-circle"></i>
-                    <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.skill',2)}}</span>
+
+{{--            SKILLS AND LEVELS --}}
+
+
+            <li>
+                <a class="d-flex align-items-center" href="#">
+                    <i data-feather="file-text"></i>
+                    <span class="menu-title text-truncate" data-i18n="Evaluation">
+                        {{trans_choice('labels.skill',2)}}
+                    </span>
                 </a>
+
+
+                <ul class="menu-content">
+
+                    <li class=" {{request()->routeIs('admin.skills*') ? 'active' : ''}} nav-item">
+
+                        <a class="d-flex align-items-center" href="{{route('admin.skills.index')}}">
+                            <i data-feather="check-circle"></i>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.skill',2)}}</span>
+                        </a>
+                    </li>
+
+                    <li class=" {{request()->routeIs('admin.tasks*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.tasks.index')}}">
+                            <i data-feather="edit"></i>
+                            <span class="menu-title text-truncate" data-i18n="Task">{{trans_choice('labels.task',2)}}</span>
+                        </a>
+                    </li>
+
+                    <li class=" {{request()->routeIs('admin.levels*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.levels.index')}}">
+                            <i data-feather="check"></i>
+                            <span class="menu-title text-truncate" data-i18n="Task">{{trans_choice('labels.level',2)}}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
-            <li class=" {{request()->routeIs('admin.tasks*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.tasks.index')}}">
-                    <i data-feather="edit"></i>
-                    <span class="menu-title text-truncate" data-i18n="Task">{{trans_choice('labels.task',2)}}</span>
-                </a>
-            </li>
 
-            <li class=" {{request()->routeIs('admin.levels*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.levels.index')}}">
-                    <i data-feather="check"></i>
-                    <span class="menu-title text-truncate" data-i18n="Task">{{trans_choice('labels.level',2)}}</span>
-                </a>
-            </li>
+
+
+
+
+
+
+
+
 
         </ul>
     </div>
