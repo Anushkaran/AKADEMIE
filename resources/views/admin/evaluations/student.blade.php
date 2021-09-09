@@ -120,11 +120,14 @@
                                     <h4 class="card-title">Liste des sessions</h4>
                                 </div>
                                 <div class="card-body">
-
+                                    @foreach($student->session_students as $session)
                                     <div class="collapse-margin" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                <span class="lead collapse-title"> Session 1 </span>
+                                                <span class="lead collapse-title"> session : {{$session->session->name}} </span>
+                                                <span class="lead collapse-title"> date {{$session->session->date->format('d/m/Y')}} </span>
+                                                <span class="lead collapse-title"> user : {{$session->session->user->name}} </span>
+                                                <span class="lead collapse-title"> note : {{$session->note}} </span>
                                             </div>
 
                                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -145,43 +148,18 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
+                                                                        @foreach($session->tasks as $t)
                                                                         <tr>
                                                                             <td>
-                                                                                <span class="font-weight-bold">task 1</span>
+                                                                                <span class="font-weight-bold">{{$t->name}}</span>
                                                                             </td>
-                                                                            <td>culinaire</td>
+                                                                            <td>{{$t->description}}</td>
 
                                                                             <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
 
                                                                         </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <span class="font-weight-bold">Task 2</span>
-                                                                            </td>
-                                                                            <td>agée</td>
+                                                                        @endforeach
 
-                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
-
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <span class="font-weight-bold">Task 3</span>
-                                                                            </td>
-                                                                            <td>netoyage</td>
-
-                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
-
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <span class="font-weight-bold">Task 4</span>
-                                                                            </td>
-                                                                            <td>malgitch wsh nekteb</td>
-
-                                                                            </td>
-                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
-
-                                                                        </tr>
 
                                                                         </tbody>
                                                                     </table>
@@ -193,6 +171,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
