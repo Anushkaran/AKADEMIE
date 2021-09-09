@@ -20,7 +20,7 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluation.student.index',$id)}}">{{trans_choice('labels.evaluation',1)}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluation.students.index',$id)}}">{{trans_choice('labels.evaluation',1)}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.details')}}
                                     </li>
