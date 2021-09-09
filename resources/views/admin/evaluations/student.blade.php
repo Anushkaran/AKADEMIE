@@ -20,7 +20,7 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.students.index')}}">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluation.student.index',$id)}}">{{trans_choice('labels.evaluation',1)}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.details')}}
                                     </li>
@@ -51,8 +51,6 @@
                                                                     <i data-feather='arrow-left'></i>
                                                                 </a>
                                                             @endif
-                                                            <a href="{{route('admin.students.edit',$student->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
-                                                            <button onclick="deleteForm({{$student->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,13 +100,7 @@
                                                     </p>
                                                 </div>
 
-                                                <div class="d-flex flex-wrap">
-                                                    <div class="user-info-title">
-                                                        <i data-feather="calendar" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.created_at')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">{{$student->created_at->format('d-m-Y')}}</p>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

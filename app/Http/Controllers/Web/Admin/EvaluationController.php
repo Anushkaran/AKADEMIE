@@ -250,6 +250,6 @@ class EvaluationController extends Controller
         ])->findOrFail($student);
 
         dd($student->toArray());
-        return view('admin.evaluations.student',compact('student'));
+        return view('admin.evaluations.student',compact('student','id'));
     }
 }
