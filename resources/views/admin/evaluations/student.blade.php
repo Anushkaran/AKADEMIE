@@ -120,7 +120,7 @@
                                     <h4 class="card-title">Liste des sessions</h4>
                                 </div>
                                 <div class="card-body">
-                                    @foreach($student->session_students as $session)
+                                    @foreach($student->sessionStudents as $session)
                                     <div class="collapse-margin" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
