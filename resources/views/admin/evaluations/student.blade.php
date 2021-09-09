@@ -120,10 +120,101 @@
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
+                <section id="accordion-with-margin">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card collapse-icon">
+                                <div class="card-header">
+                                    <h4 class="card-title">Liste des sessions</h4>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="collapse-margin" id="accordionExample">
+                                        <div class="card">
+                                            <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                <span class="lead collapse-title"> Session 1 </span>
+                                            </div>
+
+                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <div class="row" id="table-hover-animation">
+                                                        <div class="col-12">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h4 class="card-title">details de la session</h4>
+                                                                </div>
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-hover-animation">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th>task</th>
+                                                                            <th>Detail</th>
+                                                                            <th>Status</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <span class="font-weight-bold">task 1</span>
+                                                                            </td>
+                                                                            <td>culinaire</td>
+
+                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <span class="font-weight-bold">Task 2</span>
+                                                                            </td>
+                                                                            <td>agée</td>
+
+                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <span class="font-weight-bold">Task 3</span>
+                                                                            </td>
+                                                                            <td>netoyage</td>
+
+                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <span class="font-weight-bold">Task 4</span>
+                                                                            </td>
+                                                                            <td>malgitch wsh nekteb</td>
+
+                                                                            </td>
+                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
+
+                                                                        </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
             </div>
 
         </div>
     </div>
+
 
 
 @endsection
