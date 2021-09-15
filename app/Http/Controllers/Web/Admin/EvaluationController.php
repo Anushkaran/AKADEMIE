@@ -251,7 +251,7 @@ class EvaluationController extends Controller
         ])->findOrFail($student);
 
         $skills = Skill::with('tasks')->get();
-        $tasks_ids = $skills->pluck('takes');
+        $tasks_ids = $skills->pluck('tasks.id');
         dd($student->toArray(),$skills->toArray(),$tasks_ids->toArray());
         return view('admin.evaluations.student',compact('student','id','skills','tasks_ids'));
     }
