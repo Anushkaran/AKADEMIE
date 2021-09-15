@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Contracts\EvaluationContract;
 use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use App\Models\Student;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -249,6 +250,9 @@ class EvaluationController extends Controller
             }
         ])->findOrFail($student);
 
-        return view('admin.evaluations.student',compact('student','id'));
+        $skills = Skill::with('tasks')->get();
+        $tasks_ids = $skills->pluck('takes.id');
+        dd($student->toArray(),$skills->toArray(),$tasks_ids->toArray());
+        return view('admin.evaluations.student',compact('student','id','skills','tasks_ids'));
     }
 }
