@@ -27,6 +27,6 @@ class Skill extends Model
 
     public function evaluations()
     {
-        $this->belongsToMany(Evaluation::class);
+        return $this->belongsToMany(Evaluation::class);
     }
 }

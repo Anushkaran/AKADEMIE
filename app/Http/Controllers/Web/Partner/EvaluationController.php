@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Partner;
 use App\Contracts\EvaluationContract;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
+use App\Models\Task;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -243,6 +244,12 @@ class EvaluationController extends Controller
             }
         ])->where('partner_id',auth('partner')->id())->findOrFail($student);
 
-        return view('partner.evaluations.student',compact('student','id'));
+
+        $tasks = Task::whereHas('skill',function ($s) use ($id){
+            $s->whereHas('evaluations',function ($e) use ($id){
+                $e->where('evaluations.id',$id);
+            });
+        })->get();
+        return view('partner.evaluations.student',compact('student','id','tasks'));
     }
 }
