@@ -42,7 +42,7 @@
                                        href="{{route('partner.students.create')}}"
                                     >
                                         <i data-feather='plus'></i>
-                                        {{__('actions.add-new',['name' => trans_choice('labels.student',1)])}}
+                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.student',1)])}}
                                     </a>
 
                                 </h4>

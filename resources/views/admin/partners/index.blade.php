@@ -41,7 +41,7 @@
                                     <a href="{{route('admin.partners.create')}}" class="dt-button create-new btn btn-primary" tabindex="0"
                                              id="create-btn">
                                         <i data-feather='plus'></i>
-                                        {{__('actions.add-new',['name' => trans_choice('labels.partner',1)])}}
+                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.partner',1)])}}
                                     </a>
 
                                 </h4>
