@@ -253,7 +253,7 @@ class EvaluationController extends Controller
 
         $tasks = Task::whereHas('skill',function ($s) use ($id){
             $s->whereHas('evaluations',function ($e) use ($id){
-                $e->where('id',$id);
+                $e->where('evaluations.id',$id);
             });
         })->get();
 
