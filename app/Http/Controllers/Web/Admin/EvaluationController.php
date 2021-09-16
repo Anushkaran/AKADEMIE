@@ -255,7 +255,7 @@ class EvaluationController extends Controller
             $s->whereHas('evaluations',function ($e) use ($id){
                 $e->where('id',$id);
             });
-        });
+        })->get();
 
         return view('admin.evaluations.student',compact('student','id','tasks'));
     }
