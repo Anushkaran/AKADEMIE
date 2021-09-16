@@ -47,9 +47,6 @@
                                         </div>
                                         <div class="text-center">
                                             <h1 class="mb-1 text-white">Beinvenue Au Panneau d'administration Akademie,</h1>
-                                            <p class="card-text m-auto w-75">
-                                                 <strong>57.6%</strong> Des session ont été achevé avec success.
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -65,8 +62,8 @@
                                                 <i data-feather="users" class="font-medium-5"></i>
                                             </div>
                                         </div>
-                                        <h2 class="font-weight-bolder mt-1">30</h2>
-                                        <p class="card-text">Nouveaux Etudiants</p>
+                                        <h2 class="font-weight-bolder mt-1">{{$students_count}}</h2>
+                                        <p class="card-text">Etudiants</p>
                                     </div>
                                     <div id="gained-chart"></div>
                                 </div>
@@ -82,8 +79,8 @@
                                                 <i data-feather="package" class="font-medium-5"></i>
                                             </div>
                                         </div>
-                                        <h2 class="font-weight-bolder mt-1">52</h2>
-                                        <p class="card-text">Nouvelles session</p>
+                                        <h2 class="font-weight-bolder mt-1">{{$sessions_count}}</h2>
+                                        <p class="card-text">sessions</p>
                                     </div>
                                     <div id="order-chart"></div>
                                 </div>
