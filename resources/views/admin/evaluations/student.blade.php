@@ -148,14 +148,21 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        @foreach($session->tasks as $t)
+                                                                        @foreach($tasks as $t)
                                                                         <tr>
                                                                             <td>
                                                                                 <span class="font-weight-bold">{{$t->name}}</span>
                                                                             </td>
                                                                             <td>{{$t->description}}</td>
 
-                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
+                                                                            <td>
+                                                                                @if($session->tasks->contains($t->id))
+                                                                                    <span class="badge badge-pill badge-light-success mr-1">complete</span>
+                                                                                @else
+                                                                                    <span class="badge badge-pill badge-light-danger mr-1">complete</span>
+
+                                                                                @endif
+                                                                            </td>
 
                                                                         </tr>
                                                                         @endforeach
