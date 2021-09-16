@@ -154,7 +154,7 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        @foreach($task as $t)
+                                                                        @foreach($tasks as $t)
                                                                         <tr>
                                                                             <td>
                                                                                 <span class="font-weight-bold">{{$t->name}}</span>
