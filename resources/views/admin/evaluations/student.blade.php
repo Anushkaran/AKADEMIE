@@ -124,10 +124,15 @@
                                     <div class="collapse-margin" id="accordionExample">
                                         <div class="card">
                                             <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                <span class="lead collapse-title"> session : {{$session->session->name}} </span>
-                                                <span class="lead collapse-title"> date {{$session->session->date->format('d/m/Y')}} </span>
-                                                <span class="lead collapse-title"> user : {{$session->session->user->name}} </span>
-                                                <span class="lead collapse-title"> note : {{$session->note}} </span>
+
+                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> session : {{$session->session->name}} </span>
+                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> date {{$session->session->date->format('d/m/Y')}} </span>
+
+                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateur : {{$session->session->user->name}} </span>
+                                            </div>
+                                            <div class="card-header">
+                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> note : {{$session->note}} </span>
+
                                             </div>
 
                                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
@@ -136,15 +141,16 @@
                                                         <div class="col-12">
                                                             <div class="card">
                                                                 <div class="card-header">
-                                                                    <h4 class="card-title">details de la session</h4>
+                                                                    <h4 class="card-title">{{trans_choice('labels.detail',1)}} de la session</h4>
+
                                                                 </div>
                                                                 <div class="table-responsive">
                                                                     <table class="table table-hover-animation">
                                                                         <thead>
                                                                         <tr>
-                                                                            <th>task</th>
-                                                                            <th>Detail</th>
-                                                                            <th>Status</th>
+                                                                            <th>{{trans_choice('labels.task',1)}}</th>
+                                                                            <th>{{trans_choice('labels.detail',1)}}</th>
+                                                                            <th>{{trans_choice('labels.status',1)}}</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -155,7 +161,7 @@
                                                                             </td>
                                                                             <td>{{$t->description}}</td>
 
-                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Completed</span></td>
+                                                                            <td><span class="badge badge-pill badge-light-success mr-1">Complété</span></td>
 
                                                                         </tr>
                                                                         @endforeach
