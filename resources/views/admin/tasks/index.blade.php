@@ -43,7 +43,7 @@
                                             href="{{route('admin.tasks.create')}}"  id="create-btn"
                                             >
                                         <i data-feather='plus'></i>
-                                        {{__('actions.add-new',['name' => trans_choice('labels.task',1)])}}
+                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.task',1)])}}
                                     </a>                                </h4>
                             </div>
                             <div class="card-body">

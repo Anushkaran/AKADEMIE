@@ -43,7 +43,7 @@
                                             type="button" data-toggle="modal" id="create-btn"
                                             data-target="#modals-slide-in">
                                         <i data-feather='plus'></i>
-                                        {{__('actions.add-new',['name' => trans_choice('labels.level',1)])}}
+                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.level',1)])}}
                                     </button>
 
                                 </h4>

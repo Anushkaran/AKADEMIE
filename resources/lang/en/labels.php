@@ -12,7 +12,9 @@ return [
    'evaluation-session' => '{1}Evaluation-session|[2,*]Evaluation-sessions',
    'skill' => '{1}Skill|[2,*]skills',
    'task' => '{1}Task|[2,*]tasks',
-   'list' => 'List of :name',
+    'status' => '{1}status|[2,*]status',
+    'detail' => '{1}detail|[2,*]detail',
+    'list' => 'List of :name',
    'email' => 'Email',
    'password' => 'Password',
    'new_password' => 'New Password',
@@ -50,5 +52,5 @@ return [
 
     'date' => 'Date',
     'nb_of' => 'Number of :item',
-    'status' => 'Status',
+
 ];
