@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Contracts\EvaluationContract;
 use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
+use App\Models\Evaluation;
+use App\Models\Skill;
 use App\Models\Student;
+use App\Models\Task;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -238,7 +241,6 @@ class EvaluationController extends Controller
 
     public function studentDetails($id,$student)
     {
-
         $student  = Student::whereHas('evaluations',function ($ev) use ($id){
             $ev->where('evaluations.id',$id);
         })->with([
@@ -249,6 +251,12 @@ class EvaluationController extends Controller
             }
         ])->findOrFail($student);
 
-        return view('admin.evaluations.student',compact('student','id'));
+        $tasks = Task::whereHas('skill',function ($s) use ($id){
+            $s->whereHas('evaluation',function ($e) use ($id){
+                $e->where('id',$id);
+            });
+        });
+
+        return view('admin.evaluations.student',compact('student','id','tasks'));
     }
 }
