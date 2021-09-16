@@ -148,7 +148,7 @@
                                                                                 @if($session->tasks->contains($t->id))
                                                                                     <span class="badge badge-pill badge-light-success mr-1">Completed</span>
                                                                                 @else
-                                                                                    <span class="badge badge-pill badge-light-success mr-1">Completed</span>
+                                                                                    <span class="badge badge-pill badge-light-danger mr-1">Completed</span>
 
                                                                                 @endif
                                                                                 </td>
