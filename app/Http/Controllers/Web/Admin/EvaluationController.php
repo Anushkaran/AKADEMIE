@@ -252,8 +252,8 @@ class EvaluationController extends Controller
         ])->findOrFail($student);
 
         $tasks = Task::whereHas('skill',function ($s) use ($id){
-            $s->whereHas('evaluation',function ($e) use ($id){
-                $e->where('id',$id);
+            $s->whereHas('evaluations',function ($e) use ($id){
+                $e->where('evaluations.id',$id);
             });
         });
 
