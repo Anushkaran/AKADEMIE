@@ -43,7 +43,7 @@
                                             type="button" data-toggle="modal" id="create-btn"
                                             data-target="#modals-slide-in">
                                         <i data-feather='plus'></i>
-                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.center',1)])}}
+                                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.center',1)])}}
                                     </button>
 
                                 </h4>
@@ -137,7 +137,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{__('actions.add-new',['name' => trans_choice('labels.center',1)])}}
+                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.center',1)])}}
                     </h5>
                 </div>
                 <div class="modal-body flex-grow-1">

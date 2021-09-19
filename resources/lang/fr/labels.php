@@ -45,4 +45,6 @@ return [
         'admin' => 'Admin',
         'manager' => 'Manager'
     ],
+    'level' => '{1}niveau|[2,*]niveaux',
+
 ];

@@ -10,7 +10,7 @@ return [
     'delete' => 'Supprimer',
     'add' => 'Ajouter',
     //'add-new' => 'Nouveau :name',
-    'add-new' => 'Ajouter  {1}nouveau|[2]nouvelle :name',
+    'add-new' => 'Ajouter  nouveau|[2]nouvelle :name',
     'cancel' => 'Annuler',
     'details' => 'Details',
     'delete_confirm_title' => 'êtes vous sûr ?',
