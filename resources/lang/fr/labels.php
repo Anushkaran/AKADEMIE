@@ -3,11 +3,12 @@
 return [
     'user' => '{1}Utilisateur|[2,*]utilisateurs',
     'admin' => '{1}Administrateur|[2,*]administrateurs',
-    'partner' => '{1}Partenaire|[2,*]partnaires',
+    'partner' => '{1}Partenaire|[2,*]partenaires',
     'center' => '{1}Centre|[2,*]centres',
     'student' => '{1}Etudiant|[2,*]Etudiants',
     'accounts' => '{1}Compte|[2,*]Comptes',
     'evaluation' => '{1}Evaluation|[2,*]evaluations',
+    'evaluation-session'=>" session d'evaluation |'sessions d'evaluation",
     'skill' => '{1}Compétence|[2,*]Compétences',
     'task' => '{1}Tache|[2,*]taches',
     'status' => '{1}status|[2,*]status',

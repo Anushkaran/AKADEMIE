@@ -132,7 +132,7 @@
                                                href="{{route('admin.evaluations.show',$ev->id)}}"
                                                aria-selected="{{request()->routeIs('admin.evaluations.show')}}">
                                                 <i data-feather="check-circle"></i>
-                                                {{trans_choice('labels.evaluation-session',3)}}
+                                                {{trans_choice('labels.evaluation-session',1)}}
                                             </a>
                                         </li>
 
