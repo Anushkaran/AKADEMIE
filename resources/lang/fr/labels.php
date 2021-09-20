@@ -7,8 +7,10 @@ return [
     'center' => '{1}Centre|[2,*]Centres',
     'student' => '{1}Stagiaire|[2,*]Stagiaires',
     'accounts' => '{1}Compte|[2,*]Comptes',
-    'evaluation' => '{1}Session|[2,*]Séssions',
-    'evaluation-session' => '{1}Evaluation|[2,*]Evaluations',
+    'evaluation' => '{1}Evaluation|[2,*]Evaluations',
+    'session'=>'{1}Session|[2,*]Séssions',
+    'evaluation-session' => "{1}Session Evaluation|[2,*]Sessions d'évaluation",
+    'poleCompetence'=>"{1}Pôle de Compétences|[2,*]Pôles de Compétences",
     'skill' => '{1}Compétence|[2,*]Compétences',
     'task' => '{1}Compétence|[2,*]Compétences',
     'list' => 'Liste de :name',
@@ -45,6 +47,6 @@ return [
         'admin' => 'Admin',
         'manager' => 'Manager'
     ],
-    'level' => '{1}Bloc de compétence|[2,*]Bloc de compétences',
+    'level' => '{1}Bloc de compétence|[2,*]Blocs de compétences',
 
 ];

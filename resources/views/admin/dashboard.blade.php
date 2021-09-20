@@ -10,12 +10,12 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Home</h2>
+                            <h2 class="content-header-title float-left mb-0">Accueil</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Accueil</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Index
+                                    <li class="breadcrumb-item active">Statistiques
                                     </li>
                                 </ol>
                             </div>
@@ -28,7 +28,7 @@
                 <!-- Kick start -->
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">#Akademie 🚀</h4>
+                        <h4 class="card-title">{{__('messages.welcome_to',['name' => config('app.name')])}}</h4>
                     </div>
                 </div>
                     <!-- Dashboard Analytics Start -->

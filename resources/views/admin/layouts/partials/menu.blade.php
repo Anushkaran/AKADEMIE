@@ -79,7 +79,7 @@
                     <li class=" {{request()->routeIs('admin.evaluations*') ? 'active' : ''}} nav-item">
                         <a class="d-flex align-items-center" href="{{route('admin.evaluations.index')}}">
                             <i data-feather="check"></i>
-                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.evaluation',2)}}</span>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.session',2)}}</span>
                         </a>
                     </li>
                     <li class=" {{request()->routeIs('admin.students*') ? 'active' : ''}} nav-item">
@@ -110,7 +110,7 @@
 
                         <a class="d-flex align-items-center" href="{{route('admin.skills.index')}}">
                             <i data-feather="check-circle"></i>
-                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.skill',2)}}</span>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.poleCompetence',2)}}</span>
                         </a>
                     </li>
 
