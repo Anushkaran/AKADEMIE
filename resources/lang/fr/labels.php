@@ -47,6 +47,6 @@ return [
         'admin' => 'Admin',
         'manager' => 'Manager'
     ],
-    'level' => '{1}Bloc de compétence|[2,*]Blocs de compétences',
+    'level' => '{1}Bloc de compétences|[2,*]Blocs de compétences',
 
 ];
