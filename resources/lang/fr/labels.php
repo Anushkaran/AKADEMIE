@@ -7,8 +7,9 @@ return [
     'center' => '{1}Centre|[2,*]Centres',
     'student' => '{1}Stagiaire|[2,*]Stagiaires',
     'accounts' => '{1}Compte|[2,*]Comptes',
-    'evaluation' => '{1}Évaluation|[2,*]Évaluations',
-    'skill' => '{1}Pôle de compétences|[2,*]Pôles de compétences',
+    'evaluation' => '{1}Session|[2,*]Séssions',
+    'evaluation-session' => '{1}Evaluation|[2,*]Evaluations',
+    'skill' => '{1}Compétence|[2,*]Compétences',
     'task' => '{1}Compétence|[2,*]Compétences',
     'list' => 'Liste de :name',
     'email' => 'Email',
@@ -44,6 +45,6 @@ return [
         'admin' => 'Admin',
         'manager' => 'Manager'
     ],
-    'level' => '{1}niveau|[2,*]niveaux',
+    'level' => '{1}Bloc de compétence|[2,*]Bloc de compétences',
 
 ];
