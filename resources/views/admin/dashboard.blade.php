@@ -28,7 +28,7 @@
                 <!-- Kick start -->
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">{{__('messages.welcome_to',['name' => 'lakadémie'])}}</h4>
+                        <h4 class="card-title">{{__('messages.welcome_to',['name' => config('app.name')])}}</h4>
                     </div>
                 </div>
                     <!-- Dashboard Analytics Start -->
