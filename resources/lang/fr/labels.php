@@ -8,7 +8,7 @@ return [
     'student' => '{1}Stagiaire|[2,*]Stagiaires',
     'accounts' => '{1}Compte|[2,*]Comptes',
     'evaluation' => '{1}Evaluation|[2,*]Evaluations',
-    'session'=>'{1}Session|[2,*]Séssions',
+    'session'=>'{1}Session|[2,*]Sessions',
     'evaluation-session' => "{1}Session Evaluation|[2,*]Sessions d'évaluation",
     'poleCompetence'=>"{1}Pôle de Compétences|[2,*]Pôles de Compétences",
     'skill' => '{1}Compétence|[2,*]Compétences',
