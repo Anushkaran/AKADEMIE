@@ -28,7 +28,7 @@
                 <!-- Kick start -->
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">#Akademie 🚀</h4>
+                        <h4 class="card-title">#Lakadémie 🚀</h4>
                     </div>
                 </div>
                     <!-- Dashboard Analytics Start -->
@@ -46,7 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <h1 class="mb-1 text-white">Beinvenue Au Panneau d'administration Akademie,</h1>
+                                            <h1 class="mb-1 text-white">Beinvenue Au Panneau d'administration lakadémie,</h1>
                                         </div>
                                     </div>
                                 </div>
