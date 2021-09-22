@@ -48,5 +48,8 @@ return [
         'manager' => 'Manager'
     ],
     'level' => '{1}Bloc de compétences|[2,*]Blocs de compétences',
+    'nb_of' => 'Nombre de :item',
+    'settings'=>'réglages',
+
 
 ];

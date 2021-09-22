@@ -14,8 +14,6 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('partner.dashboard')}}">accueil</a>
                                     </li>
-                                    <li class="breadcrumb-item"><a href="#">Layouts</a>
-                                    </li>
                                     <li class="breadcrumb-item active">Statistiques
                                     </li>
                                 </ol>

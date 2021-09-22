@@ -51,7 +51,7 @@ return [
        'admin' => 'Admin',
        'manager' => 'Manager'
    ],
-
+    'settings'=>'settings',
     'date' => 'Date',
     'nb_of' => 'Number of :item',
 

@@ -64,7 +64,7 @@
                         <li class="{{request()->routeIs('partner.students.create') ? 'active' : ''}}">
                             <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
                                 <i data-feather="user-plus"></i>
-                                <span data-i18n="Analytics">{{__('actions.add-new',['name' => trans_choice('labels.student',2)])}}</span>
+                                <span data-i18n="Analytics">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.student',2)])}}</span>
                             </a>
                         </li>
                     </ul>

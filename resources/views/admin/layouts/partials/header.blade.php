@@ -36,11 +36,11 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{route('admin.users.show',auth()->id())}}">
                         <i class="mr-50" data-feather="settings"></i>
-                        Settings
+                        {{__('labels.settings')}}
                     </a>
                     <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logout-form').submit()">
                         <i class="mr-50" data-feather="power"></i>
-                        Logout
+                       {{__('labels.logout')}}
                     </a>
                 </div>
             </li>
