@@ -163,9 +163,9 @@
 
                                                                             <td>
                                                                                 @if($session->tasks->contains($t->id))
-                                                                                    <span class="badge badge-pill badge-light-success mr-1">validées</span>
+                                                                                    <span class="badge badge-pill badge-light-success mr-1">Validé</span>
                                                                                 @else
-                                                                                    <span class="badge badge-pill badge-light-danger mr-1">non validées</span>
+                                                                                    <span class="badge badge-pill badge-light-danger mr-1">Non validé</span>
                                                                                 @endif
                                                                             </td>
 

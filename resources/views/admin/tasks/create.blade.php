@@ -22,7 +22,7 @@
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
                                     <li class="breadcrumb-item"><a href="{{route('admin.tasks.index')}}">{{__('labels.list',['name' => trans_choice('labels.task',2)])}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{__('actions.add-new',['name' => trans_choice('labels.task',1)])}}
+                                    <li class="breadcrumb-item active">{{trans_choice('actions.add-new',2,['name' => trans_choice('labels.task',1)])}}
                                     </li>
                                 </ol>
                             </div>
@@ -37,7 +37,7 @@
                         <div class="col-md-6 card">
                             <div class="card-header">
                                     <h5 class="card-text">
-                                        {{__('actions.add-new',['name' => trans_choice('labels.task',1)])}}
+                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.task',1)])}}
                                     </h5>
                                 @if(url()->previous() !== request()->url())
                                     <a href="{{url()->previous()}}" class="btn btn-outline-danger">

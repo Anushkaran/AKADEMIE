@@ -37,7 +37,7 @@
                         <div class="col-md-6 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{__('actions.add-new',['name' => trans_choice('labels.partner',1)])}}</h4>
+                                    <h4 class="card-title">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.partner',1)])}}</h4>
                                 </div>
                                 <div class="card-body">
                                     <form class="form form-vertical" action="{{route('admin.partners.store')}}" method="post" enctype="multipart/form-data">
