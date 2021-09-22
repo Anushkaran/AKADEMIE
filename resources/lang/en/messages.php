@@ -7,7 +7,7 @@ return [
     'update' => 'Record has been Updated successfully',
     'delete' => 'Record has been deleted successfully',
     'fail' => 'Oops! Something went worn, please try again.',
-    'welcome_to' => 'Welcome to :Name!  👋',
+    'welcome_to' => 'Welcome to :name!  👋',
     'welcome' => 'Welcome.',
     'login_message' => 'Please sign-in to your account and start your session.',
     'forgot_message' => 'Enter your email and we\'ll send you instructions to reset your password.',

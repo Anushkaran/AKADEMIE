@@ -10,12 +10,12 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Accueil</h2>
+                            <h2 class="content-header-title float-left mb-0">Home</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Accueil</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Statistiques
+                                    <li class="breadcrumb-item active">Index
                                     </li>
                                 </ol>
                             </div>
@@ -46,7 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <h1 class="mb-1 text-white">Beinvenue Au Panneau d'administration Akademie,</h1>
+                                            <h1 class="mb-1 text-white">Beinvenue Au Panneau d'administration lakadémie,</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -196,5 +196,4 @@
 
             </div>
         </div>
-    </div>
 @endsection
