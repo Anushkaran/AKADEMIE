@@ -226,7 +226,7 @@ class EvaluationController extends Controller
             'date'          => 'required|date',
             'note'          => 'sometimes|nullable|string|max:200',
         ]);
-
+        $data['state'] = $request->has('state');
         $this->ev->createSession($id,$data);
         session()->flash('success',__('messages.create'));
         return redirect()->back();

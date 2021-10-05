@@ -1,5 +1,11 @@
 @extends('admin.layouts.app')
 
+@push('css')
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
+
 @section('content')
     <div class="app-content content ">
         <div class="content-overlay"></div>
@@ -71,6 +77,44 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label for="department">{{__('labels.department')}}</label>
+                                                    <select name="department" id="department" class="form-control select2-department">
+                                                        @foreach(config('departments') as $d)
+                                                            <option value="{{$d['dep_name']}}" @if(old('department') === $d['dep_name']) selected @endif>{{$d['dep_name']}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('department')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="leader-vertical">{{__('labels.leader')}}</label>
+                                                    <input type="text" value="{{old('leader')}}" id="leader-vertical"
+                                                           class="form-control @error('leader') is-invalid @enderror" name="leader"
+                                                           placeholder="{{__('labels.leader')}}" />
+                                                    @error('leader')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="pedagogical_referent-vertical">{{__('labels.pedagogical_referent')}}</label>
+                                                    <input type="text" value="{{old('pedagogical_referent')}}" id="pedagogical_referent-vertical"
+                                                           class="form-control @error('pedagogical_referent') is-invalid @enderror" name="pedagogical_referent"
+                                                           placeholder="{{__('labels.pedagogical_referent')}}" />
+                                                    @error('pedagogical_referent')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label for="phone-vertical">{{__('labels.phone')}}</label>
                                                     <input type="text"  value="{{old('phone')}}" id="phone-vertical" class="form-control @error('phone') is-invalid @enderror" required name="phone" placeholder="{{__('labels.phone')}}" />
                                                     @error('phone')
@@ -123,16 +167,15 @@
 @endsection
 
 @push('js')
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
-        let fileInput = document.getElementById('pic-input');
-        let img = document.getElementById('image_preview');
-        fileInput.onchange = (event) => {
-            img.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(img.src) // free memory
-            }
-        }
+
+
+        $(document).ready(function() {
+            $('.select2-department').select2();
+        });
+
     </script>
 
 @endpush
