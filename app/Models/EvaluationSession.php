@@ -14,14 +14,15 @@ class EvaluationSession extends Model
      * @var string[]
      */
     protected $fillable = [
-        'evaluation_id', 'user_id', 'name', 'date', 'note',
+        'evaluation_id', 'user_id', 'name', 'date', 'note','state'
     ];
 
     /**
      * @var string[]
      */
     protected $casts = [
-        'date' => 'date'
+        'state' => 'boolean',
+        'date' => 'date',
     ];
 
 
