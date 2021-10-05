@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Thematic;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -15,11 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(Thematic::class);
+        $this->call(ThematicSeeder::class);
 
         User::create([
             'first_name' => 'Jhon',
             'last_name' => 'Do',
+            'organization' => 'testing',
+            'type' => 'practical',
+            'department' => config('departments')[0]['dep_name'],
             'phone' => '213 0555644966',
             'email' => 'user@app.com',
             'password' => bcrypt('password'),

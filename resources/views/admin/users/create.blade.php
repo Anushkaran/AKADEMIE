@@ -91,10 +91,10 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="last_name-vertical">{{__('labels.organism')}}</label>
-                                                    <input type="text" value="{{old('organism')}}" id="last_name-vertical"
-                                                           class="form-control @error('organism') is-invalid @enderror" name="organism"
+                                                    <input type="text" value="{{old('organization')}}" id="last_name-vertical"
+                                                           class="form-control @error('organization') is-invalid @enderror" name="organization"
                                                            placeholder="{{__('labels.organism')}}" />
-                                                    @error('organism')
+                                                    @error('organization')
                                                     <div class="invalid-feedback">{{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -103,12 +103,12 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="user_type">{{__('labels.user_type')}}</label>
-                                                    <select name="user_type" id="user_type" class="form-control">
+                                                    <select name="type" id="user_type" class="form-control">
                                                         @foreach(config('settings.user_types') as $t)
-                                                            <option value="{{$t}}" @if(old('user_type') === $t) selected @endif>{{__('labels.user_types.'.$t)}}</option>
+                                                            <option value="{{$t}}" @if(old('type') === $t) selected @endif>{{__('labels.user_types.'.$t)}}</option>
                                                         @endforeach
                                                     </select>
-                                                    @error('user_type')
+                                                    @error('type')
                                                     <div class="invalid-feedback">{{$message}}</div>
                                                     @enderror
                                                 </div>
@@ -131,7 +131,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="thematics">{{trans_choice('labels.thematic',1)}}</label>
-                                                    <select name="thematics" multiple id="thematics" class="form-control select2-thematics">
+                                                    <select name="thematics[]" multiple id="thematics" class="form-control select2-thematics">
                                                     </select>
                                                     @error('thematics')
                                                     <div class="invalid-feedback">{{$message}}</div>
