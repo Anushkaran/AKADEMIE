@@ -66,5 +66,7 @@ return [
         'theoretical' => 'theoretical'
     ],
     'department' => 'department',
+    'leader' => 'leader',
+    'pedagogical_referent' => 'pedagogical referent',
 
 ];

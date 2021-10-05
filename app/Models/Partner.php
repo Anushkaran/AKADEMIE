@@ -21,6 +21,9 @@ class Partner extends Authenticatable
         'name',
         'phone',
         'email',
+        'leader',
+        'department',
+        'pedagogical_referent',
         'password',
     ];
 

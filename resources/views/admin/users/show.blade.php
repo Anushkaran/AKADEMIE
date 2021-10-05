@@ -94,6 +94,41 @@
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
                                                         <i data-feather="flag" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.organism')}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$user->organization}}</p>
+                                                </div>
+                                                <div class="d-flex flex-wrap my-50">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="flag" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.user_type')}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{__('labels.user_types.'.$user->type)}}</p>
+                                                </div>
+                                                <div class="d-flex flex-wrap my-50">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="flag" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.department')}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">{{$user->department}}</p>
+                                                </div>
+                                                <div class="d-flex flex-wrap my-50">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="flag" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{trans_choice('labels.thematic',3)}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0">
+                                                        @foreach($user->thematics as $th)
+
+                                                            <span class="badge badge-info">
+                                                                {{$th->name}}
+                                                            </span>
+                                                        @endforeach
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex flex-wrap my-50">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="flag" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.created_at')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$user->created_at->format("d-m-Y")}}</p>

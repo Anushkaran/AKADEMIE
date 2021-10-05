@@ -122,6 +122,9 @@ class PartnerController extends Controller
         $rules = [
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:partners,email',
+            'leader'  => 'required|string|max:200',
+            'department'=> 'required|string|max:200',
+            'pedagogical_referent'=> 'required|string|max:200',
             'phone' => 'required|string|max:20|unique:partners,phone',
             'password' => 'required|string|min:8|max:24|confirmed',
         ];
