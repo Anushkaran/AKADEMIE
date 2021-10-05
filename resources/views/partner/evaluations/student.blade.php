@@ -40,6 +40,19 @@
                         <div class="col-xl-9 col-lg-8 col-md-7">
                             <div class="card user-card">
                                 <div class="card-body">
+                                    <div class="card-body">
+
+                                        <div class=" search-input">
+                                            <form>
+                                                <div class="row">
+                                                    <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
+
+                                                    <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
                                     <div class="row">
                                         <div class="col-xl-12 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-avatar-section">

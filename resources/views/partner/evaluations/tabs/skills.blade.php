@@ -8,14 +8,14 @@
 
                     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#success">
                         <i data-feather='plus'></i>
-                        {{__('actions.add-new',['name' => trans_choice('labels.skill',1)])}}
+                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.skill',1)])}}
                     </button>
                     <!-- Modal -->
                     <div class="modal fade text-left modal-success" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel110" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myModalLabel110">{{__('actions.add-new',['name' => trans_choice('labels.skill',1)])}}</h5>
+                                    <h5 class="modal-title" id="myModalLabel110">{{trans_choice('actions.add-new',['name' => trans_choice('labels.skill',1)])}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>

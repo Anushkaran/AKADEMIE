@@ -31,6 +31,7 @@ return [
     'role' => 'Rôle',
     'dashboard' => 'Tableau de bord',
     'created_at' => 'Date de création',
+    'search'=>'rechercher',
     'updated_at' => 'Date de dernière modification',
     'login' => 'Se connecter',
     'logout' => 'Se déconnecter',
