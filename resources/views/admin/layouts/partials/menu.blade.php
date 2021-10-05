@@ -88,6 +88,12 @@
                             <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.student',2)}}</span>
                         </a>
                     </li>
+                    <li class=" {{request()->routeIs('admin.thematics*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.thematics.index')}}">
+                            <i data-feather="home"></i>
+                            <span class="menu-title text-truncate" data-i18n="Home">{{trans_choice('labels.thematics',2)}}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

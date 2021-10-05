@@ -13,6 +13,7 @@ return [
     'evaluation-session' => "{1}Session d'evaluation|[2,*]Sessions d'évaluation",
     'poleCompetence'=>"{1}Pôle de Compétences|[2,*]Pôles de Compétences",
     'skill' => '{1}Skill|[2,*]skills',
+    'thematics' => '{1}thematic|[2,*]thematics',
    'task' => '{1}Task|[2,*]tasks',
     'status' => '{1}status|[2,*]status',
     'detail' => '{1}detail|[2,*]detail',

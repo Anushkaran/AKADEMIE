@@ -12,6 +12,7 @@ return [
     'evaluation-session' => "{1}Session Evaluation|[2,*]Sessions d'évaluation",
     'poleCompetence'=>"{1}Pôle de Compétences|[2,*]Pôles de Compétences",
     'skill' => '{1}Compétence|[2,*]Compétences',
+    'thematics' => '{1}Thématique|[2,*]Thématiques',
     'task' => '{1}Compétence|[2,*]Compétences',
     'list' => 'Liste de :name',
     'email' => 'Email',
