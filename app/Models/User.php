@@ -25,6 +25,9 @@ class User extends Authenticatable
         'image',
         'email',
         'password',
+        'department',
+        'organization',
+        'type',
     ];
 
     /**
@@ -73,5 +76,10 @@ class User extends Authenticatable
     public function eavluationSessions()
     {
         return $this->hasMany(EvaluationSession::class);
+    }
+
+    public function thematics()
+    {
+        return $this->belongsToMany(Thematic::class)->withTimestamps();
     }
 }

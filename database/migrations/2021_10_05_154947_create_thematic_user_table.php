@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThematicsTable extends Migration
+class CreateThematicUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateThematicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('thematics', function (Blueprint $table) {
+        Schema::create('thematic_user', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('thematic_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateThematicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thematics');
+        Schema::dropIfExists('thematic_user');
     }
 }

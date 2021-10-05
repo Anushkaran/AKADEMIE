@@ -41,7 +41,14 @@ class UserRepository extends BaseRepository implements \App\Contracts\UserContra
 
         $data['password'] = bcrypt($data['password']);
 
-        User::create($data);
+        $user = User::create($data);
+
+        if (array_key_exists('thematics',$data))
+        {
+            $user->thematics()->attach($data['thematics']);
+        }
+
+        return $user;
     }
 
     /**
@@ -63,6 +70,12 @@ class UserRepository extends BaseRepository implements \App\Contracts\UserContra
 
             }
             $data['image'] = $this->uploadOne($data['image'],'user/img');
+        }
+
+
+        if (array_key_exists('thematics',$data))
+        {
+            $user->thematics()->sync($data['thematics']);
         }
 
         $user->update($data);

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Thematic;
 use Illuminate\Database\Seeder;
 
 class ThematicSeeder extends Seeder
@@ -13,6 +14,6 @@ class ThematicSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Thematic::factory(10)->create();
     }
 }

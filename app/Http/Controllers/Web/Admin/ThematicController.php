@@ -18,11 +18,19 @@ class ThematicController extends Controller
     }
 
     /**
-     * @return Renderable
+     * @param Request $request
+     *
      */
-    public function index() :Renderable
+    public function index(Request $request)
     {
-        $thematics = $this->thematic->findByFilter(10,['skill','level']);
+        $thematics = $this->thematic->findByFilter();
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'thematics' => $thematics
+            ]);
+        }
         return view('admin.thematics.index',compact('thematics'));
     }
 

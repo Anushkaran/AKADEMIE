@@ -84,6 +84,32 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label for="last_name-vertical">{{__('labels.organism')}}</label>
+                                                    <input type="text" value="{{old('organism')}}" id="last_name-vertical"
+                                                           class="form-control @error('organism') is-invalid @enderror" name="organism"
+                                                           placeholder="{{__('labels.organism')}}" />
+                                                    @error('organism')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="last_name-vertical">{{__('labels.user_type')}}</label>
+                                                    <select name="user_type" id="user_type">
+                                                        @foreach(config('settings.user_types') as $t)
+
+                                                        @endforeach
+                                                    </select>
+                                                    @error('organism')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label for="phone-vertical">{{__('labels.phone')}}</label>
                                                     <input type="text" value="{{old('phone')}}" id="phone-vertical"
                                                            class="form-control @error('phone') is-invalid @enderror" name="phone"

@@ -20,7 +20,7 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.tasks.index')}}">{{__('labels.list',['name' => trans_choice('labels.task',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.thematics.index')}}">{{__('labels.list',['name' => trans_choice('labels.thematic',2)])}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.edit')}}
                                     </li>
@@ -46,7 +46,7 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.tasks.update',$t->id)}}">
+                                <form class="add-new-record  pt-0" method="post" action="{{route('admin.thematics.update',$t->id)}}">
                                     @csrf
                                     @method('PUT')
 
@@ -59,36 +59,10 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="form-label" for="skill_id">{{trans_choice('labels.skill',1)}}</label>
-                                            <select class="form-control select2-skill @error('skill_id') is-invalid @enderror" name="skill_id" id="skill_id">
-                                                <option value="{{$t->skill_id}}">{{$t->skill->name}}</option>
-                                            </select>
-                                            @error('skill_id')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label class="form-label" for="level_id">{{trans_choice('labels.level',1)}}</label>
-                                            <select class="form-control select2-level @error('level_id') is-invalid @enderror" name="level_id" id="level_id">
-                                                <option value="{{$t->level_id}}">{{$t->level->name}}</option>
-                                            </select>
-                                            @error('level_id')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="form-label" for="description">{{__('labels.description')}} ({{__('labels.optional')}})</label>
-                                            <textarea  name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="..." cols="30" rows="3">{{old('description',$t->description)}}</textarea>
-                                            @error('description')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
 
                                         <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
-                                        <a href="{{route('admin.tasks.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
+                                        <a href="{{route('admin.thematics.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
                                     </div>
                                 </form>
 

@@ -40,7 +40,7 @@
                                 <h4 class="card-title">
                                     <a class="dt-button create-new btn btn-primary" tabindex="0"
                                             aria-controls="DataTables_Table_0"
-                                            href="{{route('admin.thematic.create')}}"  id="create-btn"
+                                            href="{{route('admin.thematics.create')}}"  id="create-btn"
                                             >
                                         <i data-feather='plus'></i>
                                         {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.thematic',1)])}}
