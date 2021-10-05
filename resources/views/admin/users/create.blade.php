@@ -1,5 +1,11 @@
 @extends('admin.layouts.app')
 
+
+@push('css')
+
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
 @section('content')
     <div class="app-content content ">
         <div class="content-overlay"></div>
@@ -84,6 +90,57 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label for="last_name-vertical">{{__('labels.organism')}}</label>
+                                                    <input type="text" value="{{old('organism')}}" id="last_name-vertical"
+                                                           class="form-control @error('organism') is-invalid @enderror" name="organism"
+                                                           placeholder="{{__('labels.organism')}}" />
+                                                    @error('organism')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="user_type">{{__('labels.user_type')}}</label>
+                                                    <select name="user_type" id="user_type" class="form-control">
+                                                        @foreach(config('settings.user_types') as $t)
+                                                            <option value="{{$t}}" @if(old('user_type') === $t) selected @endif>{{__('labels.user_types.'.$t)}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('user_type')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="department">{{__('labels.department')}}</label>
+                                                    <select name="department" id="department" class="form-control select2-department">
+                                                        @foreach(config('departments') as $d)
+                                                            <option value="{{$d['dep_name']}}" @if(old('department') === $d['dep_name']) selected @endif>{{$d['dep_name']}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('department')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="thematics">{{trans_choice('labels.thematic',1)}}</label>
+                                                    <select name="thematics" multiple id="thematics" class="form-control select2-thematics">
+                                                    </select>
+                                                    @error('thematics')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label for="phone-vertical">{{__('labels.phone')}}</label>
                                                     <input type="text" value="{{old('phone')}}" id="phone-vertical"
                                                            class="form-control @error('phone') is-invalid @enderror" name="phone"
@@ -136,6 +193,7 @@
 @endsection
 
 @push('js')
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
         let fileInput = document.getElementById('pic-input');
@@ -146,6 +204,48 @@
                 URL.revokeObjectURL(img.src) // free memory
             }
         }
+
+        $(document).ready(function() {
+            $('.select2-department').select2();
+
+            $('.select2-thematics').select2({
+                minimumInputLength:2,
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.thematics.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
+
+                    },
+                    processResults: function ({thematics}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(thematics.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < thematics.total
+                            }
+                        };
+                    }
+                }
+            });
+        });
+
     </script>
 
 @endpush

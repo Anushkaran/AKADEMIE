@@ -17,6 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
        \App\Contracts\PartnerContract::class    => \App\Repositories\PartnerRepository::class,
        \App\Contracts\EvaluationSessionContract::class    => \App\Repositories\EvaluationSessionRepository::class,
        \App\Contracts\LevelContract::class    => \App\Repositories\LevelRepository::class,
+       \App\Contracts\ThematicContract::class    => \App\Repositories\ThematicRepository::class,
     ];
 
     /**
