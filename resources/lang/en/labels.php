@@ -57,8 +57,13 @@ return [
     'nb_of' => 'Number of :item',
 
     //**********************************************************************************************//
-    'thematic' => '{1}thematic[2,*]thematics',
+    'thematic' => '{1}thematic|[2,*]thematics',
     'organism' => 'organism',
     'user_type' => 'user type',
+    'user_types' => [
+        'practical' => 'practical',
+        'theoretical' => 'theoretical'
+    ],
+    'department' => 'department',
 
 ];
