@@ -54,7 +54,17 @@
                                 </h4>
                             </div>
                             <div class="card-body">
-                                {{--                                filters--}}
+
+                                <div class=" search-input">
+                                    <form>
+                                        <div class="row">
+                                            <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
+
+                                            <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                             <div class="table-responsive">
                                 @php
@@ -155,7 +165,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.evaluation',1)])}}
+                        {{trans_choice('actions.add-new',['name' => trans_choice('labels.evaluation',1)])}}
                     </h5>
                 </div>
                 <div class="modal-body flex-grow-1">

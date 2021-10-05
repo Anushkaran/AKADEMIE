@@ -48,11 +48,21 @@
                                 </h4>
                             </div>
                             <div class="card-body">
-                                {{--                                filters--}}
+
+                                <div class=" search-input">
+                                    <form>
+                                        <div class="row">
+                                            <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
+
+                                            <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                             <div class="table-responsive">
                                 @php
-                                    /** @var \Illuminate\Database\Eloquent\Collection $students */
+                                    /** @var \Illuminlaate\Database\Eloquent\Collection $students */
                                     $count = $students->count();
                                 @endphp
                                 <table class="table">
