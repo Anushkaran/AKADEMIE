@@ -52,6 +52,23 @@ return [
     'level' => '{1}Bloc de compétences|[2,*]Blocs de compétences',
     'nb_of' => 'Nombre de :item',
     'settings'=>'réglages',
+    'date' => 'Date',
+
+    //**********************************************************************************************//
+    'thematic' => '{1}Thématique|[2,*]Thématiques',
+    'organism' => 'Organisme',
+    'user_type' => 'Type de profil',
+    'user_types' => [
+        'practical' => 'Pratique',
+        'theoretical' => 'Théorique'
+    ],
+    'department' => 'Départment',
+    'leader' => 'Dirigeant',
+    'pedagogical_referent' => 'Réferent Pédagogique',
+    'date_exam' => "Date d'examen",
+    'state' => 'état',
+    'active' => 'active',
+    'inactive' => 'inactive',
 
 
 ];

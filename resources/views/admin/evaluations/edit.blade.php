@@ -104,7 +104,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             <div class="custom-control custom-control-success custom-switch">
                                                 <p class="mb-50">{{__('labels.state')}}</p>
                                                 <input type="checkbox" name="state" value="on" @if(old('state',$ev->state)) checked @endif
