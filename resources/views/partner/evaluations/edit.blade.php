@@ -97,7 +97,7 @@
                                         <input type="date" required name="date_exam"
                                                value="{{old('date_exam')}}"
                                                class="form-control @error('date_exam') is-invalid @enderror"
-                                               id="name" placeholder="{{__('labels.date_exam',$ev->date_exam->format('Y-m-d')))}}
+                                               id="name" placeholder="{{__('labels.date_exam',$ev->date_exam->format('Y-m-d'))}}
                                             ..."  aria-label="{{__('labels.date_exam')}} ..." />
                                         @error('date_exam')
                                         <div class="invalid-feedback">{{$message}}</div>

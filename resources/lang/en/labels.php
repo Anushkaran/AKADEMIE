@@ -68,6 +68,7 @@ return [
     'department' => 'department',
     'leader' => 'leader',
     'pedagogical_referent' => 'pedagogical referent',
-    'date_exam' => 'date exam'
+    'date_exam' => 'date exam',
+    'state' => 'state',
 
 ];
