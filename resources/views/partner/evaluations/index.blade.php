@@ -68,8 +68,8 @@
                             </div>
                             <div class="table-responsive">
                                 @php
-                                    /** @var \Illuminate\Database\Eloquent\Collection $evaluations */
-                                    $count = $evaluations->count();
+                                    /** @var Collection $evaluations */
+                                    use Illuminate\Database\Eloquent\Collection;$count = $evaluations->count();
                                 @endphp
                                 <table class="table">
                                     <thead>
@@ -96,6 +96,13 @@
 {{--                                            </td>--}}
                                             <td>{{$ev->name}}</td>
                                             <td>
+                                                @if($e->state)
+                                                    <span class="badge badge-success">{{__('labels.active')}}</span>
+                                                @else
+                                                    <span class="badge badge-danger">{{__('labels.inactive')}}</span>
+                                                @endif
+                                            </td>
+                                            <td>
                                                 <strong>{{$ev->center->name}}</strong>
                                                 <small>
                                                     <a href="{{route('admin.centers.show',$ev->center_id)}}" class="text-decoration-none">
@@ -108,7 +115,7 @@
                                             <td><span class="badge badge-info">{{$ev->students_count}}</span></td>
                                             <td><span class="badge badge-info">{{$ev->sessions_count}}</span></td>
                                             <td>
-                                                {{$ev->created_at->format('d-m-Y')}}
+                                                {{$ev->date_exam->format('d-m-Y')}}
                                             </td>
                                             <td>
                                                 @if($count < 3)

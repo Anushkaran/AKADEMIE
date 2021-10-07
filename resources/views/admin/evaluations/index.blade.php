@@ -110,7 +110,7 @@
                                                 </strong>
                                             </td>
                                             <td>
-                                                @if($e->stata)
+                                                @if($e->state)
                                                     <span class="badge badge-success">{{__('labels.active')}}</span>
                                                 @else
                                                     <span class="badge badge-danger">{{__('labels.inactive')}}</span>
