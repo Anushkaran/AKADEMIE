@@ -10,12 +10,12 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">{{__('labels.list',['name' => trans_choice('labels.thematic',2)])}}</h2>
+                            <h2 class="content-header-title float-left mb-0">{{__('labels.list',['name' => trans_choice('labels.thematics',2)])}}</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.thematic',2)])}}
+                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.thematics',2)])}}
                                     </li>
                                 </ol>
                             </div>
@@ -43,7 +43,7 @@
                                             href="{{route('admin.thematics.create')}}"  id="create-btn"
                                             >
                                         <i data-feather='plus'></i>
-                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.thematic',1)])}}
+                                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.thematics',1)])}}
                                     </a>                                </h4>
                             </div>
                             <div class="card-body">

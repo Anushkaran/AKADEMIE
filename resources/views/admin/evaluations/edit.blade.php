@@ -105,14 +105,14 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-label" for="state">{{__('labels.state')}}</label>
-                                            <input type="checkbox"  name="state"
-                                                   value="on"
-                                                   @if(old('state',$ev->state)) checked @endif
-                                                   class="form-control @error('state') is-invalid @enderror"
-                                                   id="name" placeholder="{{__('labels.state')}}..."
-                                                   aria-label="{{__('labels.state')}} ..." />
+                                            <div class="custom-control custom-control-success custom-switch">
+                                                <p class="mb-50">{{__('labels.state')}}</p>
+                                                <input type="checkbox" name="state" value="on" @if(old('state',$ev->state)) checked @endif
+                                                class="custom-control-input @error('state') is-invalid @enderror" id="customSwitch4" />
+                                                <label class="custom-control-label" for="customSwitch4"></label>
+                                            </div>
                                         </div>
+
 
                                         <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
                                         <a href="{{route('admin.evaluations.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>
