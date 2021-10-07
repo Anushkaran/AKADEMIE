@@ -78,9 +78,10 @@
                                         <th>{{trans_choice('labels.partner',1)}}</th>
                                         <th>{{trans_choice('labels.center',1)}}</th>
 
+                                        <th>{{__('labels.state')}}</th>
                                         <th>{{__('labels.start_date')}}</th>
                                         <th>{{__('labels.end_date')}}</th>
-                                        <th>{{__('labels.created_at')}}</th>
+                                        <th>{{__('labels.date_exam')}}</th>
 
                                         <th>Actions</th>
                                     </tr>
@@ -109,13 +110,20 @@
                                                 </strong>
                                             </td>
                                             <td>
+                                                @if($e->stata)
+                                                    <span class="badge badge-success">{{__('labels.active')}}</span>
+                                                @else
+                                                    <span class="badge badge-danger">{{__('labels.inactive')}}</span>
+                                                @endif
+                                            </td>
+                                            <td>
                                                 {{$e->start_date->format('d-m-Y')}}
                                             </td>
                                             <td>
                                                 {{$e->end_date->format('d-m-Y')}}
                                             </td>
                                         <td>
-                                            {{$e->created_at->format('d-m-Y')}}
+                                            {{$e->date_exam->format('d-m-Y')}}
                                         </td>
                                         <td>
                                             @if($count < 3)

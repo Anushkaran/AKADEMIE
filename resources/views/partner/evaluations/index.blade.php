@@ -76,12 +76,15 @@
                                     <tr>
 {{--                                        <th>#</th>--}}
                                         <th>{{__('labels.name')}}</th>
+                                        <th>{{__('labels.state')}}</th>
+
                                         <th>{{trans_choice('labels.center',1)}}</th>
                                         <th>{{__('labels.start_date')}}</th>
                                         <th>{{__('labels.end_date')}}</th>
+
                                         <th>{{__('labels.nb_of',['item'=>trans_choice('labels.student',3)])}}</th>
                                         <th>{{__('labels.nb_of',['item'=>trans_choice('labels.evaluation-session',3)])}}</th>
-                                        <th>{{__('labels.created_at')}}</th>
+                                        <th>{{__('labels.date_exam')}}</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>

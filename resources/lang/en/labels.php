@@ -70,5 +70,7 @@ return [
     'pedagogical_referent' => 'pedagogical referent',
     'date_exam' => 'date exam',
     'state' => 'state',
+    'active' => 'active',
+    'inactive' => 'inactive',
 
 ];
