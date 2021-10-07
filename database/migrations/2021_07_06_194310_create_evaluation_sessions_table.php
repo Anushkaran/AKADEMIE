@@ -22,7 +22,6 @@ class CreateEvaluationSessionsTable extends Migration
 
             $table->string('name');
             $table->date('date');
-            $table->boolean('state')->default(false);
             $table->string('note')->nullable();
             $table->timestamps();
         });

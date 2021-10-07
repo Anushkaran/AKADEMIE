@@ -92,6 +92,18 @@
                                         @enderror
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="form-label" for="start_date">{{__('labels.date_exam')}}</label>
+                                        <input type="date" required name="date_exam"
+                                               value="{{old('date_exam')}}"
+                                               class="form-control @error('date_exam') is-invalid @enderror"
+                                               id="name" placeholder="{{__('labels.date_exam',$ev->date_exam->format('Y-m-d')))}}
+                                            ..."  aria-label="{{__('labels.date_exam')}} ..." />
+                                        @error('date_exam')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+
 
                                     <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
                                     <a href="{{route('partner.evaluations.index')}}"  class="btn btn-outline-secondary">{{__('actions.cancel')}}</a>

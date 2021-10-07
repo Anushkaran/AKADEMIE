@@ -17,7 +17,7 @@ class Evaluation extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name', 'start_date', 'end_date','partner_id','center_id',
+        'name', 'start_date', 'end_date','partner_id','center_id','state','date_exam'
     ];
 
     /**
@@ -26,6 +26,8 @@ class Evaluation extends Model
     protected $casts = [
         'start_date' => 'date',
         'end_date'   => 'date',
+        'date_exam'   => 'date',
+        'state' => 'boolean'
     ];
 
     public function students()

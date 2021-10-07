@@ -55,11 +55,12 @@ class EvaluationController extends Controller
     {
         $data = $request->validate([
             'name'          => 'required|string|max:100',
-            'partner_id'    => 'required|integer|exists:partners,id',
             'center_id'    => 'required|integer|exists:centers,id',
             'start_date'    => 'required|date',
+            'date_exam'    => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
+        $data['state'] = $request->has('state');
 
         $this->ev->new($data);
         session()->flash('success',__('messages.create'));
@@ -112,9 +113,10 @@ class EvaluationController extends Controller
             'name'          => 'required|string|max:100',
             'center_id'    => 'required|integer|exists:centers,id',
             'start_date'    => 'required|date',
+            'date_exam'    => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
-
+        $data['state'] = $request->has('state');
         $this->ev->update($id,$data);
         session()->flash('success',__('messages.update'));
         return redirect()->route('admin.evaluations.index');

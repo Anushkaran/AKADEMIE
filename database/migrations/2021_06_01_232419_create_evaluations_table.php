@@ -26,6 +26,8 @@ class CreateEvaluationsTable extends Migration
             $table->string('name');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->date('date_exam')->nullable();
+            $table->boolean('state')->default(false);
             $table->timestamps();
         });
     }

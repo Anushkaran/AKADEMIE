@@ -37,9 +37,12 @@ class EvaluationController extends Controller
             'name'          => 'required|string|max:100',
             'center_id'     => 'required|integer|exists:centers,id',
             'start_date'    => 'required|date',
+            'date_exam'     => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
+
         $data['partner_id'] = auth('partner')->id();
+
         $e = $this->ev->new($data);
         session()->flash(__('messages.create'));
         return redirect()->route('partner.evaluations.show',$e->id);
@@ -77,6 +80,7 @@ class EvaluationController extends Controller
             'name'          => 'required|string|max:100',
             'start_date'    => 'required|date',
             'center_id'     => 'required|integer|exists:centers,id',
+            'date_exam'     => 'required|date',
             'end_date'      => 'required|date|after:start_date',
         ]);
         $this->ev->update($id,$data);
