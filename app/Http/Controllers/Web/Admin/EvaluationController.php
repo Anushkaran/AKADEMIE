@@ -56,6 +56,7 @@ class EvaluationController extends Controller
         $data = $request->validate([
             'name'          => 'required|string|max:100',
             'center_id'    => 'required|integer|exists:centers,id',
+            'partner_id'    => 'required|integer|exists:partners,id',
             'start_date'    => 'required|date',
             'date_exam'    => 'required|date',
             'end_date'      => 'required|date|after:start_date',
