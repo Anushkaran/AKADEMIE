@@ -34,7 +34,7 @@
                         <th>#</th>
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.date')}}</th>
-                        <th>{{trans_choice('labels.user',1)}}</th>
+                        <th>{{trans_choice('labels.user',2)}}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -45,27 +45,36 @@
                         <td>{{$s->name}}</td>
                         <td><span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span></td>
                         <td>
-                            <strong>
-                                {{$s->user->name}}
-                                <a href="{{route('admin.users.show',$s->user_id)}}" class="text-decoration-none">
-                                    <i data-feather="arrow-up-right"></i>
-                                </a>
-                            </strong><br>
-                            <small>
-                                <a href="tel:{{$s->user->phone}}" class="text-decoration-none">
-                                    {{$s->user->phone}}
-                                    <i data-feather="phone"></i>
-                                </a><br>
-                                <a href="mailTo:{{$s->user->email}}" class="text-decoration-none">
-                                    {{$s->user->email}}
-                                    <i data-feather="mail"></i>
-                                </a>
-                            </small>
+                            @foreach($s->users as $user)
+                                <strong>
+                                    {{$user->name}}
+                                    <a href="{{route('admin.users.show',$user->id)}}" class="text-decoration-none">
+                                        <i data-feather="arrow-up-right"></i>
+                                    </a>
+                                </strong><br>
+                                <small>
+                                    <a href="tel:{{$user->phone}}" class="text-decoration-none">
+                                        {{$user->phone}}
+                                        <i data-feather="phone"></i>
+                                    </a><br>
+                                    <a href="mailTo:{{$user->email}}" class="text-decoration-none">
+                                        {{$user->email}}
+                                        <i data-feather="mail"></i>
+                                    </a>
+                                </small>
+                                <hr>
+                            @endforeach
                         </td>
                         <td>
                             <button class="btn btn-sm btn-outline-danger" onclick="deleteSession({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
+                            <a class="btn btn-sm btn-outline-info" href="{{route('admin.evaluations.sessions.show',['evaluation'=>$ev->id,'session' => $s->id])}}">
+                                <i data-feather="eye"></i>
+                            </a>
+                            <a class="btn btn-sm btn-outline-warning" href="{{route('admin.evaluations.sessions.edit',['evaluation'=>$ev->id,'session' => $s->id])}}">
+                                <i data-feather="edit"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -101,11 +110,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="center_id">{{trans_choice('labels.user',2)}}</label>
-                        <select name="user_id"
-                                id="user_id"
-                                class="form-control select2-user @error('user_id') is-invalid @enderror"></select>
-                        @error('user_id')
+                        <label class="users" for="users">{{trans_choice('labels.user',2)}}</label>
+                        <select name="users[]"
+                                id="users"
+                                multiple
+                                class="form-control select2-user @error('users') is-invalid @enderror"></select>
+                        @error('users')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>

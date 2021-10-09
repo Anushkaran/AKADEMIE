@@ -224,7 +224,8 @@ class EvaluationController extends Controller
     public function addSession($id,Request $request)
     {
         $data = $request->validate([
-            'user_id'       => 'required|integer|exists:users,id',
+            'users'         => 'required|array',
+            'users.*'       => 'required|integer',
             'name'          => 'required|string|max:150',
             'date'          => 'required|date',
             'note'          => 'sometimes|nullable|string|max:200',
@@ -233,6 +234,13 @@ class EvaluationController extends Controller
         $this->ev->createSession($id,$data);
         session()->flash('success',__('messages.create'));
         return redirect()->back();
+    }
+
+    public function showSession($evaluation,$session,Request $request)
+    {
+
+        $session = $this->ev->findSession($evaluation,$session,[]);
+        return view('partner.evaluations.session');
     }
 
     public function deleteSession($id,$session): RedirectResponse

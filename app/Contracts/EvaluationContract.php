@@ -43,6 +43,15 @@ interface EvaluationContract extends BaseContracts\CrudContract
     public function createSession($id,array $data);
 
     /**
+     * @param $ev
+     * @param $session
+     * @param array $relations
+     * @param array $scopes
+     * @return mixed
+     */
+    public function findSession($ev,$session,array $relations =[],array $scopes = []);
+
+    /**
      * @param $id
      * @param $session
      * @return mixed

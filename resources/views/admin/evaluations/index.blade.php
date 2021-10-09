@@ -130,7 +130,7 @@
                                             <a href="{{route('admin.evaluations.edit',$e->id)}}" class="btn btn-sm btn-outline-warning">
                                                 <i data-feather="edit"></i>
                                             </a>
-                                                <a href="{{route('admin.evaluations.show',$e->id)}}" class="btn btn-sm btn-outline-warning">
+                                                <a href="{{route('admin.evaluations.sessions.index',$e->id)}}" class="btn btn-sm btn-outline-warning">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                                 <a href="javascript:void(0)" onclick="deleteForm({{$e->id}})" class="btn btn-sm btn-outline-warning">
@@ -146,7 +146,7 @@
                                                             <i data-feather="edit-2" class="mr-50"></i>
                                                             <span>{{__('actions.edit')}}</span>
                                                         </a>
-                                                        <a class="dropdown-item" href="{{route('admin.evaluations.show',$e->id)}}">
+                                                        <a class="dropdown-item" href="{{route('admin.evaluations.sessions.index',$e->id)}}">
                                                             <i data-feather="eye" class="mr-50"></i>
                                                             <span>{{__('actions.details')}}</span>
                                                         </a>

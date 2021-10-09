@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -73,12 +74,15 @@ class User extends Authenticatable
             : asset('assets/vuexy/app-assets/images/defaults/user-default.jpg');
     }
 
-    public function eavluationSessions()
+    /**
+     * @return BelongsToMany
+     */
+    public function evaluationSessions(): BelongsToMany
     {
-        return $this->hasMany(EvaluationSession::class);
+        return $this->belongsToMany(EvaluationSession::class,'Evaluation_session_user')->withTimestamps();
     }
 
-    public function thematics()
+    public function thematics(): BelongsToMany
     {
         return $this->belongsToMany(Thematic::class)->withTimestamps();
     }

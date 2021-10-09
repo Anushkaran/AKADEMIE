@@ -1,7 +1,5 @@
 @extends('admin.evaluations.tab-layout')
 
-
-
 @section('tab-content')
     <div class="tab-pane active" id="homeIcon" aria-labelledby="homeIcon-tab" role="tabpanel">
         <div class="card">

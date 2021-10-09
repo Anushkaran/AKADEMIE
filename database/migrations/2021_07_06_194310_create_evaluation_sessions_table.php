@@ -17,7 +17,7 @@ class CreateEvaluationSessionsTable extends Migration
             $table->id();
             $table->foreignId('evaluation_id')
                 ->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('user_id')
+            $table->foreignId('user_id')->nullable()
                 ->constrained()->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('name');

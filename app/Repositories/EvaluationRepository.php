@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\Models\Evaluation;
+use App\Models\EvaluationSession;
 
 class EvaluationRepository extends BaseRepository implements \App\Contracts\EvaluationContract
 {
@@ -98,7 +99,10 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     public function createSession($id, array $data)
     {
         $e = $this->findOneById($id);
-        $e->sessions()->create($data);
+        $s = $e->sessions()->create($data);
+
+        $s->users()->attach($data['users']);
+
         return $e;
     }
 
@@ -124,5 +128,10 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
             ->select($columns)
             ->scopes($scopes)
             ->findOrFail($evaluation);
+    }
+
+    public function findSession($ev, $session, array $relations = [], array $scopes = [])
+    {
+        return EvaluationSession::with($relations)->scopes($scopes)->where('evaluation_id',$ev)->findOrFail($session);
     }
 }

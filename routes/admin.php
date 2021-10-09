@@ -46,8 +46,11 @@ Route::middleware('auth:admin')->group(function (){
     Route::get('evaluations/{id}/skills',[App\Http\Controllers\Web\Admin\EvaluationController::class,'skillsList'])->name('evaluations.skills.index');
     Route::post('evaluations/{id}/skills',[App\Http\Controllers\Web\Admin\EvaluationController::class,'attachSkills'])->name('evaluations.skills.attach');
     Route::delete('evaluations/{id}/skills/{skill}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'removeSkills'])->name('evaluations.skills.remove');
-    Route::resource('evaluations',App\Http\Controllers\Web\Admin\EvaluationController::class);
 
+    Route::post('evaluations/{evaluation}/sessions/{session}/users',[App\Http\Controllers\Web\Admin\EvaluationSessionController::class,'attachUser'])->name('evaluations.sessions.users.attach');
+    Route::delete('evaluations/{evaluation}/sessions/{session}/users/{user}',[App\Http\Controllers\Web\Admin\EvaluationSessionController::class,'detachUser'])->name('evaluations.sessions.users.detach');
+    Route::resource('evaluations.sessions',App\Http\Controllers\Web\Admin\EvaluationSessionController::class);
+    Route::resource('evaluations',App\Http\Controllers\Web\Admin\EvaluationController::class)->except('show');
 
     Route::post('skills/{id}/tasks',[App\Http\Controllers\Web\Admin\SkillController::class,'taskStore'])->name('skills.tasks.store');
     Route::resource('skills',App\Http\Controllers\Web\Admin\SkillController::class);

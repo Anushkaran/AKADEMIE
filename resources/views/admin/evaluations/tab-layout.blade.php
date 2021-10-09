@@ -127,10 +127,10 @@
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('admin.evaluations.show') ? 'active' : ''}}"
+                                            <a class="nav-link {{request()->routeIs('admin.evaluations.sessions.index') ? 'active' : ''}}"
                                                id="homeIcon-tab"
-                                               href="{{route('admin.evaluations.show',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('admin.evaluations.show')}}">
+                                               href="{{route('admin.evaluations.sessions.index',$ev->id)}}"
+                                               aria-selected="{{request()->routeIs('admin.evaluations.sessions.index')}}">
                                                 <i data-feather="check-circle"></i>
                                                 {{trans_choice('labels.evaluation-session',1)}}
                                             </a>
@@ -146,15 +146,6 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('admin.evaluations.skills.index') ? 'active' : ''}}"
-                                               id="homeIcon-tab"
-                                               href="{{route('admin.evaluations.skills.index',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('admin.evaluations.skills.index')}}">
-                                                <i data-feather="check-circle"></i>
-                                                {{trans_choice('labels.skill',3)}}
-                                            </a>
-                                        </li>
                                     </ul>
                                     <div class="tab-content">
                                         @yield('tab-content')

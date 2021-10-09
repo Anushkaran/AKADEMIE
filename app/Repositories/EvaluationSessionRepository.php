@@ -54,4 +54,27 @@ class EvaluationSessionRepository extends BaseRepository implements \App\Contrac
         $es = $this->findOneById($id);
         return $es->delete();
     }
+
+    public function findOneBy(array $params, array $relations = [])
+    {
+        return EvaluationSession::with($relations)->where($params)->firstOrFail();
+    }
+
+    public function attachUser($evaluation,$session,$users)
+    {
+        $s = $this->findOneBy(['evaluation_id'=>$evaluation,'id' => $session]);
+        $users = is_array($users) ? $users : [$users];
+        $attachedIds = $s->users()->whereIn('users.id', $users['users'])->pluck('users.id');
+        $newIds = array_diff($users['users'], $attachedIds->all());
+        $s->users()->attach($newIds);
+        return $s;
+    }
+
+    public function detachUser($evaluation,$session,$users)
+    {
+        $s = $this->findOneBy(['evaluation_id'=>$evaluation,'id' => $session]);
+        $users = is_array($users) ? $users : [$users];
+        $s->users()->detach($users);
+        return $s;
+    }
 }

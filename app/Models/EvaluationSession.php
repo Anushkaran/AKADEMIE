@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class EvaluationSession extends Model
 {
@@ -14,7 +15,7 @@ class EvaluationSession extends Model
      * @var string[]
      */
     protected $fillable = [
-        'evaluation_id', 'user_id', 'name', 'date', 'note'
+        'evaluation_id', 'name', 'date', 'note'
     ];
 
     /**
@@ -35,14 +36,14 @@ class EvaluationSession extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return BelongsToMany
      */
-    public function user(): BelongsTo
+    public function users(): BelongsToMany
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class,'Evaluation_session_user')->withTimestamps();
     }
 
-    public function students()
+    public function students(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         return $this->hasManyThrough(Student::class,Evaluation::class);
     }
