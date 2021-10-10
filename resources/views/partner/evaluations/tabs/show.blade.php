@@ -43,8 +43,8 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$s->name}}</td>
-                        <td><span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span></td>
-
+                        <td>
+                            <span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span>
                         </td>
                         <td>
                             <strong>
@@ -102,13 +102,12 @@
                         @enderror
                     </div>
 
-
                     <div class="form-group">
-                        <label class="form-label" for="center_id">{{trans_choice('labels.user',2)}}</label>
-                        <select name="user_id"
-                                id="user_id"
-                                class="form-control select2-user @error('user_id') is-invalid @enderror"></select>
-                        @error('user_id')
+                        <label class="form-label" for="users">{{trans_choice('labels.user',2)}}</label>
+                        <select name="users[]"
+                                id="users"
+                                class="form-control select2-user @error('users') is-invalid @enderror"></select>
+                        @error('users')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -124,6 +123,7 @@
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
+
                     <div class="form-group">
                         <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
                         <textarea name="note" id="note" class="form-control @error('note') is-invalid @enderror">{{old('note')}}</textarea>

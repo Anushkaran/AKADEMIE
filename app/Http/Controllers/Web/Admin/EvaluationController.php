@@ -221,33 +221,11 @@ class EvaluationController extends Controller
         return redirect()->back();
     }
 
-    public function addSession($id,Request $request)
-    {
-        $data = $request->validate([
-            'users'         => 'required|array',
-            'users.*'       => 'required|integer',
-            'name'          => 'required|string|max:150',
-            'date'          => 'required|date',
-            'note'          => 'sometimes|nullable|string|max:200',
-        ]);
-        $data['state'] = $request->has('state');
-        $this->ev->createSession($id,$data);
-        session()->flash('success',__('messages.create'));
-        return redirect()->back();
-    }
 
-    public function showSession($evaluation,$session,Request $request)
-    {
-
-        $session = $this->ev->findSession($evaluation,$session,[]);
-        return view('partner.evaluations.session');
-    }
 
     public function deleteSession($id,$session): RedirectResponse
     {
-        $this->ev->deleteSession($id,$session);
-        session()->flash('success',__('messages.delete'));
-        return redirect()->back();
+
     }
 
     public function studentDetails($id,$student)

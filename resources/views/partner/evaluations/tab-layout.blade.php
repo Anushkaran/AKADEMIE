@@ -120,10 +120,10 @@
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('partner.evaluations.show') ? 'active' : ''}}"
+                                            <a class="nav-link {{request()->routeIs('partner.evaluations.sessions.index') ? 'active' : ''}}"
                                                id="homeIcon-tab"
-                                               href="{{route('partner.evaluations.show',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('partner.evaluations.show')}}">
+                                               href="{{route('partner.evaluations.sessions.index',$ev->id)}}"
+                                               aria-selected="{{request()->routeIs('partner.evaluations.sessions.index')}}">
                                                 <i data-feather="check-circle"></i>
                                                 {{trans_choice('labels.evaluation-session',3)}}
                                             </a>
@@ -136,16 +136,6 @@
                                                aria-selected="{{request()->routeIs('partner.evaluations.students.index')}}">
                                                 <i data-feather="check-circle"></i>
                                                 {{trans_choice('labels.student',3)}}
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a class="nav-link {{request()->routeIs('partner.evaluations.skills.index') ? 'active' : ''}}"
-                                               id="homeIcon-tab"
-                                               href="{{route('partner.evaluations.skills.index',$ev->id)}}"
-                                               aria-selected="{{request()->routeIs('partner.evaluations.skills.index')}}">
-                                                <i data-feather="check-circle"></i>
-                                                {{trans_choice('labels.skill',3)}}
                                             </a>
                                         </li>
                                     </ul>

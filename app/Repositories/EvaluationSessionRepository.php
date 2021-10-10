@@ -41,7 +41,7 @@ class EvaluationSessionRepository extends BaseRepository implements \App\Contrac
      */
     public function update($id, array $data)
     {
-        $es = $this->findOneById($id);
+        $es = $this->findOneBy(['evaluation_id'=> $data['evaluation'],'id' => $id]);
         $es->update($data);
         return $es;
     }

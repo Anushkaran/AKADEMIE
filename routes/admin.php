@@ -35,8 +35,6 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('centers',App\Http\Controllers\Web\Admin\CenterController::class);
     Route::resource('students',App\Http\Controllers\Web\Admin\StudentController::class);
 
-    Route::post('evaluations/{id}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'addSession'])->name('evaluations.sessions.store');
-    Route::delete('evaluations/{id}/sessions/{session}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'deleteSession'])->name('evaluations.sessions.delete');
     Route::get('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'studentsList'])->name('evaluations.students.index');
     Route::get('evaluations/{id}/students/{student}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'studentDetails'])->name('evaluations.students.show');
     Route::post('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'attachStudents'])->name('evaluations.students.attach');

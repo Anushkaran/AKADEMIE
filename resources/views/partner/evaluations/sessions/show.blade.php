@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('partner.layouts.app')
 
 @push('css')
 
@@ -22,9 +22,9 @@
                             <h2 class="content-header-title float-left mb-0">{{__('actions.details')}}</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluations.index')}}">{{__('labels.list',['name' => trans_choice('labels.evaluation',2)])}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.evaluations.sessions.index',$session->evaluation_id)}}">{{__('labels.list',['name' => trans_choice('labels.evaluation-session',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('partner.dashboard')}}">{{__('labels.dashboard')}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('partner.evaluations.index')}}">{{__('labels.list',['name' => trans_choice('labels.evaluation',2)])}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('partner.evaluations.sessions.index',$session->evaluation_id)}}">{{__('labels.list',['name' => trans_choice('labels.evaluation-session',2)])}}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{__('actions.details')}}
                                     </li>
@@ -51,18 +51,12 @@
                                                     <div class="d-flex flex-column ml-1">
                                                         <div class="d-flex flex-wrap">
                                                             @if(url()->previous() !== request()->url())
-                                                                <a href="{{url()->previous()}}" class="btn btn-outline-danger mx-1">
+                                                                <a href="{{url()->previous()}}" class="btn btn-outline-danger">
                                                                     <i data-feather='arrow-left'></i>
                                                                 </a>
                                                             @endif
-                                                                <button class="dt-button create-new btn btn-primary mx-1" tabindex="0"
-                                                                        aria-controls="DataTables_Table_0"
-                                                                        type="button" data-toggle="modal" id="create-btn"
-                                                                        data-target="#modals-slide-in">
-                                                                    <i data-feather='plus'></i>
-                                                                    {{__('actions.edit')}}
-                                                                </button>
-                                                            <button onclick="deleteSession({{$session->evaluation_id}},{{$session->id}})" class="btn btn-outline-danger mx-1">{{__('actions.delete')}}</button>
+
+                                                            <button onclick="deleteForm({{$session->evaluation_id,$session->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -120,7 +114,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{route('admin.evaluations.sessions.users.attach',['evaluation' => $session->evaluation_id , 'session' => $session->id])}}" id="attach-users-form" method="post">
+                                                    <form action="{{route('partner.evaluations.sessions.users.attach',['evaluation' => $session->evaluation_id , 'session' => $session->id])}}" id="attach-users-form" method="post">
                                                         @csrf
                                                         <div class="form-group">
                                                             <label for="users">{{trans_choice('labels.user',3)}}</label>
@@ -209,53 +203,6 @@
 
         </div>
     </div>
-    <div class="modal modal-slide-in fade" id="modals-slide-in">
-        <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0" method="post"
-                  action="{{route('admin.evaluations.sessions.update',['evaluation' => $session->evaluation_id,'session' =>$session->id])}}">
-                @csrf
-                @method('PUT')
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                <div class="modal-header mb-1">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.evaluation-session',1)])}}
-                    </h5>
-                </div>
-                <div class="modal-body flex-grow-1">
-                    <div class="form-group">
-                        <label class="form-label" for="name">{{__('labels.name')}}</label>
-                        <input type="text" required name="name" value="{{old('name',$session->name)}}" class="form-control @error('name') is-invalid @enderror dt-full-name" id="name" placeholder="{{__('labels.name')}}  ..."  aria-label="{{__('labels.name')}} ..." />
-                        @error('name')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="form-label" for="start_date">{{__('labels.date')}}</label>
-                        <input type="date" required name="date"
-                               value="{{old('start_date',$session->date->format('Y-m-d'))}}"
-                               class="form-control @error('date') is-invalid @enderror"
-                               id="date" placeholder="{{__('labels.start_date')}}
-                            ..."  aria-label="{{__('labels.start_date')}} ..." />
-                        @error('date')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="note">{{__('labels.note')}} ({{__('labels.optional')}})</label>
-                        <textarea name="note" id="note" class="form-control @error('note') is-invalid @enderror">{{old('note',$session->note)}}</textarea>
-                        @error('note')
-                        <div class="invalid-feedback">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
-                    <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{__('actions.cancel')}}</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
 
 @endsection
@@ -273,7 +220,7 @@
                 cache:true,
                 ajax: {
                     delay: 250,
-                    url: '{{route('admin.users.index')}}',
+                    url: '{{route('partner.users.index')}}',
                     dataType: 'json',
                     data: function (params) {
 
@@ -305,39 +252,7 @@
             });
         });
 
-        const deleteSession = (id,sessionID) => {
-            Swal.fire({
-                title: '{{__('actions.delete_confirm_title')}}',
-                text: "{{__('actions.delete_confirm_text')}}",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: '{{__('actions.delete_btn_yes')}}',
-                cancelButtonText: '{{__('actions.delete_btn_cancel')}}'
-            }).then((result) => {
-                if (result.value) {
-                    let f = document.createElement("form");
-                    f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/${id}/sessions/${sessionID}`);
 
-                    let i1 = document.createElement("input"); //input element, text
-                    i1.setAttribute('type',"hidden");
-                    i1.setAttribute('name','_token');
-                    i1.setAttribute('value','{{csrf_token()}}');
-
-                    let i2 = document.createElement("input"); //input element, text
-                    i2.setAttribute('type',"hidden");
-                    i2.setAttribute('name','_method');
-                    i2.setAttribute('value','DELETE');
-
-                    f.appendChild(i1);
-                    f.appendChild(i2);
-                    document.body.appendChild(f);
-                    f.submit()
-                }
-            });
-        }
         const detachUser = id => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',
@@ -352,7 +267,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/evaluations/{{$session->evaluation_id}}/sessions/{{$session->id}}/users/${id}`);
+                    f.setAttribute('action',`/partner/evaluations/{{$session->evaluation_id}}/sessions/{{$session->id}}/users/${id}`);
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");
                     i1.setAttribute('name','_token');
@@ -371,4 +286,5 @@
             });
         }
     </script>
+    @stack('tab-js')
 @endpush
