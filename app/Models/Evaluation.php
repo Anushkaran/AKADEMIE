@@ -56,6 +56,11 @@ class Evaluation extends Model
         return $this->hasMany(EvaluationSession::class);
     }
 
+    public function finalSession()
+    {
+        return $this->sessions()->where('is_final',true);
+    }
+
     public function partner()
     {
         return $this->belongsTo(Partner::class);

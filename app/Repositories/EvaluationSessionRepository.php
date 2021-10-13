@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\Models\EvaluationSession;
+use App\Models\Task;
 
 class EvaluationSessionRepository extends BaseRepository implements \App\Contracts\EvaluationSessionContract
 {
@@ -33,7 +34,16 @@ class EvaluationSessionRepository extends BaseRepository implements \App\Contrac
      */
     public function new(array $data)
     {
-        return EvaluationSession::create($data);
+        $es = EvaluationSession::create($data);
+        if ($es->is_final)
+        {
+            $tasks = Task::whereHas('sessions',function ($s) use ($es){
+                $s->where('evaluation_id',$es->evaluation_id);
+            })->pluck('id');
+            $es->tasks()->attach($tasks->all());
+        }
+
+        return $es;
     }
 
     /**
@@ -75,6 +85,32 @@ class EvaluationSessionRepository extends BaseRepository implements \App\Contrac
         $s = $this->findOneBy(['evaluation_id'=>$evaluation,'id' => $session]);
         $users = is_array($users) ? $users : [$users];
         $s->users()->detach($users);
+        return $s;
+    }
+
+    public function attachTask($evaluation, $session, $tasks)
+    {
+        $s = $this->findOneBy(['evaluation_id'=>$evaluation,'id' => $session]);
+        if ($s->is_final)
+        {
+            return false;
+        }
+        $tasks = is_array($tasks) ? $tasks : [$tasks];
+        $attachedIds = $s->tasks()->whereIn('tasks.id', $tasks['tasks'])->pluck('tasks.id');
+        $newIds = array_diff($tasks['tasks'], $attachedIds->all());
+        $s->tasks()->attach($newIds);
+        return $s;
+    }
+
+    public function detachTask($evaluation, $session, $tasks)
+    {
+        $s = $this->findOneBy(['evaluation_id'=>$evaluation,'id' => $session]);
+        if ($s->is_final)
+        {
+            return false;
+        }
+        $tasks = is_array($tasks) ? $tasks : [$tasks];
+        $s->tasks()->detach($tasks);
         return $s;
     }
 }

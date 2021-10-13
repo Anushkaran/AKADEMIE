@@ -41,7 +41,7 @@ class Task extends Model
     {
         return $this->belongsToMany(Student::class,'session_student_task')
             ->withTimestamps()
-            ->withPivot(['session_student_id','user_id']);
+            ->withPivot(['session_student_id','user_id','state']);
     }
 
     /**
@@ -52,5 +52,13 @@ class Task extends Model
         return $this->belongsToMany(SessionStudent::class,'session_student_task')
             ->withTimestamps()
             ->withPivot(['student_id','user_id']);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function evaluationSessions(): BelongsToMany
+    {
+        return $this->belongsToMany(EvaluationSession::class,'evaluation_session_task')->withTimestamps();
     }
 }

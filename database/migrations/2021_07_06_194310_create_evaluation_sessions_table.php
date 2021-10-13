@@ -21,6 +21,7 @@ class CreateEvaluationSessionsTable extends Migration
                 ->constrained()->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('name');
+            $table->boolean('is_final')->default(false);
             $table->date('date');
             $table->string('note')->nullable();
             $table->timestamps();

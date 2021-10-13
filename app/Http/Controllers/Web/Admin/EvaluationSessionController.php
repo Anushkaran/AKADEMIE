@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class EvaluationSessionController extends Controller
 {
@@ -31,7 +30,7 @@ class EvaluationSessionController extends Controller
      */
     public function index($evaluation) :Renderable
     {
-        $ev = $this->ev->findOneById($evaluation,['sessions']);
+        $ev = $this->ev->findOneById($evaluation,['sessions'],['*'],[],['finalSession']);
         $title = __('labels.list',['name' => trans_choice('labels.evaluation-session',3)]);
         return view('admin.evaluations.tabs.show',compact('ev','title'));
     }
@@ -53,6 +52,8 @@ class EvaluationSessionController extends Controller
             'date'          => 'required|date',
             'note'          => 'sometimes|nullable|string|max:200',
         ]);
+
+        $data['is_final'] = $request->has('is_final');
         $this->ev->createSession($evaluation,$data);
         session()->flash('success',__('messages.create'));
         return redirect()->back();
@@ -67,7 +68,7 @@ class EvaluationSessionController extends Controller
      */
     public function show($evaluation,$session) : Renderable
     {
-        $session = $this->s->findOneBy(['id' => $session,'evaluation_id' => $evaluation]);
+        $session = $this->s->findOneBy(['id' => $session,'evaluation_id' => $evaluation],['tasks.level','users']);
         return  view('admin.evaluations.sessions.show',compact('session'));
     }
 
@@ -135,6 +136,25 @@ class EvaluationSessionController extends Controller
     public function detachUser($evaluation,$session,$user): RedirectResponse
     {
         $this->s->detachUser($evaluation,$session,$user);
+        session()->flash('success',__('messages.delete'));
+        return redirect()->back();
+    }
+
+    public function attachTask($evaluation,$session,Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'tasks' => 'required|array',
+            'tasks.*' => 'required|integer',
+        ]);
+
+        $this->s->attachTask($evaluation,$session,$data);
+        session()->flash('success',__('messages.create'));
+        return redirect()->back();
+    }
+
+    public function detachTask($evaluation,$session,$task): RedirectResponse
+    {
+        $this->s->detachTask($evaluation,$session,$task);
         session()->flash('success',__('messages.delete'));
         return redirect()->back();
     }

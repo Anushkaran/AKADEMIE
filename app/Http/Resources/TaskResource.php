@@ -19,6 +19,9 @@ class TaskResource extends JsonResource
             'name' => $this->name,
             'description'=> $this->description,
             'skill'=> new SkillResource($this->whenLoaded('skill')),
+            'state' => $this->whenPivotLoaded('session_student_task',function (){
+                return (bool)$this->pivot->state;
+            }),
         ];
     }
 }

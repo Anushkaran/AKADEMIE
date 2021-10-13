@@ -15,7 +15,7 @@ class EvaluationSession extends Model
      * @var string[]
      */
     protected $fillable = [
-        'evaluation_id', 'name', 'date', 'note'
+        'evaluation_id', 'name', 'date', 'note' , 'is_final'
     ];
 
     /**
@@ -23,6 +23,7 @@ class EvaluationSession extends Model
      */
     protected $casts = [
         'date' => 'date',
+        'is_final' => 'boolean',
     ];
 
 
@@ -46,5 +47,10 @@ class EvaluationSession extends Model
     public function students(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         return $this->hasManyThrough(Student::class,Evaluation::class);
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class)->withTimestamps();
     }
 }

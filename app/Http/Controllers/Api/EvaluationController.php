@@ -9,6 +9,7 @@ use App\Http\Resources\SkillResource;
 use App\Http\Resources\StudentResource;
 use App\Models\Evaluation;
 use App\Models\EvaluationSession;
+use App\Models\Skill;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +25,9 @@ class EvaluationController extends Controller
     public function index()
     {
         return EvaluationResource::collection(Evaluation::with('center')->whereHas('sessions',function ($s){
-            $s->where('user_id',auth('api')->id());
+            $s->whereHas('users',function ($user){
+                $user->where("users.id",auth('api')->id());
+            });
         })->latest()->get());
     }
 
@@ -32,9 +35,13 @@ class EvaluationController extends Controller
     {
         return new EvaluationResource(
             Evaluation::whereHas('sessions',function ($s){
-                $s->where('user_id',auth('api')->id());
+                $s->whereHas('users',function ($user){
+                    $user->where("users.id",auth('api')->id());
+                });
             })->with(['sessions' => function($q){
-                $q->where('user_id',auth('api')->id())->latest();
+                $q->whereHas('users',function ($user){
+                    $user->where("users.id",auth('api')->id());
+                });
             }])->findOrFail($id)
         );
     }
@@ -44,27 +51,37 @@ class EvaluationController extends Controller
         $evaluation = Evaluation::with([
             'students.sessionStudents' => function($sst) use($id){
                 $sst->whereHas('session',function ($s)use($id){
-                    $s->where('evaluation_sessions.evaluation_id',$id)->where('user_id',auth('api')->id());
+                    $s->where('evaluation_sessions.evaluation_id',$id);
                 });
             }
         ])
             ->whereHas('sessions',function ($s) use ($session){
-                $s->where('user_id',auth('api')->id())->where('id',$session);
+                $s->whereHas('users',function ($user){
+                    $user->where("users.id",auth('api')->id());
+                })->where('id',$session);
             })
             ->findOrFail($id);
 
         return StudentResource::collection($evaluation->students);
     }
 
-    public function skills($id)
+    public function tasks($id)
     {
-        $evaluation = Evaluation::with('skills.tasks')
-            ->whereHas('sessions',function ($s){
-                $s->where('user_id',auth('api')->id());
+        $sessions = EvaluationSession::with('tasks:id')
+            ->whereHas('users',function ($user){
+                $user->where('users.id',auth('api')->id());
             })
             ->findOrFail($id);
+
+        $tasks_ids = $sessions->tasks->pluck('id')->all();
+        $skills = Skill::whereHas('tasks',function ($t) use ($tasks_ids){
+            $t->whereIn('tasks.id',$tasks_ids);
+        })->with(['tasks' => function ($task) use($tasks_ids){
+            $task->whereIn('tasks.id',$tasks_ids);
+        }])->get();
+
         return SkillResource::collection(
-            $evaluation->skills
+            $skills
         );
     }
 }

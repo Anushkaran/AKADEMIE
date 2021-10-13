@@ -11,16 +11,16 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">
-
-                    <button class="dt-button create-new btn btn-primary" tabindex="0"
-                            aria-controls="DataTables_Table_0"
-                            type="button" data-toggle="modal" id="create-btn"
-                            data-target="#modals-slide-in">
-                        <i data-feather='plus'></i>
-                        {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.evaluation-session',1)])}}
-                    </button>
+                    @if($ev->final_session_count === 0)
+                        <button class="dt-button create-new btn btn-primary" tabindex="0"
+                                aria-controls="DataTables_Table_0"
+                                type="button" data-toggle="modal" id="create-btn"
+                                data-target="#modals-slide-in">
+                            <i data-feather='plus'></i>
+                            {{trans_choice('actions.add-new',2,['name' => trans_choice('labels.evaluation-session',1)])}}
+                        </button>
+                    @endif
                     <!-- Modal -->
-
                 </h4>
             </div>
             <div class="card-body">
@@ -34,6 +34,7 @@
                         <th>#</th>
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.date')}}</th>
+                        <th>{{__('labels.is_final')}}</th>
                         <th>{{trans_choice('labels.user',2)}}</th>
                         <th>Actions</th>
                     </tr>
@@ -43,7 +44,14 @@
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$s->name}}</td>
-                        <td><span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span></td>
+                        <td><span class="badge badge-success">{{$s->date->format('d-m-Y')}}</span></td>
+                        <td>
+                            @if($s->is_final)
+                                <span class="badge badge-danger">{{__('labels.yes')}}</span>
+                            @else
+                                <span class="badge badge-success">{{__('labels.no')}}</span>
+                            @endif
+                        </td>
                         <td>
                             @foreach($s->users as $user)
                                 <strong>
@@ -137,6 +145,15 @@
                         @error('note')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="custom-control custom-control-success custom-switch">
+                            <p class="mb-50">{{__('labels.is_final')}}</p>
+                            <input type="checkbox" name="is_final" value="on" @if(old('is_final')) checked @endif
+                            class="custom-control-input @error('is_final') is-invalid @enderror" id="is_final" />
+                            <label class="custom-control-label" for="is_final"></label>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>

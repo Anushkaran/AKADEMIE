@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('evaluations/{id}/students/{student}',[\App\Http\Controllers\Api\StudentController::class,'show']);
     Route::get('evaluations/{id}/skills',[\App\Http\Controllers\Api\EvaluationController::class,'skills']);
     Route::get('sessions/{session}/students/{student}',[\App\Http\Controllers\Api\StudentController::class,'startSession']);
+    Route::get('sessions/{session}/tasks',[\App\Http\Controllers\Api\EvaluationController::class,'tasks']);
     Route::post('session-student/{session_student}/attach/task',[\App\Http\Controllers\Api\StudentController::class,'attachTask']);
     Route::post('session-student/{session_student}/detach/task',[\App\Http\Controllers\Api\StudentController::class,'detachTask']);
     Route::put('session-student/{session_student}/update/note',[\App\Http\Controllers\Api\StudentController::class,'updateNote']);

@@ -58,7 +58,11 @@ class StudentController extends Controller
 
     public function attachTask($session_student,Request $request)
     {
-        $data = $request->validate(['task_id' => 'required|integer|exists:tasks,id']);
+        $data = $request->validate([
+            'task_id' => 'required|integer|exists:tasks,id',
+            'state'   => 'required|boolean'
+        ]);
+
         $session_student = SessionStudent::with('session.evaluation.skills')->findOrFail($session_student);
 
         if (!$session_student->tasks->contains($data['task_id']))
@@ -66,7 +70,14 @@ class StudentController extends Controller
             $session_student->tasks()->attach($data['task_id'],[
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
+                'state' => $data['state']
             ]);
+        }else{
+            $session_student->tasks()->syncWithoutDetaching([$data['task_id'] => [
+                'student_id' => $session_student->student_id,
+                'user_id' => auth('api')->id(),
+                'state' => $data['state']
+            ]]);
         }
 
 

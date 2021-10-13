@@ -72,5 +72,8 @@ return [
     'state' => 'state',
     'active' => 'active',
     'inactive' => 'inactive',
+    'is_final' => 'is final?',
+    'yes' => 'Yes',
+    'no' => 'No',
 
 ];

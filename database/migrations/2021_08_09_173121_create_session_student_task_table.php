@@ -19,6 +19,7 @@ class CreateSessionStudentTaskTable extends Migration
             $table->foreignId('session_student_id')->constrained()->onDelete('cascade');
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->boolean('state')->default(true);
 
             $table->timestamps();
         });

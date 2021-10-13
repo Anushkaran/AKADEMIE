@@ -174,7 +174,6 @@
 
         </div>
     </div>
-    </div>
     <!-- Modal to add new record -->
     <div class="modal modal-slide-in fade" id="modals-slide-in">
         <div class="modal-dialog sidebar-sm">

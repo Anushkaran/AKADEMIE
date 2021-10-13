@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Evaluation;
 use App\Models\EvaluationSession;
+use App\Models\Task;
 
 class EvaluationRepository extends BaseRepository implements \App\Contracts\EvaluationContract
 {
@@ -16,8 +17,8 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     public function findOneById($id, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
     {
         return Evaluation::with($relations)
-            ->withCount($relations_count)
             ->select($columns)
+            ->withCount($relations_count)
             ->scopes($scopes)
             ->findOrFail($id);
     }
@@ -27,7 +28,7 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
      */
     public function findByFilter($per_page = 10, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
     {
-        $query = Evaluation::with($relations)->withCount($relations_count)->scopes($scopes)->select($columns)->newQuery();
+        $query = Evaluation::with($relations)->select($columns)->withCount($relations_count)->scopes($scopes)->newQuery();
         return $this->applyFilter($query, $per_page);
     }
 
@@ -99,11 +100,17 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     public function createSession($id, array $data)
     {
         $e = $this->findOneById($id);
-        $s = $e->sessions()->create($data);
+        $es = $e->sessions()->create($data);
+        if ($es->is_final)
+        {
+            $tasks = Task::whereHas('evaluationSessions',function ($s) use ($es){
+                $s->where('evaluation_id',$es->evaluation_id);
+            })->pluck('id');
+            $es->tasks()->attach($tasks->all());
+        }
+        $es->users()->attach($data['users']);
 
-        $s->users()->attach($data['users']);
-
-        return $e;
+        return $es;
     }
 
     public function deleteSession($id, $session)

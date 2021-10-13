@@ -19,10 +19,17 @@ class TaskController extends Controller
     }
 
     /**
-     * @return Renderable
+     *
      */
-    public function index() :Renderable
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json([
+                'success' => true,
+                'tasks' => $this->task->findByFilter(),
+            ]);
+        }
         $tasks = $this->task->findByFilter(10,['skill','level']);
         return view('admin.tasks.index',compact('tasks'));
     }
