@@ -79,7 +79,7 @@ class User extends Authenticatable
      */
     public function evaluationSessions(): BelongsToMany
     {
-        return $this->belongsToMany(EvaluationSession::class,'Evaluation_session_user')->withTimestamps();
+        return $this->belongsToMany(EvaluationSession::class,'evaluation_session_user')->withTimestamps();
     }
 
     public function thematics(): BelongsToMany

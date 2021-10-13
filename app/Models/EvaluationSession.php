@@ -41,7 +41,7 @@ class EvaluationSession extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class,'Evaluation_session_user')->withTimestamps();
+        return $this->belongsToMany(User::class,'evaluation_session_user')->withTimestamps();
     }
 
     public function students(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
