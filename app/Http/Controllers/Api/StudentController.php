@@ -9,6 +9,7 @@ use App\Http\Resources\SessionStudentResource;
 use App\Http\Resources\StudentResource;
 use App\Models\SessionStudent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -48,6 +49,15 @@ class StudentController extends Controller
             'evaluation_session_id' => $session,
             'student_id' => $student,
         ]);
+
+        if ($evaluationSession->is_final)
+        {
+            $session_students = SessionStudent::wherehas('session',function ($sess) use ($evaluationSession){
+                $sess->where('id','<>',$evaluationSession->id)->where('evaluation_sessions.evaluation_id',$evaluationSession->evaluation_id);
+            })->where('student_id',$student)->pluck('id');
+            DB::table('session_student_task')->whereIn('session_student_id',$session_students)->delete();
+        }
+
 
         return response()->json([
             'success' => true,

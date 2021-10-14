@@ -113,4 +113,10 @@ class EvaluationSessionRepository extends BaseRepository implements \App\Contrac
         $s->tasks()->detach($tasks);
         return $s;
     }
+
+    public function findBy(array $params, array $relations = [])
+    {
+        $query =  EvaluationSession::with($relations)->newQuery();
+        return $this->applyFilter($query,0);
+    }
 }

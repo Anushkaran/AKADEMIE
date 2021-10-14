@@ -8,6 +8,9 @@ interface EvaluationSessionContract extends BaseContracts\CrudContract
 {
     public function findOneBy(array $params,array $relations = []);
 
+    public function findBy(array $params,array $relations = []);
+
+
     /**
      * @param $evaluation
      * @param $session
