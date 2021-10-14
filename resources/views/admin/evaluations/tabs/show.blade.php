@@ -80,9 +80,7 @@
                             <a class="btn btn-sm btn-outline-info" href="{{route('admin.evaluations.sessions.show',['evaluation'=>$ev->id,'session' => $s->id])}}">
                                 <i data-feather="eye"></i>
                             </a>
-                            <a class="btn btn-sm btn-outline-warning" href="{{route('admin.evaluations.sessions.edit',['evaluation'=>$ev->id,'session' => $s->id])}}">
-                                <i data-feather="edit"></i>
-                            </a>
+
                         </td>
                     </tr>
                     @endforeach

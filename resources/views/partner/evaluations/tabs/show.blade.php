@@ -34,7 +34,8 @@
                         <th>#</th>
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.date')}}</th>
-                        <th>{{trans_choice('labels.user',1)}}</th>
+                        <th>{{__('labels.is_final')}}</th>
+                        <th>{{trans_choice('labels.user',2)}}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -44,30 +45,44 @@
                         <td>{{$key+1}}</td>
                         <td>{{$s->name}}</td>
                         <td>
+                            @if($s->is_final)
+                                <span class="badge badge-danger">{{__('labels.yes')}}</span>
+                            @else
+                                <span class="badge badge-success">{{__('labels.no')}}</span>
+                            @endif
+                        </td>
+                        <td>
                             <span class="badge badge-info">{{$s->date->format('d-m-Y')}}</span>
                         </td>
                         <td>
-                            <strong>
-                                {{$s->user->name}}
-                                <a href="{{route('admin.users.show',$s->user_id)}}" class="text-decoration-none">
-                                    <i data-feather="arrow-up-right"></i>
-                                </a>
-                            </strong><br>
-                            <small>
-                                <a href="tel:{{$s->user->phone}}" class="text-decoration-none">
-                                    {{$s->user->phone}}
-                                    <i data-feather="phone"></i>
-                                </a><br>
-                                <a href="mailTo:{{$s->user->email}}" class="text-decoration-none">
-                                    {{$s->user->email}}
-                                    <i data-feather="mail"></i>
-                                </a>
-                            </small>
+                            @foreach($s->users as $user)
+                                <strong>
+                                    {{$user->name}}
+                                    <a href="{{route('admin.users.show',$user->id)}}" class="text-decoration-none">
+                                        <i data-feather="arrow-up-right"></i>
+                                    </a>
+                                </strong><br>
+                                <small>
+                                    <a href="tel:{{$user->phone}}" class="text-decoration-none">
+                                        {{$user->phone}}
+                                        <i data-feather="phone"></i>
+                                    </a><br>
+                                    <a href="mailTo:{{$user->email}}" class="text-decoration-none">
+                                        {{$user->email}}
+                                        <i data-feather="mail"></i>
+                                    </a>
+                                </small>
+                                <hr>
+                            @endforeach
                         </td>
                         <td>
                             <button class="btn btn-sm btn-outline-danger" onclick="deleteSession({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
+                            <a class="btn btn-sm btn-outline-info" href="{{route('partner.evaluations.sessions.show',['evaluation'=>$ev->id,'session' => $s->id])}}">
+                                <i data-feather="eye"></i>
+                            </a>
+
                         </td>
                     </tr>
                     @endforeach
@@ -103,9 +118,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="users">{{trans_choice('labels.user',2)}}</label>
+                        <label class="users" for="users">{{trans_choice('labels.user',2)}}</label>
                         <select name="users[]"
                                 id="users"
+                                multiple
                                 class="form-control select2-user @error('users') is-invalid @enderror"></select>
                         @error('users')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -130,6 +146,15 @@
                         @error('note')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="custom-control custom-control-success custom-switch">
+                            <p class="mb-50">{{__('labels.is_final')}}</p>
+                            <input type="checkbox" name="is_final" value="on" @if(old('is_final')) checked @endif
+                            class="custom-control-input @error('is_final') is-invalid @enderror" id="is_final" />
+                            <label class="custom-control-label" for="is_final"></label>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
