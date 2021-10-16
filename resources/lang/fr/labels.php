@@ -69,6 +69,9 @@ return [
     'state' => 'état',
     'active' => 'active',
     'inactive' => 'inactive',
+    'is_final' => 'session finale',
+    'yes' => 'Oui',
+    'no' => 'Non',
 
 
 ];
