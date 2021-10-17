@@ -240,7 +240,6 @@ class EvaluationController extends Controller
             }
         ])->findOrFail($student);
 
-        dd($student->sessionStudents->all());
 
         return view('admin.evaluations.student',compact('student','id','tasks'));
     }
