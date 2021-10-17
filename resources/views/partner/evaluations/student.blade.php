@@ -162,7 +162,7 @@
                                                                                 <td>{{$t->description}}</td>
 
                                                                                 <td>
-                                                                                @if($t->pivot->state)
+                                                                                @if($t->pivot->state===1)
                                                                                     <span class="badge badge-pill badge-light-success mr-1">validées</span>
                                                                                 @else
                                                                                     <span class="badge badge-pill badge-light-danger mr-1">non validées</span>
