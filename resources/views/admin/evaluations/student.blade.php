@@ -158,9 +158,8 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        @foreach($session->session->tasks as $t)
+                                                                        @foreach($session->tasks as $t)
                                                                         <tr>
-                                                                            @dd($t)
 
                                                                             <td>
                                                                                 <span class="font-weight-bold">{{$t->name}}</span>
