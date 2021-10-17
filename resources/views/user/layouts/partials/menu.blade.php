@@ -2,7 +2,7 @@
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper" data-menu-type="floating-nav">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="{{route('partner.dashboard')}}"><span class="brand-logo">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="{{route('dashboard')}}"><span class="brand-logo">
                                 <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
                                     <defs>
                                         <lineargradient id="linearGradient-1" x1="100%" y1="10.5120544%" x2="50%" y2="89.4879456%">
@@ -44,39 +44,9 @@
                         <span data-i18n="dashboard">{{__('labels.dashboard')}}</span>
                     </a>
                 </li>
-                <li class="dropdown nav-item {{request()->routeIs('partner.students*') ? 'active' : ''}}" data-menu="dropdown">
-                    <a class="dropdown-toggle nav-link d-flex align-items-center"
-                       href="{{route('partner.students.index')}}" data-toggle="dropdown">
-                        <i data-feather="partners"></i>
-                        <span data-i18n="student">
-                            {{trans_choice('labels.student',2)}}
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="{{request()->routeIs('partner.students.index') ? 'active' : ''}}">
-                            <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.index')}}" data-toggle="dropdown" data-i18n="students">
-                                <i data-feather="list"></i>
-                                <span data-i18n="Analytics">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</span>
-                            </a>
-                        </li>
 
-                        <li class="{{request()->routeIs('partner.students.create') ? 'active' : ''}}">
-                            <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
-                                <i data-feather="partner-plus"></i>
-                                <span data-i18n="Analytics">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.student',2)])}}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="{{request()->routeIs('partner.evaluations*') ? 'active' : ''}}">
-                    <a class="nav-item  d-flex align-items-center"
-                       href="{{route('partner.evaluations.index')}}"  data-i18n="Dashboard">
-                        <i data-feather="check"></i>
-                        <span data-i18n="dashboard">{{trans_choice('labels.evaluation',2)}}</span>
-                    </a>
-                </li>
+
             </ul>
-
         </div>
     </div>
 </div>

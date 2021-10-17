@@ -96,7 +96,7 @@
 {{--                                            </td>--}}
                                             <td>{{$ev->name}}</td>
                                             <td>
-                                                @if($e->state)
+                                                @if($ev->state)
                                                     <span class="badge badge-success">{{__('labels.active')}}</span>
                                                 @else
                                                     <span class="badge badge-danger">{{__('labels.inactive')}}</span>
@@ -108,7 +108,9 @@
                                                     <a href="{{route('admin.centers.show',$ev->center_id)}}" class="text-decoration-none">
                                                         <i data-feather="arrow-up-right"></i>
                                                     </a>
-                                                </small>                                            <td>{{$ev->start_date->format('d-m-Y')}}</td>
+                                                </small>
+                                            </td>
+                                            <td>{{$ev->start_date->format('d-m-Y')}}</td>
                                             <td>
                                                 {{$ev->end_date->format('d-m-Y')}}
                                             </td>
@@ -119,9 +121,11 @@
                                             </td>
                                             <td>
                                                 @if($count < 3)
+                                                    @if(!$ev->state)
                                                     <a href="{{route('partner.evaluations.edit',$ev->id)}}" class="btn btn-sm btn-outline-warning">
                                                         <i data-feather="edit"></i>
                                                     </a>
+                                                    @endif
                                                     <a href="{{route('partner.evaluations.show',$ev->id)}}" class="btn btn-sm btn-outline-warning">
                                                         <i data-feather="eye"></i>
                                                     </a>
@@ -134,10 +138,12 @@
                                                             <i data-feather="more-vertical"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
+                                                            @if(!$ev->state)
                                                             <a class="dropdown-item" href="{{route('partner.evaluations.edit',$ev->id)}}">
                                                                 <i data-feather="edit-2" class="mr-50"></i>
                                                                 <span>{{__('actions.edit')}}</span>
                                                             </a>
+                                                            @endif
                                                             <a class="dropdown-item" href="{{route('partner.evaluations.show',$ev->id)}}">
                                                                 <i data-feather="eye" class="mr-50"></i>
                                                                 <span>{{__('actions.details')}}</span>

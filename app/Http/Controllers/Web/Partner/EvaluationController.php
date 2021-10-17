@@ -66,7 +66,7 @@ class EvaluationController extends Controller
     {
         $ev = $this->ev->findOneById($id,['sessions']);
 
-        if ($ev->partner_id !== auth('partner')->id())
+        if ($ev->state  || $ev->partner_id !== auth('partner')->id())
         {
             abort(404);
         }
@@ -242,7 +242,7 @@ class EvaluationController extends Controller
             $ev->where('evaluations.id',$id)->where('partner_id',auth('partner')->id());
         })->with([
             'sessionStudents' => function($es) use($id){
-                $es->with('tasks','session.user')->whereHas('session',function ($s) use($id){
+                $es->with('tasks','session.users')->whereHas('session',function ($s) use($id){
                     $s->where('evaluation_sessions.evaluation_id',$id);
                 });
             }

@@ -107,9 +107,8 @@
                                     onclick="removeStudent({{$ev->id}},{{$s->id}})">
                                 <i data-feather="trash"></i>
                             </button>
-                            <a class="dropdown-item" href="{{route('partner.evaluations.students.show',['id' => $ev->id,'student' => $s->id])}}">
+                            <a class="btn btn-sm btn-outline-info" href="{{route('partner.evaluations.students.show',['id' => $ev->id,'student' => $s->id])}}">
                                 <i data-feather="eye" class="mr-50"></i>
-                                <span>{{__('actions.details')}}</span>
                             </a>
                         </td>
 

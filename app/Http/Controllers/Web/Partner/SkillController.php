@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Partner;
 
 use App\Contracts\SkillContract;
+use App\Contracts\TaskContract;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
@@ -28,6 +29,14 @@ class SkillController extends Controller
         return response()->json([
             'success' => true,
             'skills' => $skills
+        ]);
+    }
+
+    public function getTasks(TaskContract $task): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'tasks' => $task->findByFilter(),
         ]);
     }
 }

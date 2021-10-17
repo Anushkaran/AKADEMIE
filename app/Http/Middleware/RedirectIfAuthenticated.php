@@ -32,6 +32,11 @@ class RedirectIfAuthenticated
                 {
                     return redirect(RouteServiceProvider::PARTNER_HOME);
                 }
+
+                if ($guard === 'web')
+                {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }
         }
 

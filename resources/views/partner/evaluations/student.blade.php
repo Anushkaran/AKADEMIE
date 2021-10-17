@@ -128,7 +128,11 @@
                                             <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                 <span class="lead collapse-title"> session : {{$session->session->name}} </span>
                                                 <span class="lead collapse-title"> date {{$session->session->date->format('d/m/Y')}} </span>
-                                                <span class="lead collapse-title"> user : {{$session->session->user->name}} </span>
+                                                  <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateurs : 
+                                                    @foreach($session->session->users as $user)
+                                                        {{$user->name}},<br>
+                                                    @endforeach
+                                                 </span>
                                                 <span class="lead collapse-title"> note : {{$session->note}} </span>
                                             </div>
 

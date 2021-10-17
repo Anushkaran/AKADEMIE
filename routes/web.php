@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
+Route::get('login', [\App\Http\Controllers\Web\User\Auth\UserLoginController::class, 'index'])->name('login.index');
+Route::post('login', [\App\Http\Controllers\Web\User\Auth\UserLoginController::class, 'login'])->name('login');
+
+Route::get('password/reset/{token}', [\App\Http\Controllers\Web\User\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [\App\Http\Controllers\Web\User\Auth\ResetPasswordController::class, 'reset'])->name('reset');
+
+Route::get('forgot/password', [\App\Http\Controllers\Web\User\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('forgot.password.email');
+Route::post('forgot/password', [\App\Http\Controllers\Web\User\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forgot.password.send');
+
+
+Route::middleware('auth')->group(function () {
+    Route::any('logout', [\App\Http\Controllers\Web\User\Auth\UserLoginController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [App\Http\Controllers\Web\User\DashboardController::class, 'index'])->name('dashboard');
+});
+
+
 Route::view('/', 'welcome');
 
 Route::get('migrate',[App\Http\Controllers\ArtisanController::class,'migrate']);

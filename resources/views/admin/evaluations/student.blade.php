@@ -128,7 +128,11 @@
                                                 <span class="lead collapse-title"><i data-feather='arrow-right'></i> session : {{$session->session->name}} </span>
                                                 <span class="lead collapse-title"><i data-feather='arrow-right'></i> date {{$session->session->date->format('d/m/Y')}} </span>
 
-                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateur : {{$session->session->user->name}} </span>
+                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateurs : 
+                                                    @foreach($session->session->users as $user)
+                                                        {{$user->name}},<br>
+                                                    @endforeach
+                                                 </span>
                                             </div>
                                             <div class="card-header">
                                                 <span class="lead collapse-title"><i data-feather='arrow-right'></i> note : {{$session->note}} </span>

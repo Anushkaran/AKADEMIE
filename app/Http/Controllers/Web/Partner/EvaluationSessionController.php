@@ -31,31 +31,37 @@ class EvaluationSessionController extends Controller
      */
     public function index($evaluation) :Renderable
     {
-        $ev = $this->ev->findOneById($evaluation,['sessions']);
+
+        $ev = $this->ev->findOneById($evaluation,['sessions'],['*'],[],['finalSession']);
         $title = __('labels.list',['name' => trans_choice('labels.evaluation-session',3)]);
         return view('partner.evaluations.tabs.show',compact('ev','title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      *
+     * @param $evaluation
      * @param Request $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store($evaluation,Request $request): RedirectResponse
     {
-        //
+        $data = $request->validate([
+            'users'         => 'required|array',
+            'users.*'       => 'required|integer',
+            'name'          => 'required|string|max:150',
+            'date'          => 'required|date',
+            'note'          => 'sometimes|nullable|string|max:200',
+        ]);
+
+        $data['is_final'] = $request->has('is_final');
+        $this->ev->createSession($evaluation,$data);
+        session()->flash('success',__('messages.create'));
+        return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.
@@ -66,31 +72,30 @@ class EvaluationSessionController extends Controller
      */
     public function show($evaluation,$session) : Renderable
     {
-        $session = $this->s->findOneBy(['id' => $session,'evaluation_id' => $evaluation]);
+        $session = $this->s->findOneBy(['id' => $session,'evaluation_id' => $evaluation],['tasks.level','users']);
         return  view('partner.evaluations.sessions.show',compact('session'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param $evaluation
+     * @param $session
      * @param Request $request
-     * @param  int  $id
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update($evaluation,$session,Request $request): RedirectResponse
     {
-        //
+        $data = $request->validate([
+            'name'          => 'required|string|max:150',
+            'date'          => 'required|date',
+            'note'          => 'sometimes|nullable|string|max:200',
+        ]);
+
+        $data['evaluation'] = $evaluation;
+        $this->s->update($session,$data);
+        session()->flash('success',__('messages.update'));
+        return redirect()->back();
     }
 
     /**
@@ -104,7 +109,7 @@ class EvaluationSessionController extends Controller
     {
         $this->ev->deleteSession($evaluation,$session);
         session()->flash('success',__('messages.delete'));
-        return redirect()->back();
+        return redirect()->route('partner.evaluations.sessions.index',$evaluation);
     }
 
     public function attachUser($evaluation,$session,Request $request): RedirectResponse
@@ -122,6 +127,25 @@ class EvaluationSessionController extends Controller
     public function detachUser($evaluation,$session,$user): RedirectResponse
     {
         $this->s->detachUser($evaluation,$session,$user);
+        session()->flash('success',__('messages.delete'));
+        return redirect()->back();
+    }
+
+    public function attachTask($evaluation,$session,Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'tasks' => 'required|array',
+            'tasks.*' => 'required|integer',
+        ]);
+
+        $this->s->attachTask($evaluation,$session,$data);
+        session()->flash('success',__('messages.create'));
+        return redirect()->back();
+    }
+
+    public function detachTask($evaluation,$session,$task): RedirectResponse
+    {
+        $this->s->detachTask($evaluation,$session,$task);
         session()->flash('success',__('messages.delete'));
         return redirect()->back();
     }

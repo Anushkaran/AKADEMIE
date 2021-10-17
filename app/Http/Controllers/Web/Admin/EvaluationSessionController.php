@@ -72,18 +72,7 @@ class EvaluationSessionController extends Controller
         return  view('admin.evaluations.sessions.show',compact('session'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $evaluation
-     * @param $session
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function edit()
-    {
 
-    }
 
     /**
      * Update the specified resource in storage.
