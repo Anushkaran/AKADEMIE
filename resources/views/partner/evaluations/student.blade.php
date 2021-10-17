@@ -128,7 +128,7 @@
                                             <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                                 <span class="lead collapse-title"> session : {{$session->session->name}} </span>
                                                 <span class="lead collapse-title"> date {{$session->session->date->format('d/m/Y')}} </span>
-                                                  <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateurs : 
+                                                  <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateurs :
                                                     @foreach($session->session->users as $user)
                                                         {{$user->name}},<br>
                                                     @endforeach
@@ -154,7 +154,7 @@
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
-                                                                        @foreach($tasks as $t)
+                                                                        @foreach($session->session->tasks as $t)
                                                                             <tr>
                                                                                 <td>
                                                                                     <span class="font-weight-bold">{{$t->name}}</span>
@@ -162,7 +162,7 @@
                                                                                 <td>{{$t->description}}</td>
 
                                                                                 <td>
-                                                                                @if($session->tasks->contains($t->id))
+                                                                                @if($t->pivot->state)
                                                                                     <span class="badge badge-pill badge-light-success mr-1">validées</span>
                                                                                 @else
                                                                                     <span class="badge badge-pill badge-light-danger mr-1">non validées</span>
