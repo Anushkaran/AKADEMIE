@@ -160,6 +160,8 @@
                                                                         <tbody>
                                                                         @foreach($session->session->tasks as $t)
                                                                         <tr>
+                                                                            @dd($t->pivot->state)
+
                                                                             <td>
                                                                                 <span class="font-weight-bold">{{$t->name}}</span>
                                                                             </td>
