@@ -234,7 +234,7 @@ class EvaluationController extends Controller
             $ev->where('evaluations.id',$id);
         })->with([
             'sessionStudents' => function($es) use($id){
-                $es->with('tasks','session.user')->whereHas('session',function ($s) use($id){
+                $es->with('tasks','session.users')->whereHas('session',function ($s) use($id){
                     $s->where('evaluation_sessions.evaluation_id',$id);
                 });
             }
