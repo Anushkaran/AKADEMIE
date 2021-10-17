@@ -241,6 +241,6 @@ class EvaluationController extends Controller
         ])->findOrFail($student);
 
 
-        return view('admin.evaluations.student',compact('student','id','tasks'));
+        return view('admin.evaluations.student',compact('student','id'));
     }
 }
