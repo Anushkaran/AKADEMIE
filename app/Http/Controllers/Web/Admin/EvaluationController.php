@@ -240,11 +240,7 @@ class EvaluationController extends Controller
             }
         ])->findOrFail($student);
 
-        $tasks = Task::whereHas('skill',function ($s) use ($id){
-            $s->whereHas('evaluations',function ($e) use ($id){
-                $e->where('evaluations.id',$id);
-            });
-        })->get();
+        dd($student->sessionStudents->all());
 
         return view('admin.evaluations.student',compact('student','id','tasks'));
     }
