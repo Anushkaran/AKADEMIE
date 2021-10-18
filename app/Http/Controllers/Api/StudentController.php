@@ -96,7 +96,6 @@ class StudentController extends Controller
                 'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]]);
-
         }
 
         return response()->json([
