@@ -117,20 +117,19 @@ class StudentController extends Controller
      */
     public function getValidatedData(Request $request): array
     {
-        $rules = $request->validate([
+        $rules = [
             'first_name'    => 'required|string|max:100',
             'last_name'     => 'required|string|max:100',
             'partner_id'    => 'required|integer|exists:partners,id',
             'email'         => 'required|email',
             'phone'         => 'required|string|max:20',
             'address'       => 'required|string|max:200',
-        ]);
+        ];
 
         if ($request->method() === 'PUT')
         {
             unset($rules['partner_id']);
         }
-        dd($rules);
-        return $rules;
+        return $request->validate($rules);
     }
 }
