@@ -87,7 +87,7 @@ class StudentController extends Controller
             ]);
         }else{
             $session_student->tasks()
-                ->where('session_student_task.evaluation_id',$session_student->session->evaluation_id)
+
                 ->detach($data['task_id']);
             $session_student->tasks()->attach($data['task_id'],[
                 'student_id' => $session_student->student_id,
