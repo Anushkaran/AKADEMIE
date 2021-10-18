@@ -80,7 +80,7 @@ class StudentController extends Controller
         $session_student->load(['student.tasks' => function($q) use($session_student){
             $q->where('session_student_task.evaluation_id',$session_student->session->evaluation_id);
         }]);
-        dd($session_student->toArray());
+        dd(!$session_student->student->tasks->contains($data['task_id']));
         if (!$session_student->student->tasks->contains($data['task_id']))
         {
             $session_student->student->tasks()->attach($data['task_id'],[
