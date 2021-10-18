@@ -87,7 +87,7 @@ class StudentController extends Controller
             ]);
         }else{
             $session_student->tasks()->syncWithoutDetaching(3, [
-                'state' => $data['state']
+                'state' => true
             ]);
 
         }
