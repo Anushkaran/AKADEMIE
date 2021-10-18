@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <h1 class="mb-1 text-white">Beinvenue Au Panneau d'administration Collaborateurs lakadémie,</h1>
+                                        <h1 class="mb-1 text-white">Bienvenue Au Panneau d'administration Collaborateurs lakadémie,</h1>
                                         <p class="card-text m-auto w-75">
                                             <strong>57.6%</strong> Des session ont été achevé avec success.
                                         </p>

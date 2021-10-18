@@ -95,7 +95,7 @@
                                         <div class="row pb-50">
                                             <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
                                                 <div class="mb-1 mb-sm-0">
-                                                    <h2 class="font-weight-bolder mb-25">10</h2>
+                                                    <h2 class="font-weight-bolder mb-25">{{$students_count}}</h2>
                                                     <p class="card-text font-weight-bold mb-2">Nouveaux Etudiants</p>
                                                     <div class="font-medium-2">
                                                         <span class="text-success mr-25">+5.2%</span>
@@ -111,13 +111,13 @@
                                         <hr />
                                         <div class="row avg-sessions pt-50">
                                             <div class="col-6 mb-2">
-                                                <p class="mb-50">75 Session terminé</p>
+                                                <p class="mb-50">{{$sessions_count}} Session terminé</p>
                                                 <div class="progress progress-bar-primary" style="height: 6px">
                                                     <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="60" aria-valuemax="100" style="width: 50%"></div>
                                                 </div>
                                             </div>
                                             <div class="col-6 mb-2">
-                                                <p class="mb-50">120 Etudiants</p>
+                                                <p class="mb-50">{{$students_count}} Etudiants</p>
                                                 <div class="progress progress-bar-warning" style="height: 6px">
                                                     <div class="progress-bar" role="progressbar" aria-valuenow="120" aria-valuemin="120" aria-valuemax="200" style="width: 60%"></div>
                                                 </div>
