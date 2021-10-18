@@ -93,6 +93,7 @@ class StudentController extends Controller
      */
     public function update($id, Request $request): RedirectResponse
     {
+        dd($id);
         $data =$this->getValidatedData($request);
 
         $this->student->update($id,$data);
