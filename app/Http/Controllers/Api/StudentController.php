@@ -76,12 +76,11 @@ class StudentController extends Controller
         ]);
 
         $session_student = SessionStudent::with(['session','tasks'])->findOrFail($session_student);
-        dd($session_student->session->eavluation_id);
         if (!$session_student->tasks->contains($data['task_id']))
         {
             $session_student->tasks()->attach($data['task_id'],[
                 'student_id' => $session_student->student_id,
-                'evaluation_id' => $session_student->session->eavluation_id,
+                'evaluation_id' => $session_student->session->evaluation_id,
                 'user_id' => auth('api')->id(),
                 'state' => $data['state']
             ]);
@@ -89,7 +88,7 @@ class StudentController extends Controller
             $session_student->tasks()->syncWithoutDetaching([$data['task_id'] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
-                'evaluation_id' => $session_student->session->eavluation_id,
+                'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]]);
         }
