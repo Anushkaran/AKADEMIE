@@ -43,7 +43,7 @@
                         <div class="col-md-6 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.admin',1)])}}</h4>
+                                    <h4 class="card-title">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.user',1)])}}</h4>
                                     {{$errors}}
                                 </div>
                                 <div class="card-body">
