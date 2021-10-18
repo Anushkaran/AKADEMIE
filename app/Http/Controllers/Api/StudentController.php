@@ -16,8 +16,8 @@ class StudentController extends Controller
     public function show($id,$student,StudentContract $s)
     {
         $st = $s->findOneById($student,['evaluations' => function($ev) use($id){
-            $ev->where('evaluations.id',$id);
-        }],["*"],['active']);
+            $ev->where('evaluations.id',$id)->active();
+        }]);
 
         if ($st->evaluations->count() === 0)
         {
