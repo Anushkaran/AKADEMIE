@@ -76,7 +76,7 @@ class StudentController extends Controller
         ]);
 
         $session_student = SessionStudent::with(['session','tasks'])->findOrFail($session_student);
-        dd($session_student->tasks->contains($data['task_id']);
+        dd($session_student->tasks->contains($data['task_id']));
         if (!$session_student->tasks->contains($data['task_id']))
         {
             $session_student->tasks()->attach($data['task_id'],[
