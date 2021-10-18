@@ -87,9 +87,6 @@ class StudentController extends Controller
             ]);
         }else{
             $session_student->tasks()->syncWithoutDetaching(3, [
-                'student_id' => $session_student->student_id,
-                'user_id' => auth('api')->id(),
-                'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]);
 
