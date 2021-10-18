@@ -90,7 +90,7 @@ class StudentController extends Controller
                 'state' => $data['state']
             ]);
         }else{
-            $session_student->student->tasks()->syncWithoutDetaching([$data["taks_id"] => [
+            $session_student->student->tasks()->syncWithoutDetaching([$data["task_id"] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
                 'evaluation_id' => $session_student->session->evaluation_id,
