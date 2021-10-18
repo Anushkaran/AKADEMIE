@@ -86,13 +86,19 @@ class StudentController extends Controller
                 'state' => $data['state']
             ]);
         }else{
-            dd($data['state']);
             $session_student->tasks()->syncWithoutDetaching([$data['task_id'] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
                 'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]]);
+
+            dd( $session_student->tasks()->syncWithoutDetaching([$data['task_id'] => [
+                'student_id' => $session_student->student_id,
+                'user_id' => auth('api')->id(),
+                'evaluation_id' => $session_student->session->evaluation_id,
+                'state' => $data['state']
+            ]]));
         }
 
         return response()->json([
