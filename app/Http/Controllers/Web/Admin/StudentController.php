@@ -130,7 +130,7 @@ class StudentController extends Controller
         {
             unset($rules['partner_id']);
         }
-
+        dd($rules);
         return $rules;
     }
 }
