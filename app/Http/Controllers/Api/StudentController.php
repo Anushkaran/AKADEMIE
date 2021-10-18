@@ -82,14 +82,14 @@ class StudentController extends Controller
                 'student_id' => $session_student->student_id,
                 'evaluation_id' => $session_student->session->evaluation_id,
                 'user_id' => auth('api')->id(),
-                'state' => (boolean)$data['state'] ? true : false
+                'state' => $data['state']
             ]);
         }else{
             $session_student->tasks()->syncWithoutDetaching([$data['task_id'] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
                 'evaluation_id' => $session_student->session->evaluation_id,
-                'state' => (boolean)$data['state'] ? true : false
+                'state' => $data['state']
             ]]);
         }
 
