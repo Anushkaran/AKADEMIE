@@ -75,33 +75,27 @@ class StudentController extends Controller
             'state'   => 'required|boolean'
         ]);
 
-        $session_student = SessionStudent::with(['session','tasks'])->findOrFail($session_student);
+        $session_student = SessionStudent::with(['session'])->findOrFail($session_student);
 
-        if (!$session_student->tasks->contains($data['task_id']))
+        $session_student->load(['student.tasks' => function($q) use($session_student){
+            $q->where('session_student_task.evaluation_id',$session_student->session->evaluation_id);
+        }]);
+        dd($session_student->toArray());
+        if (!$session_student->student->tasks->contains($data['task_id']))
         {
-            $session_student->tasks()->attach($data['task_id'],[
+            $session_student->student->tasks()->attach($data['task_id'],[
                 'student_id' => $session_student->student_id,
                 'evaluation_id' => $session_student->session->evaluation_id,
                 'user_id' => auth('api')->id(),
                 'state' => $data['state']
             ]);
         }else{
-            $session_student->tasks()
-
-                ->detach($data['task_id']);
-            $session_student->tasks()->attach($data['task_id'],[
+            $session_student->student->tasks()->syncWithoutDetaching(3, [
                 'student_id' => $session_student->student_id,
-                'evaluation_id' => $session_student->session->evaluation_id,
                 'user_id' => auth('api')->id(),
+                'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]);
-
-            /*$session_student->tasks()->syncWithoutDetaching(3, [
-                'student_id' => $session_student->student_id,
-                'user_id' => auth('api')->id(),
-                'evaluation_id' => $session_student->session->evaluation_id,
-                'state' => $data['state']
-            ]);*/
 
         }
 
