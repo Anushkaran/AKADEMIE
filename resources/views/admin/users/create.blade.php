@@ -19,9 +19,9 @@
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
-                                    <li class="breadcrumb-item"><a href="{{route('admin.admins.index')}}">{{trans_choice('labels.admin',2)}}</a>
+                                    <li class="breadcrumb-item"><a href="{{route('admin.users.index')}}">{{trans_choice('labels.user',2)}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.admin',2)])}}
+                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.user',2)])}}
                                     </li>
                                 </ol>
                             </div>

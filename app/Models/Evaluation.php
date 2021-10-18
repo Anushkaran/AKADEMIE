@@ -37,6 +37,11 @@ class Evaluation extends Model
             ->withPivot('is_canceled');
     }
 
+    public function scopeActive($q)
+    {
+        return $q->where('state',true);
+    }
+
     /**
      * @return BelongsTo
      */

@@ -15,6 +15,7 @@ class CreateSessionStudentTaskTable extends Migration
     {
         Schema::create('session_student_task', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('evaluation_id')->constrained()->onDelete('cascade');
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->foreignId('session_student_id')->constrained()->onDelete('cascade');
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
@@ -33,6 +34,7 @@ class CreateSessionStudentTaskTable extends Migration
     public function down()
     {
         Schema::table('session_student_task', function (Blueprint $table) {
+            $table->dropForeign('session_student_task_evaluation_id_foreign');
             $table->dropForeign('session_student_task_student_id_foreign');
             $table->dropForeign('session_student_task_session_student_id_foreign');
             $table->dropForeign('session_student_task_task_id_foreign');
