@@ -37,9 +37,9 @@
             <!-- include ../../../includes/mixins-->
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
 
-                <li class="{{request()->routeIs('dashboard') ? 'active' : ''}}">
+                <li class="{{request()->routeIs('partner.dashboard') ? 'active' : ''}}">
                     <a class="nav-item  d-flex align-items-center"
-                       href="{{route('dashboard')}}"  data-i18n="Dashboard">
+                       href="{{route('partner.dashboard')}}"  data-i18n="Dashboard">
                         <i data-feather="activity"></i>
                         <span data-i18n="dashboard">{{__('labels.dashboard')}}</span>
                     </a>
