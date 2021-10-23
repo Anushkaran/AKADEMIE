@@ -53,4 +53,9 @@ class EvaluationSession extends Model
     {
         return $this->belongsToMany(Task::class)->withTimestamps();
     }
+
+    public function sessionStudents(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(SessionStudent::class);
+    }
 }

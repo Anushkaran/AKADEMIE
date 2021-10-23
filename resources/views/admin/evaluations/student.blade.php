@@ -112,6 +112,7 @@
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
+
                 <section id="accordion-with-margin">
                     <div class="row">
                         <div class="col-sm-12">
@@ -120,76 +121,60 @@
                                     <h4 class="card-title">Liste des sessions</h4>
                                 </div>
                                 <div class="card-body">
-                                    @foreach($student->sessionStudents as $session)
-                                    <div class="collapse-margin" id="accordionExample">
-                                        <div class="card">
-                                            <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <div class="row" id="table-hover-animation">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">{{trans_choice('labels.detail',1)}} de la session</h4>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover-animation">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>{{trans_choice('labels.task',1)}}</th>
+                                                            @foreach($evaluation->sessions as $session)
+                                                                <th>{{$session->date->format('d/m/Y')}}</th>
+                                                            @endforeach
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($tasks as $t)
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="font-weight-bold">{{$t->name}}</span>
+                                                                </td>
 
-                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> session : {{$session->session->name}} </span>
-                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> date {{$session->session->date->format('d/m/Y')}} </span>
+                                                                @foreach($evaluation->sessions as $session)
+                                                                    @php
+                                                                        $tasks = $session->sessionStudents->first() ? $session->sessionStudents->first()->tasks : collect([]);
+                                                                    @endphp
 
-                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateurs :
-                                                    @foreach($session->session->users as $user)
-                                                        {{$user->name}},<br>
-                                                    @endforeach
-                                                 </span>
-                                            </div>
-                                            <div class="card-header">
-                                                <span class="lead collapse-title"><i data-feather='arrow-right'></i> note : {{$session->note}} </span>
+                                                                    <td>
+                                                                        @if($tasks->contains($t->id))
+                                                                            @if($tasks->where('id',$t->id)->first()->pivot->state)
+                                                                                <span class="badge badge-success">{{__('labels.validated')}}</span>
+                                                                            @else
+                                                                                <span class="badge badge-danger">{{__('labels.failed')}}</span>
+                                                                            @endif
 
-                                            </div>
+                                                                        @else
+                                                                            <span class="badge badge-warning">{{__('labels.not_evaluated')}}</span>
+                                                                        @endif
 
-                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <div class="row" id="table-hover-animation">
-                                                        <div class="col-12">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <h4 class="card-title">{{trans_choice('labels.detail',1)}} de la session</h4>
-
-                                                                </div>
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-hover-animation">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>{{trans_choice('labels.task',1)}}</th>
-                                                                            <th>{{trans_choice('labels.detail',1)}}</th>
-                                                                            <th>{{trans_choice('labels.status',1)}}</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        @foreach($session->tasks as $t)
-                                                                        <tr>
-
-                                                                            <td>
-                                                                                <span class="font-weight-bold">{{$t->name}}</span>
-                                                                            </td>
-                                                                            <td>{{$t->description}}</td>
-
-                                                                            <td>
-                                                                                @if($t->pivot->state)
-                                                                                    <span class="badge badge-pill badge-light-success mr-1">Validé</span>
-                                                                                @else
-                                                                                    <span class="badge badge-pill badge-light-danger mr-1">Non validé</span>
-                                                                                @endif
-                                                                            </td>
-
-                                                                        </tr>
-                                                                        @endforeach
+                                                                    </td>
+                                                                @endforeach
+                                                            </tr>
+                                                        @endforeach
 
 
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
                                 </div>
+
                             </div>
                         </div>
                     </div>

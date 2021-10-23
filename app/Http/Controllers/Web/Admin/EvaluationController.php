@@ -222,12 +222,6 @@ class EvaluationController extends Controller
     }
 
 
-
-    public function deleteSession($id,$session): RedirectResponse
-    {
-
-    }
-
     public function studentDetails($id,$student)
     {
         $student  = Student::whereHas('evaluations',function ($ev) use ($id){
@@ -240,6 +234,14 @@ class EvaluationController extends Controller
             }
         ])->findOrFail($student);
 
-        return view('admin.evaluations.student',compact('student','id'));
+        $evaluation = Evaluation::with(['sessions.sessionStudents' => function($s) use($student){
+            $s->with('tasks')->where('student_id',$student->id);
+        }])->findOrFail($id);
+        $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($evaluation){
+            $ev->whereIn('evaluation_sessions.id',$evaluation->sessions->pluck('id'));
+        })->get();
+
+        //dd($evaluation->toArray(),$tasks->toArray());
+        return view('admin.evaluations.student',compact('student','id','tasks','evaluation'));
     }
 }

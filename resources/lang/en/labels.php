@@ -75,5 +75,7 @@ return [
     'is_final' => 'is final?',
     'yes' => 'Yes',
     'no' => 'No',
-
+    'validated' => 'validated',
+    'failed' => 'failed',
+    'not_evaluated' => 'not evaluated'
 ];
