@@ -20,12 +20,14 @@ class DashboardController extends Controller
         $evaluations_count = DB::table('evaluations')->where('partner_id',auth('partner')->id())->count();
         $new_students = DB::table('students')->where('partner_id',auth('partner')->id())->where('created_at','>=',Carbon::now()->subWeeks(1))->count();
         $week_sessions = DB::table('evaluations')->where('partner_id',auth('partner')->id())->whereBetween('date_exam',[now()->startOfWeek(),now()->endOfWeek()])->count();
+        $sessions_count = DB::table('evaluation_sessions')->where('id',auth('partner')->id())->count();
 
         return view('partner.dashboard',compact(
             'students_count',
             'evaluations_count',
             'new_students',
-            'week_sessions'
+            'week_sessions',
+            'sessions_count'
         ));
 
     }
