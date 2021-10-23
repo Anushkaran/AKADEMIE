@@ -27,7 +27,7 @@
                         <span class="user-status">{{auth()->user()->role}}</span>
                     </div>
                     <span class="avatar bg-light-primary">
-                       <span class="avatar-content">P</span>
+                       <span class="avatar-content">{{auth('partner')->user()->avatar_name}}</span>
                         <span class="avatar-status-online"></span>
                     </span>
 

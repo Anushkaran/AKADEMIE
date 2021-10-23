@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class Partner extends Authenticatable
 {
@@ -45,6 +46,15 @@ class Partner extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = [
+        'avatar_name'
+    ];
+
+    public function getAvatarNameAttribute()
+    {
+        return ucwords(Str::substr($this->name,0,1));
+    }
 
     /**
      * @return HasMany
