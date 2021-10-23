@@ -49,7 +49,6 @@
                                 <form class="add-new-record  pt-0" method="post" action="{{route('admin.students.update',$student->id)}}">
                                     @csrf
                                     @method('PUT')
-
                                     <div class="modal-body flex-grow-1">
                                         <div class="form-group">
                                             <label class="form-label" for="first_name">{{__('labels.first_name')}}</label>

@@ -28,7 +28,7 @@ class EvaluationController extends Controller
             $s->whereHas('users',function ($user){
                 $user->where("users.id",auth('api')->id());
             });
-        })->latest()->get());
+        })->active()->latest()->get());
     }
 
     public function getSessions($id)
@@ -42,7 +42,7 @@ class EvaluationController extends Controller
                 $q->whereHas('users',function ($user){
                     $user->where("users.id",auth('api')->id());
                 });
-            }])->findOrFail($id)
+            }])->active()->findOrFail($id)
         );
     }
 
@@ -52,7 +52,7 @@ class EvaluationController extends Controller
             'students.sessionStudents' => function($sst) use($id){
                 $sst->whereHas('session',function ($s)use($id){
                     $s->where('evaluation_sessions.evaluation_id',$id);
-                });
+                })->where('note','<>',null);
             }
         ])
             ->whereHas('sessions',function ($s) use ($session){
@@ -60,6 +60,7 @@ class EvaluationController extends Controller
                     $user->where("users.id",auth('api')->id());
                 })->where('id',$session);
             })
+            ->active()
             ->findOrFail($id);
 
         return StudentResource::collection($evaluation->students);

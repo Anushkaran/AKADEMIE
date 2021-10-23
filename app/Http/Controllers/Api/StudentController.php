@@ -16,7 +16,7 @@ class StudentController extends Controller
     public function show($id,$student,StudentContract $s)
     {
         $st = $s->findOneById($student,['evaluations' => function($ev) use($id){
-            $ev->where('evaluations.id',$id);
+            $ev->where('evaluations.id',$id)->active();
         }]);
 
         if ($st->evaluations->count() === 0)
@@ -26,10 +26,12 @@ class StudentController extends Controller
                 'message' => 'Object Not Found'
             ]);
         }
-
+        $st->load(['tasks' => function($t) use($id){
+            $t->where('session_student_task.evaluation_id',$id);
+        }]);
         return response()->json([
             'success' => true,
-            'student' => new StudentResource($st->load('tasks.skill'))
+            'student' => new StudentResource($st)
         ]);
     }
 
@@ -73,23 +75,28 @@ class StudentController extends Controller
             'state'   => 'required|boolean'
         ]);
 
-        $session_student = SessionStudent::with('session.evaluation.skills')->findOrFail($session_student);
+        $session_student = SessionStudent::with(['session'])->findOrFail($session_student);
 
-        if (!$session_student->tasks->contains($data['task_id']))
+        $session_student->load(['student.tasks' => function($q) use($session_student){
+            $q->where('session_student_task.evaluation_id',$session_student->session->evaluation_id);
+        }]);
+
+        if (!$session_student->student->tasks->contains($data['task_id']))
         {
-            $session_student->tasks()->attach($data['task_id'],[
+            $session_student->student->tasks()->attach($data['task_id'],[
                 'student_id' => $session_student->student_id,
+                'evaluation_id' => $session_student->session->evaluation_id,
                 'user_id' => auth('api')->id(),
                 'state' => $data['state']
             ]);
         }else{
-            $session_student->tasks()->syncWithoutDetaching([$data['task_id'] => [
+            $session_student->student->tasks()->syncWithoutDetaching([$data["task_id"] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
+                'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]]);
         }
-
 
         return response()->json([
             'success' => true,

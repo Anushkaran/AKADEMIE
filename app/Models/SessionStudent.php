@@ -32,7 +32,7 @@ class SessionStudent extends Model
     {
         return $this->belongsToMany(Task::class)
             ->withTimestamps()
-            ->withPivot(['student_id','user_id','state']);
+            ->withPivot(['student_id','user_id','state','evaluation_id']);
     }
 
 
