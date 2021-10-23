@@ -65,7 +65,7 @@
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.phone')}}</th>
                         <th>{{__('labels.email')}}</th>
-                        <th>{{__('labels.status')}}</th>
+                        <th>{{trans_choice('labels.status',1)}}</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
