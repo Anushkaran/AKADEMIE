@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Partner;
 
 use App\Contracts\EvaluationContract;
 use App\Http\Controllers\Controller;
+use App\Models\Evaluation;
 use App\Models\Student;
 use App\Models\Task;
 use Illuminate\Contracts\Support\Renderable;
@@ -240,20 +241,16 @@ class EvaluationController extends Controller
 
         $student  = Student::whereHas('evaluations',function ($ev) use ($id){
             $ev->where('evaluations.id',$id)->where('partner_id',auth('partner')->id());
-        })->with([
-            'sessionStudents' => function($es) use($id){
-                $es->with('tasks','session.users')->whereHas('session',function ($s) use($id){
-                    $s->where('evaluation_sessions.evaluation_id',$id);
-                });
-            }
-        ])->where('partner_id',auth('partner')->id())->findOrFail($student);
+        })->where('partner_id',auth('partner')->id())->findOrFail($student);
 
+        $evaluation = Evaluation::with(['sessions.sessionStudents' => function($s) use($student){
+            $s->with('tasks')->where('student_id',$student->id);
+        }])->where('partner_id',auth('partner')->id())->findOrFail($id);
 
-        $tasks = Task::whereHas('skill',function ($s) use ($id){
-            $s->whereHas('evaluations',function ($e) use ($id){
-                $e->where('evaluations.id',$id);
-            });
+        $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($evaluation){
+            $ev->whereIn('evaluation_sessions.id',$evaluation->sessions->pluck('id'));
         })->get();
-        return view('partner.evaluations.student',compact('student','id','tasks'));
+
+        return view('partner.evaluations.student',compact('student','id','tasks','evaluation'));
     }
 }

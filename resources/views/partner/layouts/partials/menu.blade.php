@@ -47,7 +47,7 @@
                 <li class="dropdown nav-item {{request()->routeIs('partner.students*') ? 'active' : ''}}" data-menu="dropdown">
                     <a class="dropdown-toggle nav-link d-flex align-items-center"
                        href="{{route('partner.students.index')}}" data-toggle="dropdown">
-                        <i data-feather="partners"></i>
+                        <i data-feather="users"></i>
                         <span data-i18n="student">
                             {{trans_choice('labels.student',2)}}
                         </span>
@@ -62,7 +62,7 @@
 
                         <li class="{{request()->routeIs('partner.students.create') ? 'active' : ''}}">
                             <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
-                                <i data-feather="partner-plus"></i>
+                                <i data-feather="user-plus"></i>
                                 <span data-i18n="Analytics">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.student',2)])}}</span>
                             </a>
                         </li>

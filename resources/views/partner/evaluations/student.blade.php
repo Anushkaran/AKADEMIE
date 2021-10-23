@@ -122,69 +122,60 @@
                                     <h4 class="card-title">Liste des sessions</h4>
                                 </div>
                                 <div class="card-body">
-                                    @foreach($student->sessionStudents as $session)
-                                    <div class="collapse-margin" id="accordionExample">
-                                        <div class="card">
-                                            <div class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                <span class="lead collapse-title"> session : {{$session->session->name}} </span>
-                                                <span class="lead collapse-title"> date {{$session->session->date->format('d/m/Y')}} </span>
-                                                  <span class="lead collapse-title"><i data-feather='arrow-right'></i> Formateurs :
-                                                    @foreach($session->session->users as $user)
-                                                        {{$user->name}},<br>
-                                                    @endforeach
-                                                 </span>
-                                                <span class="lead collapse-title"> note : {{$session->note}} </span>
-                                            </div>
+                                    <div class="row" id="table-hover-animation">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">{{trans_choice('labels.detail',1)}} de la session</h4>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover-animation">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>{{trans_choice('labels.task',1)}}</th>
+                                                            @foreach($evaluation->sessions as $session)
+                                                                <th>{{$session->date->format('d/m/Y')}}</th>
+                                                            @endforeach
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($tasks as $t)
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="font-weight-bold">{{$t->name}}</span>
+                                                                </td>
 
-                                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <div class="row" id="table-hover-animation">
-                                                        <div class="col-12">
-                                                            <div class="card">
-                                                                <div class="card-header">
-                                                                    <h4 class="card-title">details de la session</h4>
-                                                                </div>
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-hover-animation">
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>task</th>
-                                                                            <th>Detail</th>
-                                                                            <th>Status</th>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                        @foreach($session->tasks as $t)
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <span class="font-weight-bold">{{$t->name}}</span>
-                                                                                </td>
-                                                                                <td>{{$t->description}}</td>
+                                                                @foreach($evaluation->sessions as $session)
+                                                                    @php
+                                                                        $tasks = $session->sessionStudents->first() ? $session->sessionStudents->first()->tasks : collect([]);
+                                                                    @endphp
 
-                                                                                <td>
-                                                                                @if($t->pivot->state)
-                                                                                    <span class="badge badge-pill badge-light-success mr-1">validées</span>
-                                                                                @else
-                                                                                    <span class="badge badge-pill badge-light-danger mr-1">non validées</span>
+                                                                    <td>
+                                                                        @if($tasks->contains($t->id))
+                                                                            @if($tasks->where('id',$t->id)->first()->pivot->state)
+                                                                                <span class="badge badge-success">{{__('labels.validated')}}</span>
+                                                                            @else
+                                                                                <span class="badge badge-danger">{{__('labels.failed')}}</span>
+                                                                            @endif
 
-                                                                                @endif
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endforeach
+                                                                        @else
+                                                                            <span class="badge badge-warning">{{__('labels.not_evaluated')}}</span>
+                                                                        @endif
+
+                                                                    </td>
+                                                                @endforeach
+                                                            </tr>
+                                                        @endforeach
 
 
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
                                 </div>
+
                             </div>
                         </div>
                     </div>

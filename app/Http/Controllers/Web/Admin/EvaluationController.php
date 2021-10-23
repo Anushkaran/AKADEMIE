@@ -226,13 +226,7 @@ class EvaluationController extends Controller
     {
         $student  = Student::whereHas('evaluations',function ($ev) use ($id){
             $ev->where('evaluations.id',$id);
-        })->with([
-            'sessionStudents' => function($es) use($id){
-                $es->with('tasks','session.users')->whereHas('session',function ($s) use($id){
-                    $s->where('evaluation_sessions.evaluation_id',$id);
-                });
-            }
-        ])->findOrFail($student);
+        })->findOrFail($student);
 
         $evaluation = Evaluation::with(['sessions.sessionStudents' => function($s) use($student){
             $s->with('tasks')->where('student_id',$student->id);
