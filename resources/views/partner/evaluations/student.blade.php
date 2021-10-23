@@ -159,7 +159,7 @@
                                                                             @endif
 
                                                                         @else
-                                                                            <span class="badge badge-warning">{{__('labels.not_evaluated')}}</span>
+                                                                            <span class="badge badge-light-dark">{{__('labels.not_evaluated')}}</span>
                                                                         @endif
 
                                                                     </td>
