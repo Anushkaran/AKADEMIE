@@ -146,7 +146,7 @@ class StudentController extends Controller
         $student = Student::withCount(['tasks' => function ($ts) use($session_student_id){
             $ts->where('session_student_task.session_student_id',$session_student_id);
         }])->findOrFail($session_student->student_id);
-
+        dd($session_student->tasks_count !== $student->tasks_count);
         if ($session_student->tasks_count !== $student->tasks_count)
         {
             return response()->json([
@@ -159,7 +159,7 @@ class StudentController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Note Has Been Updated successfully'
+            'message' => 'Note Has Been Updated successfully',
         ]);
     }
 
