@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SessionStudentResource;
 use App\Http\Resources\StudentResource;
 use App\Models\SessionStudent;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -141,7 +142,18 @@ class StudentController extends Controller
     public function updateNote($session_student_id,Request $request)
     {
         $data = $request->validate(['note' => 'sometimes|nullable|string|max:200']);
-        $session_student = SessionStudent::findOrFail($session_student_id);
+        $session_student = SessionStudent::with(['session'])->withCount('tasks')->findOrFail($session_student_id);
+        $student = Student::withCount('tasks',function ($ts) use($session_student){
+            $ts->where('session_student_task.evaluation_id',$session_student->session->evaluation_id);
+        })->findOrFail($session_student->student_id);
+
+        if ($session_student->tasks_count !== $student->tasks_count)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'number of tasks attached to student must be equal to number of tasks attached to this session'
+            ],422);
+        }
 
         $session_student->update($data);
 
