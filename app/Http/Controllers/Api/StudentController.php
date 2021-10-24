@@ -87,6 +87,7 @@ class StudentController extends Controller
                 'student_id' => $session_student->student_id,
                 'evaluation_id' => $session_student->session->evaluation_id,
                 'user_id' => auth('api')->id(),
+                'session_student_id' => $session_student,
                 'state' => $data['state']
             ]);
         }else{
