@@ -41,8 +41,9 @@
                                     <div class="text-center">
                                         <h1 class="mb-1 text-white">Bienvenue Au Panneau d'administration Collaborateurs lakadémie,</h1>
                                         <p class="card-text m-auto w-75">
-                                            <strong>57.6%</strong> Des session ont été achevé avec success.
+                                            <strong>{{round($sessions_count/$week_sessions*100)}}%</strong> des sessions se derouleront pendant cette semaine .
                                         </p>
+
                                     </div>
                                 </div>
                             </div>
@@ -58,10 +59,11 @@
                                             <i data-feather="users" class="font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="font-weight-bolder mt-1">30</h2>
+                                    <h2 class="font-weight-bolder mt-1">{{$new_students}}</h2>
                                     <p class="card-text">Nouveaux Etudiants</p>
                                 </div>
                                 <div id="gained-chart"></div>
+
                             </div>
                         </div>
                         <!-- Subscribers Chart Card ends -->
@@ -75,7 +77,7 @@
                                             <i data-feather="package" class="font-medium-5"></i>
                                         </div>
                                     </div>
-                                    <h2 class="font-weight-bolder mt-1">52</h2>
+                                    <h2 class="font-weight-bolder mt-1">{{$sessions_count}}</h2>
                                     <p class="card-text">Nouvelles session</p>
                                 </div>
                                 <div id="order-chart"></div>
@@ -86,16 +88,16 @@
 
                     <div class="row match-height">
                         <!-- Avg Sessions Chart Card starts -->
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-12 col-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row pb-50">
                                         <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
                                             <div class="mb-1 mb-sm-0">
-                                                <h2 class="font-weight-bolder mb-25">10</h2>
+                                                <h2 class="font-weight-bolder mb-25">{{$new_students}}</h2>
                                                 <p class="card-text font-weight-bold mb-2">Nouveaux Etudiants</p>
                                                 <div class="font-medium-2">
-                                                    <span class="text-success mr-25">+5.2%</span>
+                                                    <span class="text-success mr-25">+{{round($students_count/$new_students*100)}}%</span>
                                                     <span>par rapport aux 7 derniers Jours</span>
                                                 </div>
                                             </div>
@@ -108,27 +110,28 @@
                                     <hr />
                                     <div class="row avg-sessions pt-50">
                                         <div class="col-6 mb-2">
-                                            <p class="mb-50">75 Session terminé</p>
+                                            <p class="mb-50">{{$sessions_count}} Sessions </p>
                                             <div class="progress progress-bar-primary" style="height: 6px">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="60" aria-valuemax="100" style="width: 50%"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="60" aria-valuemax="100" style="width: {{$sessions_count*100}}%"></div>
                                             </div>
                                         </div>
                                         <div class="col-6 mb-2">
-                                            <p class="mb-50">120 Etudiants</p>
+                                            <p class="mb-50">{{$students_count}} Etudiants</p>
                                             <div class="progress progress-bar-warning" style="height: 6px">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="120" aria-valuemin="120" aria-valuemax="200" style="width: 60%"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="120" aria-valuemin="120" aria-valuemax="{{$students_count}}" style="width: {{$students_count*100}}%"></div>
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <p class="mb-50">35 enseignant</p>
+                                            <p class="mb-50">{{round($sessions_count/$week_sessions*100)}}  % sessions par rapport au total se déroulerons cette semaine</p>
+                                             </p>
                                             <div class="progress progress-bar-danger" style="height: 6px">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="35" aria-valuemax="100" style="width: 70%"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$week_sessions}}" aria-valuemin="0" aria-valuemax="{{$sessions_count}}" style="width: {{round($sessions_count/$week_sessions*100)}}%"></div>
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <p class="mb-50">20 Centre</p>
+                                            <p class="mb-50">{{$new_students}} Nouveaux Etudiants</p>
                                             <div class="progress progress-bar-success" style="height: 6px">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$new_students}}" aria-valuemin="0" aria-valuemax="{{$students_count}}" style="width: {{$new_students*100}}%"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -138,39 +141,6 @@
                         <!-- Avg Sessions Chart Card ends -->
 
                         <!-- Support Tracker Chart Card starts -->
-                        <div class="col-lg-6 col-12">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between pb-0">
-                                    <h4 class="card-title">Centres</h4>
-
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-12 d-flex flex-column flex-wrap text-center">
-                                            <h1 class="font-large-2 font-weight-bolder mt-2 mb-0">20</h1>
-                                            <p class="card-text">CENTRES</p>
-                                        </div>
-                                        <div class="col-sm-10 col-12 d-flex justify-content-center">
-                                            <div id="support-trackers-chart"></div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between mt-1">
-                                        <div class="text-center">
-                                            <p class="card-text mb-50">Nouveaux Centres</p>
-                                            <span class="font-large-1 font-weight-bold">9</span>
-                                        </div>
-                                        <div class="text-center">
-                                            <p class="card-text mb-50">Centres Actifs</p>
-                                            <span class="font-large-1 font-weight-bold">18</span>
-                                        </div>
-                                        <div class="text-center">
-                                            <p class="card-text mb-50">Session actives</p>
-                                            <span class="font-large-1 font-weight-bold">34</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- Support Tracker Chart Card ends -->
                     </div>
 

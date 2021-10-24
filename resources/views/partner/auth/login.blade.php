@@ -72,7 +72,16 @@
                                 <div class="divider my-2">
                                     <div class="divider-text"><small>{{__('messages.forgot_password')}}</small></div>
                                 </div>
-                                <a href="{{route('partner.forgot.password.email')}}"><small>{{__('messages.reset_password_text')}} </small></a>                            </div>
+                                <a href="{{route('partner.forgot.password.email')}}"><small>{{__('messages.reset_password_text')}} </small></a>
+                                <div class="divider my-2">
+                                    <div class="divider-text"><small>{{__('messages.connect_as')}}</small></div>
+                                </div>
+                                <a href="{{route('admin.login')}}"><small>{{__('messages.connect_as_admin')}} </small></a>
+
+                                <br>
+
+                                <a href="{{route('login')}}"><small>{{__('messages.connect_as_user')}} </small></a>
+                            </div>
                         </div>
                         <!-- /Login-->
                     </div>

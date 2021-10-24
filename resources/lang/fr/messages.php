@@ -13,5 +13,9 @@ return [
     'forgot_password' => 'Mot de passe oublié?',
     'reset_password_text' => 'Récupérez votre Mot de passe 🔒',
     'reset_password' => 'Récupérer mon Mot de passe 🔒',
+    'connect_as' => 'Se connecter Autrement',
+    'connect_as_admin' => "Se Connecter autant qu'admin",
+    'connect_as_partner' => "Se Connecter autant qu'Organisme",
+    'connect_as_user' => "Se Connecter autant que Formateur",
 ];
 

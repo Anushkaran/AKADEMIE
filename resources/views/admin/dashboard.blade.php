@@ -95,11 +95,11 @@
                                         <div class="row pb-50">
                                             <div class="col-sm-6 col-12 d-flex justify-content-between flex-column order-sm-1 order-2 mt-1 mt-sm-0">
                                                 <div class="mb-1 mb-sm-0">
-                                                    <h2 class="font-weight-bolder mb-25">{{$students_count}}</h2>
+                                                    <h2 class="font-weight-bolder mb-25">{{$new_students}}</h2>
                                                     <p class="card-text font-weight-bold mb-2">Nouveaux Etudiants</p>
                                                     <div class="font-medium-2">
-                                                        <span class="text-success mr-25">+5.2%</span>
-                                                        <span>par rapport aux 7 derniers Jours</span>
+                                                        <span class="text-success mr-25">+{{$new_students/$students_count*100}}%</span>
+                                                        <span>par rapport au nombre total d'étudiants</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,21 +117,21 @@
                                                 </div>
                                             </div>
                                             <div class="col-6 mb-2">
-                                                <p class="mb-50">{{$students_count}} Etudiants</p>
+                                                <p class="mb-50">{{$new_students}} Nouveaux Etudiants</p>
                                                 <div class="progress progress-bar-warning" style="height: 6px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="120" aria-valuemin="120" aria-valuemax="200" style="width: 60%"></div>
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$new_students}}" aria-valuemin="0" aria-valuemax="{{$students_count}}" style="width: {{$new_students/$students_count*100}}%"></div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <p class="mb-50">35 enseignant</p>
+                                                <p class="mb-50">{{$users_count}} enseignants</p>
                                                 <div class="progress progress-bar-danger" style="height: 6px">
                                                     <div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="35" aria-valuemax="100" style="width: 70%"></div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <p class="mb-50">20 Centre</p>
+                                                <p class="mb-50">{{$centers_count}} Centres</p>
                                                 <div class="progress progress-bar-success" style="height: 6px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$centers_count}}" aria-valuemin="0" aria-valuemax="{{$centers_count}}" style="width: {{$centers_count*100}}%"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,14 +144,14 @@
                             <div class="col-lg-6 col-12">
                                 <div class="card">
                                     <div class="card-header d-flex justify-content-between pb-0">
-                                        <h4 class="card-title">Centres</h4>
+                                        <h4 class="card-title">Partenaires</h4>
 
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-sm-2 col-12 d-flex flex-column flex-wrap text-center">
-                                                <h1 class="font-large-2 font-weight-bolder mt-2 mb-0">20</h1>
-                                                <p class="card-text">CENTRES</p>
+                                                <h1 class="font-large-2 font-weight-bolder mt-2 mb-0">{{$partner_count}}</h1>
+                                                <p class="card-text">Partenaire</p>
                                             </div>
                                             <div class="col-sm-10 col-12 d-flex justify-content-center">
                                                 <div id="support-trackers-chart"></div>
@@ -160,15 +160,15 @@
                                         <div class="d-flex justify-content-between mt-1">
                                             <div class="text-center">
                                                 <p class="card-text mb-50">Nouveaux Centres</p>
-                                                <span class="font-large-1 font-weight-bold">9</span>
+                                                <span class="font-large-1 font-weight-bold">{{$centers_count}}</span>
                                             </div>
                                             <div class="text-center">
                                                 <p class="card-text mb-50">Centres Actifs</p>
-                                                <span class="font-large-1 font-weight-bold">18</span>
+                                                <span class="font-large-1 font-weight-bold">{{$centers_count}}</span>
                                             </div>
                                             <div class="text-center">
-                                                <p class="card-text mb-50">Session actives</p>
-                                                <span class="font-large-1 font-weight-bold">34</span>
+                                                <p class="card-text mb-50">Sessions de la semaine </p>
+                                                <span class="font-large-1 font-weight-bold">{{$week_sessions}}</span>
                                             </div>
                                         </div>
                                     </div>

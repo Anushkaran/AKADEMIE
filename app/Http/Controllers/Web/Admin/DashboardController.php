@@ -24,7 +24,12 @@ class DashboardController extends Controller
         $centers_count = DB::table('centers')->count();
         $evaluations_count = DB::table('evaluations')->count();
         $sessions_count = DB::table('evaluation_sessions')->count();
+
+
         $new_students = DB::table('students')->where('created_at','>=',Carbon::now()->subWeeks(1))->count();
+
+
+
         $week_sessions = DB::table('evaluations')->whereBetween('date_exam',[now()->startOfWeek(),now()->endOfWeek()])->count();
 
         return view('admin.dashboard',compact(

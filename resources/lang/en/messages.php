@@ -15,5 +15,9 @@ return [
     'forgot_password' => 'Forgot Password?',
     'reset_password_text' => 'Reset your password from here 🔒',
     'reset_password' => 'Reset Password 🔒',
+    'connect_as' => 'Connect as',
+    'connect_as_admin' => 'Connect as admin',
+    'connect_as_partner' => 'connect as partner',
+    'connect_as_user' => 'connect as user',
 ];
 

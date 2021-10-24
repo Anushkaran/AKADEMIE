@@ -72,6 +72,9 @@ return [
     'is_final' => 'session finale',
     'yes' => 'Oui',
     'no' => 'Non',
+    'validated' => 'validé',
+    'failed' => 'non validé',
+    'not_evaluated' => 'non évalué'
 
 
 ];
