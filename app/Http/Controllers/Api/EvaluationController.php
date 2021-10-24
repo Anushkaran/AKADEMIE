@@ -71,7 +71,7 @@ class EvaluationController extends Controller
         $sessions = EvaluationSession::with('tasks:id')
             ->whereHas('users',function ($user){
                 $user->where('users.id',auth('api')->id());
-            })
+            })->withCount('tasks')
             ->findOrFail($id);
 
         $tasks_ids = $sessions->tasks->pluck('id')->all();
@@ -81,8 +81,11 @@ class EvaluationController extends Controller
             $task->whereIn('tasks.id',$tasks_ids);
         }])->get();
 
-        return SkillResource::collection(
-            $skills
-        );
+        return response()->json([
+            'skills' => SkillResource::collection(
+                $skills
+            ),
+            'tasks_count' => $sessions->tasks_count
+        ]);
     }
 }
