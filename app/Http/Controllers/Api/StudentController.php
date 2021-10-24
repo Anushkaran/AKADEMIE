@@ -143,9 +143,9 @@ class StudentController extends Controller
     {
         $data = $request->validate(['note' => 'sometimes|nullable|string|max:200']);
         $session_student = SessionStudent::with(['session'])->withCount('tasks')->findOrFail($session_student_id);
-        $student = Student::withCount('tasks',function ($ts) use($session_student){
-            $ts->where('session_student_task.evaluation_id',$session_student->session->evaluation_id);
-        })->findOrFail($session_student->student_id);
+        $student = Student::withCount(['tasks' => function ($ts) use($session_student_id){
+            $ts->where('session_student_task.session_student_id',$session_student_id);
+        }])->findOrFail($session_student->student_id);
 
         if ($session_student->tasks_count !== $student->tasks_count)
         {
