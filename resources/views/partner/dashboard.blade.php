@@ -41,7 +41,13 @@
                                     <div class="text-center">
                                         <h1 class="mb-1 text-white">Bienvenue Au Panneau d'administration Collaborateurs lakadémie,</h1>
                                         <p class="card-text m-auto w-75">
-                                            <strong>{{round($sessions_count/$week_sessions*100)}}%</strong> des sessions se derouleront pendant cette semaine .
+                                            @if($sessions_count !=0 &&$week_sessions!=0)
+                                            <strong>{{round($sessions_count/$week_sessions*100)}}%</strong>
+                                            @else
+                                                <strong>--%</strong>
+                                            @endif
+                                                des sessions se derouleront pendant cette semaine .
+
                                         </p>
 
                                     </div>
@@ -97,7 +103,13 @@
                                                 <h2 class="font-weight-bolder mb-25">{{$new_students}}</h2>
                                                 <p class="card-text font-weight-bold mb-2">Nouveaux Etudiants</p>
                                                 <div class="font-medium-2">
-                                                    <span class="text-success mr-25">+{{round($students_count/$new_students*100)}}%</span>
+                                                    <span class="text-success mr-25">+
+                                                        @if($students_count !=0 &&$new_students!=0)
+                                                            {{round($students_count/$new_students*100)}}%
+                                                        @else
+                                                        --%
+                                                        @endif
+                                                            </span>
                                                     <span>par rapport aux 7 derniers Jours</span>
                                                 </div>
                                             </div>
@@ -125,7 +137,13 @@
                                             <p class="mb-50">{{round($sessions_count/$week_sessions*100)}}  % sessions par rapport au total se déroulerons cette semaine</p>
                                              </p>
                                             <div class="progress progress-bar-danger" style="height: 6px">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$week_sessions}}" aria-valuemin="0" aria-valuemax="{{$sessions_count}}" style="width: {{round($sessions_count/$week_sessions*100)}}%"></div>
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{$week_sessions}}" aria-valuemin="0" aria-valuemax="{{$sessions_count}}" style="width:
+                                                @if($sessions_count !=0 &&$week_sessions!=0)
+                                                {{round($sessions_count/$week_sessions*100)}}%
+                                                @else
+                                                0
+                                                @endif
+                                                    "></div>
                                             </div>
                                         </div>
                                         <div class="col-6">
