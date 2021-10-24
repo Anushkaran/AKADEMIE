@@ -98,8 +98,13 @@
                                                     <h2 class="font-weight-bolder mb-25">{{$new_students}}</h2>
                                                     <p class="card-text font-weight-bold mb-2">Nouveaux Etudiants</p>
                                                     <div class="font-medium-2">
-                                                        <span class="text-success mr-25">+{{$new_students/$students_count*100}}%</span>
-                                                        <span>par rapport au nombre total d'étudiants</span>
+
+                                                        @if($students_count !=0 &&$new_students!=0)
+                                                            <span class="text-success mr-25">+{{$new_students/$students_count*100}}%</span>
+                                                        @else
+                                                            <span class="text-success mr-25">+ --%</span>
+                                                        @endif
+                                                            <span>par rapport au nombre total d'étudiants</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -119,19 +124,27 @@
                                             <div class="col-6 mb-2">
                                                 <p class="mb-50">{{$new_students}} Nouveaux Etudiants</p>
                                                 <div class="progress progress-bar-warning" style="height: 6px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$new_students}}" aria-valuemin="0" aria-valuemax="{{$students_count}}" style="width: {{$new_students/$students_count*100}}%"></div>
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$new_students}}" aria-valuemin="0" aria-valuemax="{{$students_count}}" style="width:
+                                                    @if($students_count !=0 &&$new_students!=0)
+                                                    {{$new_students/$students_count*100}}%
+                                                    @else
+                                                    0%
+                                                    @endif
+
+                                                        "></div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <p class="mb-50">{{$users_count}} enseignants</p>
                                                 <div class="progress progress-bar-danger" style="height: 6px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="35" aria-valuemax="100" style="width: 70%"></div>
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$users_count}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$users_count}}%"></div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <p class="mb-50">{{$centers_count}} Centres</p>
                                                 <div class="progress progress-bar-success" style="height: 6px">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$centers_count}}" aria-valuemin="0" aria-valuemax="{{$centers_count}}" style="width: {{$centers_count*100}}%"></div>
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{$centers_count}}" aria-valuemin="0" aria-valuemax="{{$centers_count}}" style="width:
+                                                    {{$centers_count*100}}%"></div>
                                                 </div>
                                             </div>
                                         </div>
