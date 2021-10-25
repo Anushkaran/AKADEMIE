@@ -34,7 +34,6 @@
                         <th>#</th>
                         <th>{{__('labels.name')}}</th>
                         <th>{{__('labels.date')}}</th>
-                        <th>{{__('labels.is_final')}}</th>
                         <th>{{trans_choice('labels.user',2)}}</th>
                         <th>Actions</th>
                     </tr>
@@ -45,13 +44,7 @@
                         <td>{{$key+1}}</td>
                         <td>{{$s->name}}</td>
                         <td><span class="badge badge-success">{{$s->date->format('d-m-Y')}}</span></td>
-                        <td>
-                            @if($s->is_final)
-                                <span class="badge badge-danger">{{__('labels.yes')}}</span>
-                            @else
-                                <span class="badge badge-success">{{__('labels.no')}}</span>
-                            @endif
-                        </td>
+
                         <td>
                             @foreach($s->users as $user)
                                 <strong>
@@ -145,14 +138,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group ">
-                        <div class="custom-control custom-control-success custom-switch">
-                            <p class="mb-50">{{__('labels.is_final')}}</p>
-                            <input type="checkbox" name="is_final" value="on" @if(old('is_final')) checked @endif
-                            class="custom-control-input @error('is_final') is-invalid @enderror" id="is_final" />
-                            <label class="custom-control-label" for="is_final"></label>
-                        </div>
-                    </div>
+
 
                     <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>
                     <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">{{__('actions.cancel')}}</button>
