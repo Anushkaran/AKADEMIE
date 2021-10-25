@@ -92,7 +92,7 @@ class StudentController extends Controller
                 'state' => $data['state']
             ]);
         }else{
-            $session_student->student->tasks()->where('session_student_task.evaluation_id',$session_student->session->evaluation_id)->syncWithoutDetaching([$data["task_id"] => [
+            $session_student->student->tasks()->wherePivot('session_student_task.evaluation_id',$session_student->session->evaluation_id)->syncWithoutDetaching([$data["task_id"] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
                 'evaluation_id' => $session_student->session->evaluation_id,
