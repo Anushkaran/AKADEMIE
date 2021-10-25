@@ -95,6 +95,7 @@ class StudentController extends Controller
             $session_student->student->tasks()->wherePivot('session_student_task.evaluation_id',$session_student->session->evaluation_id)->syncWithoutDetaching([$data["task_id"] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
+                'session_student_id' => $session_student->id,
                 'evaluation_id' => $session_student->session->evaluation_id,
                 'state' => $data['state']
             ]]);
@@ -142,12 +143,16 @@ class StudentController extends Controller
     public function updateNote($session_student_id,Request $request)
     {
         $data = $request->validate(['note' => 'sometimes|nullable|string|max:200']);
+
         $session_student = SessionStudent::with(['session' => function($ss){
-            $ss->withCount('tasks');
+            $ss->withCount('tasks')->with('tasks:id');
         }])->findOrFail($session_student_id);
-        $student = Student::withCount(['tasks' => function ($ts) use($session_student_id){
-            $ts->where('session_student_task.session_student_id',$session_student_id);
+
+        $student = Student::withCount(['tasks' => function ($ts) use($session_student){
+            $ts->where('session_student_task.evaluation_id',$session_student->session->evaluation_id)
+                ->whereIn('tasks.id',$session_student->session->tasks->pluck('id')->all());
         }])->findOrFail($session_student->student_id);
+
 
         if ($session_student->session->tasks_count !== $student->tasks_count)
         {
