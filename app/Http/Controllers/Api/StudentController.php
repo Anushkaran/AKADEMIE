@@ -92,7 +92,7 @@ class StudentController extends Controller
                 'state' => $data['state']
             ]);
         }else{
-            $session_student->student->tasks()->syncWithoutDetaching([$data["task_id"] => [
+            $session_student->student->tasks()->where('session_student_task.evaluation_id',$session_student->session->evaluation_id)->syncWithoutDetaching([$data["task_id"] => [
                 'student_id' => $session_student->student_id,
                 'user_id' => auth('api')->id(),
                 'evaluation_id' => $session_student->session->evaluation_id,
@@ -148,6 +148,7 @@ class StudentController extends Controller
         $student = Student::withCount(['tasks' => function ($ts) use($session_student_id){
             $ts->where('session_student_task.session_student_id',$session_student_id);
         }])->findOrFail($session_student->student_id);
+
         if ($session_student->session->tasks_count !== $student->tasks_count)
         {
             return response()->json([
