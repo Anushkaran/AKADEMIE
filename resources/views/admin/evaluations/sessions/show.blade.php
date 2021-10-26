@@ -422,7 +422,7 @@
 
                     },
                     processResults: function ({tasks}, params) {
-                        params.page = params.page || 1;
+                        params.page = tasks.page || 1;
 
                         let fData = $.map(tasks.data, function (obj) {
                             obj.text = obj.name; // replace name with the property used for the text
