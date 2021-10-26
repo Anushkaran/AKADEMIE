@@ -29,7 +29,7 @@
                         <i class="mr-50" data-feather="home"></i>
                         {{__('labels.dashboard')}}
                     </a>
-                    <a class="dropdown-item" href="{{route('admin.users.show',auth()->id())}}">
+                    <a class="dropdown-item" href="{{route('admin.admins.show',auth()->id())}}">
                         <i class="mr-50" data-feather="user"></i>
                         {{__('labels.profile')}}
                     </a>

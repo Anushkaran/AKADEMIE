@@ -16,10 +16,6 @@ class PartnerSeeder extends Seeder
      */
     public function run(): void
     {
-        Partner::factory(16)->create()->each(function ($p){
-            Student::factory(random_int(100,500))->create([
-                'partner_id' => $p->id
-            ]);
-        });
+
     }
 }
