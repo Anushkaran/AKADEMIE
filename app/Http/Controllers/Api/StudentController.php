@@ -30,22 +30,17 @@ class StudentController extends Controller
             ]);
         }
 
-        /*$st->load(['tasks' => function($t) use($id , $session){
-            $t->wherePivot('session_student_task.evaluation_id',$id)->whereDoesntHave('sessionStudents',function ($ss) use ($session){
-                $ss->where('session_students.evaluation_session_id','<>',$session);
+        $st->load(['tasks' => function($t) use($id , $session){
+            $t->wherePivot('session_student_task.evaluation_id',$id)->whereHas('sessionStudents',function ($ss) use ($session){
+                $ss->where('evaluation_session_id','<>',$session);
             });
-        }]);*/
+        }]);
 
-        $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($session,$student){
-            $ev->where('evaluation_sessions.id',$session);
-        })->with(['sessionStudents' => function ($s) use($student){
-            $s->where("session_students.student_id",$student);
-        }])->get();
+
 
         return response()->json([
             'success' => true,
             'student' => new StudentResource($st),
-            'tasks'     => TaskResource::collection($tasks)
         ]);
     }
 
