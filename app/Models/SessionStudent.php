@@ -16,6 +16,7 @@ class SessionStudent extends Model
         'evaluation_session_id',
         'student_id',
         'note',
+        'is_evaluated'
     ];
 
     public function session(): \Illuminate\Database\Eloquent\Relations\BelongsTo

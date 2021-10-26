@@ -18,6 +18,7 @@ class CreateSessionStudentsTable extends Migration
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->foreignId('evaluation_session_id')->constrained()->onDelete('cascade');
             $table->string('note')->nullable();
+            $table->boolean('is_evaluated')->nullable();
             $table->timestamps();
         });
     }
