@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'success' => false,
                     'message' => 'Object not found'
-                ]);
+                ],404);
             }
         });
     }
