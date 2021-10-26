@@ -52,7 +52,7 @@ class EvaluationController extends Controller
             'students.sessionStudents' => function($sst) use($id,$session) {
                 $sst->whereHas('session',function ($s)use($id){
                     $s->where('evaluation_sessions.evaluation_id',$id);
-                })->where('is_evaluated',true)->where('sessionStudents.evaluation_session_id',$session);
+                })->where('is_evaluated',true)->where('session_students.evaluation_session_id',$session);
             }
         ])
             ->whereHas('sessions',function ($s) use ($session){
