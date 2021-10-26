@@ -410,15 +410,14 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
 
-                    },
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    }
+
+                },
                     processResults: function ({tasks}, params) {
                         params.page = params.page || 1;
                         let fData = $.map(tasks.data, function (obj) {
