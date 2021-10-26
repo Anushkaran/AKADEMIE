@@ -363,7 +363,6 @@
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
-    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script>
         $(document).ready(function() {
 
@@ -410,7 +409,7 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term  )
+                        if (params.term && params.term.length > 1)
                         {
                             return {
                                 search: params.term,
@@ -423,6 +422,7 @@
                 },
                 processResults: function ({tasks}, params) {
                     params.page = params.page || 1;
+
                     let fData = $.map(tasks.data, function (obj) {
                         obj.text = obj.name; // replace name with the property used for the text
                         return obj;
