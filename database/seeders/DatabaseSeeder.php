@@ -29,9 +29,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AdminSeeder::class);
         $this->call(LevelSeeder::class);
-        //$this->call(CenterSeeder::class);
-//        $this->call(PartnerSeeder::class);
+        $this->call(CenterSeeder::class);
+        $this->call(PartnerSeeder::class);
         $this->call(SkillSeeder::class);
         $this->call(TaskSeeder::class);
+        $this->call(StudentSeeder::class);
     }
 }

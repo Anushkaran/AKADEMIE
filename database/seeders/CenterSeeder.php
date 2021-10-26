@@ -14,6 +14,11 @@ class CenterSeeder extends Seeder
      */
     public function run()
     {
-        Center::factory(5)->create();
+        Center::create([
+            'name' => 'KLEORH METZ',
+            'phone' => 'KLEORH +33676342323',
+            'note' => 'METZ',
+            'address' => 'METZ',
+        ]);
     }
 }

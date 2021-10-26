@@ -16,6 +16,14 @@ class PartnerSeeder extends Seeder
      */
     public function run(): void
     {
-
+        Partner::create([
+            'name' => 'KLEORH',
+            'phone' => '+33676342323',
+            'email' => 'kleorh@lakademie.fr',
+            'leader' => 'KLEORH',
+            'department' => 'Hautes-Alpes',
+            'pedagogical_referent' => 'KLEORH',
+            'password' => bcrypt('password'),
+        ]);
     }
 }
