@@ -7,10 +7,8 @@ use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SessionStudentResource;
 use App\Http\Resources\StudentResource;
-use App\Http\Resources\TaskResource;
 use App\Models\SessionStudent;
 use App\Models\Student;
-use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -156,10 +154,9 @@ class StudentController extends Controller
 
         $student = Student::withCount(['tasks' => function ($ts) use($session_student){
             $ts->where('session_student_task.evaluation_id',$session_student->session->evaluation_id)
-                ->whereIn('tasks.id',$session_student->session->tasks->pluck('id')->all());
+                ->where('session_student_task.session_student_id',$session_student->id);
         }])->findOrFail($session_student->student_id);
 
-        dd($session_student->session->tasks_count,$student->tasks_count);
         if ($session_student->session->tasks_count !== $student->tasks_count)
         {
             return response()->json([
@@ -168,6 +165,8 @@ class StudentController extends Controller
             ],422);
         }
 
+
+        $data['is_evaluated'] = true;
         $session_student->update($data);
 
         return response()->json([

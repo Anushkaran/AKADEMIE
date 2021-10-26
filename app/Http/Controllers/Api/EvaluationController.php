@@ -49,10 +49,10 @@ class EvaluationController extends Controller
     public function students($id,$session)
     {
         $evaluation = Evaluation::with([
-            'students.sessionStudents' => function($sst) use($id){
+            'students.sessionStudents' => function($sst) use($id,$session) {
                 $sst->whereHas('session',function ($s)use($id){
                     $s->where('evaluation_sessions.evaluation_id',$id);
-                })->where('note','<>',null);
+                })->where('is_evaluated',true)->where('sessionStudents.evaluation_session_id',$session);
             }
         ])
             ->whereHas('sessions',function ($s) use ($session){
