@@ -425,9 +425,12 @@
                             obj.text = obj.name; // replace name with the property used for the text
                             return obj;
                         });
-
+                        console.log( (params.page * 10) < tasks.total);
+                        console.log('page : '+ params.page) ;
+                        console.log('total : '+ tasks.total) ;
                         return {
                             results: fData,
+
                             pagination: {
                                 more: (params.page * 10) < tasks.total
                             }
