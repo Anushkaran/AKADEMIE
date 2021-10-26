@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function show($id,$student,StudentContract $s): \Illuminate\Http\JsonResponse
+    public function show($id,$session,$student,StudentContract $s): \Illuminate\Http\JsonResponse
     {
         $st = $s->findOneById($student,['evaluations' => function($ev) use($id){
             $ev->where('evaluations.id',$id)->active();
@@ -28,8 +28,10 @@ class StudentController extends Controller
             ]);
         }
 
-        $st->load(['tasks' => function($t) use($id){
-            $t->where('session_student_task.evaluation_id',$id);
+        $st->load(['tasks' => function($t) use($id , $session){
+            $t->where('session_student_task.evaluation_id',$id)->whereHas('sessionStudents',function ($ss) use ($session){
+                $ss->where('session_students.evaluation_session_id',$session);
+            });
         }]);
 
         return response()->json([
@@ -80,11 +82,11 @@ class StudentController extends Controller
 
         $session_student = SessionStudent::with(['session'])->findOrFail($session_student);
 
-        $session_student->load(['student.tasks' => function($q) use($session_student){
-            $q->where('session_student_task.evaluation_id',$session_student->session->evaluation_id);
-        }]);
+        $tasks = DB::table('session_student_task')
+            ->where('student_id',$session_student->student_id)
+            ->where('session_student_id',$session_student->id)->pluck('task_id');
 
-        if (!$session_student->student->tasks->contains($data['task_id']))
+        if (!$tasks->contains($data['task_id']))
         {
             $session_student->student->tasks()->attach($data['task_id'],[
                 'student_id' => $session_student->student_id,
@@ -94,13 +96,11 @@ class StudentController extends Controller
                 'state' => $data['state']
             ]);
         }else{
-            $session_student->student->tasks()->wherePivot('session_student_task.evaluation_id',$session_student->session->evaluation_id)->syncWithoutDetaching([$data["task_id"] => [
-                'student_id' => $session_student->student_id,
-                'user_id' => auth('api')->id(),
-                'session_student_id' => $session_student->id,
-                'evaluation_id' => $session_student->session->evaluation_id,
-                'state' => $data['state']
-            ]]);
+            $session_student->student->tasks()
+                ->wherePivot('session_student_task.session_student_id',$session_student->id)
+                ->syncWithoutDetaching([$data["task_id"] => [
+                    'state' => $data['state']
+                ]]);
         }
 
         return response()->json([
