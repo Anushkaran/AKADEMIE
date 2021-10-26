@@ -32,7 +32,7 @@ class StudentController extends Controller
 
         $st->load(['tasks' => function($t) use($id , $session){
             $t->wherePivot('session_student_task.evaluation_id',$id)->whereHas('sessionStudents',function ($ss) use ($session){
-                $ss->where('evaluation_session_id','<>',$session);
+                $ss->where('evaluation_session_id',$session);
             });
         }]);
 
