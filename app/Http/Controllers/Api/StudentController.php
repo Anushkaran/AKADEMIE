@@ -38,8 +38,8 @@ class StudentController extends Controller
 
         $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($session,$student){
             $ev->where('evaluation_sessions.id',$session);
-        })->with(['students' => function ($s) use($student){
-            $s->where("students.id",$student);
+        })->with(['sessionStudents' => function ($s) use($student){
+            $s->where("session_students.student_id",$student);
         }])->get();
 
         return response()->json([
