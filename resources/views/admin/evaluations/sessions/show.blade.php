@@ -410,28 +410,31 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        return {
-                            search: params.term,
-                            page: params.page || 1
-                        };
+                        if (params.term  )
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
 
                     }
 
                 },
-                    processResults: function ({tasks}, params) {
-                        params.page = params.page || 1;
-                        let fData = $.map(tasks.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
+                processResults: function ({tasks}, params) {
+                    params.page = params.page || 1;
+                    let fData = $.map(tasks.data, function (obj) {
+                        obj.text = obj.name; // replace name with the property used for the text
+                        return obj;
+                    });
 
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < tasks.total
-                            }
-                        };
-                    }
+                    return {
+                        results: fData,
+                        pagination: {
+                            more: (params.page * 10) < tasks.total
+                        }
+                    };
+                }
             });
         });
 
