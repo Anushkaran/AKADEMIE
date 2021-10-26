@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@app.com',
             'password' => bcrypt('password'),
         ]);
-        \App\Models\User::factory(3)->create();
 
         $this->call(AdminSeeder::class);
         $this->call(LevelSeeder::class);
         //$this->call(CenterSeeder::class);
 //        $this->call(PartnerSeeder::class);
         $this->call(SkillSeeder::class);
+        $this->call(TaskSeeder::class);
     }
 }

@@ -4,23 +4,32 @@ namespace Database\Seeders;
 
 use App\Models\Skill;
 use App\Models\Task;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class SkillSeeder extends Seeder
 {
     /**
+     * @var string[][]
+     */
+    protected $skills = array(
+        array('id' => '13','name' => 'TRAVAILLER DANS LE SAAD','description' => 'Met en œuvre un accompagnement structuré et collaboratif','created_at' => '2021-09-23 08:31:18','updated_at' => '2021-09-23 09:27:44'),
+        array('id' => '14','name' => 'CONDITIONS DE BIENTRAITANCE','description' => 'Met en œuvre un accompagnement relationnel adapté','created_at' => '2021-09-23 08:31:28','updated_at' => '2021-09-23 09:28:02'),
+        array('id' => '15','name' => 'PRATIQUES SECURITAIRES','description' => 'Met en œuvre un accompagnement sécuritaire et favorable au maintien de l\'autonomie','created_at' => '2021-09-23 08:31:50','updated_at' => '2021-09-23 09:28:36'),
+        array('id' => '16','name' => 'TECHNIQUES MENAGERES ET DU LINGE','description' => 'Techniques ménagères et entretien du linge','created_at' => '2021-09-23 08:31:58','updated_at' => '2021-09-23 09:29:04'),
+        array('id' => '17','name' => 'TECHNIQUES CULINAIRES','description' => 'Techniques culinaires','created_at' => '2021-09-23 08:32:06','updated_at' => '2021-09-23 09:29:17'),
+        array('id' => '18','name' => 'TECHNIQUE HYGIENE ET CONFORT','description' => 'Techniques d\'hygiène et de confort et aider à la mobilité','created_at' => '2021-09-23 08:32:13','updated_at' => '2021-09-23 09:29:46')
+    );
+
+
+    /**
      * Run the database seeds.
      *
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
-    public function run()
+    public function run(): void
     {
-        Skill::factory(10)->create()->each(function ($s){
-           Task::factory(random_int(2,5))->create([
-               'skill_id' => $s->id,
-               'level_id' => random_int(1,10),
-           ]);
-        });
+        Skill::insert($this->skills);
     }
 }
