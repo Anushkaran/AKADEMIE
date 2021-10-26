@@ -414,7 +414,7 @@
                         // Query parameters will be ?search=[term]&page=[page]
                         return {
                             search: params.term,
-                            page: params.page || 1
+                            page: params.page + 1 || 1
                         };
 
                     },
