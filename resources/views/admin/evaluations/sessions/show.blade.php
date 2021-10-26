@@ -417,24 +417,24 @@
                             };
                         }
 
+                    },
+                    processResults: function ({tasks}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(tasks.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < tasks.total
+                            }
+                        };
                     }
-
                 },
-                processResults: function ({tasks}, params) {
-                    params.page = params.page || 1;
 
-                    let fData = $.map(tasks.data, function (obj) {
-                        obj.text = obj.name; // replace name with the property used for the text
-                        return obj;
-                    });
-
-                    return {
-                        results: fData,
-                        pagination: {
-                            more: (params.page * 10) < tasks.total
-                        }
-                    };
-                }
             });
         });
 
