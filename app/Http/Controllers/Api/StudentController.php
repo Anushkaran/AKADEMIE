@@ -36,9 +36,11 @@ class StudentController extends Controller
             });
         }]);*/
 
-        $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($session){
+        $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($session,$student){
             $ev->where('evaluation_sessions.id',$session);
-        })->get();
+        })->with(['students' => function ($s) use($student){
+            $s->where("students.id",$student);
+        }])->get();
 
         return response()->json([
             'success' => true,
