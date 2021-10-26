@@ -412,13 +412,7 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 1)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
+
 
                     },
                     processResults: function ({tasks}, params) {
