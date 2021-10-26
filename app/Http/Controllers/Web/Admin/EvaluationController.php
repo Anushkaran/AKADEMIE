@@ -231,6 +231,7 @@ class EvaluationController extends Controller
         $evaluation = Evaluation::with(['sessions.sessionStudents' => function($s) use($student){
             $s->with('tasks')->where('student_id',$student->id);
         }])->findOrFail($id);
+
         $tasks = Task::whereHas('evaluationSessions',function ($ev) use ($evaluation){
             $ev->whereIn('evaluation_sessions.id',$evaluation->sessions->pluck('id'));
         })->get();
