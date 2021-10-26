@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function show($id,$student,StudentContract $s)
+    public function show($id,$student,StudentContract $s): \Illuminate\Http\JsonResponse
     {
         $st = $s->findOneById($student,['evaluations' => function($ev) use($id){
             $ev->where('evaluations.id',$id)->active();
@@ -27,9 +27,11 @@ class StudentController extends Controller
                 'message' => 'Object Not Found'
             ]);
         }
+
         $st->load(['tasks' => function($t) use($id){
             $t->where('session_student_task.evaluation_id',$id);
         }]);
+
         return response()->json([
             'success' => true,
             'student' => new StudentResource($st)

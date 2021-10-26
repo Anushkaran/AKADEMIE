@@ -66,7 +66,7 @@ class EvaluationController extends Controller
         return StudentResource::collection($evaluation->students);
     }
 
-    public function tasks($id)
+    public function tasks($id): \Illuminate\Http\JsonResponse
     {
         $sessions = EvaluationSession::with('tasks:id')
             ->whereHas('users',function ($user){
