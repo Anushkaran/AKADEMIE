@@ -412,7 +412,10 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
 
                     },
                     processResults: function ({tasks}, params) {
