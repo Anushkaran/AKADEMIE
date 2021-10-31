@@ -110,7 +110,7 @@
                                                             <span>{{__('actions.details')}}</span>
                                                         </a>
 
-                                                        <a class="dropdown-item" href="javascript:void(0);" onclick="deleteForm({{$t->id}})">
+                                                        <a class="dropdown-item" href="javascript:void(0);" onclick="deleteForm({{$resource->id}})">
                                                             <i data-feather="trash" class="mr-50"></i>
                                                             <span>{{__('actions.delete')}}</span>
                                                         </a>

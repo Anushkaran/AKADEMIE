@@ -61,4 +61,8 @@ Route::middleware('auth:admin')->group(function (){
     Route::post('resources/{id}/users',[App\Http\Controllers\Web\Admin\ResourceController::class,'attach'])->name('resources.users.attach');
     Route::delete('resources/{id}/users/{user}',[App\Http\Controllers\Web\Admin\ResourceController::class,'detach'])->name('resources.users.detach');
     Route::resource('resources',App\Http\Controllers\Web\Admin\ResourceController::class);
+
+
+    Route::get('files/{id}',[App\Http\Controllers\Web\Admin\FileController::class,'show'])->name('files.show');
+
 });

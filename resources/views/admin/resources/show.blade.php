@@ -125,7 +125,7 @@
                                     </button>
                                 </h4>
                             </div>
-                            <div class="card-body" style="height: 500px">
+                            <div class="card-body" >
                                 {{--                                filters--}}
                             </div>
                             <div class="table-responsive">
@@ -236,27 +236,65 @@
     <!-- END: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script src="{{asset('assets/pdf-assets/lib/webviewer.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script>
-        WebViewer({
-            path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
-            licenseKey: 'uDGu06O5cLe2jYumzv0F',
-            initialDoc: '{{$resource->full_link}}',
-            // initialDoc: '/path/to/my/file.pdf',  // You can also use documents on your server
-        }, document.getElementById('viewer'))
-            .then(instance => {
-                // now you can access APIs through the WebViewer instance
-                const { Core, UI } = instance;
+        let link = `/admin/files/{{$resource->id}}`
+        axios({
+            url: link,
+            method: 'GET',
+            responseType: 'blob',
+        }).then(res => {
+            let blob = new Blob([res.data] ,{type:"application/pdf"})
+            /*const url = window.URL.createObjectURL(blob);
+            console.log(url)
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'test.pdf'; //or any other extension
+            document.body.appendChild(link);
+            link.click();*/
 
-                // adding an event listener for when a document is loaded
-                Core.documentViewer.addEventListener('documentLoaded', () => {
-                    console.log('document loaded');
-                });
+            WebViewer({
+                path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
+                licenseKey: 'w8xeg97n9J62TgxqdczO',
+            }, document.getElementById('viewer'))
+                .then(instance => {
+                    // now you can access APIs through the WebViewer instance
+                    const { Core, UI } = instance;
+                    const { documentViewer } = Core;
+                    UI.loadDocument(blob, { filename: 'myfile.pdf' })
 
-                // adding an event listener for when the page number has changed
-                Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
-                    console.log(`Page number is: ${pageNumber}`);
+                    // adding an event listener for when a document is loaded
+                    documentViewer.addEventListener('documentLoaded', () => {
+                        console.log('document loaded');
+                    });
+
+                    // adding an event listener for when the page number has changed
+                    documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
+                        console.log(`Page number is: ${pageNumber}`);
+                    });
+
+                    UI.disableElements([ 'menuOverlay', 'downloadButton' ]);
+                    UI.disableElements([ 'menuOverlay', 'printButton' ]);
                 });
-            });
+        }).catch(err => console.error())
+
+
+
+
+
+        function base64ToBlob(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; ++i) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+
+            return new Blob([bytes], { type: 'application/pdf' });
+        };
+
+
 
 
 
