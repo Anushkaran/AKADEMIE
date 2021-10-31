@@ -125,7 +125,7 @@
                                     </button>
                                 </h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="height: 500px">
                                 {{--                                filters--}}
                             </div>
                             <div class="table-responsive">
