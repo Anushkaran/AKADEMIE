@@ -59,6 +59,7 @@ return [
 
     //**********************************************************************************************//
     'thematic' => '{1}thematic|[2,*]thematics',
+    'resource' => '{1}resource|[2,*]resources',
     'organism' => 'organism',
     'user_type' => 'user type',
     'user_types' => [
@@ -77,5 +78,19 @@ return [
     'no' => 'No',
     'validated' => 'validated',
     'failed' => 'failed',
-    'not_evaluated' => 'not evaluated'
+    'not_evaluated' => 'not evaluated',
+    'resources' => 'resources',
+    'access' => 'Access method',
+    'file_type' => 'File Type',
+    'file' => 'File',
+
+    'access_methods' => [
+        1 => 'Read only',
+        2 => 'Download',
+    ],
+
+    'file_types' => [
+        1 => 'PDF',
+        2 => 'DOCUMENT (Docx,doc,ppt ...)',
+    ]
 ];

@@ -86,4 +86,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Thematic::class)->withTimestamps();
     }
+
+    public function resources(): BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class)->withTimestamps();
+    }
 }

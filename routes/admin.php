@@ -57,4 +57,8 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('tasks',App\Http\Controllers\Web\Admin\TaskController::class);
     Route::resource('thematics',App\Http\Controllers\Web\Admin\ThematicController::class)->except('show');
     Route::resource('levels',App\Http\Controllers\Web\Admin\LevelController::class)->except(['show','create']);
+
+    Route::post('resources/{id}/users',[App\Http\Controllers\Web\Admin\ResourceController::class,'attach'])->name('resources.users.attach');
+    Route::delete('resources/{id}/users/{user}',[App\Http\Controllers\Web\Admin\ResourceController::class,'detach'])->name('resources.users.detach');
+    Route::resource('resources',App\Http\Controllers\Web\Admin\ResourceController::class);
 });

@@ -9,7 +9,7 @@ return [
     'edit-password' => 'Change password',
     'delete' => 'Delete',
     'add' => 'Add',
-    'add-new' => 'Add new :name',
+    'add-new' => 'Add new :name|[2,*]Add new :name',
     'cancel' => 'Cancel',
     'details' => 'Details',
     'delete_confirm_title' => 'Are you sure?',
