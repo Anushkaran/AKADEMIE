@@ -108,7 +108,9 @@
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
+                <div id="viewer">
 
+                </div>
                 <div class="row" id="basic-table">
                     <div class="col-12">
                         <div class="card">
@@ -233,8 +235,30 @@
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
-
+    <script src="{{asset('assets/pdf-assets/lib/webviewer.min.js')}}"></script>
     <script>
+        WebViewer({
+            path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
+            licenseKey: 'uDGu06O5cLe2jYumzv0F',
+            initialDoc: '{{$resource->full_link}}',
+            // initialDoc: '/path/to/my/file.pdf',  // You can also use documents on your server
+        }, document.getElementById('viewer'))
+            .then(instance => {
+                // now you can access APIs through the WebViewer instance
+                const { Core, UI } = instance;
+
+                // adding an event listener for when a document is loaded
+                Core.documentViewer.addEventListener('documentLoaded', () => {
+                    console.log('document loaded');
+                });
+
+                // adding an event listener for when the page number has changed
+                Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
+                    console.log(`Page number is: ${pageNumber}`);
+                });
+            });
+
+
 
         $('.select2-users').select2({
             cache:true,
