@@ -85,7 +85,7 @@
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.file_type')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">
-                                                        <span class="badge badge-success">{{__('labels.types.'.$resource->type)}}</span>
+                                                        <span class="badge badge-success">{{__('labels.file_types.'.$resource->type)}}</span>
                                                     </p>
                                                 </div>
 
@@ -239,19 +239,29 @@
 
     <script>
         let link = `/admin/files/{{$resource->id}}`
+
+        let iframe = document.createElement('iframe');
+        iframe.id = 'iframe-viewer'
+
         axios({
             url: link,
             method: 'GET',
             responseType: 'blob',
         }).then(res => {
-            let blob = new Blob([res.data] ,{type:"application/pdf"})
+            let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
+            let url = window.URL.createObjectURL(blob,{ type: res.data.type });
+            console.log(url)
+            iframe.src = `https://docs.google.com/gview?url=${url}&embedded=true`
+            iframe.height = "300px";
+            iframe.width = "100%";
+            document.getElementById('viewer').append(iframe)
             /*const url = window.URL.createObjectURL(blob);
             console.log(url)
             const link = document.createElement('a');
             link.href = url;
             link.download = 'test.pdf'; //or any other extension
             document.body.appendChild(link);
-            link.click();*/
+            link.click();
 
             WebViewer({
                 path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
@@ -275,7 +285,7 @@
 
                     UI.disableElements([ 'menuOverlay', 'downloadButton' ]);
                     UI.disableElements([ 'menuOverlay', 'printButton' ]);
-                });
+                });*/
         }).catch(err => console.error())
 
 

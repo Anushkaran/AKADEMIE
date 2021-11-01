@@ -19,8 +19,4 @@ class FileController extends Controller
         return response()->download($path);
     }
 
-    public function test()
-    {
-
-    }
 }
