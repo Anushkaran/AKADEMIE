@@ -16,11 +16,8 @@ class FileController extends Controller
             abort(404);
         }
         $path = Storage::disk('private')->path($r->link);
+
         return response()->download($path);
     }
 
-    public function test()
-    {
-
-    }
 }

@@ -85,7 +85,7 @@
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.file_type')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">
-                                                        <span class="badge badge-success">{{__('labels.types.'.$resource->type)}}</span>
+                                                        <span class="badge badge-success">{{__('labels.file_types.'.$resource->type)}}</span>
                                                     </p>
                                                 </div>
 
@@ -235,24 +235,34 @@
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/pdf-assets/lib/webviewer.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
         let link = `/admin/files/{{$resource->id}}`
+
+        let iframe = document.createElement('iframe');
+        iframe.id = 'iframe-viewer'
+
         axios({
             url: link,
             method: 'GET',
             responseType: 'blob',
         }).then(res => {
-            let blob = new Blob([res.data] ,{type:"application/pdf"})
+            let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
+            let url = window.URL.createObjectURL(blob);
+            //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
+            console.log(url)
+            iframe.src = `${url}`
+            iframe.height = "300px";
+            iframe.width = "100%";
+            document.getElementById('viewer').append(iframe)
             /*const url = window.URL.createObjectURL(blob);
             console.log(url)
             const link = document.createElement('a');
             link.href = url;
             link.download = 'test.pdf'; //or any other extension
             document.body.appendChild(link);
-            link.click();*/
+            link.click();
 
             WebViewer({
                 path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
@@ -262,7 +272,7 @@
                     // now you can access APIs through the WebViewer instance
                     const { Core, UI } = instance;
                     const { documentViewer } = Core;
-                    UI.loadDocument(blob, { filename: 'myfile.pdf' })
+                    UI.loadDocument(blob, { filename: '{{$resource->name}}'+'.pdf' })
 
                     // adding an event listener for when a document is loaded
                     documentViewer.addEventListener('documentLoaded', () => {
@@ -276,7 +286,7 @@
 
                     UI.disableElements([ 'menuOverlay', 'downloadButton' ]);
                     UI.disableElements([ 'menuOverlay', 'printButton' ]);
-                });
+                });*/
         }).catch(err => console.error())
 
 
