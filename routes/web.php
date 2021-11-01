@@ -32,7 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/test', [App\Http\Controllers\Web\Admin\FileController::class,'test']);
+Route::view('/', 'welcome');
+Route::view('/test', 'test');
 
 Route::get('migrate',[App\Http\Controllers\ArtisanController::class,'migrate']);
 Route::get('seed',[App\Http\Controllers\ArtisanController::class,'seed']);

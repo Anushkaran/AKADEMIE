@@ -235,7 +235,6 @@
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
     <!-- END: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/pdf-assets/lib/webviewer.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
@@ -262,7 +261,7 @@
                     // now you can access APIs through the WebViewer instance
                     const { Core, UI } = instance;
                     const { documentViewer } = Core;
-                    UI.loadDocument(blob, { filename: 'myfile.pdf' })
+                    UI.loadDocument(blob, { filename: '{{$resource->name}}'+'.pdf' })
 
                     // adding an event listener for when a document is loaded
                     documentViewer.addEventListener('documentLoaded', () => {
