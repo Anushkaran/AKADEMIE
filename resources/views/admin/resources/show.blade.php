@@ -248,10 +248,11 @@
             method: 'GET',
             responseType: 'blob',
         }).then(res => {
-            let blob = new Blob([res.data] ,{type:"application/pdf"})
-            let url = window.URL.createObjectURL(blob,{ type: res.data.type });
+            let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
+            let url = window.URL.createObjectURL(blob);
+            //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
             console.log(url)
-            iframe.src = `https://docs.google.com/gview?url=${url}&embedded=true`
+            iframe.src = `${url}`
             iframe.height = "300px";
             iframe.width = "100%";
             document.getElementById('viewer').append(iframe)

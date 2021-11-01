@@ -9,7 +9,11 @@
 </head>
 <body>
 
-<iframe src="https://docs.google.com/gview?url=https://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx&embedded=true" height="300" width="100%">
+<iframe  src="https://docs.google.com/gview?url={{asset('db_v1.pdf')}}&embedded=true" frameborder="0">
 </iframe>
+
+<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://ieee802.org/secmail/docIZSEwEqHFr.doc' width='px' height='px' frameborder='0'>
+</iframe>
+
 </body>
 </html>
