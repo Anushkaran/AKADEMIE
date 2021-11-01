@@ -248,7 +248,7 @@
             method: 'GET',
             responseType: 'blob',
         }).then(res => {
-            let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
+            let blob = new Blob([res.data] ,{type:"application/pdf"})
             let url = window.URL.createObjectURL(blob,{ type: res.data.type });
             console.log(url)
             iframe.src = `https://docs.google.com/gview?url=${url}&embedded=true`

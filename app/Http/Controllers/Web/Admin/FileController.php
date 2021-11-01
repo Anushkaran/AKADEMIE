@@ -16,7 +16,8 @@ class FileController extends Controller
             abort(404);
         }
         $path = Storage::disk('private')->path($r->link);
-        return response()->download($path);
+
+        return response()->download(public_path('db_v1.pdf'));
     }
 
 }
