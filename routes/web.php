@@ -33,7 +33,6 @@ Route::middleware('auth')->group(function () {
 
 
 Route::view('/', 'welcome');
-Route::get('/test', [App\Http\Controllers\Web\Admin\FileController::class,'test']);
 
 Route::get('migrate',[App\Http\Controllers\ArtisanController::class,'migrate']);
 Route::get('seed',[App\Http\Controllers\ArtisanController::class,'seed']);

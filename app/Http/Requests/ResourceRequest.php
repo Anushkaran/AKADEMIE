@@ -27,13 +27,14 @@ class ResourceRequest extends FormRequest
         $rules  =  [
             'name'   => 'required|string|max:200',
             'type'   => 'required|integer|in:1,2',
-            'access' => 'required|integer|in:1,2',
+            'access' => $this->getRuleForAccess(),
             'file'   => $this->getRuleForFile(),
         ];
 
         if ($this->method() === "PUT")
         {
             unset($rules['type'],$rules['file']);
+
         }
 
         return $rules;
@@ -50,6 +51,22 @@ class ResourceRequest extends FormRequest
         if ($type === 2)
         {
             return 'required|mimes:ppt,pptx,docx,doc|max:3000';
+        }
+
+        return  '';
+    }
+
+    private function getRuleForAccess()
+    {
+        $type = (int)$this->input('type');
+
+        if ($type === 1){
+            return 'required|integer|in:1,2';
+        }
+
+        if ($type === 2)
+        {
+            return 'required|integer|in:2';
         }
 
         return  '';
