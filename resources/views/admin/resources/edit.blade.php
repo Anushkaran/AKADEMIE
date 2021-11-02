@@ -54,7 +54,7 @@
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>
-
+                                            @if($resource->type === 1)
                                             <div class="form-group">
                                                 <label class="form-label" for="access">{{__('labels.access')}}</label>
                                                 <select name="access" required id="access" class="form-control">
@@ -68,6 +68,7 @@
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>
+                                            @endif
 
 
                                         <button type="submit" class="btn btn-primary  mr-1">{{__('actions.save')}}</button>

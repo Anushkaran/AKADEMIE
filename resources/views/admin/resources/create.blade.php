@@ -59,22 +59,8 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="form-label" for="access">{{__('labels.access')}}</label>
-                                            <select name="access" required id="access" class="form-control">
-                                                @foreach(__('labels.access_methods') as $key => $a)
-                                                    <option value="{{$key}}" @if((int)old('access') === $key) selected @endif>
-                                                        {{__('labels.access_methods.'.$key)}}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('access')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="form-group">
                                             <label class="form-label" for="type">{{__('labels.file_type')}}</label>
-                                            <select name="type" required id="type" class="form-control">
+                                            <select name="type" required id="type" class=" form-control">
                                                 @foreach(__('labels.file_types') as $key => $a)
                                                     <option value="{{$key}}" @if((int)old('type') === $key) selected @endif>
                                                         {{__('labels.file_types.'.$key)}}
@@ -85,6 +71,23 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="access">{{__('labels.access')}}</label>
+                                            <select name="access" required id="access" class=" form-control">
+                                                <option value="1" @if((int)old('access') === 1) selected @endif id="access-option-read-only">
+                                                    {{__('labels.access_methods.1')}}
+                                                </option>
+                                                <option value="{{2}}" @if((int)old('access') === 2) selected @endif id="access-option-download" >
+                                                    {{__('labels.access_methods.2')}}
+                                                </option>
+                                            </select>
+                                            @error('access')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+
+
 
                                         <div class="form-group">
                                             <label class="form-label" for="file">{{__('labels.file')}}</label>
@@ -115,78 +118,32 @@
     <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.select2-skill').select2({
-                cache:true,
-                ajax: {
-                    delay: 250,
-                    url: '{{route('admin.skills.index')}}',
-                    dataType: 'json',
-                    data: function (params) {
 
-                        // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
-
-                    },
-                    processResults: function ({skills}, params) {
-                        params.page = params.page || 1;
-
-                        let fData = $.map(skills.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
-
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < skills.total
-                            }
-                        };
-                    }
-                }
-            });
-
-            $('.select2-level').select2({
-                minimumInputLength:2,
-                cache:true,
-                ajax: {
-                    delay: 250,
-                    url: '{{route('admin.levels.index')}}',
-                    dataType: 'json',
-                    data: function (params) {
-
-                        // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
-
-                    },
-                    processResults: function ({levels}, params) {
-                        params.page = params.page || 1;
-
-                        let fData = $.map(levels.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
-
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < levels.total
-                            }
-                        };
-                    }
-                }
-            });
+            $('.select2').select2();
         });
+        let fileType = document.getElementById('type');
+
+        if (parseInt(fileType.value) === 2)
+        {
+            document.getElementById('access-option-read-only').style.display = 'none';
+            document.getElementById('access-option-download').selected = true;
+        }
+
+
+        fileType.addEventListener('change',function (e){
+
+            if (parseInt(e.target.value) === 1)
+            {
+                document.getElementById('access-option-read-only').style.display = '';
+
+            }
+
+            if (parseInt(e.target.value) === 2)
+            {
+                document.getElementById('access-option-read-only').style.display = 'none';
+                document.getElementById('access-option-download').selected = true;
+            }
+        })
+
     </script>
 @endpush

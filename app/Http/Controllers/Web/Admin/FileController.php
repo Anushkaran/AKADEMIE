@@ -23,16 +23,4 @@ class FileController extends Controller
         return response()->download($path);
     }
 
-    public function test(){
-        $url = Storage::disk('private')->path('resources/test.docx');
-
-        if (!auth()->check())
-        {
-            abort(403);
-        }
-
-
-        return response()->download($url);
-    }
-
 }

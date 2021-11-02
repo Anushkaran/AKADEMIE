@@ -115,17 +115,8 @@
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
-                <div id="">
-                    @php
-                    if ($resource->type === 1)
-                    {
-                        $url = $resource->full_link;
-                    }else{
-                        $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
-                    }
+                <div id="viewer">
 
-                    @endphp
-                    <iframe width="100%" height="400" src="{!! $url !!}"></iframe>
                 </div>
                 <div class="row" id="basic-table">
                     <div class="col-12">
@@ -137,7 +128,7 @@
                                             type="button" data-toggle="modal" id="create-btn"
                                             data-target="#modals-slide-in">
                                         <i data-feather='plus'></i>
-                                        {{__('actions.add-new',['name' => trans_choice('labels.resource',1)])}}
+                                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.user',1)])}}
                                     </button>
                                 </h4>
                             </div>
@@ -185,7 +176,7 @@
                                                         </button>
                                                         <div class="dropdown-menu">
 
-                                                            <a class="dropdown-item" href="{{route('admin.resources.show',$user->id)}}">
+                                                            <a class="dropdown-item" href="{{route('admin.users.show',$user->id)}}">
                                                                 <i data-feather="eye" class="mr-50"></i>
                                                                 <span>{{__('actions.details')}}</span>
                                                             </a>
@@ -254,44 +245,47 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+        @if($resource->type === 1)
         let link = `/admin/files/{{$resource->id}}`
 
-        /*   let iframe = document.createElement('iframe');
-           iframe.id = 'iframe-viewer'
+        let iframe = document.createElement('iframe');
+        iframe.id = 'iframe-viewer'
 
-           axios({
-               url: link,
-               method: 'GET',
-               responseType: 'blob',
-           }).then(res => {
-               let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
+        axios({
+            url: link,
+            method: 'GET',
+            responseType: 'blob',
+        }).then(res => {
+            let blob = new Blob([res.data] ,{type:"application/pdf"})
 
-               //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
+            //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
 
-               let file = new File([blob], "test.pdf");
-               let url = window.URL.createObjectURL(file);
-               console.log(url)
-               iframe.src = `https://docs.google.com/gview${url}`
-               iframe.height = "300px";
-               iframe.width = "100%";
-               document.getElementById('viewer').append(iframe)
-               const url = window.URL.createObjectURL(blob);
-               console.log(url)
-               const link = document.createElement('a');
-               link.href = url;
-               link.download = 'test.pdf'; //or any other extension
-               document.body.appendChild(link);
-               link.click();
+            let url = window.URL.createObjectURL(blob);
+            @if($resource->access === 1)
+                iframe.src = `${url}#toolbar=0`
+            @else
+                iframe.src = `${url}`
+            @endif
+            iframe.height = "300px";
+            iframe.width = "100%";
+            document.getElementById('viewer').append(iframe)
+            /*  const url = window.URL.createObjectURL(blob);
+             console.log(url)
+             const link = document.createElement('a');
+             link.href = url;
+             link.download = 'test.pdf'; //or any other extension
+             document.body.appendChild(link);
+             link.click();
 
-               WebViewer({
-                   path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
-                   licenseKey: 'w8xeg97n9J62TgxqdczO',
-               }, document.getElementById('viewer'))
-                   .then(instance => {
-                       // now you can access APIs through the WebViewer instance
-                       const { Core, UI } = instance;
-                       const { documentViewer } = Core;
-                       UI.loadDocument(blob, { filename: '{{$resource->name}}'+'.pdf' })
+             WebViewer({
+                 path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
+                 licenseKey: 'w8xeg97n9J62TgxqdczO',
+             }, document.getElementById('viewer'))
+                 .then(instance => {
+                     // now you can access APIs through the WebViewer instance
+                     const { Core, UI } = instance;
+                     const { documentViewer } = Core;
+                     UI.loadDocument(blob, { filename: '{{$resource->name}}'+'.pdf' })
 
                     // adding an event listener for when a document is loaded
                     documentViewer.addEventListener('documentLoaded', () => {
@@ -305,12 +299,12 @@
 
                     UI.disableElements([ 'menuOverlay', 'downloadButton' ]);
                     UI.disableElements([ 'menuOverlay', 'printButton' ]);
-                });
+                });*/
         }).catch(err => console.error())
 
+            @endif
 
 
-*/
 
         function base64ToBlob(base64) {
             const binaryString = window.atob(base64);
