@@ -119,7 +119,7 @@
                     @php
                     if ($resource->type === 1)
                     {
-                        $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
+                        $url = $resource->full_link;
                     }else{
                         $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
                     }
