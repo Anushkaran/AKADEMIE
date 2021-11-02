@@ -4,7 +4,14 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/pages/app-user.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
-
+    <style>
+        div[aria-label="Pop-out"] {
+            display: none;
+        }
+        div[aria-label="toolbar"] {
+            width: 52px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -108,8 +115,17 @@
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
-                <div id="viewer">
+                <div id="">
+                    @php
+                    if ($resource->type === 1)
+                    {
+                        $url = $resource->full_link;
+                    }else{
+                        $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
+                    }
 
+                    @endphp
+                    <iframe width="100%" height="400" src="{!! $url !!}"></iframe>
                 </div>
                 <div class="row" id="basic-table">
                     <div class="col-12">
@@ -240,39 +256,42 @@
     <script>
         let link = `/admin/files/{{$resource->id}}`
 
-        let iframe = document.createElement('iframe');
-        iframe.id = 'iframe-viewer'
+        /*   let iframe = document.createElement('iframe');
+           iframe.id = 'iframe-viewer'
 
-        axios({
-            url: link,
-            method: 'GET',
-            responseType: 'blob',
-        }).then(res => {
-            let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
-            let url = window.URL.createObjectURL(blob);
-            //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
-            console.log(url)
-            iframe.src = `${url}`
-            iframe.height = "300px";
-            iframe.width = "100%";
-            document.getElementById('viewer').append(iframe)
-            /*const url = window.URL.createObjectURL(blob);
-            console.log(url)
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'test.pdf'; //or any other extension
-            document.body.appendChild(link);
-            link.click();
+           axios({
+               url: link,
+               method: 'GET',
+               responseType: 'blob',
+           }).then(res => {
+               let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
 
-            WebViewer({
-                path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
-                licenseKey: 'w8xeg97n9J62TgxqdczO',
-            }, document.getElementById('viewer'))
-                .then(instance => {
-                    // now you can access APIs through the WebViewer instance
-                    const { Core, UI } = instance;
-                    const { documentViewer } = Core;
-                    UI.loadDocument(blob, { filename: '{{$resource->name}}'+'.pdf' })
+               //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
+
+               let file = new File([blob], "test.pdf");
+               let url = window.URL.createObjectURL(file);
+               console.log(url)
+               iframe.src = `https://docs.google.com/gview${url}`
+               iframe.height = "300px";
+               iframe.width = "100%";
+               document.getElementById('viewer').append(iframe)
+               const url = window.URL.createObjectURL(blob);
+               console.log(url)
+               const link = document.createElement('a');
+               link.href = url;
+               link.download = 'test.pdf'; //or any other extension
+               document.body.appendChild(link);
+               link.click();
+
+               WebViewer({
+                   path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
+                   licenseKey: 'w8xeg97n9J62TgxqdczO',
+               }, document.getElementById('viewer'))
+                   .then(instance => {
+                       // now you can access APIs through the WebViewer instance
+                       const { Core, UI } = instance;
+                       const { documentViewer } = Core;
+                       UI.loadDocument(blob, { filename: '{{$resource->name}}'+'.pdf' })
 
                     // adding an event listener for when a document is loaded
                     documentViewer.addEventListener('documentLoaded', () => {
@@ -286,12 +305,12 @@
 
                     UI.disableElements([ 'menuOverlay', 'downloadButton' ]);
                     UI.disableElements([ 'menuOverlay', 'printButton' ]);
-                });*/
+                });
         }).catch(err => console.error())
 
 
 
-
+*/
 
         function base64ToBlob(base64) {
             const binaryString = window.atob(base64);
