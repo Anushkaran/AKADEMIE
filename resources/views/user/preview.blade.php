@@ -23,7 +23,9 @@
 
             </div>
             <div class="content-body">
-                <div id="viewer">
+
+                <div id="viewer2" style="height: 1000px">
+
                 </div>
             </div>
         </div>
@@ -36,6 +38,9 @@
 
 
 
+    <script src='/assets/pdf-assets/lib/webviewer.min.js'></script>
+
+
 
     <script>
 
@@ -45,8 +50,10 @@
 
         let link = `/files/{{$resource->id}}`
 
-        let iframe = document.createElement('iframe');
-        iframe.id = 'iframe-viewer'
+        //let iframe = document.createElement('iframe');
+        let body = document.get;
+
+        //iframe.id = 'iframe-viewer'
 
         axios({
             url: link,
@@ -55,18 +62,59 @@
         }).then(res => {
             let blob = new Blob([res.data] ,{type:"application/pdf"})
             let url = window.URL.createObjectURL(blob);
-            @if($resource->access === 1)
-                iframe.src = `${url}#toolbar=0`
-            @else
-                iframe.src = `${url}`
-            @endif
-            iframe.height = "500px";
-            iframe.width = "100%";
-            document.getElementById('viewer').append(iframe)
+
+            //testing
+
+            WebViewer({
+                path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
+                licenseKey: 'qAOF49tuwGdQoipZAbyW	',
+                initialDoc: url,
+
+
+                // initialDoc: '/path/to/my/file.pdf',  // You can also use documents on your server
+            }, document.getElementById('viewer2'))
+                .then(instance => {
+                    // now you can access APIs through the WebViewer instance
+                    const { Core, UI } = instance;
+
+                    // adding an event listener for when a document is loaded
+                    Core.documentViewer.addEventListener('documentLoaded', () => {
+                        console.log('document loaded');
+                    });
+
+                    // adding an event listener for when the page number has changed
+                    Core.documentViewer.addEventListener('pageNumberUpdated', (pageNumber) => {
+                        console.log(`Page number is: ${pageNumber}`);
+                    });
+                    @if($resource->access === 2)
+                        UI.enableElements([  'downloadButton' ]);
+                        UI.enableElements([  'printButton' ]);
+                        @else
+                        UI.disableElements([  'printButton' ]);
+                        UI.disableElements([  'downloadButton' ]);
+
+                    @endif
+
+                    Core.documentViewer.setWatermark({
+                        // Draw diagonal watermark in middle of the document
+                        diagonal: {
+                            fontSize: 200, // or even smaller size
+                            fontFamily: 'sans-serif',
+                            color: 'yellow',
+                            opacity: 10, // from 0 to 100
+                            text: 'Lakademie'
+                        }});
+
+                });
+
+
 
         }).catch(err => console.error())
 
-    
+
+
+
+
 
     </script>
 
