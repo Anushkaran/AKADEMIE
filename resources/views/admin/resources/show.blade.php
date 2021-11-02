@@ -4,7 +4,14 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/pages/app-user.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
-
+    <style>
+        div[aria-label="Pop-out"] {
+            display: none;
+        }
+        div[aria-label="toolbar"] {
+            width: 52px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -110,7 +117,13 @@
                 </section>
                 <div id="">
                     @php
-                    $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
+                    if ($resource->type === 1)
+                    {
+                        $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
+                    }else{
+                        $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
+                    }
+
                     @endphp
                     <iframe width="100%" height="400" src="{!! $url !!}"></iframe>
                 </div>
