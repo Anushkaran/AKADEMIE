@@ -98,6 +98,17 @@
                                                             <div class="card-body">
                                                                 <div class="d-flex justify-content-between">
                                                                     <i class="fa-solid fa-file-powerpoint text-warning fa-7x"></i>
+                                                                    <div class="dropdown-items-wrapper">
+                                                                        <i data-feather="more-vertical" id="dropdownMenuLink1" role="button" data-toggle="dropdown" aria-expanded="false"></i>
+                                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink1">
+                                                                            <a class="dropdown-item" href="javascript:void(0)">
+                                                                                <i data-feather="download" class="mr-25"></i>
+                                                                                <span class="align-middle">Telecharger</span>
+                                                                                <span class="align-middle">Consulter</span>
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="my-1">
                                                                     <h5>COMPETENCES A EVALUER.PPTX</h5>
