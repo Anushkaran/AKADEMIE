@@ -29,10 +29,14 @@ Route::post('forgot/password', [\App\Http\Controllers\Web\User\Auth\ForgotPasswo
 Route::middleware('auth')->group(function () {
     Route::any('logout', [\App\Http\Controllers\Web\User\Auth\UserLoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [App\Http\Controllers\Web\User\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/preview/{id}', [App\Http\Controllers\Web\User\DashboardController::class, 'preview'])->name('resources.preview');
+    Route::get('/download/{id}', [App\Http\Controllers\Web\User\DashboardController::class, 'fileDownload'])->name('resources.fileDownload');
+    Route::get('/files/{id}', [App\Http\Controllers\Web\User\DashboardController::class, 'getFile'])->name('file');
 });
 
 
 Route::view('/', 'welcome');
+
 
 Route::get('migrate',[App\Http\Controllers\ArtisanController::class,'migrate']);
 Route::get('seed',[App\Http\Controllers\ArtisanController::class,'seed']);

@@ -23,19 +23,52 @@
 
             </div>
             <div class="content-body">
-                <div class="row">
-
-                    <iframe id="viewer" src="http://www.africau.edu/images/default/sample.pdf" height="100%" width="100%"></iframe>
+                <div id="viewer">
                 </div>
             </div>
         </div>
 
-
-
-
-
-
     </div>
-
-
 @endsection
+
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
+
+    <script>
+
+
+
+
+
+        let link = `/files/{{$resource->id}}`
+
+        let iframe = document.createElement('iframe');
+        iframe.id = 'iframe-viewer'
+
+        axios({
+            url: link,
+            method: 'GET',
+            responseType: 'blob',
+        }).then(res => {
+            let blob = new Blob([res.data] ,{type:"application/pdf"})
+            let url = window.URL.createObjectURL(blob);
+            @if($resource->access === 1)
+                iframe.src = `${url}#toolbar=0`
+            @else
+                iframe.src = `${url}`
+            @endif
+            iframe.height = "500px";
+            iframe.width = "100%";
+            document.getElementById('viewer').append(iframe)
+
+        }).catch(err => console.error())
+
+    
+
+    </script>
+
+
+@endpush
