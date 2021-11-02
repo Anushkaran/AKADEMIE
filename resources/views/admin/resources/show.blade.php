@@ -110,7 +110,7 @@
                 </section>
                 <div id="">
                     @php
-                    $url = "https://docs.google.com/gview?url=".$resource->full_link."&embedded=true"
+                    $url = "http://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
                     @endphp
                     <iframe src="{!! $url !!}"></iframe>
                 </div>
