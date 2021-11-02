@@ -47,9 +47,7 @@
                 <div class="card">
 
                                                 <div class="row mx-1 my-4">
-                                                    <div class="col-12">
-                                                        <h6 class="files-section-title mb-75">Types de fichiers</h6>
-                                                    </div>
+
                                                     <div class="col-lg-3 col-md-6 col-12">
                                                         <div class="card shadow-none border cursor-pointer">
                                                             <div class="card-body">
@@ -71,9 +69,7 @@
 
                                                                 </div>
 
-                                                                <div class="progress progress-bar-warning progress-md mb-0" style="height: 10px">
-                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="70" aria-valuemax="100" style="width: 70%"></div>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,14 +78,23 @@
                                                             <div class="card-body">
                                                                 <div class="d-flex justify-content-between">
                                                                     <i class="fa-solid fa-file-pdf text-danger fa-7x"></i>
+                                                                    <div class="dropdown-items-wrapper">
+                                                                        <i data-feather="more-vertical" id="dropdownMenuLink1" role="button" data-toggle="dropdown" aria-expanded="false"></i>
+                                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink1">
+                                                                            <a class="dropdown-item" href="javascript:void(0)">
+                                                                                <i data-feather="download" class="mr-25"></i>
+                                                                                <span class="align-middle">Telecharger</span>
+                                                                            </a>
+
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+
                                                                 <div class="my-1">
                                                                     <h5>FORMULAIRE.PDF</h5>
                                                                 </div>
 
-                                                                <div class="progress progress-bar-success progress-md mb-0" style="height: 10px">
-                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="70" aria-valuemax="100" style="width: 68%"></div>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -104,8 +109,14 @@
                                                                             <a class="dropdown-item" href="javascript:void(0)">
                                                                                 <i data-feather="download" class="mr-25"></i>
                                                                                 <span class="align-middle">Telecharger</span>
-                                                                                <span class="align-middle">Consulter</span>
+
                                                                             </a>
+                                                                            <a class="dropdown-item" href="javascript:void(0)">
+                                                                                <i data-feather="eye" class="mr-25"></i>
+                                                                                <span class="align-middle">Consulter</span>
+
+                                                                            </a>
+
 
                                                                         </div>
                                                                     </div>
@@ -116,9 +127,7 @@
                                                                 <div class="d-flex justify-content-between mb-50">
 
                                                                 </div>
-                                                                <div class="progress progress-bar-primary progress-md mb-0" style="height: 10px">
-                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="70" aria-valuemax="100" style="width: 80%"></div>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -126,16 +135,23 @@
                                                         <div class="card shadow-none border cursor-pointer">
                                                             <div class="card-body">
                                                                 <div class="d-flex justify-content-between">
-                                                                    <img src="../../../app-assets/images/icons/icloud-1.png" alt="icloud" height="38" class="p-25" />
+                                                                    <i class="fa-solid fa-file-powerpoint text-warning fa-7x"></i>
+                                                                    <div class="dropdown-items-wrapper">
+                                                                        <i data-feather="more-vertical" id="dropdownMenuLink1" role="button" data-toggle="dropdown" aria-expanded="false"></i>
+                                                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink1">
+                                                                            <a class="dropdown-item" href="javascript:void(0)">
+                                                                                <i data-feather="download" class="mr-25"></i>
+                                                                                <span class="align-middle">Telecharger</span>
+                                                                            </a>
 
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="my-1">
-                                                                    <h5>Liste de missions.pdf</h5>
+                                                                    <h5>Liste de missions.ppt</h5>
                                                                 </div>
 
-                                                                <div class="progress progress-bar-info progress-md mb-0" style="height: 10px">
-                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="70" aria-valuemax="100" style="width: 60%"></div>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
