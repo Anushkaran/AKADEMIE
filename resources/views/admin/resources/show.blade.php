@@ -109,7 +109,10 @@
                     <!-- User Card & Plan Ends -->
                 </section>
                 <div id="">
-                    <iframe src="https://docs.google.com/gview?url={{$resource->full_link}}&embedded=true"></iframe>
+                    @php
+                    $url = "https://docs.google.com/gview?url=".$resource->full_link."&embedded=true"
+                    @endphp
+                    <iframe src="{!! $url !!}"></iframe>
                 </div>
                 <div class="row" id="basic-table">
                     <div class="col-12">
