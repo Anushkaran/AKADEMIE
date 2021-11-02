@@ -112,7 +112,7 @@
                     @php
                     $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
                     @endphp
-                    <iframe src="{!! $url !!}"></iframe>
+                    <iframe width="100%" height="400" src="{!! $url !!}"></iframe>
                 </div>
                 <div class="row" id="basic-table">
                     <div class="col-12">
