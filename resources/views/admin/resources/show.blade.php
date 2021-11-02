@@ -110,7 +110,7 @@
                 </section>
                 <div id="">
                     @php
-                    $url = "http://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
+                    $url = "https://view.officeapps.live.com/op/view.aspx?src=".$resource->full_link;
                     @endphp
                     <iframe src="{!! $url !!}"></iframe>
                 </div>
