@@ -108,8 +108,8 @@
                     </div>
                     <!-- User Card & Plan Ends -->
                 </section>
-                <div id="viewer">
-
+                <div id="">
+                    <iframe src="https://docs.google.com/gview?url={{$resource->full_link}}&embedded=true"></iframe>
                 </div>
                 <div class="row" id="basic-table">
                     <div class="col-12">
@@ -249,10 +249,13 @@
             responseType: 'blob',
         }).then(res => {
             let blob = new Blob([res.data] ,{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"})
-            let url = window.URL.createObjectURL(blob);
+
             //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
+
+            let file = new File([blob], "test.pdf");
+            let url = window.URL.createObjectURL(file);
             console.log(url)
-            iframe.src = `${url}`
+            iframe.src = `https://docs.google.com/gview${url}`
             iframe.height = "300px";
             iframe.width = "100%";
             document.getElementById('viewer').append(iframe)
