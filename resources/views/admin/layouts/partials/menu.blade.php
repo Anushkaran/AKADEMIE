@@ -135,7 +135,15 @@
                     </li>
                 </ul>
             </li>
+            <li class="class= {{request()->routeIs('admin.resources.index*') ? 'active' : ''}} nav-item">
+                <a class="d-flex align-items-center" href="{{route('admin.resources.index')}}">
 
+                        <i data-feather="file"></i>
+                        <span class="menu-title text-truncate" data-i18n="Resources">
+                            {{__('labels.resources')}}
+                        </span>
+                </a>
+            </li>
 
 
 
