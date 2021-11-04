@@ -67,7 +67,7 @@
 
             WebViewer({
                 path: '/assets/pdf-assets/lib/', // path to the PDF.js Express'lib' folder on your server
-                licenseKey: 'vxvCk7m9x1xTEKn7nfo1'||'frdyg8TwT77cCwYrs6sO',
+                licenseKey: 'frdyg8TwT77cCwYrs6sO',
                 initialDoc: url,
 
 
