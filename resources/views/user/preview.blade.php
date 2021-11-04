@@ -98,9 +98,9 @@
                     Core.documentViewer.setWatermark({
                         // Draw diagonal watermark in middle of the document
                         diagonal: {
-                            fontSize: 200, // or even smaller size
+                            fontSize: 150 ,// or even smaller size
                             fontFamily: 'sans-serif',
-                            color: 'yellow',
+                            color: '#FECC1F',
                             opacity: 10, // from 0 to 100
                             text: 'Lakademie'
                         }});
