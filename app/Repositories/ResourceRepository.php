@@ -61,7 +61,7 @@ class ResourceRepository extends BaseRepository implements \App\Contracts\Resour
 
         if ($resource->link)
         {
-            $this->deleteOne($resource->link);
+            $this->deleteOne($resource->link,'s3');
         }
 
         return $resource->delete();
