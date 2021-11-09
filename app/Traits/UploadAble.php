@@ -20,7 +20,7 @@ trait UploadAble
     private function uploadOne(UploadedFile $file, $folder = null, string $disk = 'public', $filename = null)
     {
         $name = $filename ?? Str::random(25);
-
+       // return Storage::disk($disk)->put('images/originals', $file);
         return $file->storeAs(
                 $folder,
                 $name . '.' . $file->getClientOriginalExtension(),

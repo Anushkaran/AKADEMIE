@@ -77,15 +77,11 @@ class DashboardController extends Controller
             $q->where('users.id',auth()->id());
         })->findOrFail($id);
 
-        if (!Storage::disk('private')->exists($resource->link))
+        if (!Storage::disk('s3')->exists($resource->link))
         {
             abort(404);
         }
 
-
-        $path = Storage::disk('private')->path(
-            $resource->link
-        );
-        return response()->download($path);
+        return Storage::disk('s3')->download($resource->link);
     }
 }

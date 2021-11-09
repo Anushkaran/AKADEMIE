@@ -10,17 +10,12 @@ use Illuminate\Support\Facades\Storage;
 class FileController extends Controller
 {
     public function show($id){
-
         $r = Resource::findOrFail($id);
-
-        if (!Storage::disk('private')->exists($r->link))
+        if (!Storage::disk('s3')->exists($r->link))
         {
             abort(404);
         }
-        $path = Storage::disk('private')->path(
-            $r->link
-        );
-        return response()->download($path);
+        return Storage::disk('s3')->download($r->link);
     }
 
 }

@@ -254,6 +254,7 @@
             //let url = 'http://file-examples-com.github.io/uploads/2017/02/file-sample_100kB.docx';
 
             let url = window.URL.createObjectURL(blob);
+            console.log(url);
             @if($resource->access === 1)
                 iframe.src = `${url}#toolbar=0`
             @else
