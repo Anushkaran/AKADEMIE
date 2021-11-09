@@ -28,14 +28,16 @@ class StudentController extends Controller
             ],404);
         }
 
-        if ($sessionStudent = SessionStudent::where('evaluation_session_id',$session)->first())
+        if ($sessionStudent = SessionStudent::where('evaluation_session_id',$session)->get())
         {
-            $st->load(['tasks']);
-            /* => function($t) use($id , $sessionStudent){
+            dd($sessionStudent);
+            $st->load(['tasks' => function($t) use($id , $sessionStudent){
                 $t->wherePivot('session_student_task.evaluation_id',$id)
                     ->wherePivot('session_student_task.session_student_id',$sessionStudent->id);
-            }*/
+            }]);
         }
+
+
 
         return response()->json([
             'success' => true,
