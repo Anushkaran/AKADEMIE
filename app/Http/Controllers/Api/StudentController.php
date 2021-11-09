@@ -28,7 +28,7 @@ class StudentController extends Controller
             ],404);
         }
 
-        if ($sessionStudent = SessionStudent::where('evaluation_session_id',$session)->where("student",$student)->first())
+        if ($sessionStudent = SessionStudent::where('evaluation_session_id',$session)->where("student_id",$student)->first())
         {
             $st->load(['tasks' => function($t) use($id , $sessionStudent){
                 $t->wherePivot('session_student_task.evaluation_id',$id)
