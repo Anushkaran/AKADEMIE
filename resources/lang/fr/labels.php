@@ -74,7 +74,26 @@ return [
     'no' => 'Non',
     'validated' => 'validé',
     'failed' => 'non validé',
-    'not_evaluated' => 'non évalué'
+    'not_evaluated' => 'non évalué',
+
+//file ressources
+    'resources' => 'ressources',
+    'access' => 'accessibilité',
+    'file_type' => 'Type de fichier',
+    'file' => 'Fichier',
+
+    'access_methods' => [
+        1 => 'Lecture Seule',
+        2 => 'Télechargement',
+    ],
+
+    'file_types' => [
+        1 => 'PDF',
+        2 => 'DOCUMENT (Docx,doc,ppt ,Pptx...)',
+    ]
+
+
+
 
 
 ];

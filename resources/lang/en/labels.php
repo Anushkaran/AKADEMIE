@@ -79,6 +79,8 @@ return [
     'validated' => 'validated',
     'failed' => 'failed',
     'not_evaluated' => 'not evaluated',
+    //file ressources
+
     'resources' => 'resources',
     'access' => 'Access method',
     'file_type' => 'File Type',
