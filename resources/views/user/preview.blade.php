@@ -35,15 +35,8 @@
 
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
-
-
+    <script src="{{asset('assets/pdf-assets/lib/webviewer.min.js')}}"></script>
     <script>
-
-
-
-
 
         let link = `/files/{{$resource->id}}`
 
@@ -104,14 +97,7 @@
 
                 });
 
-
-
         }).catch(err => console.error())
-
-
-
-
-
 
     </script>
 

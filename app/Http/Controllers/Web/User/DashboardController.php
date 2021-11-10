@@ -57,18 +57,15 @@ class DashboardController extends Controller
         }
 
 
-        if (!Storage::disk('private')->exists($resource->link))
+        if (!Storage::disk('s3')->exists($resource->link))
         {
             abort(404);
         }
 
 
-        $path = Storage::disk('private')->path(
+        return  Storage::disk('s3')->download(
             $resource->link
         );
-
-
-        return response()->download($path);
     }
 
     public function getFile($id)
