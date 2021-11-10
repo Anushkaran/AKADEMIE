@@ -134,8 +134,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <p class="mb-50">{{round($sessions_count/$week_sessions*100)}}  % sessions par rapport au total se déroulerons cette semaine</p>
-                                             </p>
+                                            <p class="mb-50">{{round($week_sessions > 0 ? $sessions_count/$week_sessions*100 : 0)}}  % sessions par rapport au total se déroulerons cette semaine</p>
                                             <div class="progress progress-bar-danger" style="height: 6px">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="{{$week_sessions}}" aria-valuemin="0" aria-valuemax="{{$sessions_count}}" style="width:
                                                 @if($sessions_count !=0 &&$week_sessions!=0)
