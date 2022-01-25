@@ -27,6 +27,7 @@ class ResourceRequest extends FormRequest
         $rules  =  [
             'name'   => 'required|string|max:200',
             'type'   => 'required|integer|in:1,2',
+            'resource_category_id'   => 'required|integer|exists:resource_categories,id',
             'access' => $this->getRuleForAccess(),
             'file'   => $this->getRuleForFile(),
         ];

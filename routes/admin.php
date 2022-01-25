@@ -34,6 +34,7 @@ Route::middleware('auth:admin')->group(function (){
 
     Route::resource('centers',App\Http\Controllers\Web\Admin\CenterController::class);
     Route::resource('students',App\Http\Controllers\Web\Admin\StudentController::class);
+    Route::resource('pedagogical-referents',App\Http\Controllers\Web\Admin\PedagogicalReferentController::class);
 
     Route::get('evaluations/{id}/students',[App\Http\Controllers\Web\Admin\EvaluationController::class,'studentsList'])->name('evaluations.students.index');
     Route::get('evaluations/{id}/students/{student}',[App\Http\Controllers\Web\Admin\EvaluationController::class,'studentDetails'])->name('evaluations.students.show');

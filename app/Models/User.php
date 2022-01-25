@@ -24,6 +24,8 @@ class User extends Authenticatable
         'last_name',
         'phone',
         'image',
+        'partner_id',
+        'state',
         'email',
         'password',
         'department',
@@ -48,6 +50,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'state' => 'integer',
     ];
 
     /**
@@ -91,4 +94,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Resource::class)->withTimestamps();
     }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
+
+    public function isActive(): bool
+    {
+        return $this->state === 1;
+    }
+
 }

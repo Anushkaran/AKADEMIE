@@ -95,6 +95,13 @@ return [
         1 => 'PDF',
         2 => 'DOCUMENT (Docx,doc,ppt ...)',
     ],
-
-    'resource-category' => '{1}Resource category|[2,*]Resource categories'
+    // last update
+    'resource-category' => '{1}Resource category|[2,*]Resource categories',
+    'pedagogical-referent' => '{1}Pedagogical referent|[2,*]Pedagogical referents',
+    'account_state' => 'Account state',
+    'last_item' => 'Last :name',
+    'account_states' => [
+        1 => 'Active',
+        2 => 'Inactive',
+    ],
 ];

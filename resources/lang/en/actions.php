@@ -16,4 +16,6 @@ return [
     'delete_confirm_text' => "You won t be able to revert this!",
     'delete_btn_yes' => 'Yes',
     'delete_btn_cancel' => 'Cancel',
+
+    'clear' => 'clear'
 ];

@@ -93,6 +93,8 @@
                                                 </div>
                                             </div>
 
+
+
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="last_name-vertical">{{__('labels.organism')}}</label>
@@ -114,6 +116,20 @@
                                                         @endforeach
                                                     </select>
                                                     @error('type')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="state">{{__('labels.account_state')}}</label>
+                                                    <select name="state" id="state" class="form-control">
+                                                        @foreach(config('settings.account_states') as $s)
+                                                            <option value="{{$s}}" @if(old('state',$user->state) === $s) selected @endif>{{__('labels.account_states.'.$s)}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('state')
                                                     <div class="invalid-feedback">{{$message}}</div>
                                                     @enderror
                                                 </div>
