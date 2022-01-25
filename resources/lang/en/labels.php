@@ -94,5 +94,7 @@ return [
     'file_types' => [
         1 => 'PDF',
         2 => 'DOCUMENT (Docx,doc,ppt ...)',
-    ]
+    ],
+
+    'resource-category' => '{1}Resource category|[2,*]Resource categories'
 ];

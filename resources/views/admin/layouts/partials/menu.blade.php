@@ -144,6 +144,15 @@
                         </span>
                 </a>
             </li>
+            <li class="class= {{request()->routeIs('admin.resource-categories.*') ? 'active' : ''}} nav-item">
+                <a class="d-flex align-items-center" href="{{route('admin.resource-categories.index')}}">
+
+                        <i data-feather="file"></i>
+                        <span class="menu-title text-truncate" data-i18n="Category">
+                            {{trans_choice('labels.resource-category',1)}}
+                        </span>
+                </a>
+            </li>
 
 
 
