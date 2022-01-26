@@ -1,6 +1,10 @@
 @extends('admin.layouts.app')
 
+@push('css')
 
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
 @section('content')
 
     <div class="app-content content ">
@@ -54,6 +58,19 @@
                                                 <div class="invalid-feedback">{{$message}}</div>
                                                 @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label" for="resource_category_id">{{trans_choice('labels.resource-category',1)}}</label>
+                                                <select name="resource_category_id" required id="resource_category_id" class=" form-control">
+                                                    @foreach($resource->categories as $category)
+                                                        <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('resource_category_id')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+
                                             @if($resource->type === 1)
                                             <div class="form-group">
                                                 <label class="form-label" for="access">{{__('labels.access')}}</label>
@@ -91,7 +108,43 @@
 @push('js')
     <!-- BEGIN: Page JS-->
     <script src="{{asset('assets/vuexy/app-assets/js/scripts/pages/app-user-view.js')}}"></script>
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
+
     <!-- END: Page JS-->
 
+    <script>
+        $('#resource_category_id').select2({
+            cache:true,
+            ajax: {
+                delay: 250,
+                url: '{{route('admin.resource-categories.index')}}',
+                dataType: 'json',
+                data: function (params) {
 
+                    // Query parameters will be ?search=[term]&page=[page]
+
+                    return {
+                        search: params.term,
+                        page: params.page || 1
+                    };
+
+                },
+                processResults: function ({resource_categories}, params) {
+                    params.page = params.page || 1;
+
+                    let fData = $.map(resource_categories.data, function (obj) {
+                        obj.text = obj.name; // replace name with the property used for the text
+                        return obj;
+                    });
+
+                    return {
+                        results: fData,
+                        pagination: {
+                            more: (params.page * 10) < resource_categories.total
+                        }
+                    };
+                }
+            }
+        });
+    </script>
 @endpush

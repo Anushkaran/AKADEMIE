@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\Repositories;
 
+use App\Models\PedagogicalReferent;
 
-use App\Models\Student;
-
-class StudentRepository extends BaseRepository implements \App\Contracts\StudentContract
+class PedagogicalReferentRepository extends BaseRepository implements \App\Contracts\PedagogicalReferentContract
 {
 
     /**
@@ -14,7 +12,7 @@ class StudentRepository extends BaseRepository implements \App\Contracts\Student
      */
     public function findOneById($id, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
     {
-        return Student::with($relations)
+        return PedagogicalReferent::with($relations)
             ->scopes($scopes)
             ->select($columns)
             ->withCount($relations_count)
@@ -26,14 +24,13 @@ class StudentRepository extends BaseRepository implements \App\Contracts\Student
      */
     public function findByFilter($per_page = 10, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
     {
-        $query = Student::with($relations)
+        $query = PedagogicalReferent::with($relations)
             ->withCount($relations_count)
             ->scopes($scopes)
             ->select($columns)
             ->newQuery();
         return $this->applyFilter($query, $per_page,[
-            \App\QueryFilter\Search::class,
-            \App\QueryFilter\Partner::class,
+            \App\QueryFilter\Search::class
         ]);
     }
 
@@ -42,7 +39,7 @@ class StudentRepository extends BaseRepository implements \App\Contracts\Student
      */
     public function new(array $data)
     {
-        return Student::create($data);
+        return PedagogicalReferent::create($data);
     }
 
     /**
@@ -60,7 +57,6 @@ class StudentRepository extends BaseRepository implements \App\Contracts\Student
      */
     public function delete($id)
     {
-        $s = $this->findOneById($id);
-        return $s->delete();
+        return $this->findOneById($id)->delete();
     }
 }

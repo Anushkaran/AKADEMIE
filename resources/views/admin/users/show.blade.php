@@ -141,7 +141,119 @@
                             </div>
                         </div>
                         <!-- /User Card Ends-->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">
+                                    </h4>
+                                </div>
+                                <div class="card-body">
 
+{{--                                    <div class=" search-input">--}}
+{{--                                        <form>--}}
+{{--                                            <div class="row">--}}
+{{--                                                <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">--}}
+
+{{--                                                <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>--}}
+{{--                                            </div>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+
+                                </div>
+                                <div class="table-responsive">
+                                    @php
+                                        /** @var \Illuminate\Database\Eloquent\Collection $evaluations */
+                                        $count = $evaluations->count();
+                                    @endphp
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{__('labels.name')}}</th>
+                                            <th>{{trans_choice('labels.partner',1)}}</th>
+                                            <th>{{trans_choice('labels.center',1)}}</th>
+
+                                            <th>{{__('labels.state')}}</th>
+                                            <th>{{__('labels.start_date')}}</th>
+                                            <th>{{__('labels.end_date')}}</th>
+                                            <th>{{__('labels.date_exam')}}</th>
+
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($evaluations as $key => $e)
+                                            <tr>
+                                                <td>
+                                                    {{$key + 1}}
+                                                </td>
+                                                <td>{{$e->name}}</td>
+                                                <td>
+                                                    <strong>
+                                                        <a href="{{route('admin.partners.show',$e->partner_id)}}" class="text-decoration-none">
+                                                            <i data-feather="arrow-up-right"></i>
+                                                            {{$e->partner->name}}
+                                                        </a>
+                                                    </strong>
+                                                </td>
+                                                <td>
+                                                    <strong>
+                                                        <a href="{{route('admin.centers.show',$e->center_id)}}" class="text-decoration-none">
+                                                            <i data-feather="arrow-up-right"></i>
+                                                            {{$e->center->name}}
+                                                        </a>
+                                                    </strong>
+                                                </td>
+                                                <td>
+                                                    @if($e->state)
+                                                        <span class="badge badge-success">{{__('labels.active')}}</span>
+                                                    @else
+                                                        <span class="badge badge-danger">{{__('labels.inactive')}}</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{$e->start_date->format('d-m-Y')}}
+                                                </td>
+                                                <td>
+                                                    {{$e->end_date->format('d-m-Y')}}
+                                                </td>
+                                                <td>
+                                                    {{$e->date_exam->format('d-m-Y')}}
+                                                </td>
+                                                <td>
+                                                    @if($count < 3)
+
+                                                        <a href="{{route('admin.evaluations.sessions.index',$e->id)}}" class="btn btn-sm btn-outline-warning">
+                                                            <i data-feather="eye"></i>
+                                                        </a>
+
+                                                    @else
+                                                        <div class="dropdown">
+                                                            <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">
+                                                                <i data-feather="more-vertical"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+
+                                                                <a class="dropdown-item" href="{{route('admin.evaluations.sessions.index',$e->id)}}">
+                                                                    <i data-feather="eye" class="mr-50"></i>
+                                                                    <span>{{__('actions.details')}}</span>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+                                                    @endif
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    {{$evaluations->links()}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- User Card & Plan Ends -->
 

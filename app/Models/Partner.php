@@ -24,7 +24,12 @@ class Partner extends Authenticatable
         'email',
         'leader',
         'department',
+        'state',
         'pedagogical_referent',
+        'legal_referent',
+        'legal_referent_phone',
+        'administrative_referent',
+        'administrative_referent_phone',
         'password',
     ];
 
@@ -54,6 +59,11 @@ class Partner extends Authenticatable
     public function getAvatarNameAttribute()
     {
         return ucwords(Str::substr($this->name,0,1));
+    }
+
+    public function isActive()
+    {
+        return $this->state === 1;
     }
 
     /**

@@ -59,6 +59,7 @@ class EvaluationController extends Controller
             'partner_id'    => 'required|integer|exists:partners,id',
             'start_date'    => 'required|date',
             'date_exam'    => 'required|date',
+            'type'    => 'required|string|in:'.implode(',',config('settings.evaluation_types')),
             'end_date'      => 'required|date|after:start_date',
         ]);
         $data['state'] = $request->has('state');
@@ -115,6 +116,7 @@ class EvaluationController extends Controller
             'center_id'    => 'required|integer|exists:centers,id',
             'start_date'    => 'required|date',
             'date_exam'    => 'required|date',
+            'type'    => 'required|string|in:'.implode(',',config('settings.evaluation_types')),
             'end_date'      => 'required|date|after:start_date',
         ]);
         $data['state'] = $request->has('state');

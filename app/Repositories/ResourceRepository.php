@@ -36,8 +36,13 @@ class ResourceRepository extends BaseRepository implements \App\Contracts\Resour
         {
             $data['link'] = $this->uploadOne($data['file'],'resources','s3');
         }
+        $resource = Resource::create($data);
+        if (array_key_exists('resource_category_id',$data))
+        {
+            $resource->categories()->attach($data['resource_category_id']);
+        }
 
-        return Resource::create($data);
+        return $resource;
     }
 
     /**
@@ -48,6 +53,11 @@ class ResourceRepository extends BaseRepository implements \App\Contracts\Resour
         $resource = $this->findOneById($id);
 
         $resource->update($data);
+
+        if (array_key_exists('resource_category_id',$data))
+        {
+            $resource->categories()->sync($data['resource_category_id']);
+        }
 
         return $resource;
     }

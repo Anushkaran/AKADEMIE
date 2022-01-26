@@ -16,9 +16,10 @@ abstract class Filter
             return $next($request);
         }
 
-        $builder = $next($request);
-
-        return $this->applyFilters($builder);
+        return $next($request)->where(function($q)
+        {
+            $this->applyFilters($q);
+        });
     }
 
     abstract protected function applyFilters($builder);

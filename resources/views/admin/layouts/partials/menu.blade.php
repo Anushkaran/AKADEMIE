@@ -154,13 +154,15 @@
                 </a>
             </li>
 
+            <li class="class= {{request()->routeIs('admin.pedagogical-referents.*') ? 'active' : ''}} nav-item">
+                <a class="d-flex align-items-center" href="{{route('admin.pedagogical-referents.index')}}">
 
-
-
-
-
-
-
+                    <i data-feather="file"></i>
+                    <span class="menu-title text-truncate" data-i18n="Category">
+                            {{trans_choice('labels.pedagogical-referent',1)}}
+                        </span>
+                </a>
+            </li>
 
 
         </ul>

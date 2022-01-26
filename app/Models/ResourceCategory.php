@@ -13,4 +13,9 @@ class ResourceCategory extends Model
         'name'
     ];
 
+    public function resource(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class,'resource_resource_category')->withTimestamps();
+    }
+
 }

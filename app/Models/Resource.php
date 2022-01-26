@@ -36,4 +36,9 @@ class Resource extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
+
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(ResourceCategory::class,'resource_resource_category')->withTimestamps();
+    }
 }

@@ -87,7 +87,19 @@
                                                     @enderror
                                                 </div>
                                             </div>
-
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                                                    <select name="partner_id" id="partner_id" class="form-control select2-partners">
+                                                        {{--                            @foreach($partners as $p)--}}
+                                                        {{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
+                                                        {{--                            @endforeach--}}
+                                                    </select>
+                                                    @error('partner_id')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="last_name-vertical">{{__('labels.organism')}}</label>
@@ -113,6 +125,21 @@
                                                     @enderror
                                                 </div>
                                             </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="state">{{__('labels.account_state')}}</label>
+                                                    <select name="state" id="state" class="form-control">
+                                                        @foreach(config('settings.account_states') as $s)
+                                                            <option value="{{$s}}" @if(old('state') === $s) selected @endif>{{__('labels.account_states.'.$s)}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('state')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
 
                                             <div class="col-12">
                                                 <div class="form-group">
@@ -209,7 +236,6 @@
             $('.select2-department').select2();
 
             $('.select2-thematics').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
@@ -218,13 +244,11 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
+
                             return {
                                 search: params.term,
                                 page: params.page || 1
                             };
-                        }
 
                     },
                     processResults: function ({thematics}, params) {
@@ -239,6 +263,35 @@
                             results: fData,
                             pagination: {
                                 more: (params.page * 10) < thematics.total
+                            }
+                        };
+                    }
+                }
+            });
+            $('.select2-partners').select2({
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.partners.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    },
+                    processResults: function ({partners}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(partners.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < partners.total
                             }
                         };
                     }

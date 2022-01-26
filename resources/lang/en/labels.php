@@ -95,6 +95,24 @@ return [
         1 => 'PDF',
         2 => 'DOCUMENT (Docx,doc,ppt ...)',
     ],
+    // last update
+    'resource-category' => '{1}Resource category|[2,*]Resource categories',
+    'pedagogical-referent' => '{1}Pedagogical referent|[2,*]Pedagogical referents',
+    'account_state' => 'Account state',
+    'last_item' => 'Last :name',
+    'account_states' => [
+        1 => 'Active',
+        2 => 'Inactive',
+    ],
+    'legal_referent' => 'Legal referent',
+    'legal_referent_phone' => 'Legal referent_phone',
+    'evaluation_type' => 'Session type',
+    'administrative_referent' => 'Administrative referent',
+    'administrative_referent_phone' => 'Administrative referent phone',
+    'evaluation_types' => [
+        'POEI' => 'Préparation Opérationnel à l’Emploi Individuel',
+        'POEC' => 'Préparation Opérationnel à l’Emploi Collectif',
+        'CFA' => 'Centre de Formation d’Apprentis',
+    ]
 
-    'resource-category' => '{1}Resource category|[2,*]Resource categories'
 ];

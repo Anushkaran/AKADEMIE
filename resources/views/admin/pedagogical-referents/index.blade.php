@@ -16,12 +16,12 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}</h2>
+                            <h2 class="content-header-title float-left mb-0">{{__('labels.list',['name' => trans_choice('labels.pedagogical-referent',2)])}}</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">{{__('labels.dashboard')}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.student',2)])}}
+                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.pedagogical-referent',2)])}}
                                     </li>
                                 </ol>
                             </div>
@@ -49,31 +49,19 @@
                                             type="button" data-toggle="modal" id="create-btn"
                                             data-target="#modals-slide-in">
                                         <i data-feather='plus'></i>
-                                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.student',1)])}}
+                                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.pedagogical-referent',1)])}}
                                     </button>
 
                                 </h4>
                             </div>
                             <div class="card-body">
 
-                                <div class=" search-input row">
-                                    <form class="col-md-6">
-                                        <div class="form-group">
-                                            <input class="form-control input"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
-
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="partners-filter"> {{trans_choice('labels.partner',1)}}</label>
-                                            <select name="partner_id" id="partners-filter">
-                                                @isset($partner)
-                                                    <option value="{{$partner->id}}" selected>{{$partner->name}}</option>
-                                                @endisset
-                                            </select>
-                                        </div>
+                                <div class=" search-input">
+                                    <form>
                                         <div class="row">
+                                            <input class="form-control input col-6" value="{{request('search')}}"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
 
                                             <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
-                                            <a  href="{{route('admin.users.index')}}" class="btn btn-primary mr-1 col-2">{{__('actions.clear')}}</a>
                                         </div>
                                     </form>
                                 </div>
@@ -81,8 +69,8 @@
                             </div>
                             <div class="table-responsive">
                                 @php
-                                    /** @var \Illuminate\Database\Eloquent\Collection $students */
-                                    $count = $students->count();
+                                    /** @var \Illuminate\Database\Eloquent\Collection $pedagogical-referents */
+                                    $count = $referents->count();
                                 @endphp
                                 <table class="table">
                                     <thead>
@@ -97,7 +85,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($students as $key => $s)
+                                    @foreach($referents as $key => $s)
                                         <tr>
                                         <td>
                                             {{$key + 1}}
@@ -115,10 +103,10 @@
                                         </td>
                                         <td>
                                             @if($count < 3)
-                                            <a href="{{route('admin.students.edit',$s->id)}}" class="btn btn-sm btn-outline-warning">
+                                            <a href="{{route('admin.pedagogical-referents.edit',$s->id)}}" class="btn btn-sm btn-outline-warning">
                                                 <i data-feather="edit"></i>
                                             </a>
-                                                <a href="{{route('admin.students.show',$s->id)}}" class="btn btn-sm btn-outline-warning">
+                                                <a href="{{route('admin.pedagogical-referents.show',$s->id)}}" class="btn btn-sm btn-outline-warning">
                                                     <i data-feather="eye"></i>
                                                 </a>
                                                 <a href="javascript:void(0)" onclick="deleteForm({{$s->id}})" class="btn btn-sm btn-outline-warning">
@@ -130,11 +118,11 @@
                                                         <i data-feather="more-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('admin.students.edit',$s->id)}}">
+                                                        <a class="dropdown-item" href="{{route('admin.pedagogical-referents.edit',$s->id)}}">
                                                             <i data-feather="edit-2" class="mr-50"></i>
                                                             <span>{{__('actions.edit')}}</span>
                                                         </a>
-                                                        <a class="dropdown-item" href="{{route('admin.students.show',$s->id)}}">
+                                                        <a class="dropdown-item" href="{{route('admin.pedagogical-referents.show',$s->id)}}">
                                                             <i data-feather="eye" class="mr-50"></i>
                                                             <span>{{__('actions.details')}}</span>
                                                         </a>
@@ -154,7 +142,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            {{$students->links()}}
+                            {{$referents->links()}}
                         </div>
                     </div>
                 </div>
@@ -166,12 +154,12 @@
     <!-- Modal to add new record -->
     <div class="modal modal-slide-in fade" id="modals-slide-in">
         <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0" method="post" action="{{route('admin.students.store')}}">
+            <form class="add-new-record modal-content pt-0" method="post" action="{{route('admin.pedagogical-referents.store')}}">
                 @csrf
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.student',1)])}}
+                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.pedagogical-referent',1)])}}
                     </h5>
                 </div>
                 <div class="modal-body flex-grow-1">
@@ -247,7 +235,7 @@
 
         $(document).ready(function() {
             $('.select2').select2({
-                minimumInputLength:1,
+                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
@@ -256,11 +244,13 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-
-                        return {
-                            search: params.term,
-                            page: params.page || 1
-                        };
+                        if (params.term && params.term.length > 3)
+                        {
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+                        }
 
                     },
                     processResults: function ({partners}, params) {
@@ -280,39 +270,7 @@
                     }
                 }
             });
-            $('#partners-filter').select2({
-                minimumInputLength:1,
-                cache:true,
-                ajax: {
-                    delay: 250,
-                    url: '{{route('admin.partners.index')}}',
-                    dataType: 'json',
-                    data: function (params) {
-
-                        // Query parameters will be ?search=[term]&page=[page]
-                        return {
-                            search: params.term,
-                            page: params.page || 1
-                        };
-
-                    },
-                    processResults: function ({partners}, params) {
-                        params.page = params.page || 1;
-
-                        let fData = $.map(partners.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
-
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < partners.total
-                            }
-                        };
-                    }
-                }
-            });
+            $('.select2-selection__arrow').style.display = 'node'
         });
 
         const deleteForm = id => {
@@ -329,7 +287,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/students/${id}`);
+                    f.setAttribute('action',`/admin/pedagogical-referents/${id}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

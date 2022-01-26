@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
+@push('css')
 
+    <link rel="stylesheet" href="{{asset('assets/vuexy/app-assets/vendors/css/forms/select/select2.min.css')}}">
+
+@endpush
 @section('content')
 
     <div class="app-content content ">
@@ -48,12 +52,33 @@
                             </div>
                             <div class="card-body">
 
-                                <div class=" search-input">
-                                    <form>
+                                <div class=" search-input row">
+                                    <form class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control input"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="partners-filter"> {{trans_choice('labels.partner',1)}}</label>
+                                            <select name="partner_id" id="partners-filter">
+                                                @isset($partner)
+                                                    <option value="{{$partner->id}}" selected>{{$partner->name}}</option>
+                                                @endisset
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="state"> {{__('labels.account_state')}}</label>
+                                            <select name="state" id="state" class="form-control">
+                                                <option value="all" disabled selected>...</option>
+                                                @foreach(config('settings.account_states') as $state)
+                                                    <option value="{{$state}}" @if((int)request('state') === $state) selected @endif>{{__('labels.account_states.'.$state)}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row">
-                                            <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
 
                                             <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
+                                            <a  href="{{route('admin.users.index')}}" class="btn btn-primary mr-1 col-2">{{__('actions.clear')}}</a>
                                         </div>
                                     </form>
                                 </div>
@@ -68,10 +93,9 @@
                                     <thead>
                                     <tr>
                                         <th>{{__('labels.pic')}}</th>
-                                        <th>{{__('labels.name')}}</th>
-                                        <th>{{__('labels.email')}}</th>
-                                        <th>{{__('labels.phone')}}</th>
-                                        <th>{{__('labels.created_at')}}</th>
+                                        <th>{{trans_choice('labels.user',1)}}</th>
+                                        <th>{{__('labels.account_state')}}</th>
+                                        <th>{{__('labels.last_item',['name' => trans_choice('labels.evaluation-session',1)])}}</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -85,14 +109,40 @@
 
                                                 </span>
                                             </td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
                                             <td>
-                                                {{$user->phone}}
+                                                <ul>
+                                                    <li>{{$user->name}}</li>
+                                                    <li>
+                                                        <a href="mailto:{{$user->email}}">{{$user->email}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="tel:{{$user->phone}}">{{$user->phone}}}</a>
+                                                    </li>
+                                                </ul>
                                             </td>
                                             <td>
-                                                {{$user->created_at->format('d-m-Y')}}
+                                                @if($user->isActive())
+                                                    <span class="badge badge-success">{{__('labels.account_states.'.$user->state)}}</span>
+                                                @else
+                                                    <span class="badge badge-danger">{{__('labels.account_states.'.$user->state)}}</span>
+                                                @endif
                                             </td>
+                                            <td>
+                                                <ul>
+                                                    @foreach($user->evaluationSessions as $session)
+                                                        <li>
+                                                            <span>{{trans_choice('labels.evaluation-session',1)}}: </span>
+                                                            <a href="{{route('admin.evaluations.sessions.show',['evaluation' => $session->evaluation_id,'session' => $session->id])}}">{{$session->name}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <span>{{trans_choice('labels.evaluation',1)}}: </span>
+                                                            <a href="{{route('admin.evaluations.sessions.index',$session->evaluation_id)}}">{{$session->evaluation->name}}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+
+                                            </td>
+
                                             <td>
                                                 @if($count < 3)
                                                     <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-sm btn-outline-warning">
@@ -145,12 +195,47 @@
 @endsection
 
 @push('js')
+    <script src="{{asset('assets/vuexy/app-assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
 
     <script>
         @if($errors->any())
         document.getElementById('create-btn').click();
         @endif
+        $(document).ready(function() {
+            $('#state').select2();
+            $('#partners-filter').select2({
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.partners.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
 
+                        // Query parameters will be ?search=[term]&page=[page]
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+
+                    },
+                    processResults: function ({partners}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(partners.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < partners.total
+                            }
+                        };
+                    }
+                }
+            });
+        });
         const deleteForm = id => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',

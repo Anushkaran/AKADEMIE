@@ -29,7 +29,9 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     public function findByFilter($per_page = 10, array $relations = [], array $columns = ['*'], array $scopes = [], array $relations_count = [])
     {
         $query = Evaluation::with($relations)->select($columns)->withCount($relations_count)->scopes($scopes)->newQuery();
-        return $this->applyFilter($query, $per_page);
+        return $this->applyFilter($query, $per_page,[
+            \App\QueryFilter\Type::class
+        ]);
     }
 
     /**

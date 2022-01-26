@@ -10,7 +10,7 @@ class Search extends Filter
     protected function applyFilters($builder)
     {
         $q = request($this->filterName());
-        if (request()->is(['*students*','*users*']))
+        if (request()->is(['*students*','*users*','*pedagogical-referents*']))
         {
             return $builder->where('first_name','like','%'.$q.'%')->orWhere('last_name','like','%'.$q.'%');
         }

@@ -34,7 +34,8 @@ class PartnerRepository extends BaseRepository implements \App\Contracts\Partner
             ->scopes($scopes)
             ->newQuery();
         return $this->applyFilter($query,$per_page,[
-            \App\QueryFilter\Search::class
+            \App\QueryFilter\Search::class,
+            \App\QueryFilter\State::class,
         ]);
     }
 

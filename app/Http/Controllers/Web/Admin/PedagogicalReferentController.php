@@ -3,50 +3,43 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Contracts\PartnerContract;
-use App\Contracts\StudentContract;
+use App\Contracts\PedagogicalReferentContract;
 use App\Http\Controllers\Controller;
-use App\Models\Evaluation;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class PedagogicalReferentController extends Controller
 {
     /**
-     * @var StudentContract
+     * @var PedagogicalReferentContract
      */
-    protected $student;
+    protected $referent;
 
     /**
      * EvaluationController constructor.
-     * @param StudentContract $student
+     * @param PedagogicalReferentContract $referent
      */
-    public function __construct(StudentContract $student)
+    public function __construct(PedagogicalReferentContract $referent)
     {
-        $this->student = $student;
+        $this->referent = $referent;
     }
 
     /**
      * @return Renderable|JsonResponse
      */
-    public function index(Request $request,PartnerContract $p)
+    public function index(Request $request)
     {
         if ($request->wantsJson())
         {
             return response()->json([
                 'success' => true,
-                'students'=> $this->student->findByFilter(10,[],['id','first_name','last_name'])
+                'referents'=> $this->referent->findByFilter(10,[],['id','first_name','last_name'])
             ]);
         }
-        $partner = null;
-        if ($request->has('partner_id'))
-        {
-            $partner =  $p->findOneById($request->input('partner_id'));
-        }
-
-        $students = $this->student->findByFilter();
-        return view('admin.students.index',compact('students','partner'));
+        $referents = $this->referent->findByFilter();
+        return view('admin.pedagogical-referents.index',compact('referents'));
     }
 
     /**
@@ -54,7 +47,7 @@ class StudentController extends Controller
      */
     public function create(): Renderable
     {
-        return view('admin.students.create');
+        return view('admin.pedagogical-referents.create');
     }
 
     /**
@@ -65,10 +58,10 @@ class StudentController extends Controller
     {
         $data = $this->getValidatedData($request);
 
-        $this->student->new($data);
+        $this->referent->new($data);
 
         session()->flash('success',__('messages.create'));
-        return redirect()->route('admin.students.index');
+        return redirect()->route('admin.pedagogical-referents.index');
     }
 
     /**
@@ -77,24 +70,20 @@ class StudentController extends Controller
      */
     public function show($id): Renderable
     {
-        $student = $this->student->findOneById($id);
-        $evaluations = Evaluation::whereHas('students',function ($query) use ($student){
-            $query->where('students.id',$student->id);
-        })->paginate(10);
-        return view('admin.students.show',compact('student','evaluations'));
+        $referent = $this->referent->findOneById($id);
+        return view('admin.pedagogical-referents.show',compact('referent'));
     }
 
     /**
      * @param $id
-     * @param PartnerContract $p
      * @return Renderable
      */
     public function edit($id,PartnerContract $p) : Renderable
     {
-        $student = $this->student->findOneById($id);
+        $referent = $this->referent->findOneById($id);
         $partners = $p->findByFilter(-1,[],['id','name']);
 
-        return view('admin.students.edit',compact('student','partners'));
+        return view('admin.pedagogical-referents.edit',compact('referent','partners'));
     }
 
     /**
@@ -106,9 +95,9 @@ class StudentController extends Controller
     {
         $data =$this->getValidatedData($request);
 
-        $this->student->update($id,$data);
+        $this->referent->update($id,$data);
         session()->flash('success',__('messages.update'));
-        return redirect()->route('admin.students.index');
+        return redirect()->route('admin.pedagogical-referents.index');
     }
 
     /**
@@ -117,9 +106,9 @@ class StudentController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        $this->student->delete($id);
+        $this->referent->delete($id);
         session()->flash('success',__('messages.delete'));
-        return redirect()->route('admin.students.index');
+        return redirect()->route('admin.pedagogical-referents.index');
     }
 
     /**
