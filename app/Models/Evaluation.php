@@ -17,7 +17,7 @@ class Evaluation extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name', 'start_date', 'end_date','partner_id','center_id','state','date_exam'
+        'name', 'start_date', 'end_date','partner_id','center_id','state','date_exam','type'
     ];
 
     /**

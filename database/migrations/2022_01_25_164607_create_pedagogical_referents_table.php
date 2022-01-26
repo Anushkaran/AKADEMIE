@@ -36,7 +36,7 @@ class CreatePedagogicalReferentsTable extends Migration
      */
     public function down()
     {
-        Schema::create('pedagogical_referents', function (Blueprint $table) {
+        Schema::table('pedagogical_referents', function (Blueprint $table) {
             $table->dropForeign('pedagogical_referents_partner_id_foreign');
 
         });
