@@ -1,3 +1,4 @@
+@extends('partner.layouts.app')
 @push('tab-css')
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/css/pages/app-user.css')}}">
@@ -23,7 +24,7 @@
                             <h2 class="mb-1">You are not authorized! 🔐</h2>
                             <p class="mb-2">
                                 Please contact admin to activate your Account  🔐
-                            </p><a class="btn btn-primary mb-1 btn-sm-block" href="#">logout</a><img class="img-fluid" src="../../../app-assets/images/pages/not-authorized.svg" alt="Not authorized page"/>
+                            </p><a class="btn btn-primary mb-1 btn-sm-block" href="#">logout</a><img class="img-fluid" src="{{asset('assets/vuexy/app-assets/images/pages/not-authorized.svg')}}" alt="Not authorized page"/>
                         </div>
                     </div>
                 </div>

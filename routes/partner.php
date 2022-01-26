@@ -42,7 +42,7 @@ Route::middleware('auth:partner')->group(function (){
         Route::get('skills',[App\Http\Controllers\Web\Partner\SkillController::class,'index'])->name('skills.index');
     });
 
-    Route::view('un-active/account','account.un-active')
+    Route::view('un-active/account','partner.account.un-active')
         ->name('un-active.account')
         ->middleware('unActiveAccount');
 });

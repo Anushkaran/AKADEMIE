@@ -16,11 +16,18 @@ class ActiveAccountMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->isActive())
+        if (!$request->user()->isActive())
         {
-            return $next($request);
-        }
+            if ($request->is('partner*'))
+            {
+                return redirect()->to('partner/un-active/account');
+            }
 
-        return redirect()->to('un-active/account');
+            if ($request->is('user*'))
+            {
+                return redirect()->to('user/un-active/account');
+            }
+        }
+        return $next($request);
     }
 }
