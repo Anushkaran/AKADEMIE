@@ -54,12 +54,25 @@
                             </div>
                             <div class="card-body">
 
-                                <div class=" search-input">
-                                    <form>
+                                <div class=" search-input row">
+                                    <form class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control input"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="type"> {{__('labels.evaluation_type')}}</label>
+                                            <select name="type" id="type" class="form-control">
+                                                <option value="all" disabled selected>...</option>
+                                                @foreach(config('settings.evaluation_types') as $type)
+                                                    <option value="{{$type}}" @if(request('type') === $type) selected @endif>{{$type}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row">
-                                            <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
 
                                             <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
+                                            <a  href="{{route('admin.evaluations.index')}}" class="btn btn-primary mr-1 col-2">{{__('actions.clear')}}</a>
                                         </div>
                                     </form>
                                 </div>
@@ -74,9 +87,10 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>{{__('labels.name')}}</th>
-                                        <th>{{trans_choice('labels.partner',1)}}</th>
-                                        <th>{{trans_choice('labels.center',1)}}</th>
+                                        <th>{{trans_choice('labels.evaluation',1)}}</th>
+                                        <th>
+                                            {{__('labels.evaluation_type')}}
+                                        </th>
 
                                         <th>{{__('labels.state')}}</th>
                                         <th>{{__('labels.start_date')}}</th>
@@ -92,23 +106,29 @@
                                         <td>
                                             {{$key + 1}}
                                         </td>
-                                        <td>{{$e->name}}</td>
                                         <td>
-                                            <strong>
-                                                <a href="{{route('admin.partners.show',$e->partner_id)}}" class="text-decoration-none">
-                                                   <i data-feather="arrow-up-right"></i>
-                                                    {{$e->partner->name}}
-                                                </a>
-                                            </strong>
-                                        </td>
-                                            <td>
-                                                <strong>
+                                            <ul>
+                                                <li>{{$e->name}}</li>
+                                                <li>
+                                                    <Strong>{{trans_choice('labels.partner',1)}}</Strong>:
+                                                    <a href="{{route('admin.partners.show',$e->partner_id)}}" class="text-decoration-none">
+                                                        <i data-feather="arrow-up-right"></i>
+                                                        {{$e->partner->name}}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <Strong>{{trans_choice('labels.center',1)}}</Strong>:
                                                     <a href="{{route('admin.centers.show',$e->center_id)}}" class="text-decoration-none">
                                                         <i data-feather="arrow-up-right"></i>
                                                         {{$e->center->name}}
                                                     </a>
-                                                </strong>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                            <td>
+                                                <span class="badge badge-info">{{$e->type}}</span>
                                             </td>
+
                                             <td>
                                                 @if($e->state)
                                                     <span class="badge badge-success">{{__('labels.active')}}</span>
@@ -203,11 +223,21 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                        <label class="form-label" for="type">{{__('labels.evaluation_type')}}</label>
+                        <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                            @foreach(config('settings.evaluation_types') as $t)
+                                <option value="{{$t}}" {{old('type') === $t ? 'selected' : ''}}>{{$t}} ({{__('labels.evaluation_types.'.$t)}})</option>
+                            @endforeach
+                        </select>
+                        @error('type')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="partner_id">{{trans_choice('labels.partner',1)}}</label>
                         <select name="partner_id" id="partner_id" class="form-control select2-partner @error('partner_id') is-invalid @enderror">
-                            {{--                            @foreach($partners as $p)--}}
-                            {{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
-                            {{--                            @endforeach--}}
+
                         </select>
                         @error('partner_id')
                         <div class="invalid-feedback">{{$message}}</div>
@@ -277,7 +307,6 @@
         @endif
         $(document).ready(function() {
             $('.select2-center').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
@@ -286,13 +315,11 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
-                            return {
-                                search: params.term,
-                                page: params.page || 1
-                            };
-                        }
+
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
 
                     },
                     processResults: function ({centers}, params) {
@@ -314,7 +341,6 @@
             });
 
             $('.select2-partner').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
@@ -323,13 +349,11 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
+
                             return {
                                 search: params.term,
                                 page: params.page || 1
                             };
-                        }
 
                     },
                     processResults: function ({partners}, params) {

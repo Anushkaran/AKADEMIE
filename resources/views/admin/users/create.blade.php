@@ -88,17 +88,17 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                            <div class="form-group">
-                                                <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
-                                                <select name="partner_id" id="partner_id" class="form-control select2-partners">
-                                                    {{--                            @foreach($partners as $p)--}}
-                                                    {{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
-                                                    {{--                            @endforeach--}}
-                                                </select>
-                                                @error('partner_id')
-                                                <div class="invalid-feedback">{{$message}}</div>
-                                                @enderror
-                                            </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                                                    <select name="partner_id" id="partner_id" class="form-control select2-partners">
+                                                        {{--                            @foreach($partners as $p)--}}
+                                                        {{--                                <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>--}}
+                                                        {{--                            @endforeach--}}
+                                                    </select>
+                                                    @error('partner_id')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
@@ -236,7 +236,6 @@
             $('.select2-department').select2();
 
             $('.select2-thematics').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
@@ -245,13 +244,11 @@
                     data: function (params) {
 
                         // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
+
                             return {
                                 search: params.term,
                                 page: params.page || 1
                             };
-                        }
 
                     },
                     processResults: function ({thematics}, params) {

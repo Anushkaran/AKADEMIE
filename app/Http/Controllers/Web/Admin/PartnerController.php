@@ -124,7 +124,11 @@ class PartnerController extends Controller
             'email' => 'required|email|unique:partners,email',
             'leader'  => 'required|string|max:200',
             'department'=> 'required|string|max:200',
-            'pedagogical_referent'=> 'required|string|max:200',
+            'state'=> 'required|integer|in:'.implode(',',config('settings.account_states')),
+            'legal_referent'=> 'required|string|max:200',
+            'legal_referent_phone'=> 'required|string|max:20',
+            'administrative_referent'=> 'required|string|max:200',
+            'administrative_referent_phone'=> 'required|string|max:20',
             'phone' => 'required|string|max:20|unique:partners,phone',
             'password' => 'required|string|min:8|max:24|confirmed',
         ];

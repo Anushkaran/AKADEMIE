@@ -104,4 +104,15 @@ return [
         1 => 'Active',
         2 => 'Inactive',
     ],
+    'legal_referent' => 'Legal referent',
+    'legal_referent_phone' => 'Legal referent_phone',
+    'evaluation_type' => 'Session type',
+    'administrative_referent' => 'Administrative referent',
+    'administrative_referent_phone' => 'Administrative referent phone',
+    'evaluation_types' => [
+        'POEI' => 'Préparation Opérationnel à l’Emploi Individuel',
+        'POEC' => 'Préparation Opérationnel à l’Emploi Collectif',
+        'CFA' => 'Centre de Formation d’Apprentis',
+    ]
+
 ];

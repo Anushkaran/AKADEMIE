@@ -10,4 +10,9 @@ return [
        1, // active
        2, // inactive
    ],
+    'evaluation_types' => [
+        'POEI',
+        'POEC',
+        'CFA',
+    ]
 ];

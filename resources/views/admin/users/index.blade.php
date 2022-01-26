@@ -66,6 +66,15 @@
                                                 @endisset
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="state"> {{__('labels.account_state')}}</label>
+                                            <select name="state" id="state" class="form-control">
+                                                <option value="all" disabled selected>...</option>
+                                                @foreach(config('settings.account_states') as $state)
+                                                    <option value="{{$state}}" @if((int)request('state') === $state) selected @endif>{{__('labels.account_states.'.$state)}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row">
 
                                             <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
@@ -85,6 +94,7 @@
                                     <tr>
                                         <th>{{__('labels.pic')}}</th>
                                         <th>{{trans_choice('labels.user',1)}}</th>
+                                        <th>{{__('labels.account_state')}}</th>
                                         <th>{{__('labels.last_item',['name' => trans_choice('labels.evaluation-session',1)])}}</th>
                                         <th>Actions</th>
                                     </tr>
@@ -110,7 +120,13 @@
                                                     </li>
                                                 </ul>
                                             </td>
-
+                                            <td>
+                                                @if($user->isActive())
+                                                    <span class="badge badge-success">{{__('labels.account_states.'.$user->state)}}</span>
+                                                @else
+                                                    <span class="badge badge-danger">{{__('labels.account_states.'.$user->state)}}</span>
+                                                @endif
+                                            </td>
                                             <td>
                                                 <ul>
                                                     @foreach($user->evaluationSessions as $session)
@@ -186,42 +202,8 @@
         document.getElementById('create-btn').click();
         @endif
         $(document).ready(function() {
-            $('.select2').select2({
-                minimumInputLength:1,
-                cache:true,
-                ajax: {
-                    delay: 250,
-                    url: '{{route('admin.partners.index')}}',
-                    dataType: 'json',
-                    data: function (params) {
-
-                        // Query parameters will be ?search=[term]&page=[page]
-
-                        return {
-                            search: params.term,
-                            page: params.page || 1
-                        };
-
-                    },
-                    processResults: function ({partners}, params) {
-                        params.page = params.page || 1;
-
-                        let fData = $.map(partners.data, function (obj) {
-                            obj.text = obj.name; // replace name with the property used for the text
-                            return obj;
-                        });
-
-                        return {
-                            results: fData,
-                            pagination: {
-                                more: (params.page * 10) < partners.total
-                            }
-                        };
-                    }
-                }
-            });
+            $('#state').select2();
             $('#partners-filter').select2({
-                minimumInputLength:1,
                 cache:true,
                 ajax: {
                     delay: 250,

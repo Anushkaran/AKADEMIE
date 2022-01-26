@@ -141,7 +141,7 @@ class UserController extends Controller
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:8|max:24|confirmed',
             'image' => 'sometimes|nullable|file|image|max:3000',
-            'state' => 'required|integer|in:1,2',
+            'state' => 'required|integer|in:'.implode(',',config('settings.account_states')),
             'partner_id' => 'required|integer|exists:partners,id',
             'thematics' => 'required|array',
         ];

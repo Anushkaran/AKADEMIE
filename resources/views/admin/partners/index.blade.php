@@ -48,12 +48,26 @@
                             </div>
                             <div class="card-body">
 
-                                <div class=" search-input">
-                                    <form>
+                                <div class=" search-input row">
+                                    <form class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control input"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="state"> {{__('labels.account_state')}}</label>
+                                            <select name="state" id="state" class="form-control">
+                                                <option value="all" disabled selected>...</option>
+                                                @foreach(config('settings.account_states') as $state)
+                                                    <option value="{{$state}}" @if((int)request('state') === $state) selected @endif>{{__('labels.account_states.'.$state)}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         <div class="row">
-                                            <input class="form-control input col-6"  name="search" type="text" placeholder="{{__('labels.search')}}" tabindex="0" data-search="search">
 
                                             <button  type="submit" class="btn btn-primary mr-1 col-2"><i data-feather="search"></i></button>
+                                            <a  href="{{route('admin.users.index')}}" class="btn btn-primary mr-1 col-2">{{__('actions.clear')}}</a>
                                         </div>
                                     </form>
                                 </div>
@@ -68,9 +82,8 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>{{__('labels.name')}}</th>
-                                        <th>{{__('labels.email')}}</th>
-                                        <th>{{__('labels.phone')}}</th>
+                                        <th>{{trans_choice('labels.partner',1)}}</th>
+                                        <th>{{__('labels.account_state')}}</th>
                                         <th>{{__('labels.created_at')}}</th>
                                         <th>Actions</th>
                                     </tr>
@@ -81,22 +94,33 @@
                                             <td>
                                                 {{$key + 1}}
                                             </td>
-                                            <td>{{$p->name}}</td>
                                             <td>
-                                                <a href="mailto:{{$p->email}}" class="text-decoration-none">
-                                                    <strong>
-                                                        <i data-feather="mail"></i>
-                                                        {{$p->email}}
-                                                    </strong>
-                                                </a>
+                                                <ul>
+                                                    <li>{{$p->name}}</li>
+                                                    <li>
+                                                        <a href="mailto:{{$p->email}}" class="text-decoration-none">
+                                                            <strong>
+                                                                <i data-feather="mail"></i>
+                                                                {{$p->email}}
+                                                            </strong>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="tel:{{$p->phone}}" class="text-decoration-none">
+                                                            <strong>
+                                                                <i data-feather="phone"></i>
+                                                                {{$p->phone}}
+                                                            </strong>
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </td>
                                             <td>
-                                                <a href="tel:{{$p->phone}}" class="text-decoration-none">
-                                                    <strong>
-                                                        <i data-feather="phone"></i>
-                                                        {{$p->phone}}
-                                                    </strong>
-                                                </a>
+                                                @if($p->isActive())
+                                                    <span class="badge badge-success">{{__('labels.account_states.'.$p->state)}}</span>
+                                                @else
+                                                    <span class="badge badge-danger">{{__('labels.account_states.'.$p->state)}}</span>
+                                                @endif
                                             </td>
                                             <td>
                                                 {{$p->created_at->format('d-m-Y')}}

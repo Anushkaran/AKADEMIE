@@ -12,13 +12,13 @@ class Partner extends Filter
     {
         $q = request($this->filterName());
 
-        if (!empty($q))
+        if (empty($q))
         {
             return $builder;
         }
 
         $model = $builder->getModel();
-        
+
         if (
             $model instanceof User || $model instanceof Student
         )

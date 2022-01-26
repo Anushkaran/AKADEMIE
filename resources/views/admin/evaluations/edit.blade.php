@@ -69,6 +69,17 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <label class="form-label" for="type">{{__('labels.evaluation_type')}}</label>
+                                            <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                                @foreach(config('settings.evaluation_types') as $t)
+                                                    <option value="{{$t}}" {{old('type',$ev->type) === $t ? 'selected' : ''}}>{{$t}} ({{__('labels.evaluation_types.'.$t)}})</option>
+                                                @endforeach
+                                            </select>
+                                            @error('type')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <label class="form-label" for="start_date">{{__('labels.start_date')}}</label>
                                             <input type="date" required name="start_date"
                                                    value="{{old('start_date',$ev->start_date->format('Y-m-d'))}}"

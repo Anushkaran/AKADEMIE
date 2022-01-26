@@ -51,7 +51,7 @@
                                 <div class="card-body">
                                     <form class="form form-vertical" action="{{route('admin.users.update',$user->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
-
+                                        {{$errors}}
                                         @method('PUT')
                                         <div class="row">
                                             <div class="col-12">
@@ -92,9 +92,19 @@
                                                     @enderror
                                                 </div>
                                             </div>
-
-
-
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="partner_id">{{trans_choice('labels.partner',2)}}</label>
+                                                    <select name="partner_id" id="partner_id" class="form-control select2-partners">
+                                                        @if($p =$user->partner )
+                                                            <option value="{{$p->id}}" {{(int)old('partner_id') === $p->id ? 'selected' : ''}}>{{$p->name}}</option>
+                                                        @endif
+                                                    </select>
+                                                    @error('partner_id')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="last_name-vertical">{{__('labels.organism')}}</label>
@@ -154,7 +164,7 @@
                                                     <label for="thematics">{{trans_choice('labels.thematic',1)}}</label>
                                                     <select name="thematics[]" multiple id="thematics" class="form-control select2-thematics">
                                                         @foreach($user->thematics as $th)
-                                                            <option value="{{$th->name}}"  selected @>{{$th->name}}</option>
+                                                            <option value="{{$th->id}}"  selected >{{$th->name}}</option>
                                                         @endforeach
                                                     </select>
                                                     @error('thematics')
@@ -219,7 +229,6 @@
             $('.select2-department').select2();
 
             $('.select2-thematics').select2({
-                minimumInputLength:2,
                 cache:true,
                 ajax: {
                     delay: 250,
@@ -227,14 +236,11 @@
                     dataType: 'json',
                     data: function (params) {
 
-                        // Query parameters will be ?search=[term]&page=[page]
-                        if (params.term && params.term.length > 3)
-                        {
+
                             return {
                                 search: params.term,
                                 page: params.page || 1
                             };
-                        }
 
                     },
                     processResults: function ({thematics}, params) {
@@ -249,6 +255,35 @@
                             results: fData,
                             pagination: {
                                 more: (params.page * 10) < thematics.total
+                            }
+                        };
+                    }
+                }
+            });
+            $('.select2-partners').select2({
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.partners.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+                    },
+                    processResults: function ({partners}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(partners.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < partners.total
                             }
                         };
                     }

@@ -25,7 +25,8 @@ class UserRepository extends BaseRepository implements \App\Contracts\UserContra
     {
         $query = User::with($relations)->select($columns)->withCount($relations_count)->newQuery();
         return $this->applyFilter($query,$per_page,[
-            \App\QueryFilter\Search::class
+            \App\QueryFilter\State::class,
+            \App\QueryFilter\Search::class,
         ]);
     }
 
