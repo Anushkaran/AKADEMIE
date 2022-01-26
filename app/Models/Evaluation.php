@@ -70,4 +70,9 @@ class Evaluation extends Model
     {
         return $this->belongsTo(Partner::class);
     }
+
+    public function referents(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(PedagogicalReferent::class)->withTimestamps();
+    }
 }

@@ -39,7 +39,13 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
      */
     public function new(array $data)
     {
-        return Evaluation::create($data);
+        $e = Evaluation::create($data);
+        if (array_key_exists('pedagogical_referent_id',$data))
+        {
+            $e->referents()->attach($data['pedagogical_referent_id']);
+        }
+
+        return $e;
     }
 
     /**
@@ -49,6 +55,10 @@ class EvaluationRepository extends BaseRepository implements \App\Contracts\Eval
     {
         $evaluation = $this->findOneById($id);
         $evaluation->update($data);
+        if (array_key_exists('pedagogical_referent_id',$data))
+        {
+            $evaluation->referents()->sync($data['pedagogical_referent_id']);
+        }
         return $evaluation;
     }
 

@@ -56,6 +56,7 @@ class EvaluationController extends Controller
         $data = $request->validate([
             'name'          => 'required|string|max:100',
             'center_id'    => 'required|integer|exists:centers,id',
+            'pedagogical_referent_id'    => 'required|integer|exists:pedagogical_referents,id',
             'partner_id'    => 'required|integer|exists:partners,id',
             'start_date'    => 'required|date',
             'date_exam'    => 'required|date',
@@ -114,6 +115,7 @@ class EvaluationController extends Controller
         $data = $request->validate([
             'name'          => 'required|string|max:100',
             'center_id'    => 'required|integer|exists:centers,id',
+            'pedagogical_referent_id'    => 'required|integer|exists:pedagogical_referents,id',
             'start_date'    => 'required|date',
             'date_exam'    => 'required|date',
             'type'    => 'required|string|in:'.implode(',',config('settings.evaluation_types')),

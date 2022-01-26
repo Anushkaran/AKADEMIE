@@ -43,6 +43,7 @@
                                     </a>
                                 @endif
                             </div>
+
                             <div class="card-body">
                                 <form class="add-new-record  pt-0" method="post" action="{{route('admin.evaluations.update',$ev->id)}}">
                                     @csrf
@@ -80,9 +81,20 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <label class="form-label" for="pedagogical_referent_id">{{trans_choice('labels.pedagogical_referent',1)}}</label>
+                                            <select name="pedagogical_referent_id" id="pedagogical_referent_id" class="form-control @error('pedagogical_referent_id') is-invalid @enderror">
+                                                @foreach($ev->referents as $r)
+                                                    <option value="{{$r->id}}" selected> {{$r->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('pedagogical_referent_id')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <label class="form-label" for="start_date">{{__('labels.start_date')}}</label>
                                             <input type="date" required name="start_date"
-                                                   value="{{old('start_date',$ev->start_date->format('Y-m-d'))}}"
+                                                   value="{{old('start_date', $ev->start_date->format('Y-m-d'))}}"
                                                    class="form-control @error('start_date') is-invalid @enderror"
                                                    id="name" placeholder="{{__('labels.start_date')}}
                                                 ..."  aria-label="{{__('labels.start_date')}} ..." />
@@ -94,7 +106,7 @@
                                         <div class="form-group">
                                             <label class="form-label" for="end_date">{{__('labels.end_date')}}</label>
                                             <input type="date" required name="end_date"
-                                                   value="{{old('end_date',$ev->end_date->format('Y-m-d'))}}"
+                                                   value="{{old('end_date', $ev->end_date->format('Y-m-d'))}}"
                                                    class="form-control @error('end_date') is-invalid @enderror"
                                                    id="name" placeholder="{{__('labels.end_date')}}
                                                 ..."  aria-label="{{__('labels.end_date')}} ..." />
@@ -102,11 +114,10 @@
                                             <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
                                         </div>
-
                                         <div class="form-group">
                                             <label class="form-label" for="start_date">{{__('labels.date_exam')}}</label>
                                             <input type="date" required name="date_exam"
-                                                   value="{{old('date_exam',$ev->date_exam->format('Y-m-d'))}}"
+                                                   value="{{old('date_exam',$ev->date_exam->format('Y-m-d') )}}"
                                                    class="form-control @error('date_exam') is-invalid @enderror"
                                                    id="name" placeholder="{{__('labels.date_exam')}}
                                                 ..."  aria-label="{{__('labels.date_exam')}} ..." />
@@ -186,7 +197,39 @@
                     }
                 }
             });
+            $('#pedagogical_referent_id').select2({
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.pedagogical-referents.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
 
+                        // Query parameters will be ?search=[term]&page=[page]
+
+                        return {
+                            search: params.term,
+                            page: params.page || 1
+                        };
+
+                    },
+                    processResults: function ({referents}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(referents.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < referents.total
+                            }
+                        };
+                    }
+                }
+            });
         });
         @if($errors->any())
         document.getElementById('create-btn').click();

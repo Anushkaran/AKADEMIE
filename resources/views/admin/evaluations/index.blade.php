@@ -235,6 +235,16 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label" for="pedagogical_referent_id">{{trans_choice('labels.pedagogical_referent',1)}}</label>
+                        <select name="pedagogical_referent_id" id="pedagogical_referent_id" class="form-control @error('pedagogical_referent_id') is-invalid @enderror">
+
+                        </select>
+                        @error('pedagogical_referent_id')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label" for="partner_id">{{trans_choice('labels.partner',1)}}</label>
                         <select name="partner_id" id="partner_id" class="form-control select2-partner @error('partner_id') is-invalid @enderror">
 
@@ -373,6 +383,39 @@
                     }
                 }
             });
+            $('#pedagogical_referent_id').select2({
+                cache:true,
+                ajax: {
+                    delay: 250,
+                    url: '{{route('admin.pedagogical-referents.index')}}',
+                    dataType: 'json',
+                    data: function (params) {
+
+                        // Query parameters will be ?search=[term]&page=[page]
+
+                            return {
+                                search: params.term,
+                                page: params.page || 1
+                            };
+
+                    },
+                    processResults: function ({referents}, params) {
+                        params.page = params.page || 1;
+
+                        let fData = $.map(referents.data, function (obj) {
+                            obj.text = obj.name; // replace name with the property used for the text
+                            return obj;
+                        });
+
+                        return {
+                            results: fData,
+                            pagination: {
+                                more: (params.page * 10) < referents.total
+                            }
+                        };
+                    }
+                }
+            });
         });
         const deleteForm = id => {
             Swal.fire({
@@ -388,7 +431,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/partner/evaluations/${id}`);
+                    f.setAttribute('action',`/admin/evaluations/${id}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");
