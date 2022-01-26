@@ -28,11 +28,9 @@ class CreateResourceResourceCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::create('resource_resource_category', function (Blueprint $table) {
-            $table->id();
+        Schema::table('resource_resource_category', function (Blueprint $table) {
             $table->dropForeign('resource_resource_category_resource_category_id_foreign');
             $table->dropForeign('resource_resource_category_resource_id_foreign');
-            $table->timestamps();
         });
         Schema::dropIfExists('resource_resource_category');
     }

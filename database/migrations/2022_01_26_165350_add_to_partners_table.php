@@ -17,8 +17,8 @@ class AddToPartnersTable extends Migration
             $table->integer('state')->default(1); // 1: active 2: unActive
             $table->string('legal_referent')->nullable();
             $table->string('legal_referent_phone')->nullable();
-            $table->string('administrative_referent ')->nullable();
-            $table->string('administrative_referent_phone ')->nullable();
+            $table->string('administrative_referent')->nullable();
+            $table->string('administrative_referent_phone')->nullable();
 
         });
     }
@@ -34,8 +34,8 @@ class AddToPartnersTable extends Migration
             $table->dropColumn('state'); // 1: active 2: unActive
             $table->dropColumn('legal_referent');
             $table->dropColumn('legal_referent_phone');
-            $table->dropColumn('administrative_referent ');
-            $table->dropColumn('administrative_referent_phone ');
+            $table->dropColumn('administrative_referent');
+            $table->dropColumn('administrative_referent_phone');
         });
     }
 }

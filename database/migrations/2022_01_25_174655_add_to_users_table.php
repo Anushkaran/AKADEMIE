@@ -29,6 +29,7 @@ class AddToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('state');
             $table->dropForeign('users_partner_id_foreign');
+            $table->dropColumn('partner_id');
         });
     }
 }
