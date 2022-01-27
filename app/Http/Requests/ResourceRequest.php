@@ -26,7 +26,7 @@ class ResourceRequest extends FormRequest
     {
         $rules  =  [
             'name'   => 'required|string|max:200',
-            'type'   => 'required|integer|in:1,2',
+            'type'   => 'required|integer|in:1,2,3',
             'resource_category_id'   => 'required|integer|exists:resource_categories,id',
             'access' => $this->getRuleForAccess(),
             'file'   => $this->getRuleForFile(),
@@ -51,7 +51,12 @@ class ResourceRequest extends FormRequest
 
         if ($type === 2)
         {
-            return 'required|mimes:ppt,pptx,docx,doc|max:3000';
+            return 'required|file|mimes:ppt,pptx,docx,doc|max:3000';
+        }
+
+        if ($type === 3)
+        {
+            return 'required|file|mimes:mp4,mov,avi,doc|max:10000';
         }
 
         return  '';
