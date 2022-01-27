@@ -84,4 +84,9 @@ class Partner extends Authenticatable
     {
         return $this->hasMany(Evaluation::class);
     }
+
+    public function resources(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class)->withTimestamps();
+    }
 }
