@@ -21,6 +21,7 @@ return [
     'password_confirmation' => 'Confirmation du Mot de passe',
     'set_password' => 'Créer un nouveau Mot de passe',
     'name' => 'Nom',
+    'formation_name' => 'Intitulé de la Formation',
     'profile' => 'Profile',
     'first_name' => 'Prénom',
     'last_name' => 'Nom',
@@ -53,7 +54,7 @@ return [
     'nb_of' => 'Nombre de :item',
     'settings'=>'réglages',
     'date' => 'Date',
-
+    'duration' => 'durée',
     //**********************************************************************************************//
     'thematic' => '{1}Thématique|[2,*]Thématiques',
     'organism' => 'Organisme',

@@ -24,7 +24,8 @@ return [
    'password_confirmation' => 'Confirm Password',
    'set_password' => 'Set New Password',
    'name' => 'Name',
-   'profile' => 'Profile',
+    'formation_name' => 'Formation name',
+    'profile' => 'Profile',
    'first_name' => 'First name',
    'last_name' => 'Last name',
    'phone' => 'Phone',
@@ -79,6 +80,7 @@ return [
     'validated' => 'validated',
     'failed' => 'failed',
     'not_evaluated' => 'not evaluated',
+    'duration' => 'duration',
     //file ressources
 
     'resources' => 'resources',
