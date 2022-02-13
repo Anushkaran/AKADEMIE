@@ -94,6 +94,7 @@ return [
     'file_types' => [
         1 => 'PDF',
         2 => 'DOCUMENT (Docx,doc,ppt ...)',
+        3 => 'Videos (mp4,avi,mov)',
     ],
     // last update
     'resource-category' => '{1}Resource category|[2,*]Resource categories',

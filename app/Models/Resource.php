@@ -41,4 +41,9 @@ class Resource extends Model
     {
         return $this->belongsToMany(ResourceCategory::class,'resource_resource_category')->withTimestamps();
     }
+
+    public function partners(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Partner::class)->withTimestamps();
+    }
 }

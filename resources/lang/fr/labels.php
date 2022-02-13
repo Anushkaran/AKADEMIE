@@ -89,8 +89,9 @@ return [
 
     'file_types' => [
         1 => 'PDF',
-        2 => 'DOCUMENT (Docx,doc,ppt ,Pptx...)',
-    ]
+        2 => 'DOCUMENT (Docx,doc,ppt ...)',
+        3 => 'Videos (mp4,avi,mov)',
+    ],
 
 
 

@@ -60,8 +60,8 @@ Route::middleware('auth:admin')->group(function (){
     Route::resource('levels',App\Http\Controllers\Web\Admin\LevelController::class)->except(['show','create']);
     Route::resource('resource-categories',App\Http\Controllers\Web\Admin\ResourceCategoryController::class)->except(['show','create']);
 
-    Route::post('resources/{id}/users',[App\Http\Controllers\Web\Admin\ResourceController::class,'attach'])->name('resources.users.attach');
-    Route::delete('resources/{id}/users/{user}',[App\Http\Controllers\Web\Admin\ResourceController::class,'detach'])->name('resources.users.detach');
+    Route::post('resources/{id}/partners',[App\Http\Controllers\Web\Admin\ResourceController::class,'attach'])->name('resources.partners.attach');
+    Route::delete('resources/{id}/partners/{partner}',[App\Http\Controllers\Web\Admin\ResourceController::class,'detach'])->name('resources.partners.detach');
     Route::resource('resources',App\Http\Controllers\Web\Admin\ResourceController::class);
 
     Route::get('files/{id}',[App\Http\Controllers\Web\Admin\FileController::class,'show'])->name('files.show');

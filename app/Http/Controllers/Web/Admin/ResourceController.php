@@ -64,20 +64,20 @@ class ResourceController extends Controller
     public function attach($id,Request $request)
     {
         $data = $request->validate([
-            'users'     => 'required|array',
-            'users.*'   => 'required|integer'
+            'partners'     => 'required|array',
+            'partners.*'   => 'required|integer'
         ]);
 
-        $this->resource->attachUser($id,$data);
+        $this->resource->attachPartner($id,$data);
 
 
         session()->flash('success',__('messages.attach'));
         return redirect()->back();
     }
 
-    public function detach($id,$user)
+    public function detach($id,$partner)
     {
-        $this->resource->detachUser($id,$user);
+        $this->resource->detachPartner($id,$partner);
         session()->flash('success',__('messages.removed'));
         return redirect()->back();
     }

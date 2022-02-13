@@ -121,7 +121,7 @@
                                             type="button" data-toggle="modal" id="create-btn"
                                             data-target="#modals-slide-in">
                                         <i data-feather='plus'></i>
-                                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.user',1)])}}
+                                        {{trans_choice('actions.add-new',1,['name' => trans_choice('labels.partner',1)])}}
                                     </button>
                                 </h4>
                             </div>
@@ -131,7 +131,7 @@
                             <div class="table-responsive">
                                 @php
                                     /** @var \App\Models\Resource $resource */
-                                    $count = $resource->users->count();
+                                    $count = $resource->partners->count();
                                 @endphp
                                 <table class="table">
                                     <thead>
@@ -144,22 +144,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($resource->users as $key => $user)
+                                    @foreach($resource->partners as $key => $partner)
                                         <tr>
                                             <td>
                                                 {{$key + 1}}
                                             </td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->phone}}</td>
+                                            <td>{{$partner->name}}</td>
+                                            <td>{{$partner->email}}</td>
+                                            <td>{{$partner->phone}}</td>
 
                                             <td>
                                                 @if($count < 3)
 
-                                                    <a href="{{route('admin.resources.show',$resource->id)}}" class="btn btn-sm btn-outline-warning">
+                                                    <a href="{{route('admin.partners.show',$partner->id)}}" class="btn btn-sm btn-outline-warning">
                                                         <i data-feather="eye"></i>
                                                     </a>
-                                                    <a href="javascript:void(0)" onclick="detachUser({{$resource->id}},{{$user->id}})" class="btn btn-sm btn-outline-warning">
+                                                    <a href="javascript:void(0)" onclick="detachUser({{$resource->id}},{{$partner->id}})" class="btn btn-sm btn-outline-warning">
                                                         <i data-feather="trash"></i>
                                                     </a>
                                                 @else
@@ -169,11 +169,11 @@
                                                         </button>
                                                         <div class="dropdown-menu">
 
-                                                            <a class="dropdown-item" href="{{route('admin.users.show',$user->id)}}">
+                                                            <a class="dropdown-item" href="{{route('admin.partners.show',$partner->id)}}">
                                                                 <i data-feather="eye" class="mr-50"></i>
                                                                 <span>{{__('actions.details')}}</span>
                                                             </a>
-                                                            <a class="dropdown-item" href="javascript:void(0);" onclick="detachUser({{$resource->id}},{{$user->id}})">
+                                                            <a class="dropdown-item" href="javascript:void(0);" onclick="detachPartner({{$resource->id}},{{$partner->id}})">
                                                                 <i data-feather="trash" class="mr-50"></i>
                                                                 <span>{{__('actions.delete')}}</span>
                                                             </a>
@@ -201,21 +201,21 @@
     <!-- Modal to add new record -->
     <div class="modal modal-slide-in fade" id="modals-slide-in">
         <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0" method="post" action="{{route('admin.resources.users.attach',$resource->id)}}">
+            <form class="add-new-record modal-content pt-0" method="post" action="{{route('admin.resources.partners.attach',$resource->id)}}">
                 @csrf
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        {{__('actions.add-new',['name' => trans_choice('labels.user',1)])}}
+                        {{__('actions.add-new',['name' => trans_choice('labels.partner',1)])}}
                     </h5>
                 </div>
                 <div class="modal-body flex-grow-1">
 
                     <div class="form-group">
-                        <label class="form-label" for="users">{{trans_choice('labels.user',2)}}</label>
-                        <select multiple class="form-control select2-users @error('users') is-invalid @enderror" name="users[]" id="users">
+                        <label class="form-label" for="partners">{{trans_choice('labels.partner',2)}}</label>
+                        <select multiple class="form-control select2-partners @error('partners') is-invalid @enderror" name="partners[]" id="partners">
                         </select>
-                        @error('users')
+                        @error('partners')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -315,11 +315,11 @@
 
 
 
-        $('.select2-users').select2({
+        $('.select2-partners').select2({
             cache:true,
             ajax: {
                 delay: 250,
-                url: '{{route('admin.users.index')}}',
+                url: '{{route('admin.partners.index')}}',
                 dataType: 'json',
                 data: function (params) {
 
@@ -330,10 +330,10 @@
                     };
 
                 },
-                processResults: function ({users}, params) {
+                processResults: function ({partners}, params) {
                     params.page = params.page || 1;
 
-                    let fData = $.map(users.data, function (obj) {
+                    let fData = $.map(partners.data, function (obj) {
                         obj.text = obj.name; // replace name with the property used for the text
                         return obj;
                     });
@@ -341,7 +341,7 @@
                     return {
                         results: fData,
                         pagination: {
-                            more: (params.page * 10) < users.total
+                            more: (params.page * 10) < partners.total
                         }
                     };
                 }
@@ -381,7 +381,7 @@
             });
         }
 
-        const detachUser = (resource,user) => {
+        const detachPartner = (resource,partner) => {
             Swal.fire({
                 title: '{{__('actions.delete_confirm_title')}}',
                 text: "{{__('actions.delete_confirm_text')}}",
@@ -395,7 +395,7 @@
                 if (result.value) {
                     let f = document.createElement("form");
                     f.setAttribute('method',"post");
-                    f.setAttribute('action',`/admin/resources/${resource}/users/${user}`);
+                    f.setAttribute('action',`/admin/resources/${resource}/partners/${partner}`);
 
                     let i1 = document.createElement("input"); //input element, text
                     i1.setAttribute('type',"hidden");

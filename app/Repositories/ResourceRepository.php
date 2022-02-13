@@ -91,6 +91,23 @@ class ResourceRepository extends BaseRepository implements \App\Contracts\Resour
         $users = is_array($user) ? $user : [$user];
         $resource = $this->findOneById($id);
         $resource->users()->detach($users);
-        return$resource;
+        return $resource;
+    }
+
+    public function attachPartner($id, array $data)
+    {
+        $resource = $this->findOneById($id);
+
+        $resource->partners()->syncWithoutDetaching($data['partners']);
+
+        return $resource;
+    }
+
+    public function detachPartner($id, $partner)
+    {
+        $partners = is_array($partner) ? $partner : [$partner];
+        $resource = $this->findOneById($id);
+        $resource->partners()->detach($partners);
+        return $resource;
     }
 }

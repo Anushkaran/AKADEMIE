@@ -17,8 +17,8 @@ class DashboardController extends Controller
      */
     public function index(Request $request) : Renderable
     {
-        $query = Resource::whereHas('users',function ($q){
-            $q->where('users.id',auth()->id());
+        $query = Resource::whereHas('partners',function ($q){
+            $q->where('partners.id',auth()->user()->partner_id);
         })->newQuery();
 
         if ($request->has('search') && !empty($request->input('search')))
@@ -33,8 +33,8 @@ class DashboardController extends Controller
 
     public function preview($id)
     {
-        $resource = Resource::whereHas('users',function ($q){
-            $q->where('users.id',auth()->id());
+        $resource = Resource::whereHas('partners',function ($q){
+            $q->where('partners.id',auth()->user()->partner_id);
         })->findOrFail($id);
 
         if (!$resource->access === 1)
@@ -47,8 +47,8 @@ class DashboardController extends Controller
 
     public function fileDownload($id)
     {
-        $resource = Resource::whereHas('users',function ($q){
-            $q->where('users.id',auth()->id());
+        $resource = Resource::whereHas('partners',function ($q){
+            $q->where('partners.id',auth()->user()->partner_id);
         })->findOrFail($id);
 
         if (!$resource->access === 2)
@@ -70,8 +70,8 @@ class DashboardController extends Controller
 
     public function getFile($id)
     {
-        $resource = Resource::whereHas('users',function ($q){
-            $q->where('users.id',auth()->id());
+        $resource = Resource::whereHas('partners',function ($q){
+            $q->where('partners.id',auth()->user()->partner_id);
         })->findOrFail($id);
 
         if (!Storage::disk('s3')->exists($resource->link))
