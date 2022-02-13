@@ -4,7 +4,7 @@ return [
     'user' => '{1}Formateur|[2,*]Formateurs',
     'admin' => '{1}Administrateur|[2,*]Administrateurs',
     'partner' => '{1}Organisme|[2,*]Organismes',
-    'center' => '{1}Centre|[2,*]Centres',
+    'center' => '{1}Lieu|[2,*]Lieux',
     'student' => '{1}Stagiaire|[2,*]Stagiaires',
     'accounts' => '{1}Compte|[2,*]Comptes',
     'evaluation' => '{1}Evaluation|[2,*]Evaluations',
