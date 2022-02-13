@@ -5,7 +5,7 @@ return [
     'admin' => '{1}Administrateur|[2,*]Administrateurs',
     'partner' => '{1}Organisme|[2,*]Organismes',
     'center' => '{1}Lieu|[2,*]Lieux',
-    'student' => '{1}Stagiaire|[2,*]Stagiaires',
+    'student' => '{1}Apprenant|[2,*]Apprenants',
     'accounts' => '{1}Compte|[2,*]Comptes',
     'evaluation' => '{1}Evaluation|[2,*]Evaluations',
     'session'=>'{1}Session|[2,*]Sessions',
@@ -77,8 +77,8 @@ return [
     'not_evaluated' => 'non évalué',
 
 //file ressources
-    'resources' => 'ressources',
-    'access' => 'accessibilité',
+    'resources' => 'Ressources',
+    'access' => 'Accessibilité',
     'file_type' => 'Type de fichier',
     'file' => 'Fichier',
 
