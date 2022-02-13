@@ -68,6 +68,19 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label for="state">{{__('labels.account_state')}}</label>
+                                                    <select name="state" id="state" class="form-control">
+                                                        @foreach(config('settings.account_states') as $s)
+                                                            <option value="{{$s}}" @if(old('state',$partner->state) === $s) selected @endif>{{__('labels.account_states.'.$s)}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('state')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label for="legal_referent">{{__('labels.legal_referent')}}</label>
                                                     <input type="text" value="{{old('legal_referent',$partner->legal_referent)}}" id="legal_referent"
                                                            class="form-control @error('legal_referent') is-invalid @enderror" name="legal_referent"
