@@ -119,11 +119,9 @@
                                 </div>
                                 <div class="d-flex justify-content-start">
                                     <ul class="list-unstyled mb-4 ">
-                                        <li><strong>{{trans_choice('labels.center',1)}} </strong> .........</li>
-                                        <li><strong>{{__('labels.formation_name')}} </strong>  ..........</li>
-                                        <li><strong>{{__('labels.date')}} </strong>  .../.../....</li>
-                                        <li><strong>{{__('labels.duration')}} </strong>  .../.../.... </li>
-                                        <li><strong>Sur </strong> ... <strong> Jours </strong> </li>
+                                        <li><strong>{{trans_choice('labels.center',1)}} </strong> {{$session->evaluation->center->name}}</li>
+                                        <li><strong>{{__('labels.formation_name')}} </strong> {{$session->evaluation->name}}</li>
+                                        <li><strong>{{__('labels.date')}} </strong> {{$session->date->format('d/m/Y')}}</li>
 
                                     </ul>
                                 </div>
@@ -145,15 +143,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
+                                            @foreach($session->evaluation->students as $std)
                                             <tr>
 
-                                                <td class="per70 text-center"></td>
+                                                <td class="per70 text-center">{{$std->name}}</td>
                                                 <td class="per70 text-center"></td>
                                                 <td class="per70 text-center"></td>
 
                                             </tr>
-
+                                            @endforeach
 
                                         </tbody>
                                         <tfoot>
@@ -173,7 +171,7 @@
 
                                         <tr>
 
-                                            <td class="per70 text-center"></td>
+                                            <td class="per70 text-center">{{auth()->user()->name}}</td>
                                             <td class="per70 text-center"></td>
                                             <td class="per70 text-center"></td>
 

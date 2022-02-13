@@ -77,7 +77,7 @@
                                             <td><span class="badge badge-info">{{$session->evaluation->students_count}}</span></td>
 
                                             <td>
-                                                <a href="javascript:void(0)" onclick="deleteForm({{$session->id}})" class="btn btn-sm btn-outline-warning">
+                                                <a href="{{route('evaluation-sessions.absence-sheet.generate',$session->id)}}"  class="btn btn-sm btn-outline-warning">
                                                     <i data-feather="download"></i>
                                                 </a>
                                             </td>

@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::any('logout', [\App\Http\Controllers\Web\User\Auth\UserLoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [App\Http\Controllers\Web\User\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/evaluation-sessions', [App\Http\Controllers\Web\User\EvaluationSessionController::class, 'index'])->name('evaluation-sessions.index');
+    Route::get('/evaluation-sessions/{session}/absence-sheet/generate', [App\Http\Controllers\Web\User\EvaluationSessionController::class, 'generate'])->name('evaluation-sessions.absence-sheet.generate');
     Route::get('/preview/{id}', [App\Http\Controllers\Web\User\DashboardController::class, 'preview'])->name('resources.preview');
     Route::get('/download/{id}', [App\Http\Controllers\Web\User\DashboardController::class, 'fileDownload'])->name('resources.fileDownload');
     Route::get('/files/{id}', [App\Http\Controllers\Web\User\DashboardController::class, 'getFile'])->name('file');
