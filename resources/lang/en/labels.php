@@ -4,8 +4,8 @@ return [
    'user' => '{1}User|[2,*]users',
    'admin' => '{1}Admin|[2,*]admins',
    'partner' => '{1}Partner|[2,*]partners',
-   'center' => '{1}Center|[2,*]center',
-   'level' => '{1}Level|[2,*]levels',
+   'center' => '{1}Place|[2,*]Places',
+   'level' => '{1}Level|[2,*]Levels',
    'student' => '{1}Student|[2,*]students',
    'accounts' => '{1}Account|[2,*]accounts',
     'evaluation' => '{1}Evaluation|[2,*]Evaluations',
@@ -24,7 +24,8 @@ return [
    'password_confirmation' => 'Confirm Password',
    'set_password' => 'Set New Password',
    'name' => 'Name',
-   'profile' => 'Profile',
+    'formation_name' => 'Formation name',
+    'profile' => 'Profile',
    'first_name' => 'First name',
    'last_name' => 'Last name',
    'phone' => 'Phone',
@@ -79,6 +80,7 @@ return [
     'validated' => 'validated',
     'failed' => 'failed',
     'not_evaluated' => 'not evaluated',
+    'duration' => 'duration',
     //file ressources
 
     'resources' => 'resources',

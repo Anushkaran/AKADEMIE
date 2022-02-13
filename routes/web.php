@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::view('/', 'welcome');
+Route::view('/pdf-view', 'user.evaluation-sessions.absence-sheet');
 
 
 Route::get('migrate',[App\Http\Controllers\ArtisanController::class,'migrate']);

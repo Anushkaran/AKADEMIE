@@ -35,7 +35,7 @@
 
                             <i  class="feather" data-feather='user-plus'></i>
 
-                            <h3 class=" mb-3">{{__('messages.connect_as_admin')}} </h3>
+                            <h3>{{__('messages.connect_as_admin')}}<br> </h3>
 
                             <a href="{{route('admin.login')}}" class="btn btn-block btn-primary mt-2">{{__('labels.login')}}</a>
                         </div>

@@ -1,4 +1,4 @@
-<div class="horizontal-menu-wrapper">
+<div class="horizontal-menu-wrapper mt-1">
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper" data-menu-type="floating-nav">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
@@ -38,10 +38,17 @@
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
 
                 <li class="{{request()->routeIs('partner.dashboard') ? 'active' : ''}}">
-                    <a class="nav-item  d-flex align-items-center"
+                    <a class="nav-item  d-flex align-items-center {{request()->routeIs('partner.dashboard') ? 'text-white' : 'text-dark'}}"
                        href="{{route('partner.dashboard')}}"  data-i18n="Dashboard">
                         <i data-feather="activity"></i>
                         <span data-i18n="dashboard">{{__('labels.dashboard')}}</span>
+                    </a>
+                </li>
+                <li class="{{request()->routeIs('partner.evaluations*') ? 'active' : ''}}">
+                    <a class="nav-item  d-flex align-items-center {{request()->routeIs('partner.evaluations*') ? 'text-white' : 'text-dark'}}"
+                       href="{{route('partner.evaluations.index')}}"  data-i18n="Dashboard">
+                        <i data-feather="check"></i>
+                        <span data-i18n="dashboard">{{trans_choice('labels.session',2)}}</span>
                     </a>
                 </li>
                 <li class="dropdown nav-item {{request()->routeIs('partner.students*') ? 'active' : ''}}" data-menu="dropdown">
@@ -61,20 +68,14 @@
                         </li>
 
                         <li class="{{request()->routeIs('partner.students.create') ? 'active' : ''}}">
-                            <a class="dropdown-item d-flex align-items-center" href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
+                            <a class="dropdown-item d-flex align-items-center " href="{{route('partner.students.create')}}" data-toggle="dropdown" data-i18n="students">
                                 <i data-feather="user-plus"></i>
                                 <span data-i18n="Analytics">{{trans_choice('actions.add-new',1,['name' => trans_choice('labels.student',2)])}}</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="{{request()->routeIs('partner.evaluations*') ? 'active' : ''}}">
-                    <a class="nav-item  d-flex align-items-center"
-                       href="{{route('partner.evaluations.index')}}"  data-i18n="Dashboard">
-                        <i data-feather="check"></i>
-                        <span data-i18n="dashboard">{{trans_choice('labels.evaluation',2)}}</span>
-                    </a>
-                </li>
+
             </ul>
 
         </div>

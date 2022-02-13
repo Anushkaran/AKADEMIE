@@ -32,7 +32,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>{{__('labels.name')}}</th>
+                        <th>{{trans_choice('labels.session',1)}}</th>
                         <th>{{__('labels.date')}}</th>
                         <th>{{trans_choice('labels.user',2)}}</th>
                         <th>Actions</th>
