@@ -80,7 +80,7 @@
     </style>
 </head>
 <header>
-    <img width="100%" src="{{asset('assets/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
+    <img width="1200px"  height="300px" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
 
 </header>
 <body>
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="d-flex justify-content-start">
                                     <ul class="list-unstyled mb-4 ">
-                                        <li><strong>{{__('labels.center')}} </strong> .........</li>
+                                        <li><strong>{{trans_choice('labels.center',1)}} </strong> .........</li>
                                         <li><strong>{{__('labels.formation_name')}} </strong>  ..........</li>
                                         <li><strong>{{__('labels.date')}} </strong>  .../.../....</li>
                                         <li><strong>{{__('labels.duration')}} </strong>  .../.../.... </li>
@@ -200,8 +200,13 @@
 
 </div>
 <footer style="margin-bottom: 0px!important;">
-    <img width="100%" src="{{asset('assets/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
-
+    <img width="1200px"  height="300px" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
+    <div class="text-center">
+        K.LéORH – 15 Boulevard Maginot – 57 000 METZ
+    </div>
+    <div class="text-center">
+        Siret : 807 650 932 00021 – Activité formation N°41 57 03465 57 – APE 8559A - FR 90 807650932
+    </div>
 </footer>
 <script src="{{asset('assets/app-assets/vendors/js/bootstrap.min.js')}}">
 </script>
