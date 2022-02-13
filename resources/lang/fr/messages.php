@@ -15,8 +15,9 @@ return [
     'reset_password_text' => 'Récupérez votre Mot de passe 🔒',
     'reset_password' => 'Récupérer mon Mot de passe 🔒',
     'connect_as' => 'Se connecter Autrement',
-    'connect_as_admin' => "Se Connecter autant qu'admin",
-    'connect_as_partner' => "Se Connecter autant qu'Organisme",
-    'connect_as_user' => "Se Connecter autant que Formateur",
+    'connect_as_admin' => "Accès K.LéORH",
+    'connect_as_partner' => "Accès Partenaire",
+    'connect_as_user' => "Accès  Formateur",
+
 ];
 
