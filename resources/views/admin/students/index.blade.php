@@ -92,7 +92,7 @@
                                         <th>{{__('labels.last_name')}}</th>
                                         <th>{{__('labels.phone')}}</th>
                                         <th>{{__('labels.email')}}</th>
-                                        <th>{{__('labels.created_at')}}</th>
+                                        <th>{{__('labels.contract_date')}}</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>

@@ -33,6 +33,8 @@ return [
     'role' => 'Rôle',
     'dashboard' => 'Tableau de bord',
     'created_at' => 'Date de création',
+    'contract_date'=>'Date de Contrat',
+
     'search'=>'rechercher',
     'updated_at' => 'Date de dernière modification',
     'login' => 'Se connecter',
@@ -93,6 +95,26 @@ return [
         2 => 'DOCUMENT (Docx,doc,ppt ...)',
         3 => 'Videos (mp4,avi,mov)',
     ],
+    // last update
+    'resource-category' => '{1}Categorie de fichier |[2,*]Categorie de fichiers',
+    'pedagogical-referent' => '{1}Referent Pedagogique|[2,*]Referents Pedagogiques',
+    'account_state' => 'Status du Compte',
+    'last_item' => 'Dernier :name',
+    'account_states' => [
+        1 => 'Active',
+        2 => 'Inactive',
+    ],
+    'legal_referent' => 'Referent Legal',
+    'legal_referent_phone' => 'Télephone du Referent Legal',
+    'evaluation_type' => 'Type de Session',
+    'administrative_referent' => 'Referent Administratif ',
+    'administrative_referent_phone' => 'Télephone du Referent Administratif',
+    'evaluation_types' => [
+        'POEI' => 'Préparation Opérationnel à l’Emploi Individuel',
+        'POEC' => 'Préparation Opérationnel à l’Emploi Collectif',
+        'CFA' => 'Centre de Formation d’Apprentis',
+    ]
+
 
 
 
