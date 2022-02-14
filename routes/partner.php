@@ -45,4 +45,7 @@ Route::middleware('auth:partner')->group(function (){
     Route::view('un-active/account','partner.account.un-active')
         ->name('un-active.account')
         ->middleware('unActiveAccount');
+    Route::view('/settings', 'partner.settings.index');
+
 });
+
