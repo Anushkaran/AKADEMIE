@@ -89,4 +89,9 @@ class Partner extends Authenticatable
     {
         return $this->belongsToMany(Resource::class)->withTimestamps();
     }
+
+    public function settingSheet()
+    {
+        return $this->hasOne(PartnerSheetSetting::class);
+    }
 }
