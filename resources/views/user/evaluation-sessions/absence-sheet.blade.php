@@ -84,7 +84,7 @@
     </style>
 </head>
 <header>
-    <img class="img-fh" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
+    <img class="img-fh img-fluid" src="{{isset($setting)? $setting->footer_image_url :asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
 
 </header>
 <body>
@@ -202,7 +202,7 @@
 
 </div>
 <footer style="margin-bottom: 0px!important;">
-    <img CLASS="img-fh" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
+    <img CLASS="img-fh img-fluid" src="{{isset($setting)? $setting->footer_image_url :asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
     <div class="text-center">
         K.LéORH – 15 Boulevard Maginot – 57 000 METZ
     </div>
