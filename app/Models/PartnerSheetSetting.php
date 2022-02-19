@@ -21,7 +21,7 @@ class PartnerSheetSetting extends Model
         'header_image_url','footer_image_url'
     ];
 
-    public function getHeaderImageUrl()
+    public function getHeaderImageUrlAttribute()
     {
         if (Str::contains($this->header_image,'http'))
         {
@@ -31,7 +31,7 @@ class PartnerSheetSetting extends Model
         return  $this->header_image ? Storage::disk(config('filesystems.default'))->url($this->header_image) : asset('assets/vuexy/app-assets/images/logo/logo.png');
     }
 
-    public function getFooterImageUrl()
+    public function getFooterImageUrlAttribute()
     {
         if (Str::contains($this->footer_image,'http'))
         {

@@ -36,16 +36,19 @@ Route::middleware('auth:partner')->group(function (){
         Route::delete('evaluations/{evaluation}/sessions/{session}/users/{user}',[App\Http\Controllers\Web\Partner\EvaluationSessionController::class,'detachUser'])->name('evaluations.sessions.users.detach');
         Route::resource('evaluations.sessions',App\Http\Controllers\Web\Partner\EvaluationSessionController::class);
         Route::resource('evaluations',App\Http\Controllers\Web\Partner\EvaluationController::class);
-
         Route::get('centers',[App\Http\Controllers\Web\Partner\CenterController::class,'index'])->name('centers.index');
         Route::get('users',[App\Http\Controllers\Web\Partner\UserController::class,'index'])->name('users.index');
         Route::get('skills',[App\Http\Controllers\Web\Partner\SkillController::class,'index'])->name('skills.index');
+
+        Route::get('/settings', [App\Http\Controllers\Web\Partner\SettingSheetController::class,'index'])->name('settings.absence-sheet.index');
+        Route::post('/settings', [App\Http\Controllers\Web\Partner\SettingSheetController::class,'store'])->name('settings.absence-sheet.store');
+
     });
 
     Route::view('un-active/account','partner.account.un-active')
         ->name('un-active.account')
         ->middleware('unActiveAccount');
-    Route::view('/settings', 'partner.settings.index');
+
 
 });
 

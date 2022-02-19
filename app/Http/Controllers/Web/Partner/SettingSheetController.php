@@ -26,12 +26,12 @@ class SettingSheetController extends Controller
 
         if ($request->hasFile('header_image'))
         {
-            $data['header_image'] = $this->uploadOne($request->file('header_image'),'partner/absence/sheets/','s3');
+            $data['header_image'] = $this->uploadOne($request->file('header_image'),'partner/absence/sheets/','public');
         }
 
         if ($request->hasFile('footer_image'))
         {
-            $data['footer_image'] = $this->uploadOne($request->file('footer_image'),'partner/absence/sheets/','s3');
+            $data['footer_image'] = $this->uploadOne($request->file('footer_image'),'partner/absence/sheets/','public');
         }
         $data['partner_id'] = auth('partner')->id();
         PartnerSheetSetting::updateOrCreate(

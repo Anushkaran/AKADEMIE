@@ -24,9 +24,10 @@ class EvaluationSessionController extends Controller
         $session = EvaluationSession::with(['evaluation.students'])->whereHas('users',function ($query){
             $query->where('users.id',auth()->id());
         })->where('id',$session)->firstOrFail();
+        $setting = $session->evaluation->partner->settingSheet;
 
         $pdf = app('dompdf.wrapper');
-        $pdf = $pdf->loadView('user.evaluation-sessions.absence-sheet',compact('session'));
+        $pdf = $pdf->loadView('user.evaluation-sessions.absence-sheet',compact('session','setting'));
         return $pdf->download($session->name.'-absence_sheet.pdf');
     }
 }
