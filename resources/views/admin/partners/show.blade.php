@@ -141,7 +141,7 @@
 
                             <div class="card user-card">
                                 <div class="card-body">
-                                    <div class="row">
+                                    <div class="row my-auto">
 
                                         <div class="col-xl-12 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-avatar-section">
@@ -159,7 +159,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-xl-12 col-lg-12 mt-2 ">
+                                        <div class="col-xl-12 col-lg-12 mt-2 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-info-wrapper">
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title user-wide" >
@@ -175,7 +175,7 @@
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title user-wide">
-                                                        <i data-feather="mail" class="mr-1"></i>
+                                                        <i data-feather="user" class="mr-1"></i>
                                                         <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.legal_referent')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->legal_referent}}</p>
@@ -190,7 +190,7 @@
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title user-wide">
-                                                        <i data-feather="flag" class="mr-1"></i>
+                                                        <i data-feather="user-plus" class="mr-1"></i>
                                                         <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.administrative_referent')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->administrative_referent}}</p>
@@ -205,21 +205,7 @@
                                                 </div>
 
 
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
-                                                        <i data-feather="flag" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.pedagogical_referent')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">{{$partner->pedagogical_referent}}</p>
-                                                </div>
 
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
-                                                        <i data-feather="flag" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.created_at')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">{{$partner->created_at->format('d-m-Y')}}</p>
-                                                </div>
 
                                             </div>
                                         </div>
