@@ -53,7 +53,6 @@
                                                                 </a>
                                                             @endif
                                                             <a href="{{route('partner.students.edit',$student->id)}}" class="btn btn-primary ml-1">{{__('actions.edit')}}</a>
-                                                            <button onclick="deleteForm({{$student->id}})" class="btn btn-outline-danger ml-1">{{__('actions.delete')}}</button>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -18,7 +18,7 @@ return [
     'reset_password' => 'Reset Password 🔒',
     'connect_as' => 'Connect as',
     'connect_as_admin' => 'Connect as admin',
-    'connect_as_partner' => 'connect as partner',
-    'connect_as_user' => 'connect as user',
+    'connect_as_partner' => 'Connect as partner',
+    'connect_as_user' => 'Connect as user',
 ];
 

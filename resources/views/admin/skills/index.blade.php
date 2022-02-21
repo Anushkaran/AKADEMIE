@@ -106,10 +106,7 @@
                                                         <i data-feather="more-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('admin.skills.edit',$s->id)}}">
-                                                            <i data-feather="edit-2" class="mr-50"></i>
-                                                            <span>{{__('actions.edit')}}</span>
-                                                        </a>
+
                                                         <a class="dropdown-item" href="{{route('admin.skills.show',$s->id)}}">
                                                             <i data-feather="eye" class="mr-50"></i>
                                                             <span>{{__('actions.details')}}</span>

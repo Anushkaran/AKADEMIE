@@ -87,7 +87,7 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>{{trans_choice('labels.evaluation',1)}}</th>
+                                        <th>{{trans_choice('labels.session',1)}}</th>
                                         <th>
                                             {{__('labels.evaluation_type')}}
                                         </th>
@@ -147,9 +147,7 @@
                                         </td>
                                         <td>
                                             @if($count < 3)
-                                            <a href="{{route('admin.evaluations.edit',$e->id)}}" class="btn btn-sm btn-outline-warning">
-                                                <i data-feather="edit"></i>
-                                            </a>
+
                                                 <a href="{{route('admin.evaluations.sessions.index',$e->id)}}" class="btn btn-sm btn-outline-warning">
                                                     <i data-feather="eye"></i>
                                                 </a>

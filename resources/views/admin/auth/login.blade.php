@@ -21,14 +21,21 @@
                         <!-- Left Text-->
                         <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
                             <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('assets/vuexy/app-assets/images/pages/login-v2.svg')}}" alt="Login V2" /></div>
+
                         </div>
                         <!-- /Left Text-->
                         <!-- Login-->
                         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+
                             <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                                <h2 class="card-title font-weight-bold mb-1">{{__('messages.welcome_to',['name' => config('app.name')])}}</h2>
-                                <h2 class="card-title font-weight-bold mb-1">{{__('messages.access_type',['name' => trans_choice('labels.admin',2)])}}</h2>
+                                <h1 class="card-title font-weight-bold mb-1">{{__('messages.connect_as_admin')}}</h1>
+
+
+                                <p class="card-text mb-2 font-weight-bold">
+                                    {{__('messages.welcome_to',['name' => config('app.name')])}}
+                                </p>
                                 <p class="card-text mb-2">
+
                                     {{__('messages.login_message')}}
                                 </p>
                                 @if(session()->has('error'))

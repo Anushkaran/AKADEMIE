@@ -88,9 +88,7 @@
                                         </td>
                                         <td>
                                             @if($count < 3)
-                                            <a href="{{route('admin.resource-categories.edit',$l->id)}}" class="btn btn-sm btn-outline-warning">
-                                                <i data-feather="edit"></i>
-                                            </a>
+
 {{--                                                <a href="{{route('admin.levels.show',$l->id)}}" class="btn btn-sm btn-outline-warning">--}}
 {{--                                                    <i data-feather="eye"></i>--}}
 {{--                                                </a>--}}
@@ -103,10 +101,7 @@
                                                         <i data-feather="more-vertical"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{route('admin.levels.edit',$l->id)}}">
-                                                            <i data-feather="edit-2" class="mr-50"></i>
-                                                            <span>{{__('actions.edit')}}</span>
-                                                        </a>
+                                                        
 {{--                                                        <a class="dropdown-item" href="{{route('admin.levels.show',$l->id)}}">--}}
 {{--                                                            <i data-feather="eye" class="mr-50"></i>--}}
 {{--                                                            <span>{{__('actions.details')}}</span>--}}

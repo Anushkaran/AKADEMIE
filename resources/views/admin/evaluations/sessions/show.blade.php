@@ -107,6 +107,7 @@
                                                     <p class="card-text mb-0">{{$session->date->format('d/m/Y')}}</p>
 
                                                 </div>
+
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
                                                         <i data-feather="calendar" class="mr-1"></i>
