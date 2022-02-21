@@ -23,6 +23,7 @@ class Partner extends Authenticatable
         'phone',
         'email',
         'leader',
+        'leader_phone',
         'department',
         'state',
         'pedagogical_referent',

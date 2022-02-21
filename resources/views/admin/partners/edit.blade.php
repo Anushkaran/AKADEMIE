@@ -165,6 +165,18 @@
 
                                             <div class="col-12">
                                                 <div class="form-group">
+                                                    <label for="leader-vertical">{{__('labels.leader_phone')}}</label>
+                                                    <input type="text" value="{{old('leader_phone',$partner->leader_phone)}}" id="leader-vertical"
+                                                           class="form-control @error('leader_phone') is-invalid @enderror" name="leader_phone"
+                                                           placeholder="{{__('labels.leader_phone')}}" />
+                                                    @error('leader_phone')
+                                                    <div class="invalid-feedback">{{$message}}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="form-group">
                                                     <label for="pedagogical_referent-vertical">{{__('labels.pedagogical_referent')}}</label>
                                                     <input type="text" value="{{old('pedagogical_referent',$partner->pedagogical_referent)}}" id="pedagogical_referent-vertical"
                                                            class="form-control @error('pedagogical_referent') is-invalid @enderror" name="pedagogical_referent"

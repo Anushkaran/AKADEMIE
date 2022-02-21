@@ -123,6 +123,7 @@ class PartnerController extends Controller
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:partners,email',
             'leader'  => 'required|string|max:200',
+            'leader_phone'=> 'required|string|max:20',
             'department'=> 'required|string|max:200',
             'state'=> 'required|integer|in:'.implode(',',config('settings.account_states')),
             'legal_referent'=> 'required|string|max:200',
