@@ -78,7 +78,7 @@
                 <a class="d-flex align-items-center" href="#">
                     <i data-feather="file"></i>
                     <span class="menu-title text-truncate" data-i18n="Evaluation">
-                        {{trans_choice('labels.evaluation',2)}}
+                        {{trans_choice('labels.session',2)}}
                     </span>
                 </a>
                 <ul class="menu-content">
