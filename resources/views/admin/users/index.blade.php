@@ -71,7 +71,7 @@
                                             <select name="state" id="state" class="form-control">
                                                 <option value="all" disabled selected>...</option>
                                                 @foreach(config('settings.account_states') as $state)
-                                                    <option value="{{$state}}" @if((int)request('state') === $state) selected @endif>{{__('labels.account_states.'.$state)}}</option>
+                                                    <option value="{{$state}}" @if((int)request('state') === $state) selected @endif>{{__('labels.account_states'.$state)}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -123,7 +123,9 @@
                                             <td>
                                                 @if($user->isActive())
                                                     <span class="badge badge-success">{{__('labels.account_states.'.$user->state)}}</span>
+
                                                 @else
+
                                                     <span class="badge badge-danger">{{__('labels.account_states.'.$user->state)}}</span>
                                                 @endif
                                             </td>
