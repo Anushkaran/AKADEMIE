@@ -51,7 +51,6 @@
                                 <div class="card-body">
                                     <form class="form form-vertical" action="{{route('admin.users.update',$user->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
-                                        {{$errors}}
                                         @method('PUT')
                                         <div class="row">
                                             <div class="col-12">
