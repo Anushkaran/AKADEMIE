@@ -19,6 +19,7 @@ class AddToPartnersTable extends Migration
             $table->string('legal_referent_phone')->nullable();
             $table->string('administrative_referent')->nullable();
             $table->string('administrative_referent_phone')->nullable();
+            $table->string('leader_phone')->nullable();
 
         });
     }

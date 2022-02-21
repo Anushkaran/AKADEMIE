@@ -34,7 +34,7 @@ class ResourceRepository extends BaseRepository implements \App\Contracts\Resour
     {
         if (array_key_exists('file',$data))
         {
-            $data['link'] = $this->uploadOne($data['file'],'resources','s3');
+            $data['link'] = $this->uploadOne($data['file'],'resources');
         }
         $resource = Resource::create($data);
         if (array_key_exists('resource_category_id',$data))

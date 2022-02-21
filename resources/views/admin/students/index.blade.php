@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="partners-filter"> {{trans_choice('labels.partner',1)}}</label>
-                                            <select name="partner_id" id="partners-filter">
+                                            <select name="partner" id="partners-filter">
                                                 @isset($partner)
                                                     <option value="{{$partner->id}}" selected>{{$partner->name}}</option>
                                                 @endisset

@@ -69,7 +69,8 @@ class EvaluationSessionController extends Controller
     public function show($evaluation,$session) : Renderable
     {
         $session = $this->s->findOneBy(['id' => $session,'evaluation_id' => $evaluation],['tasks.level','users']);
-        return  view('admin.evaluations.sessions.show',compact('session'));
+        $ev = $session->evaluation;
+        return  view('admin.evaluations.sessions.show',compact('session','ev'));
     }
 
 

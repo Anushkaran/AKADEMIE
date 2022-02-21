@@ -11,7 +11,6 @@ class Partner extends Filter
     protected function applyFilters($builder)
     {
         $q = request($this->filterName());
-
         if (empty($q))
         {
             return $builder;
@@ -23,7 +22,7 @@ class Partner extends Filter
             $model instanceof User || $model instanceof Student
         )
         {
-            $builder->where('partner_id',$q);
+            return $builder->where('partner_id',$q);
         }
 
         return $builder;

@@ -109,7 +109,10 @@
                                                         <i data-feather="flag" class="mr-1"></i>
                                                         <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.leader')}}</span>
                                                     </div>
-                                                    <p class="card-text mb-0">{{$partner->leader}}</p>
+                                                    <p class="card-text mb-0">
+                                                        {{$partner->leader}} <br>
+                                                        {{$partner->phone}}
+                                                    </p>
 
                                                 </div>
 

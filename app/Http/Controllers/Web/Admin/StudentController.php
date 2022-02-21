@@ -6,6 +6,7 @@ use App\Contracts\PartnerContract;
 use App\Contracts\StudentContract;
 use App\Http\Controllers\Controller;
 use App\Models\Evaluation;
+use App\Models\Partner;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -30,7 +31,7 @@ class StudentController extends Controller
     /**
      * @return Renderable|JsonResponse
      */
-    public function index(Request $request,PartnerContract $p)
+    public function index(Request $request)
     {
         if ($request->wantsJson())
         {
@@ -40,9 +41,9 @@ class StudentController extends Controller
             ]);
         }
         $partner = null;
-        if ($request->has('partner_id'))
+        if ($request->has('partner'))
         {
-            $partner =  $p->findOneById($request->input('partner_id'));
+            $partner = Partner::find($request->input('partner'));
         }
 
         $students = $this->student->findByFilter();
