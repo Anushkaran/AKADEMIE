@@ -1,5 +1,13 @@
 @extends('user.layouts.app')
 
+@push('css')
+
+    @if($resource->type === 3)
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/vuexy/app-assets/vendors/css/extensions/plyr.min.css')}}">
+    @endif
+
+@endpush
+
 @section('content')
     <div class="app-content content ">
         <div class="content-overlay"></div>
@@ -23,7 +31,26 @@
 
             </div>
             <div class="content-body">
+                @if($resource->type === 3)
+                    <section id="media-player-wrapper " style="width: 100%">
+                        <div class="row d-flex justify-content-center">
+                            <!-- VIDEO -->
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Video</h4>
+                                        <div class="video-player" id="plyr-video-player">
+                                            <video width="100%" src="{{$resource->full_link}}" controls></video>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ VIDEO -->
 
+                            <!--/ AUDIO -->
+                        </div>
+                    </section>
+                @endif
                 <div id="viewer2" style="height: 1000px">
 
                 </div>
@@ -36,6 +63,20 @@
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{asset('assets/pdf-assets/lib/webviewer.min.js')}}"></script>
+
+
+    @if($resource->type === 3)
+
+        <!-- BEGIN: Page Vendor JS-->
+        <script src="{{asset('assets/vuexy/app-assets/vendors/js/extensions/plyr.min.js')}}"></script>
+        <script src="{{asset('assets/vuexy/app-assets/vendors/js/extensions/plyr.polyfilled.min.js')}}"></script>
+        <!-- END: Page Vendor JS-->
+
+        <!-- BEGIN: Page JS-->
+        <script src="{{asset('assets/vuexy/app-assets/js/scripts/extensions/ext-component-media-player.js')}}"></script>
+        <!-- END: Page JS-->
+    @endif
+
     <script>
 
         let link = `/files/{{$resource->id}}`
