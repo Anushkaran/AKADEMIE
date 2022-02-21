@@ -150,10 +150,8 @@
                                                     <div class="d-flex flex-column ml-1">
                                                         <div class="user-info mb-1">
                                                             <h4 class="mb-0">Contact</h4>
-                                                            <span class="card-text"></span>
                                                         </div>
-                                                        <div class="d-flex flex-wrap">
-                                                            </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,47 +159,49 @@
 
                                         <div class="col-xl-12 col-lg-12 mt-2 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-info-wrapper">
-                                                <div class="d-flex flex-wrap">
-                                                    <div class="user-info-title user-wide" >
-                                                        <i data-feather="user" class=""></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.pedagogical_referent')}}</span>
-                                                    </div>
-
-                                                    <p class="card-text mb-0">{{$partner->pedagogical_referent}}</p>
+                                                <div class="card user-card border-2 bg-gradient-info">
+                                                    <div class="card-body">
+                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">
+                                                            {{__('labels.legal_referent')}}
+                                                        </span>
 
 
-
-                                                </div>
 
                                                 <div class="d-flex flex-wrap">
-                                                    <div class="user-info-title user-wide">
+                                                    <div class="">
                                                         <i data-feather="user" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.legal_referent')}}</span>
+                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0"></span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->legal_referent}}</p>
                                                 </div>
 
                                                 <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
+                                                    <div class="">
                                                         <i data-feather="phone" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.legal_referent_phone')}}</span>
+                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0"></span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->legal_referent_phone}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
-                                                        <i data-feather="user-plus" class="mr-1"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="card user-card border-2 bg-gradient-success">
+                                                    <div class="card-body">
                                                         <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.administrative_referent')}}</span>
+
+                                                        <div class="d-flex flex-wrap my-50">
+                                                    <div class="">
+                                                        <i data-feather="user-plus" class="mr-1"></i>
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->administrative_referent}}</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
+                                                    <div class="">
                                                         <i data-feather="phone" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.administrative_referent_phone')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->administrative_referent_phone}}</p>
 
+                                                </div>
+                                                    </div>
                                                 </div>
 
 

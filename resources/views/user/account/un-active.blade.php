@@ -18,7 +18,7 @@
                 <!-- Not authorized-->
                 <div class="misc-wrapper"><a class="brand-logo" href="javascript:void(0);">
 
-                        <h2 class="brand-text text-primary ml-1">{{__('labels.lakademie')}}</h2></a>
+                        <h2 class="brand-text text-primary ml-1">{{config('app.name')}}</h2></a>
                     <div class="misc-inner p-2 p-sm-3">
                         <div class="w-100 text-center">
                             <h2 class="mb-1">You are not authorized! 🔐</h2>

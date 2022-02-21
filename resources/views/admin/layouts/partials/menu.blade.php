@@ -37,22 +37,34 @@
                             <span class="menu-item text-truncate" data-i18n="Collapsed Menu">{{trans_choice('labels.admin',2)}}</span>
                         </a>
                     </li>
-
-                    <li class="{{request()->routeIs('admin.users*') ? 'active' : ''}}">
-                        <a class="d-flex align-items-center" href="{{route('admin.users.index')}}">
-                            <i data-feather="user"></i>
-                            <span class="menu-item text-truncate" data-i18n="Collapsed Menu">{{trans_choice('labels.user',2)}}</span>
-                        </a>
-                    </li>
-
                     <li class="{{request()->routeIs('admin.partners*') ? 'active' : ''}}">
                         <a class="d-flex align-items-center" href="{{route('admin.partners.index')}}">
                             <i data-feather="users"></i>
                             <span class="menu-item text-truncate" data-i18n="Collapsed Menu">{{trans_choice('labels.partner',2)}}</span>
                         </a>
                     </li>
+                    <li class="{{request()->routeIs('admin.users*') ? 'active' : ''}}">
+                        <a class="d-flex align-items-center" href="{{route('admin.users.index')}}">
+                            <i data-feather="user"></i>
+                            <span class="menu-item text-truncate" data-i18n="Collapsed Menu">{{trans_choice('labels.user',2)}}</span>
+                        </a>
+                    </li>
+                    <li class="class= {{request()->routeIs('admin.pedagogical-referents.*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.pedagogical-referents.index')}}">
+
+                            <i data-feather="user"></i>
+                            <span class="menu-title text-truncate" data-i18n="Category">
+                            {{trans_choice('labels.pedagogical-referent',1)}}
+                        </span>
+                        </a>
+                    </li>
+
+
+
+
                 </ul>
             </li>
+
 
 
 
@@ -135,34 +147,37 @@
                     </li>
                 </ul>
             </li>
-            <li class="class= {{request()->routeIs('admin.resources.index*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.resources.index')}}">
+            <li class="nav-item {{request()->routeIs(['admin.ressources*','admin.resource-categories.*']) ? 'open' : ''}}">
+                <a class="d-flex align-items-center" href="#">
+                    <i data-feather="file-plus"></i>
+                    <span class="menu-title text-truncate" data-i18n="Account">
+                        {{__('labels.resources')}}
+                    </span>
+                </a>
+                <ul class="menu-content">
+                    <li class="class= {{request()->routeIs('admin.resources.index*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.resources.index')}}">
 
-                        <i data-feather="file"></i>
-                        <span class="menu-title text-truncate" data-i18n="Resources">
+                            <i data-feather="file"></i>
+                            <span class="menu-title text-truncate" data-i18n="Resources">
                             {{__('labels.resources')}}
                         </span>
-                </a>
-            </li>
-            <li class="class= {{request()->routeIs('admin.resource-categories.*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.resource-categories.index')}}">
+                        </a>
+                    </li>
+                    <li class="class= {{request()->routeIs('admin.resource-categories.*') ? 'active' : ''}} nav-item">
+                        <a class="d-flex align-items-center" href="{{route('admin.resource-categories.index')}}">
 
-                        <i data-feather="file"></i>
-                        <span class="menu-title text-truncate" data-i18n="Category">
+                            <i data-feather="file"></i>
+                            <span class="menu-title text-truncate" data-i18n="Category">
                             {{trans_choice('labels.resource-category',1)}}
                         </span>
-                </a>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
-            <li class="class= {{request()->routeIs('admin.pedagogical-referents.*') ? 'active' : ''}} nav-item">
-                <a class="d-flex align-items-center" href="{{route('admin.pedagogical-referents.index')}}">
 
-                    <i data-feather="file"></i>
-                    <span class="menu-title text-truncate" data-i18n="Category">
-                            {{trans_choice('labels.pedagogical-referent',1)}}
-                        </span>
-                </a>
-            </li>
+
 
 
         </ul>
