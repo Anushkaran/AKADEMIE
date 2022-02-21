@@ -69,6 +69,50 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 mt-2 ">
+                                            <div class="card-body bg-gradient-info border-2">
+                                                <div class="user-info-wrapper">
+
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="user" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.name')}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0"> {{$ev->name}}</p>
+                                                </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.start_date')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0"> {{$ev->start_date->format('d/m/Y')}}</p>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.end_date')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0"> {{$ev->end_date->format('d/m/Y')}}</p>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.state')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0"> {{$ev->state}}</p>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.evaluation_type')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0 badge badge-success">  {{$ev->type}}</p>
+                                                    </div>
+
+                                                  </div>
+                                            </div>
+                                            <div class="card-body bg-gradient-success border-2">
+
+
                                             <div class="user-info-wrapper">
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
@@ -115,6 +159,15 @@
                                                     </div>
                                                     <p class="card-text mb-0">{{$session->created_at->format('d-m-Y')}}</p>
                                                 </div>
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="calendar" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.created_at')}}</span>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
