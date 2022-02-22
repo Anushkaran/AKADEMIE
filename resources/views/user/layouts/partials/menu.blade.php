@@ -38,10 +38,17 @@
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
 
                 <li class="{{request()->routeIs('dashboard') ? 'active' : ''}}">
-                    <a class="nav-item  d-flex align-items-center"
+                    <a class="nav-item  d-flex align-items-center  {{request()->routeIs('dashboard') ? 'text-white' : 'text-dark'}}"
                        href="{{route('dashboard')}}"  data-i18n="Dashboard">
-                        <i data-feather="activity"></i>
-                        <span data-i18n="dashboard">{{__('labels.dashboard')}}</span>
+                        <i data-feather="file"></i>
+                        <span data-i18n="dashboard">{{trans_choice('labels.files',2)}}</span>
+                    </a>
+                </li>
+                <li class="{{request()->routeIs('evaluation-sessions.index') ? 'active' : ''}}">
+                    <a class="nav-item  d-flex align-items-center {{request()->routeIs('evaluation-sessions.index') ? 'text-white' : 'text-dark'}}"
+                       href="{{route('evaluation-sessions.index')}}"  data-i18n="Dashboard">
+                        <i data-feather="check"></i>
+                        <span data-i18n="dashboard">{{trans_choice('labels.session',2)}}</span>
                     </a>
                 </li>
 

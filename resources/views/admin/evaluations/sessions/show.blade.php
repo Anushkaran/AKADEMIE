@@ -84,24 +84,28 @@
                                                 </div>
                                                     <div class="d-flex flex-wrap">
                                                         <div class="user-info-title">
-                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <i data-feather="calendar" class="mr-1"></i>
                                                             <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.start_date')}}</span>
                                                         </div>
                                                         <p class="card-text mb-0"> {{$ev->start_date->format('d/m/Y')}}</p>
                                                     </div>
                                                     <div class="d-flex flex-wrap">
                                                         <div class="user-info-title">
-                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <i data-feather="calendar" class="mr-1"></i>
                                                             <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.end_date')}}</span>
                                                         </div>
                                                         <p class="card-text mb-0"> {{$ev->end_date->format('d/m/Y')}}</p>
                                                     </div>
                                                     <div class="d-flex flex-wrap">
                                                         <div class="user-info-title">
-                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <i data-feather="info" class="mr-1"></i>
                                                             <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.state')}}</span>
                                                         </div>
-                                                        <p class="card-text mb-0"> {{$ev->state}}</p>
+                                                        @if($ev->state)
+                                                            <span class="badge badge-success mb-1">{{__('labels.active')}}</span>
+                                                        @else
+                                                            <span class="badge badge-danger mb-1">{{__('labels.inactive')}}</span>
+                                                        @endif
                                                     </div>
                                                     <div class="d-flex flex-wrap">
                                                         <div class="user-info-title">
@@ -127,7 +131,7 @@
                                                 </div>
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
-                                                        <i data-feather="user" class="mr-1"></i>
+                                                        <i data-feather="book" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.note')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$session->note ?? '/'}}</p>
@@ -135,7 +139,7 @@
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
-                                                        <i data-feather="user" class="mr-1"></i>
+                                                        <i data-feather="info" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.is_final')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">

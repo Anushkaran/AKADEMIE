@@ -44,6 +44,10 @@
                         <i class="mr-50" data-feather="power"></i>
                         {{__('labels.logout')}}
                     </a>
+                    <a class="dropdown-item" href="{{route('partner.settings.absence-sheet.index')}}">
+                        <i class="mr-50" data-feather="settings"></i>
+                        {{trans_choice('labels.settings',2)}}
+                    </a>
                 </div>
             </li>
         </ul>
