@@ -26,7 +26,7 @@
 
         .img-fh{
             width :1200px!important;
-            height:300px!important;
+            height:150px!important;
         }
         .mt-5 {
             margin-top: 3rem !important;
@@ -84,7 +84,7 @@
     </style>
 </head>
 <header>
-    <img class="img-fh img-fluid" src="{{isset($setting)? $setting->footer_image_url :asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
+    <img class="img-fh img-fluid" src="{{isset($setting)? $setting->header_image_url :asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
 
 </header>
 <body>
@@ -203,12 +203,12 @@
 </div>
 <footer style="margin-bottom: 0px!important;">
     <img CLASS="img-fh img-fluid" src="{{isset($setting)? $setting->footer_image_url :asset('assets/vuexy/app-assets/images/logo/logo.png')}}" alt="Invoice logo">
-    <div class="text-center">
+   {{-- <div class="text-center">
         K.LéORH – 15 Boulevard Maginot – 57 000 METZ
     </div>
     <div class="text-center">
         Siret : 807 650 932 00021 – Activité formation N°41 57 03465 57 – APE 8559A - FR 90 807650932
-    </div>
+    </div>--}}
 </footer>
 <script src="{{asset('assets/app-assets/vendors/js/bootstrap.min.js')}}">
 </script>
