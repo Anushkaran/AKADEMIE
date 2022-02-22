@@ -104,27 +104,7 @@
                                                     </div>
                                                     <p class="card-text mb-0">{{$partner->department}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
-                                                        <i data-feather="flag" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.leader')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">
-                                                        {{$partner->leader}} <br>
-                                                        {{$partner->phone}}
-                                                    </p>
 
-                                                </div>
-
-
-                                                <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title user-wide">
-                                                        <i data-feather="flag" class="mr-1"></i>
-                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.pedagogical_referent')}}</span>
-                                                    </div>
-
-                                                    <p class="card-text mb-0">{{$partner->pedagogical_referent}}</p>
-                                                </div>
 
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title user-wide">
@@ -162,6 +142,26 @@
 
                                         <div class="col-xl-12 col-lg-12 mt-2 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-info-wrapper">
+                                                <div class="card user-card border-2 bg-gradient-danger">
+                                                    <div class="card-body">
+                                                        <span class="card-text user-info-title user-wide font-weight-bold mb-0">{{__('labels.leader')}}</span>
+
+                                                        <div class="d-flex flex-wrap my-50">
+                                                            <div class="">
+                                                                <i data-feather="user-plus" class="mr-1"></i>
+                                                            </div>
+                                                            <p class="card-text mb-0">{{$partner->leader}}</p>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap my-50">
+                                                            <div class="">
+                                                                <i data-feather="phone" class="mr-1"></i>
+                                                            </div>
+                                                            <p class="card-text mb-0">{{$partner->leader_phone}}</p>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="card user-card border-2 bg-gradient-info">
                                                     <div class="card-body">
                                                         <span class="card-text user-info-title user-wide font-weight-bold mb-0">
@@ -206,7 +206,6 @@
                                                 </div>
                                                     </div>
                                                 </div>
-
 
 
 

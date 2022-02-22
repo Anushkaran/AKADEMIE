@@ -69,7 +69,10 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 mt-2 ">
+
                                             <div class="card-body bg-gradient-info border-2">
+                                                <p class="card-text mb-0"> Informations de Session</p>
+
                                                 <div class="user-info-wrapper">
 
                                                 <div class="d-flex flex-wrap">
@@ -111,6 +114,7 @@
                                                   </div>
                                             </div>
                                             <div class="card-body bg-gradient-success border-2">
+                                                <p class="card-text mb-0">Informations d'évaluation</p>
 
 
                                             <div class="user-info-wrapper">
@@ -312,7 +316,7 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th>{{__('labels.name')}}</th>
+                                                <th>{{trans_choice('labels.session',2)}}</th>
                                                 <th>{{__('labels.description')}}</th>
                                                 <th>{{trans_choice('labels.level',1)}}</th>
                                                 <th>Actions</th>
