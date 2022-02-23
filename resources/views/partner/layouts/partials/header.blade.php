@@ -17,7 +17,7 @@
                     <span class="brand-logo ">
                         <img  height="10%" width="10%" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}"/>
                     </span>
-                    </a>
+
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
             <li class="nav-item dropdown dropdown-user">
