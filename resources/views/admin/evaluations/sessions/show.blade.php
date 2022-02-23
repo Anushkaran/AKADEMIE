@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="col-xl-12 col-lg-12 mt-2 ">
 
-                                            <div class="card-body bg-gradient-info border-2">
+                                            <div class="card-body  border-2">
                                                 <p class="card-text mb-0"> Informations de Session</p>
 
                                                 <div class="user-info-wrapper">
@@ -117,7 +117,7 @@
 
                                                   </div>
                                             </div>
-                                            <div class="card-body bg-gradient-success border-2">
+                                            <div class="card-body  border-2">
                                                 <p class="card-text mb-0">Informations d'évaluation</p>
 
 
@@ -137,19 +137,7 @@
                                                     <p class="card-text mb-0">{{$session->note ?? '/'}}</p>
                                                 </div>
 
-                                                <div class="d-flex flex-wrap">
-                                                    <div class="user-info-title">
-                                                        <i data-feather="info" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.is_final')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">
-                                                        @if($session->is_final)
-                                                            <span class="badge badge-danger">{{__('labels.yes')}} </span>
-                                                        @else
-                                                        <span class="badge badge-info">{{__('labels.no')}}</span>
-                                                        @endif
-                                                    </p>
-                                                </div>
+
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
@@ -167,14 +155,7 @@
                                                     </div>
                                                     <p class="card-text mb-0">{{$session->created_at->format('d-m-Y')}}</p>
                                                 </div>
-                                                <div class="d-flex flex-wrap">
-                                                    <div class="user-info-title">
-                                                        <i data-feather="calendar" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.created_at')}}</span>
-                                                    </div>
 
-
-                                                </div>
                                             </div>
                                             </div>
                                         </div>
