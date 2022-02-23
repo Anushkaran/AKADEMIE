@@ -104,17 +104,17 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="last_name-vertical">{{__('labels.organism')}}</label>
-                                                    <input type="text" value="{{old('organization',$user->organization)}}" id="last_name-vertical"
-                                                           class="form-control @error('organization') is-invalid @enderror" name="organization"
-                                                           placeholder="{{__('labels.organism')}}" />
-                                                    @error('organization')
-                                                    <div class="invalid-feedback">{{$message}}</div>
-                                                    @enderror
-                                                </div>
-                                            </div>
+{{--                                            <div class="col-12">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label for="last_name-vertical">{{__('labels.organism')}}</label>--}}
+{{--                                                    <input type="text" value="{{old('organization',$user->organization)}}" id="last_name-vertical"--}}
+{{--                                                           class="form-control @error('organization') is-invalid @enderror" name="organization"--}}
+{{--                                                           placeholder="{{__('labels.organism')}}" />--}}
+{{--                                                    @error('organization')--}}
+{{--                                                    <div class="invalid-feedback">{{$message}}</div>--}}
+{{--                                                    @enderror--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
                                             <div class="col-12">
                                                 <div class="form-group">

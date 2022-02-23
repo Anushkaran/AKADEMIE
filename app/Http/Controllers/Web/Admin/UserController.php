@@ -135,7 +135,7 @@ class UserController extends Controller
             'first_name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
             'department'=> 'required|string|max:200',
-            'organization'=> 'required|string|max:200',
+            //'organization'=> 'required|string|max:200',
             'type'  =>'required|string|in:'.implode(',',config('settings.user_types')),
             'phone' => 'sometimes|nullable|string|max:20',
             'email' => 'required|string|email|unique:users,email',
