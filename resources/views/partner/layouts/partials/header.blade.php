@@ -17,7 +17,7 @@
                     <span class="brand-logo ">
                         <img  height="10%" width="10%" src="{{asset('assets/vuexy/app-assets/images/logo/logo.png')}}"/>
                     </span>
-                    </a>
+
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
             <li class="nav-item dropdown dropdown-user">
@@ -43,6 +43,10 @@
                     <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logout-form').submit()">
                         <i class="mr-50" data-feather="power"></i>
                         {{__('labels.logout')}}
+                    </a>
+                    <a class="dropdown-item" href="{{route('partner.settings.absence-sheet.index')}}">
+                        <i class="mr-50" data-feather="settings"></i>
+                        {{trans_choice('labels.settings',2)}}
                     </a>
                 </div>
             </li>

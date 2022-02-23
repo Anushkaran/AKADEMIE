@@ -127,13 +127,14 @@
                                             </td>
                                             <td>
                                                 @if($count < 3)
-
-                                                    <a href="{{route('admin.partners.show',$p->id)}}" class="btn btn-sm btn-outline-warning">
+                                                    <div class="row ">
+                                                    <a href="{{route('admin.partners.show',$p->id)}}" class="btn btn-sm btn-outline-warning mx-1">
                                                         <i data-feather="eye"></i>
                                                     </a>
                                                     <a href="javascript:void(0)" onclick="deleteForm({{$p->id}})" class="btn btn-sm btn-outline-warning">
                                                         <i data-feather="trash"></i>
                                                     </a>
+                                                    </div>
                                                 @else
                                                     <div class="dropdown">
                                                         <button type="button" class="btn btn-sm dropdown-toggle hide-arrow" data-toggle="dropdown">

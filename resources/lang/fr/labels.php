@@ -84,6 +84,7 @@ return [
     'access' => 'Accessibilité',
     'file_type' => 'Type de fichier',
     'file' => 'Fichier',
+    'files' => '{1}Fichier|[2,*]Fichiers',
 
     'access_methods' => [
         1 => 'Lecture Seule',

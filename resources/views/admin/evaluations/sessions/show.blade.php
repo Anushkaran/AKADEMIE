@@ -69,6 +69,58 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-lg-12 mt-2 ">
+
+                                            <div class="card-body  border-2">
+                                                <p class="card-text mb-0"> Informations de Session</p>
+
+                                                <div class="user-info-wrapper">
+
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="user-info-title">
+                                                        <i data-feather="user" class="mr-1"></i>
+                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.name')}}</span>
+                                                    </div>
+                                                    <p class="card-text mb-0"> {{$ev->name}}</p>
+                                                </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="calendar" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.start_date')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0"> {{$ev->start_date->format('d/m/Y')}}</p>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="calendar" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.end_date')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0"> {{$ev->end_date->format('d/m/Y')}}</p>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="info" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.state')}}</span>
+                                                        </div>
+                                                        @if($ev->state)
+                                                            <span class="badge badge-success mb-1">{{__('labels.active')}}</span>
+                                                        @else
+                                                            <span class="badge badge-danger mb-1">{{__('labels.inactive')}}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="d-flex flex-wrap">
+                                                        <div class="user-info-title">
+                                                            <i data-feather="user" class="mr-1"></i>
+                                                            <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.evaluation_type')}}</span>
+                                                        </div>
+                                                        <p class="card-text mb-0 badge badge-success">  {{$ev->type}}</p>
+                                                    </div>
+
+                                                  </div>
+                                            </div>
+                                            <div class="card-body  border-2">
+                                                <p class="card-text mb-0">Informations d'évaluation</p>
+
+
                                             <div class="user-info-wrapper">
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
@@ -79,25 +131,13 @@
                                                 </div>
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
-                                                        <i data-feather="user" class="mr-1"></i>
+                                                        <i data-feather="book" class="mr-1"></i>
                                                         <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.note')}}</span>
                                                     </div>
                                                     <p class="card-text mb-0">{{$session->note ?? '/'}}</p>
                                                 </div>
 
-                                                <div class="d-flex flex-wrap">
-                                                    <div class="user-info-title">
-                                                        <i data-feather="user" class="mr-1"></i>
-                                                        <span class="card-text user-info-title font-weight-bold mb-0">{{__('labels.is_final')}}</span>
-                                                    </div>
-                                                    <p class="card-text mb-0">
-                                                        @if($session->is_final)
-                                                            <span class="badge badge-danger">{{__('labels.yes')}} </span>
-                                                        @else
-                                                        <span class="badge badge-info">{{__('labels.no')}}</span>
-                                                        @endif
-                                                    </p>
-                                                </div>
+
 
                                                 <div class="d-flex flex-wrap">
                                                     <div class="user-info-title">
@@ -115,6 +155,8 @@
                                                     </div>
                                                     <p class="card-text mb-0">{{$session->created_at->format('d-m-Y')}}</p>
                                                 </div>
+
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -259,7 +301,7 @@
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th>{{__('labels.name')}}</th>
+                                                <th>{{trans_choice('labels.session',2)}}</th>
                                                 <th>{{__('labels.description')}}</th>
                                                 <th>{{trans_choice('labels.level',1)}}</th>
                                                 <th>Actions</th>

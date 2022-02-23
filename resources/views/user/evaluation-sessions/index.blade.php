@@ -15,12 +15,12 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">{{__('labels.list',['name' => trans_choice('labels.user',2)])}}</h2>
+                            <h2 class="content-header-title float-left mb-0">{{__('labels.list',['name' => trans_choice('labels.session',2)])}}</h2>
                             <div class="breadcrumb-wrapper">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">{{__('labels.dashboard')}}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.user',2)])}}
+                                    <li class="breadcrumb-item active">{{__('labels.list',['name' => trans_choice('labels.session',2)])}}
                                     </li>
                                 </ol>
                             </div>
@@ -60,8 +60,8 @@
                                     <tr>
 {{--                                        <th>#</th>--}}
                                         <th>{{__('labels.name')}}</th>
-                                        <th>{{trans_choice('labels.evaluation',1)}}</th>
-                                        <th>{{__('labels.nb_of',['name'=>trait_exists('student',3)])}}</th>
+                                        <th>{{trans_choice('labels.session',1)}}</th>
+                                        <th>{{__('labels.nb_of',['item'=>trans_choice('labels.student',3)])}}</th>
 
 
                                         <th>Actions</th>
